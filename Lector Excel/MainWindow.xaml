@@ -1,0 +1,31 @@
+﻿<Window x:Class="Lector_Excel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lector_Excel"
+        mc:Ignorable="d"
+        Title="Lector Excel" Height="450" Width="800" ResizeMode="NoResize">
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="Archivo">
+				<MenuItem Name="menu_FillType1" Header="Rellenar datos tipo 1..." Click="Menu_FillType1_Click"/>
+				<MenuItem Name="menu_Export" Header="Exportar" IsEnabled="False" Click="Menu_Export_Click"/>
+				<Separator/>
+				<MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
+			</MenuItem>
+			<MenuItem Header="Acerca de">
+				<MenuItem Name="menu_About" Header="Lector Excel" Click="Menu_About_Click"/>
+			</MenuItem>
+		</Menu>
+		<StackPanel Orientation="Vertical">
+			<TextBlock Text="Fichero Excel a leer" Width="500" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+			</TextBlock>
+			<Button Name="btnOpenFile" Click="BtnOpenFile_Click" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center">
+				Abrir
+			</Button>
+		</StackPanel>
+
+		</DockPanel>
+</Window>
