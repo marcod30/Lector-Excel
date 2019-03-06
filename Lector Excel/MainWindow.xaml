@@ -19,9 +19,9 @@
 			</MenuItem>
 		</Menu>
 		<StackPanel Orientation="Vertical">
-			<TextBlock Text="Fichero Excel a leer" Width="500" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
-
-			</TextBlock>
+			<Label Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+                Fichero Excel a leer
+            </Label>
 			<Button Name="btnOpenFile" Click="BtnOpenFile_Click" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center">
 				Abrir
 			</Button>

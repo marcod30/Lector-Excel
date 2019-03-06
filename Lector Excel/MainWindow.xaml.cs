@@ -22,6 +22,7 @@ namespace Lector_Excel
     public partial class MainWindow : Window
     {
         private ExcelManager ExcelManager;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace Lector_Excel
             if (openFileDialog.ShowDialog() == true)
             {
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
-                menu_Export.IsEnabled = true;
+                menu_Export.IsEnabled = true; // enable on correct file read
             }
             else
             {
@@ -47,7 +48,18 @@ namespace Lector_Excel
         //Handles data filling of Type 1
         private void Menu_FillType1_Click(object sender, RoutedEventArgs e)
         {
+            Type1Window type1Window = new Type1Window();
+            type1Window.Owner = this;
 
+            type1Window.ShowDialog();
+            if(type1Window.DialogResult == true)
+            {
+                MessageBox.Show("Cambios confirmados");
+            }
+            else
+            {
+                MessageBox.Show("Cambios descartados");
+            }
         }
 
         //Handles text file exporting
@@ -56,11 +68,13 @@ namespace Lector_Excel
 
         }
 
+        //Handles program exiting
         private void Menu_Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
+        //Handles showing about info
         private void Menu_About_Click(object sender, RoutedEventArgs e)
         {
 
