@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,27 +16,19 @@ using System.Windows.Shapes;
 namespace Lector_Excel
 {
     /// <summary>
-    /// Lógica de interacción para Type1Window.xaml
+    /// Lógica de interacción para AboutWindow.xaml
     /// </summary>
-    public partial class Type1Window : Window
+    public partial class AboutWindow : Window
     {
-        public Type1Window()
+        public AboutWindow()
         {
             InitializeComponent();
         }
 
-        // Handles changes confirmation
-        private void Btn_OK_Click(object sender, RoutedEventArgs e)
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            this.DialogResult = true;
-            this.Close();
-        }
-
-        // Handles window force close
-        private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            this.Close();
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
         }
     }
 }

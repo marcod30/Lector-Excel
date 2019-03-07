@@ -77,7 +77,9 @@ namespace Lector_Excel
         //Handles showing about info
         private void Menu_About_Click(object sender, RoutedEventArgs e)
         {
-
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.Owner = this;
+            aboutWindow.ShowDialog();
         }
     }
 }

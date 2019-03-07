@@ -5,43 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Rellenar datos del tipo 1" Height="320" Width="400" ResizeMode="NoResize">
-    <DockPanel Margin="5">
+        Title="Rellenar datos del tipo 1" Height="350" Width="400" ResizeMode="NoResize">
+    <DockPanel Margin="0">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Opciones">
+                <MenuItem Header="Importar desde fichero"/>
+                <MenuItem Header="Exportar a fichero"/>
+                <Separator/>
+                <MenuItem Header="Cerrar" Click="Btn_Cancel_Click"/>
+            </MenuItem>
+        </Menu>
         <Label DockPanel.Dock="Top">
             Ejercicio
         </Label>
-        <TextBox Name="txt_Ejercicio" DockPanel.Dock="Top" MaxLength="4" Height="20">
+        <TextBox Margin="2" Name="txt_Ejercicio" DockPanel.Dock="Top" MaxLength="4" Height="20">
             
         </TextBox>
         <Label DockPanel.Dock="Top">
             Nombre y apellidos del declarante
         </Label>
-        <TextBox Name="txt_Name" DockPanel.Dock="Top" MaxLength="40" Height="20">
+        <TextBox Margin="2" Name="txt_Name" DockPanel.Dock="Top" MaxLength="40" Height="20">
             
         </TextBox>
         <Label DockPanel.Dock="Top">
             NIF del declarante
         </Label>
-        <TextBox Name="txt_NIF" DockPanel.Dock="Top" MaxLength="9" Height="20">
+        <TextBox Margin="2" Name="txt_NIF" DockPanel.Dock="Top" MaxLength="9" Height="20">
             
         </TextBox>
         <Label DockPanel.Dock="Top">
             Número de personas y entidades
         </Label>
-        <TextBox Name="txt_Entities" DockPanel.Dock="Top" MaxLength="4" Height="20">
+        <TextBox Margin="2" Name="txt_Entities" DockPanel.Dock="Top" MaxLength="4" Height="20">
             
         </TextBox>
         <Label DockPanel.Dock="Top">
             Importe total
         </Label>
-        <TextBox Name="txt_TotalMoney" DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
+        <TextBox Margin="2" Name="txt_TotalMoney" DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
 
         </TextBox>
         <Canvas DockPanel.Dock="Bottom">
-            <Button Canvas.Left="80" Canvas.Top="20" Width="100">
+            <Button Name="btn_OK" Canvas.Left="80" Canvas.Top="10" Canvas.Bottom="10" Width="100" Click="Btn_OK_Click">
                 Aceptar
             </Button>
-            <Button Canvas.Left="200" Canvas.Top="20" Width="100">
+            <Button Name="btn_Cancel" Canvas.Left="200" Canvas.Top="10" Canvas.Bottom="10" Width="100" Click="Btn_Cancel_Click">
                 Cancelar
             </Button>
         </Canvas>
