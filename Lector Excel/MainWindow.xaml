@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Lector Excel" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Lector Excel" Height="450" Width="800" ResizeMode="CanMinimize">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Archivo">

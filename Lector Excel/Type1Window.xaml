@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Rellenar datos del tipo 1" Height="350" Width="400" ResizeMode="NoResize">
+        Title="Rellenar datos del tipo 1" Height="350" Width="400" ResizeMode="CanMinimize">
     <DockPanel Margin="0">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Opciones">
-                <MenuItem Header="Importar desde fichero"/>
-                <MenuItem Header="Exportar a fichero"/>
+                <MenuItem Name="menu_importData" Header="Importar desde fichero" Click="Menu_importData_Click"/>
+                <MenuItem Name="menu_exportData" Header="Exportar a fichero" Click="Menu_exportData_Click"/>
                 <Separator/>
                 <MenuItem Header="Cerrar" Click="Btn_Cancel_Click"/>
             </MenuItem>

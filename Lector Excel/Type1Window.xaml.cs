@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,24 @@ namespace Lector_Excel
         {
             this.DialogResult = false;
             this.Close();
+        }
+
+        private void Menu_importData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Menu_exportData_Click(object sender, RoutedEventArgs e)
+        {
+            if(Lista.Count > 0)
+            //The using statement automatically flushes AND CLOSES the stream and calls IDisposable.Dispose on the stream object.
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\PersonalDataType1.lectorexcel"))
+            {
+                foreach (string s in Lista)
+                {
+                    sw.WriteLine(s);
+                }
+            }
         }
     }
 }
