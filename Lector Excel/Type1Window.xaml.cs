@@ -23,10 +23,17 @@ namespace Lector_Excel
         {
             InitializeComponent();
         }
-
+        public List<string> Lista { get; set; }
         // Handles changes confirmation
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
+            if (Lista == null)
+                Lista = new List<string>();
+            Lista.Add(txt_Ejercicio.Text);
+            Lista.Add(txt_Name.Text);
+            Lista.Add(txt_NIF.Text);
+            Lista.Add(txt_Entities.Text);
+            Lista.Add(txt_TotalMoney.Text);
             this.DialogResult = true;
             this.Close();
         }

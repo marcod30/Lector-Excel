@@ -22,7 +22,7 @@ namespace Lector_Excel
     public partial class MainWindow : Window
     {
         private ExcelManager ExcelManager;
-
+        List<string> Type1Fields = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -50,22 +50,41 @@ namespace Lector_Excel
         {
             Type1Window type1Window = new Type1Window();
             type1Window.Owner = this;
-
+            if (Type1Fields.Count > 0)
+                type1Window.Lista = Type1Fields;
             type1Window.ShowDialog();
             if(type1Window.DialogResult == true)
             {
                 MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
+                Type1Fields = type1Window.Lista;
             }
             else
             {
                 MessageBox.Show("Cambios descartados","cambios", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            if (Type1Fields.Count > 0)
+            {
+                menu_Export.IsEnabled = true;
+            }
+            else
+            {
+                menu_Export.IsEnabled = false;
             }
         }
 
         //Handles text file exporting
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult msg = MessageBox.Show("Se van a exportart los datos. ¿Continuar?","OJOCUIDAO",MessageBoxButton.YesNo,MessageBoxImage.Question);
+            if(msg != MessageBoxResult.Yes)
+            {
+                return;
+            }
 
+            // Mostrar ventana con ProgressBar
+            // Exportar a fichero de texto
+            //   |- Quizás desde ExcelManager?
         }
 
         //Handles program exiting
