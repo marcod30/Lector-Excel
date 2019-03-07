@@ -54,11 +54,11 @@ namespace Lector_Excel
             type1Window.ShowDialog();
             if(type1Window.DialogResult == true)
             {
-                MessageBox.Show("Cambios confirmados");
+                MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Cambios descartados");
+                MessageBox.Show("Cambios descartados","cambios", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
