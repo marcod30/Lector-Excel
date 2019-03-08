@@ -82,6 +82,7 @@ namespace Lector_Excel
                 return;
             }
 
+            ExcelManager.ExportData(Type1Fields[0],Type1Fields[1]);
             // Mostrar ventana con ProgressBar
             // Exportar a fichero de texto
             //   |- Quizás desde ExcelManager?
