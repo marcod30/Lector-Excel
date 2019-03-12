@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 
 using System.Linq;
@@ -20,16 +21,21 @@ namespace Lector_Excel
     /// </summary>
     public partial class Type1Window : Window
     {
+        
         public Type1Window()
         {
             InitializeComponent();
+            Lista = new List<string>();
+            if (Lista != null && Lista.Count > 0)
+            {
+                menu_exportData.IsEnabled = true;
+                txt_Ejercicio.Text = Lista[0];
+            }
         }
         public List<string> Lista { get; set; }
         // Handles changes confirmation
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
-            if (Lista == null)
-                Lista = new List<string>();
             Lista.Add(txt_Ejercicio.Text);
             Lista.Add(txt_Name.Text);
             Lista.Add(txt_NIF.Text);
@@ -48,7 +54,18 @@ namespace Lector_Excel
 
         private void Menu_importData_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                IEnumerable<TextBox> collection = main_dockpanel.Children.OfType<TextBox>();
+                int index = 0;
+                foreach (TextBox t in collection)
+                {
+                    t.Text = Lista[index++];
+                }
+            }
         }
 
         private void Menu_exportData_Click(object sender, RoutedEventArgs e)

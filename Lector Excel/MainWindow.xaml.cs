@@ -50,20 +50,23 @@ namespace Lector_Excel
         {
             Type1Window type1Window = new Type1Window();
             type1Window.Owner = this;
-            if (Type1Fields.Count > 0)
+            if (Type1Fields != null && Type1Fields.Count > 0)
                 type1Window.Lista = Type1Fields;
             type1Window.ShowDialog();
             if(type1Window.DialogResult == true)
             {
                 MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
+
+
+                MessageBox.Show(Type1Fields[0]);
             }
             else
             {
                 MessageBox.Show("Cambios descartados","cambios", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            if (Type1Fields.Count > 0)
+            if (Type1Fields.Count > 0 /* && Excel opened*/)
             {
                 menu_Export.IsEnabled = true;
             }
