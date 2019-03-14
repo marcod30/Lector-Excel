@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Exportando..." Height="100" Width="200" ResizeMode="NoResize">
+        Loaded="Window_Loaded"
+        Title="Exportando..." Height="70" Width="200" ResizeMode="NoResize">
     <Grid>
-        <ProgressBar Name="Export_Progressbar" Minimum="0" IsIndeterminate="False">
+        <ProgressBar Name="Export_Progressbar" Minimum="0" IsIndeterminate="False" Margin="2">
             
         </ProgressBar>
     </Grid>

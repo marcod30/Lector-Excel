@@ -19,9 +19,13 @@ namespace Lector_Excel
     /// </summary>
     public partial class ProgressWindow : Window
     {
-        public ProgressWindow()
+        bool isIndeterminate;
+        string title = "Exportando...";
+        public ProgressWindow(bool isIndeterminate, string title)
         {
             InitializeComponent();
+            this.isIndeterminate = isIndeterminate;
+            this.title = title;
         }
 
         // Property that has progress
@@ -31,6 +35,10 @@ namespace Lector_Excel
             set { Amount = value; }
         }
 
-        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Export_Progressbar.IsIndeterminate = isIndeterminate;
+            this.Title = title;
+        }
     }
 }
