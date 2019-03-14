@@ -34,15 +34,21 @@ namespace Lector_Excel
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            ProgressWindow progressWindow = new ProgressWindow(true,"Abriendo fichero...");
+            progressWindow.Show();
             if (openFileDialog.ShowDialog() == true)
             {
+                
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
                 menu_Export.IsEnabled = true; // enable on correct file read
+                lbl_fileOpenStatus.Content =openFileDialog.SafeFileName + " abierto con éxito.";
             }
             else
             {
                 menu_Export.IsEnabled = false;
+                lbl_fileOpenStatus.Content = "";
             }
+            progressWindow.Close();
         }
 
         //Handles data filling of Type 1
@@ -77,6 +83,11 @@ namespace Lector_Excel
         //Handles text file exporting
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
+            if (Type1Fields.Count != 6)
+            {
+                MessageBox.Show("Rellene primero los datos de tipo 1","Error");
+                return;
+            }
             MessageBoxResult msg = MessageBox.Show("Se van a exportart los datos. ¿Continuar?","OJOCUIDAO",MessageBoxButton.YesNo,MessageBoxImage.Question);
             if(msg != MessageBoxResult.Yes)
             {

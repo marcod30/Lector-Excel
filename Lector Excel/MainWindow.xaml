@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Lector Excel" Height="450" Width="800" ResizeMode="CanMinimize">
+        Title="Lector Excel" Height="400" Width="300" ResizeMode="CanMinimize">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Archivo">
@@ -19,12 +19,16 @@
 			</MenuItem>
 		</Menu>
 		<StackPanel Orientation="Vertical">
-			<Label Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
-                Fichero Excel a leer
+            <Image Source="media\Lector Excel Logo.png"/>
+            <Label Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
+                Elija el fichero que quiere exportar
             </Label>
-			<Button Name="btnOpenFile" Click="BtnOpenFile_Click" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center">
+			<Button Name="btnOpenFile" Click="BtnOpenFile_Click" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
 				Abrir
 			</Button>
+            <Label Name="lbl_fileOpenStatus" FontWeight="Bold" Foreground="Green">
+                
+            </Label>
 		</StackPanel>
 
 		</DockPanel>
