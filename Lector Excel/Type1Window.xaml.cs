@@ -33,8 +33,8 @@ namespace Lector_Excel
         {
             Lista.Clear();
             Lista.Add(txt_Ejercicio.Text);
-            Lista.Add(txt_Name.Text);
-            Lista.Add(txt_NIF.Text);
+            Lista.Add(txt_Name.Text.ToUpper());
+            Lista.Add(txt_NIF.Text.ToUpper());
             Lista.Add(txt_Entities.Text);
             Lista.Add(txt_TotalMoney.Text);
             this.DialogResult = true;
