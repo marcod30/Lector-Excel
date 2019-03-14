@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,7 +39,6 @@ namespace Lector_Excel
             progressWindow.Show();
             if (openFileDialog.ShowDialog() == true)
             {
-                
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
                 menu_Export.IsEnabled = true; // enable on correct file read
                 lbl_fileOpenStatus.Content =openFileDialog.SafeFileName + " abierto con éxito.";
@@ -83,18 +83,21 @@ namespace Lector_Excel
         //Handles text file exporting
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
-            if (Type1Fields.Count != 6)
+            if (Type1Fields.Count != 5)
             {
-                MessageBox.Show("Rellene primero los datos de tipo 1","Error");
+                MessageBox.Show("Rellene primero todos los datos de tipo 1","Error");
                 return;
             }
             MessageBoxResult msg = MessageBox.Show("Se van a exportart los datos. ¿Continuar?","OJOCUIDAO",MessageBoxButton.YesNo,MessageBoxImage.Question);
-            if(msg != MessageBoxResult.Yes)
+            
+            if (msg != MessageBoxResult.Yes)
             {
+                
                 return;
             }
 
-            ExcelManager.ExportData(Type1Fields[0],Type1Fields[1]);
+            ExcelManager.ExportData(Type1Fields);
+            Debug.Write(msg);
             // Mostrar ventana con ProgressBar
             // Exportar a fichero de texto
             //   |- Quizás desde ExcelManager?
