@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,16 +26,12 @@ namespace Lector_Excel
         {
             InitializeComponent();
             Lista = new List<string>();
-            if (Lista != null && Lista.Count > 0)
-            {
-                menu_exportData.IsEnabled = true;
-                txt_Ejercicio.Text = Lista[0];
-            }
         }
         public List<string> Lista { get; set; }
         // Handles changes confirmation
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
+            Lista.Clear();
             Lista.Add(txt_Ejercicio.Text);
             Lista.Add(txt_Name.Text);
             Lista.Add(txt_NIF.Text);
@@ -59,25 +55,50 @@ namespace Lector_Excel
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
+                string[] temp;
+                temp = File.ReadAllLines(openFileDialog.FileName);
                 IEnumerable<TextBox> collection = main_dockpanel.Children.OfType<TextBox>();
                 int index = 0;
+                Lista.Clear();
                 foreach (TextBox t in collection)
                 {
-                    t.Text = Lista[index++];
+                    t.Text = temp[index];
+                    Lista.Add(temp[index]);
+                    index++;
                 }
             }
         }
 
         private void Menu_exportData_Click(object sender, RoutedEventArgs e)
         {
-            if(Lista.Count > 0)
-            //The using statement automatically flushes AND CLOSES the stream and calls IDisposable.Dispose on the stream object.
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\PersonalDataType1.lectorexcel"))
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (sfd.ShowDialog() == true)
             {
-                foreach (string s in Lista)
-                {
-                    sw.WriteLine(s);
-                }
+                if (Lista.Count > 0)
+                    //The using statement automatically flushes AND CLOSES the stream and calls IDisposable.Dispose on the stream object.
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                    {
+                        foreach (string s in Lista)
+                        {
+                            sw.WriteLine(s);
+                        }
+                    }
+            }
+        }
+
+        // When Window is completely loaded, execute this
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Lista != null && Lista.Count > 0)
+            {
+                menu_exportData.IsEnabled = true;
+                txt_Ejercicio.Text = Lista[0];
+                txt_Name.Text = Lista[1];
+                txt_NIF.Text = Lista[2];
+                txt_Entities.Text = Lista[3];
+                txt_TotalMoney.Text = Lista[4];
             }
         }
     }

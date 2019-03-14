@@ -57,8 +57,6 @@ namespace Lector_Excel
             {
                 MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
-
-
                 MessageBox.Show(Type1Fields[0]);
             }
             else
