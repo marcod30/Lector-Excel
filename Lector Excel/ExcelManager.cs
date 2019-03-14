@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -26,19 +27,118 @@ namespace Lector_Excel
             this.path = path;
         }
 
-        public void ExportData(string Ejercicio, string NIFDeclarante)
+        // Exports the Type 1 data
+        public void ExportType1Data(List<string> Type1Data, string exportingPath = "")
+        {
+            StringBuilder sb = new StringBuilder();
+            Type1Data[1] = deAccent(Type1Data[1]);
+            sb.Append("1347");
+            //sb.AppendFormat("%04d", Type1Data[0]);
+            sb.Append(Type1Data[0].PadLeft(4,'0'));
+            sb.Append(Type1Data[2]);
+            sb.Append(Type1Data[1].PadRight(40));
+            //sb.AppendFormat("%-40s", Type1Data[1]);
+            sb.Append("T000000000");
+
+            for (int i = 0; i < 40; i++)
+            {
+                sb.Append(" ");
+            }
+
+            sb.Append("3470000000000  0000000000000");
+            sb.AppendFormat("%09s", Type1Data[3]);
+
+            if (Type1Data[4].Contains(","))
+            {
+                bool isNegative = false;
+                if (Type1Data[4].Contains("-"))
+                {
+                    isNegative = true;
+                    Type1Data[4] = Type1Data[4].Split('-')[1];
+                }
+                string entera = Type1Data[4].Split(',')[0];
+                string dec = Type1Data[4].Split(',')[1];
+                if (isNegative)
+                {
+                    sb.Append("N");
+                }
+                else
+                {
+                    sb.Append(" ");
+                }
+                sb.AppendFormat("%013s", entera);
+                sb.AppendFormat("%-2s", dec).Replace(' ', '0');
+            }
+            else if (Type1Data[4].Contains("."))
+            {
+                bool isNegative = false;
+                if (Type1Data[4].Contains("-"))
+                {
+                    isNegative = true;
+                    Type1Data[4] = Type1Data[4].Split('-')[1];
+                }
+                string entera = Type1Data[4].Split('.')[0];
+                string dec = Type1Data[4].Split('.')[1];
+                if (isNegative)
+                {
+                    sb.Append("N");
+                }
+                else
+                {
+                    sb.Append(" ");
+                }
+                sb.AppendFormat("%013s", entera);
+                sb.AppendFormat("%-2s", dec).Replace(' ', '0');
+            }
+            else
+            {
+                bool isNegative = false;
+                if (Type1Data[4].Contains("-"))
+                {
+                    isNegative = true;
+                    Type1Data[4] = Type1Data[4].Split('-')[1];
+                }
+                if (isNegative)
+                {
+                    sb.Append("N");
+                }
+                else
+                {
+                    sb.Append(" ");
+                }
+                sb.AppendFormat("%013s", Type1Data[4]);
+                sb.Append("00");
+            }
+
+            sb.Append("000000000 000000000000000");
+
+            for (int i = 0; i < 315; i++)
+            {
+                sb.Append(" ");
+            }
+            File.WriteAllText(Path.GetDirectoryName(this.path) + "\\result.txt", sb.ToString());
+        }
+
+        // Opens a text file and starts exporting the data
+        public void ExportData(List<string> Type1Data,string exportingPath = "")
         {
             StringBuilder stringBuilder = new StringBuilder();
+            int rows, columns;
+            Debug.WriteLine("STARTING EXPORT TO: "+ Path.GetDirectoryName(this.path) + "\\result.txt");
+            ExportType1Data(Type1Data);
+
             worksheet = workbook.Sheets[1];
             range = worksheet.UsedRange;
-            int rows, columns;
             rows = range.Rows.Count;
             columns = range.Columns.Count;
-            stringBuilder.Append("2347").Append(Ejercicio).Append(NIFDeclarante);
+
+            stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
+
             for (int i = 2; i < rows; i++)
             {
                 for (int j = 1; j > columns; j++)
                 {
+                    Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, j].Value);
                     // NUMERIC CELL
                     if(double.TryParse(range.Cells[i, j].Value2, out double d))
                         if (j == 5 || j == 6 || j == 14)
@@ -81,12 +181,13 @@ namespace Lector_Excel
                         {
                             stringBuilder.Append(" ");
                         }
-                    File.WriteAllText(Path.GetDirectoryName(this.path)+"result.txt",stringBuilder.ToString());
+                    File.WriteAllText(Path.GetDirectoryName(this.path)+"\\result.txt",stringBuilder.ToString());
                 }
             }
         }
 
-        // Imported from Old Lector Excel
+        // Puts the number in the required 347 Model Format
+        // Type1Data[4]d from Old Lector Excel
         public string FormatNumber(string number, int maxlength, bool shouldBeFloat, bool isUnsigned)
         {
             string entera = "0", dec = "0";
@@ -139,6 +240,8 @@ namespace Lector_Excel
             }
             return sb.ToString();
         }
+
+        // Tries to convert accentuated chars into their non-accentuated variants
         static string deAccent(string text)
         {
             var normalizedString = text.Normalize(NormalizationForm.FormD);
