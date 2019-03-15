@@ -152,10 +152,11 @@ namespace Lector_Excel
                 columns = range.Columns.Count;
 
                 Debug.WriteLine("El excel tiene " + rows + " filas y " + columns + " columnas");
-                stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
+                
 
                 for (int i = 2; i <= rows; i++)
                 {
+                    stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
                     for (int j = 1; j <= MAX_ALLOWED_COLUMNS; j++)
                     {
 
