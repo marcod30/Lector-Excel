@@ -25,9 +25,7 @@ namespace Lector_Excel
 
         public ExcelManager(string path)
         {
-            excelApp = new Excel.Application();
-            workbooks = excelApp.Workbooks;
-            workbook = workbooks.Open(path);
+            
             this.path = path;
         }
 
@@ -126,9 +124,11 @@ namespace Lector_Excel
             {
                 sb.Append(" ");
             }
-            sb.AppendFormat("\n");
-            File.WriteAllText(Path.GetDirectoryName(this.path) + "\\result.txt", sb.ToString());
-            
+            sb.Append(Environment.NewLine);
+            if(exportingPath.Equals(""))
+                File.WriteAllText(Path.GetDirectoryName(this.path) + "\\result.txt", sb.ToString());
+            else
+                File.WriteAllText(exportingPath, sb.ToString());
         }
 
         // Opens a text file and starts exporting the data
@@ -137,10 +137,14 @@ namespace Lector_Excel
             try
             {
                 StringBuilder stringBuilder = new StringBuilder();
+                excelApp = new Excel.Application();
+                workbooks = excelApp.Workbooks;
+                workbook = workbooks.Open(path);
+
                 int rows, columns;
                 Debug.WriteLine("STARTING EXPORT TO: " + Path.GetDirectoryName(this.path) + "\\result.txt");
 
-                ExportType1Data(Type1Data);
+                ExportType1Data(Type1Data,exportingPath);
 
                 worksheet = workbook.Sheets[1];
                 range = worksheet.UsedRange;
@@ -211,12 +215,15 @@ namespace Lector_Excel
                                     stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().PadRight(longitudes2[j]).ToUpper()));
                                 }
                             }
-
-                        stringBuilder.AppendFormat("\n");
                     }
+                    stringBuilder.Append(Environment.NewLine);
                 }
-                stringBuilder.AppendFormat("\n");
-                File.AppendAllText(Path.GetDirectoryName(this.path) + "\\result.txt", stringBuilder.ToString());
+                stringBuilder.Append(Environment.NewLine);
+                if(exportingPath.Equals(""))
+                    File.AppendAllText(Path.GetDirectoryName(this.path) + "\\result.txt", stringBuilder.ToString());
+                else
+                    File.AppendAllText(exportingPath, stringBuilder.ToString());
+
             }
             finally
             {
