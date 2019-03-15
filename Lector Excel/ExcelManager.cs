@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,15 +16,18 @@ namespace Lector_Excel
     {
         string path;
         Excel.Application excelApp;
+        Excel.Workbooks workbooks;
         Excel.Workbook workbook;
         Excel._Worksheet worksheet;
         Excel.Range range;
         private readonly int[] longitudes2 = {-1, 9, 9, 40, 1, 2, 2, 1, 1, 16, 1, 1, 15, 16, 4, 16, 16, 16, 16, 16, 16, 16, 16, 17, 1, 1, 1, 16, 201 };
-        
+        const int MAX_ALLOWED_COLUMNS = 28; //Model 347 has 28 data fields only, so if further data is found, it will be ignored
+
         public ExcelManager(string path)
         {
             excelApp = new Excel.Application();
-            workbook = excelApp.Workbooks.Open(path);
+            workbooks = excelApp.Workbooks;
+            workbook = workbooks.Open(path);
             this.path = path;
         }
 
@@ -46,7 +50,8 @@ namespace Lector_Excel
             }
 
             sb.Append("3470000000000  0000000000000");
-            sb.AppendFormat("%09s", Type1Data[3]);
+            sb.Append(Type1Data[3].PadLeft(9, '0'));
+            //sb.AppendFormat("%09s", Type1Data[3]);
 
             if (Type1Data[4].Contains(","))
             {
@@ -66,8 +71,10 @@ namespace Lector_Excel
                 {
                     sb.Append(" ");
                 }
-                sb.AppendFormat("%013s", entera);
-                sb.AppendFormat("%-2s", dec).Replace(' ', '0');
+                sb.Append(entera.PadLeft(13,'0'));
+                //sb.AppendFormat("%013s", entera);
+                sb.Append(dec.PadRight(2).Replace(' ', '0'));
+                //sb.AppendFormat("%-2s", dec).Replace(' ', '0');
             }
             else if (Type1Data[4].Contains("."))
             {
@@ -87,8 +94,10 @@ namespace Lector_Excel
                 {
                     sb.Append(" ");
                 }
-                sb.AppendFormat("%013s", entera);
-                sb.AppendFormat("%-2s", dec).Replace(' ', '0');
+                sb.Append(entera.PadLeft(13, '0'));
+                //sb.AppendFormat("%013s", entera);
+                sb.Append(dec.PadRight(2).Replace(' ', '0'));
+                //sb.AppendFormat("%-2s", dec).Replace(' ', '0');
             }
             else
             {
@@ -106,7 +115,8 @@ namespace Lector_Excel
                 {
                     sb.Append(" ");
                 }
-                sb.AppendFormat("%013s", Type1Data[4]);
+                sb.Append(Type1Data[4].PadLeft(13,'0'));
+                //sb.AppendFormat("%013s", Type1Data[4]);
                 sb.Append("00");
             }
 
@@ -116,78 +126,124 @@ namespace Lector_Excel
             {
                 sb.Append(" ");
             }
+            sb.AppendFormat("\n");
             File.WriteAllText(Path.GetDirectoryName(this.path) + "\\result.txt", sb.ToString());
+            
         }
 
         // Opens a text file and starts exporting the data
         public void ExportData(List<string> Type1Data,string exportingPath = "")
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            int rows, columns;
-            Debug.WriteLine("STARTING EXPORT TO: "+ Path.GetDirectoryName(this.path) + "\\result.txt");
-            ExportType1Data(Type1Data);
-
-            worksheet = workbook.Sheets[1];
-            range = worksheet.UsedRange;
-            rows = range.Rows.Count;
-            columns = range.Columns.Count;
-
-            stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
-
-            for (int i = 2; i < rows; i++)
+            try
             {
-                for (int j = 1; j > columns; j++)
-                {
-                    Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, j].Value);
-                    // NUMERIC CELL
-                    if(double.TryParse(range.Cells[i, j].Value2, out double d))
-                        if (j == 5 || j == 6 || j == 14)
-                        {
-                            stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], false, true));
-                        }
-                        else if (j == 12)
-                        {
-                            stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], true, true));
-                        }
-                        else
-                        {
-                            stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], true, false));
-                        }
-                    else
-                    // STRING CELL
-                    if (!range.Cells[i, j].Value.ToString().Contains("-"))
-                    {
-                        if (longitudes2[j] != 1)
-                        {
-                            stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, j].Value.ToString()).ToUpper()));
-                        }
-                        else
-                        {
-                            stringBuilder.Append(deAccent(string.Format("%s", range.Cells[i, j].Value.ToString()).ToUpper()));
-                        }
-                    }
-                    else if (Regex.Match(range.Cells[i, j].Value.ToString(), "^ -?\\d +\\.?\\d *$").Success)
-                    {
-                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value.ToString(), longitudes2[j], true, false));
-                    }
-                    else
-                    {
-                        stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, j].Value.ToString()).ToUpper()));
-                    }
+                StringBuilder stringBuilder = new StringBuilder();
+                int rows, columns;
+                Debug.WriteLine("STARTING EXPORT TO: " + Path.GetDirectoryName(this.path) + "\\result.txt");
 
-                    // BLANK CELL
-                    if(range.Cells[i, j].Value.ToString().Equals(""))
-                        for (int k = 0; k < longitudes2[j]; k++)
-                        {
-                            stringBuilder.Append(" ");
-                        }
-                    File.WriteAllText(Path.GetDirectoryName(this.path)+"\\result.txt",stringBuilder.ToString());
+                ExportType1Data(Type1Data);
+
+                worksheet = workbook.Sheets[1];
+                range = worksheet.UsedRange;
+                rows = range.Rows.Count;
+                columns = range.Columns.Count;
+
+                Debug.WriteLine("El excel tiene " + rows + " filas y " + columns + " columnas");
+                stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
+
+                for (int i = 2; i <= rows; i++)
+                {
+                    for (int j = 1; j <= MAX_ALLOWED_COLUMNS; j++)
+                    {
+
+                        //Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, j].Value2.ToString());
+                        /*
+                        if (range.Cells[i, j].Value2 != null)
+                            MessageBox.Show("Exporting cell " + i + ", " + j + ": " + range.Cells[i, j].Value2.ToString());
+                            */
+
+                        // BLANK CELL
+                        if (range.Cells[i, j] != null)
+                            if (range.Cells[i, j].Value2 == null)
+                                for (int k = 0; k < longitudes2[j]; k++)
+                                {
+                                    stringBuilder.Append(" ");
+                                }
+                            else if(range.Cells[i,1] != null )
+                            {
+                                // NUMERIC CELL
+                                if (double.TryParse(range.Cells[i, j].Value2.ToString(), out double d))
+                                    if (j == 5 || j == 6 || j == 14)
+                                    {
+                                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], false, true));
+                                    }
+                                    else if (j == 12)
+                                    {
+                                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], true, true));
+                                    }
+                                    else
+                                    {
+                                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], true, false));
+                                    }
+                                else
+                                // STRING CELL
+                                if (!range.Cells[i, j].Value.ToString().Contains("-"))
+                                {
+                                    if (longitudes2[j] != 1)
+                                    {
+                                        //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, j].Value.ToString()).ToUpper()));
+                                        stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().PadRight(longitudes2[j]).ToUpper()));
+                                    }
+                                    else
+                                    {
+                                        //stringBuilder.Append(deAccent(string.Format("%s", range.Cells[i, j].Value2.ToString()).ToUpper()));
+                                        stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().ToUpper()));
+                                    }
+                                }
+                                /*
+                                else if (Regex.Match(range.Cells[i, j].Value2.ToString(), "^ -?\\d +\\.?\\d *$").Success)
+                                {
+                                    stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], true, false));
+                                }
+                                */
+                                else
+                                {
+                                    //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, j].Value2.ToString()).ToUpper()));
+                                    stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().PadRight(longitudes2[j]).ToUpper()));
+                                }
+                            }
+
+                        stringBuilder.AppendFormat("\n");
+                    }
                 }
+                stringBuilder.AppendFormat("\n");
+                File.AppendAllText(Path.GetDirectoryName(this.path) + "\\result.txt", stringBuilder.ToString());
+            }
+            finally
+            {
+                //cleanup
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                //rule of thumb for releasing com objects:
+                //  never use two dots, all COM objects must be referenced and released individually
+                //  ex: [somthing].[something].[something] is bad
+
+                //release com objects to fully kill excel process from running in the background
+                Marshal.ReleaseComObject(range);
+                Marshal.ReleaseComObject(worksheet);
+
+                //close and release
+                workbook.Close();
+                Marshal.ReleaseComObject(workbook);
+
+                //quit and release
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
             }
         }
 
         // Puts the number in the required 347 Model Format
-        // Type1Data[4]d from Old Lector Excel
+        // Imported from Old Lector Excel
         public string FormatNumber(string number, int maxlength, bool shouldBeFloat, bool isUnsigned)
         {
             string entera = "0", dec = "0";
@@ -228,15 +284,20 @@ namespace Lector_Excel
                 {
                     maxlength -= 2;
                 }
-                sb.AppendFormat("%0" + maxlength + "d", int.Parse(entera));
+                sb.Append(entera.PadLeft(maxlength,'0'));
+                //sb.AppendFormat("%0" + maxlength + "d", int.Parse(entera));
+                /*
                 string temp = "";
                 temp = string.Format("%-2s", dec);
                 temp.Replace(' ', '0');
-                sb.AppendFormat(temp);
+                */
+                sb.Append(dec.PadRight(2,'0'));
+                //sb.AppendFormat(temp);
             }
             else
             {
-                sb.AppendFormat("%0" + maxlength + "d", int.Parse(entera));
+                sb.Append(entera.PadLeft(maxlength,'0'));
+                //sb.AppendFormat("%0" + maxlength + "d", int.Parse(entera));
             }
             return sb.ToString();
         }
