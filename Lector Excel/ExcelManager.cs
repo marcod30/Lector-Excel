@@ -156,7 +156,8 @@ namespace Lector_Excel
 
                 for (int i = 2; i <= rows; i++)
                 {
-                    stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
+                    if (range.Cells[i, 1].Value2 != null)
+                        stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
                     for (int j = 1; j <= MAX_ALLOWED_COLUMNS; j++)
                     {
 
@@ -173,7 +174,7 @@ namespace Lector_Excel
                                 {
                                     stringBuilder.Append(" ");
                                 }
-                            else if(range.Cells[i,1] != null )
+                            else if(range.Cells[i,1].Value2 != null )
                             {
                                 // NUMERIC CELL
                                 if (double.TryParse(range.Cells[i, j].Value2.ToString(), out double d))
@@ -257,11 +258,15 @@ namespace Lector_Excel
             string entera = "0", dec = "0";
             StringBuilder sb = new StringBuilder();
             bool isNegative = false;
+
+            //Si el numero es negativo
             if (number.Contains("-"))
             {
                 isNegative = true;
                 number = number.Split('-')[1];
             }
+
+            //Si es decimal
             if (number.Contains(","))
             {
                 entera = number.Split(',')[0];
@@ -273,7 +278,13 @@ namespace Lector_Excel
                 entera = number.Split('.')[0];
 
                 dec = number.Split('.')[1];
+            }//Si es entero
+            else
+            {
+                entera = number;
             }
+
+            //Agregar simbolo segun el numero
             if (isNegative)
             {
                 sb.Append("N");
@@ -282,6 +293,7 @@ namespace Lector_Excel
             {
                 sb.Append(" ");
             }
+
             if (shouldBeFloat)
             {
                 if (!isUnsigned)
@@ -307,6 +319,7 @@ namespace Lector_Excel
                 sb.Append(entera.PadLeft(maxlength,'0'));
                 //sb.AppendFormat("%0" + maxlength + "d", int.Parse(entera));
             }
+
             return sb.ToString();
         }
 
