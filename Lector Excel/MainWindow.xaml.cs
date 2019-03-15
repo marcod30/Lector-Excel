@@ -99,14 +99,20 @@ namespace Lector_Excel
                 
                 return;
             }
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Text files (*.txt)|*.txt";
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if(sfd.ShowDialog() == true)
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+                ExcelManager.ExportData(Type1Fields,sfd.FileName);
+                Mouse.OverrideCursor = Cursors.Arrow;
 
-            Mouse.OverrideCursor = Cursors.Wait;
-            ExcelManager.ExportData(Type1Fields);
-            Mouse.OverrideCursor = Cursors.Arrow;
+                menu_Export.IsEnabled = false;
+                btn_Export.IsEnabled = false;
+                lbl_fileOpenStatus.Content = "";
+            }
 
-            menu_Export.IsEnabled = false;
-            btn_Export.IsEnabled = false;
-            lbl_fileOpenStatus.Content = "";
             // Mostrar ventana con ProgressBar
             // Exportar a fichero de texto
             //   |- Quizás desde ExcelManager?
