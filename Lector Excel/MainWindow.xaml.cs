@@ -41,11 +41,13 @@ namespace Lector_Excel
             {
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
                 menu_Export.IsEnabled = true; // enable on correct file read
+                btn_Export.IsEnabled = true;
                 lbl_fileOpenStatus.Content =openFileDialog.SafeFileName + " abierto con éxito.";
             }
             else
             {
                 menu_Export.IsEnabled = false;
+                btn_Export.IsEnabled = false;
                 lbl_fileOpenStatus.Content = "";
             }
             progressWindow.Close();
@@ -63,20 +65,22 @@ namespace Lector_Excel
             {
                 MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
-                MessageBox.Show(Type1Fields[0]);
             }
+            /*
             else
             {
                 MessageBox.Show("Cambios descartados","cambios", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            if (Type1Fields.Count > 0 /* && Excel opened*/)
+            */
+            if (Type1Fields.Count > 0 && ExcelManager != null)
             {
                 menu_Export.IsEnabled = true;
+                btn_Export.IsEnabled = true;
             }
             else
             {
                 menu_Export.IsEnabled = false;
+                btn_Export.IsEnabled = false;
             }
         }
 
@@ -96,8 +100,13 @@ namespace Lector_Excel
                 return;
             }
 
+            Mouse.OverrideCursor = Cursors.Wait;
             ExcelManager.ExportData(Type1Fields);
-            Debug.Write(msg);
+            Mouse.OverrideCursor = Cursors.Arrow;
+
+            menu_Export.IsEnabled = false;
+            btn_Export.IsEnabled = false;
+            lbl_fileOpenStatus.Content = "";
             // Mostrar ventana con ProgressBar
             // Exportar a fichero de texto
             //   |- Quizás desde ExcelManager?
