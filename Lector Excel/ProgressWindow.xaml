@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Exportando..." Height="70" Width="200" ResizeMode="NoResize">
-    <Grid>
-        <ProgressBar Name="Export_Progressbar" Minimum="0" IsIndeterminate="False" Margin="2">
+        Title="Exportando..." Height="100" Width="300" ResizeMode="NoResize">
+    <Grid Margin="10">
+        <ProgressBar Name="Export_Progressbar" Minimum="0" Maximum="100" IsIndeterminate="False" Margin="2">
             
         </ProgressBar>
+        <TextBlock Text="{Binding ElementName=Export_Progressbar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Window>
