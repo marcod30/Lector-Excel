@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 using Excel = Microsoft.Office.Interop.Excel;
 namespace Lector_Excel
@@ -132,7 +130,7 @@ namespace Lector_Excel
         }
 
         // Opens a text file and starts exporting the data
-        public void ExportData(List<string> Type1Data,string exportingPath = "")
+        public void ExportData(List<string> Type1Data, BackgroundWorker bw, string exportingPath = "")
         {
             try
             {
@@ -219,6 +217,9 @@ namespace Lector_Excel
                             }
                     }
                     stringBuilder.Append(Environment.NewLine);
+                    float progress = (float)i / rows * 100;
+                    Debug.WriteLine(progress + "%");
+                    bw.ReportProgress((int)progress);
                 }
                 stringBuilder.Append(Environment.NewLine);
                 if(exportingPath.Equals(""))
