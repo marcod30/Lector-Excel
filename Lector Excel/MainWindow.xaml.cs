@@ -1,19 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Lector_Excel
 {
@@ -24,9 +15,16 @@ namespace Lector_Excel
     {
         private ExcelManager ExcelManager;
         List<string> Type1Fields = new List<string>();
+        ProgressWindow exportProgressBar = new ProgressWindow(false, "Exportando...");
+        private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
+        private string saveLocation = "";
         public MainWindow()
         {
             InitializeComponent();
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.DoWork += Worker_DoWork;
+            backgroundWorker.ProgressChanged += Worker_ProgressChanged;
+            backgroundWorker.RunWorkerCompleted += Worker_Completed;
         }
 
         //Handles file opening button
@@ -35,8 +33,6 @@ namespace Lector_Excel
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            ProgressWindow progressWindow = new ProgressWindow(true,"Abriendo fichero...");
-            progressWindow.Show();
             if (openFileDialog.ShowDialog() == true)
             {
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
@@ -60,7 +56,6 @@ namespace Lector_Excel
                 }
 
             }
-            progressWindow.Close();
         }
 
         //Handles data filling of Type 1
@@ -115,7 +110,10 @@ namespace Lector_Excel
             if(sfd.ShowDialog() == true)
             {
                 Mouse.OverrideCursor = Cursors.Wait;
-                ExcelManager.ExportData(Type1Fields,sfd.FileName);
+                saveLocation = sfd.FileName;
+                
+                backgroundWorker.RunWorkerAsync();
+                exportProgressBar.ShowDialog();
                 Mouse.OverrideCursor = Cursors.Arrow;
 
                 menu_Export.IsEnabled = false;
@@ -126,6 +124,24 @@ namespace Lector_Excel
             // Mostrar ventana con ProgressBar
             // Exportar a fichero de texto
             //   |- Quizás desde ExcelManager?
+        }
+
+        //Handles background worker execution
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ExcelManager.ExportData(Type1Fields, sender as BackgroundWorker, saveLocation);
+        }
+
+        //Handles background worker completion
+        private void Worker_Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+            exportProgressBar.Close();
+        }
+
+        //Handles background worker progress
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            exportProgressBar.Export_Progressbar.Value = e.ProgressPercentage;
         }
 
         //Handles program exiting
