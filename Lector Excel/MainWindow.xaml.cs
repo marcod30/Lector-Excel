@@ -113,17 +113,17 @@ namespace Lector_Excel
                 saveLocation = sfd.FileName;
                 
                 backgroundWorker.RunWorkerAsync();
+
+                if(exportProgressBar == null)
+                    exportProgressBar = new ProgressWindow(false, "Exportando...");
                 exportProgressBar.ShowDialog();
+
                 Mouse.OverrideCursor = Cursors.Arrow;
 
                 menu_Export.IsEnabled = false;
                 btn_Export.IsEnabled = false;
                 lbl_fileOpenStatus.Content = "";
             }
-
-            // Mostrar ventana con ProgressBar
-            // Exportar a fichero de texto
-            //   |- Quizás desde ExcelManager?
         }
 
         //Handles background worker execution
