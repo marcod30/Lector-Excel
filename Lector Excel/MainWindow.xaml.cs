@@ -15,7 +15,7 @@ namespace Lector_Excel
     {
         private ExcelManager ExcelManager;
         List<string> Type1Fields = new List<string>();
-        ProgressWindow exportProgressBar = new ProgressWindow(false, "Exportando...");
+        ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private string saveLocation = "";
         public MainWindow()
@@ -114,8 +114,7 @@ namespace Lector_Excel
                 
                 backgroundWorker.RunWorkerAsync();
 
-                if(exportProgressBar == null)
-                    exportProgressBar = new ProgressWindow(false, "Exportando...");
+                exportProgressBar = new ProgressWindow(false, "Exportando...");
                 exportProgressBar.ShowDialog();
 
                 Mouse.OverrideCursor = Cursors.Arrow;
