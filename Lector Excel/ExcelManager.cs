@@ -18,6 +18,7 @@ namespace Lector_Excel
         Excel.Workbook workbook;
         Excel._Worksheet worksheet;
         Excel.Range range;
+                                            // Excel is not 0 based, thus the array's first position is not used
         private readonly int[] longitudes2 = {-1, 9, 9, 40, 1, 2, 2, 1, 1, 16, 1, 1, 15, 16, 4, 16, 16, 16, 16, 16, 16, 16, 16, 17, 1, 1, 1, 16, 201 };
         const int MAX_ALLOWED_COLUMNS = 28; //Model 347 has 28 data fields only, so if further data is found, it will be ignored
 
