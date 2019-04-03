@@ -68,15 +68,9 @@ namespace Lector_Excel
             type1Window.ShowDialog();
             if(type1Window.DialogResult == true)
             {
-                MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
+                //MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
             }
-            /*
-            else
-            {
-                MessageBox.Show("Cambios descartados","cambios", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            */
             if (Type1Fields.Count > 0 && ExcelManager != null)
             {
                 menu_Export.IsEnabled = true;
