@@ -20,6 +20,26 @@ namespace Lector_Excel
             Lista = new List<string>();
         }
         public List<string> Lista { get; set; }
+        /*
+         * Lista holds the information from Type1Window's TextBoxes in order of appearance
+         * For uses in other classes, Lista should ALWAYS have the fields in its following positions,
+         * even if they are empty:
+         *  0  => txt_Ejercicio
+         *  1  => txt_NIF
+         *  2  => txt_Name
+         *  3  => txt_SupportType
+         *  4  => txt_Phone
+         *  5  => txt_RelationName
+         *  6  => txt_DeclarationID
+         *  7  => txt_ComplementaryDec
+         *  8  => txt_SustitutiveDec
+         *  9  => txt_PrevDeclarationID
+         *  10 => txt_Entities
+         *  11 => txt_TotalMoney
+         *  12 => txt_TotalProperties
+         *  13 => txt_TotalMoneyRental
+         *  14 => txt_NIFLegal
+        */
         // Handles changes confirmation
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
