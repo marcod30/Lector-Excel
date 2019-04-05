@@ -32,24 +32,28 @@ namespace Lector_Excel
         public void ExportType1Data(List<string> Type1Data, string exportingPath = "")
         {
             StringBuilder sb = new StringBuilder();
-            Type1Data[1] = deAccent(Type1Data[1]);
+            Type1Data[2] = deAccent(Type1Data[2]);  // Delete special chars of Name
+            Type1Data[5] = deAccent(Type1Data[5]);  // Delete special chars of Relation Name
             sb.Append("1347");
             //sb.AppendFormat("%04d", Type1Data[0]);
-            sb.Append(Type1Data[0].PadLeft(4,'0'));
-            sb.Append(Type1Data[2]);
-            sb.Append(Type1Data[1].PadRight(40));
+            sb.Append(Type1Data[0].PadLeft(4, '0')); // Append Ejercicio, padding with zeroes
+            sb.Append(Type1Data[1]);    // Append NIF
+            sb.Append(Type1Data[2].PadRight(40));   // Append Name, requires padding
             //sb.AppendFormat("%-40s", Type1Data[1]);
-            sb.Append("T000000000");
+            sb.Append(Type1Data[3].PadLeft(1));    // Append Support Type, replacing if empty
 
-            for (int i = 0; i < 40; i++)
-            {
-                sb.Append(" ");
-            }
+            sb.Append(Type1Data[4].PadRight(9, '0'));    // Append Phone, padding with zeroes if empty
+            sb.Append(Type1Data[5].PadRight(40));   // Append Relation Name, requires padding
 
-            sb.Append("3470000000000  0000000000000");
-            sb.Append(Type1Data[3].PadLeft(9, '0'));
+            sb.Append(Type1Data[6].PadRight(13, '0'));    // Append Declaration ID
+            sb.Append(Type1Data[7].PadLeft(1));    // Append Complementary Dec, replacing if empty
+            sb.Append(Type1Data[8].PadLeft(1));    // Append Sustitutive Dec, replacing if empty
+            sb.Append(Type1Data[9].PadRight(13, '0'));    // Append Previous Declaration ID, padding with zeroes
+
+            sb.Append(Type1Data[10].PadLeft(9, '0'));   // Append Total number of entities, padding with zeroes
             //sb.AppendFormat("%09s", Type1Data[3]);
-
+            sb.Append(FormatNumber(Type1Data[11],16,true,false));   // Append Total Money, with floating point and sign formatting
+            /*
             if (Type1Data[4].Contains(","))
             {
                 bool isNegative = false;
@@ -116,14 +120,24 @@ namespace Lector_Excel
                 //sb.AppendFormat("%013s", Type1Data[4]);
                 sb.Append("00");
             }
+            */
+            sb.Append(Type1Data[12].PadLeft(9, '0'));   // Append Properties amount, padding with zeroes if empty
+            sb.Append(FormatNumber(Type1Data[13], 16, true, false));    // Append Total Money Rental, with floating point and sign formatting
 
-            sb.Append("000000000 000000000000000");
-
-            for (int i = 0; i < 315; i++)
+            // Append 205 blank characters
+            for (int i = 0; i < 205; i++)
             {
                 sb.Append(" ");
             }
-            sb.Append(Environment.NewLine);
+            sb.Append(Type1Data[14].PadLeft(9));   // Append Legal NIF, padding with spaces if empty
+
+            // Append 101 blank characters
+            for (int i = 0; i < 101; i++)
+            {
+                sb.Append(" ");
+            }
+
+            sb.Append(Environment.NewLine); // Append a new line
             if(exportingPath.Equals(""))
                 File.WriteAllText(Path.GetDirectoryName(this.path) + "\\result.txt", sb.ToString());
             else
@@ -156,7 +170,7 @@ namespace Lector_Excel
                 for (int i = 2; i <= rows; i++)
                 {
                     if (range.Cells[i, 1].Value2 != null)
-                        stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[2]);
+                        stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[1]);
                     for (int j = 1; j <= MAX_ALLOWED_COLUMNS; j++)
                     {
 
