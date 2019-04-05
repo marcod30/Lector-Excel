@@ -86,7 +86,7 @@ namespace Lector_Excel
         //Handles text file exporting
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
-            if (Type1Fields.Count != 5)
+            if (Type1Fields.Count < 5)
             {
                 MessageBox.Show("Rellene primero todos los datos de tipo 1","Error");
                 return;
