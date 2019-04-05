@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Rellenar datos del tipo 1" Height="600" Width="400" ResizeMode="CanMinimize">
+        Title="Rellenar datos del tipo 1" Height="700" Width="410" ResizeMode="CanMinimize">
     <DockPanel Name="main_dockpanel" Margin="0"> <!-- Don't change this dockpanel-->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
@@ -35,8 +35,12 @@
                 Ejercicio
             </Label>
 
-            <Label Canvas.Left="110">
+            <Label Canvas.Left="80">
                 NIF del declarante
+            </Label>
+
+            <Label Canvas.Left="210">
+                Tipo de soporte
             </Label>
         </Canvas>
         <Canvas DockPanel.Dock="Top" Height="25">
@@ -44,7 +48,11 @@
 
             </TextBox>
             
-            <TextBox Canvas.Left="115" Canvas.Top="3" Name="txt_NIF" DockPanel.Dock="Top" MaxLength="9" Height="20" Width="100">
+            <TextBox Canvas.Left="85" Canvas.Top="3" Name="txt_NIF" DockPanel.Dock="Top" MaxLength="9" Height="20" Width="100">
+
+            </TextBox>
+
+            <TextBox Canvas.Left="215" Canvas.Top="3" Name="txt_SupportType" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20">
 
             </TextBox>
         </Canvas>
@@ -74,9 +82,43 @@
 
             </TextBox>
         </Canvas>
-        
+
+        <Label DockPanel.Dock="Top" FontWeight="Bold">
+            Opciones de la declaración
+        </Label>
+        <Canvas DockPanel.Dock="Top" Height="25">
+            <Label Canvas.Left="10">
+                Nº identificativo de la declaración
+            </Label>
+            <Label Canvas.Left="240">
+                Comp.
+            </Label>
+
+            <Label Canvas.Left="290">
+                Sust.
+            </Label>
+        </Canvas>
+        <Canvas DockPanel.Dock="Top" Height="30">
+            <TextBox Canvas.Left="15" Name="txt_DeclarationID" DockPanel.Dock="Top" MaxLength="13" Height="20" Width="120" HorizontalAlignment="Left">
+
+            </TextBox>
+            <TextBox Canvas.Left="245" Name="txt_ComplementaryDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left">
+
+            </TextBox>
+            
+            <TextBox Canvas.Left="295" Name="txt_SustitutiveDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left">
+
+            </TextBox>
+        </Canvas>
+
+        <Label DockPanel.Dock="Top" Margin="10,0,2,2">
+            Nº identificativo de la declaración anterior
+        </Label>
+        <TextBox Margin="15,0,2,2" Name="txt_PrevDeclarationID" DockPanel.Dock="Top" MaxLength="13" Height="20" Width="120" HorizontalAlignment="Left">
+
+        </TextBox>
         <Label DockPanel.Dock="Top">
-            Número total de personas y entidades
+            Nº total de personas y entidades
         </Label>
         <TextBox Margin="2" Name="txt_Entities" DockPanel.Dock="Top" MaxLength="9" Height="20">
             
@@ -90,7 +132,7 @@
         </TextBox>
         
         <Label DockPanel.Dock="Top">
-            Número total de inmuebles
+            Nº total de inmuebles
         </Label>
         <TextBox Margin="2" Name="txt_TotalProperties" DockPanel.Dock="Top" Height="20" MaxLength="9" VerticalAlignment="Top">
 

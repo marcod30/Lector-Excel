@@ -8,7 +8,7 @@
         Title="Acerca de Lector Excel" Height="200" Width="300" ResizeMode="NoResize">
     <StackPanel>
         <Label FontWeight="Bold" HorizontalAlignment="Center" Margin="10">
-            LectorExcel versión 1.1.1
+            LectorExcel versión 1.1.2
         </Label>
         <Label Content="Este programa es Free Software.&#10;Puede distribuirse libremente sin finalidad de lucro.&#10;Cualquier duda o error, contactar con:">
             
