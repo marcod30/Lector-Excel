@@ -11,7 +11,8 @@
 			<MenuItem Header="Opciones">
 				<MenuItem Name="menu_FillType1" Header="Rellenar datos tipo 1..." Click="Menu_FillType1_Click"/>
 				<MenuItem Name="menu_Export" Header="Exportar a Modelo 347" IsEnabled="False" Click="Menu_Export_Click"/>
-				<Separator/>
+                <MenuItem Name="menu_ImportSettings" Header="Opciones de importación..."/>
+                <Separator/>
 				<MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
 			</MenuItem>
 			<MenuItem Header="Acerca de">
