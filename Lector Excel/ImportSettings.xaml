@@ -7,11 +7,6 @@
         mc:Ignorable="d"
         Title="Opciones de importación" Height="750" Width="600" ResizeMode="CanMinimize">
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Opciones">
-                <MenuItem Header="Cerrar"/>
-            </MenuItem>
-        </Menu>
         <StackPanel DockPanel.Dock="Left" Margin="5">
             <Label FontWeight="Bold" MinWidth="250">
                 Dato a importar
