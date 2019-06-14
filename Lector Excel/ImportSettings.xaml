@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="ImportSettings" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Opciones de importación" Height="750" Width="600" ResizeMode="CanMinimize">
+    <DockPanel Margin="5">
+        <StackPanel DockPanel.Dock="Left">
+            <Label FontWeight="Bold" MinWidth="250">
+                Dato a importar
+            </Label>
+            <Label>
+                NIF del declarado
+            </Label>
+            <Label>
+                NIF del representante legal
+            </Label>
+            <Label>
+                Apellidos y nombre, razón social o denominación del declarado
+            </Label>
+            <Label>
+                Código de provincia
+            </Label>
+            <Label>
+                Código de país
+            </Label>
+            <Label>
+                Clave operación
+            </Label>
+            <Label>
+                Importe anual de las operaciones
+            </Label>
+            <Label>
+                Operación seguro
+            </Label>
+            <Label>
+                Arrendamiento local negocio
+            </Label>
+            <Label>
+                Importe percibido en metálico
+            </Label>
+            <Label>
+                Importe anual percibido por transmisiones de inmuebles sujetas a IVA
+            </Label>
+            <Label>
+                Ejercicio
+            </Label>
+            <Label>
+                Importe de las operaciones (1T)
+            </Label>
+            <Label>
+                Importe percibido por transmisiones de inmuebles sujetas a IVA (1T)
+            </Label>
+            <Label>
+                Importe de las operaciones (2T)
+            </Label>
+            <Label>
+                Importe percibido por transmisiones de inmuebles sujetas a IVA (2T)
+            </Label>
+            <Label>
+                Importe de las operaciones (3T)
+            </Label>
+            <Label>
+                Importe percibido por transmisiones de inmuebles sujetas a IVA (3T)
+            </Label>
+            <Label>
+                Importe de las operaciones (4T)
+            </Label>
+            <Label>
+                Importe percibido por transmisiones de inmuebles sujetas a IVA (4T)
+            </Label>
+            <Label>
+                NIF Operador comunitario
+            </Label>
+            <Label>
+                Operaciones régimen especial criterio de caja IVA
+            </Label>
+            <Label>
+                Operación con inversión del sujeto pasivo
+            </Label>
+            <Label Content="Operación con bienes vinculados o destinados a&#10;vincularse al régimen de depósito distinto del aduanero"/>
+
+            <Label Content="Importe anual de las operaciones devengadas conforme&#10;al criterio de caja del IVA"/>
+
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right">
+            <Label FontWeight="Bold">
+                Columna del Excel
+            </Label>
+            <TextBox Margin="5" HorizontalAlignment="Left" MinWidth="40" Text="A"/>
+        </StackPanel>
+    </DockPanel>
 </Window>
