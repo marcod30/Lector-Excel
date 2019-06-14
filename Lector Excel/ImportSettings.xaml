@@ -6,8 +6,13 @@
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
         Title="Opciones de importación" Height="750" Width="600" ResizeMode="CanMinimize">
-    <DockPanel Margin="5">
-        <StackPanel DockPanel.Dock="Left">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Opciones">
+                <MenuItem Header="Cerrar"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel DockPanel.Dock="Left" Margin="5">
             <Label FontWeight="Bold" MinWidth="250">
                 Dato a importar
             </Label>
@@ -85,11 +90,35 @@
             <Label Content="Importe anual de las operaciones devengadas conforme&#10;al criterio de caja del IVA"/>
 
         </StackPanel>
-        <StackPanel DockPanel.Dock="Right">
+        <StackPanel DockPanel.Dock="Right" Margin="5">
             <Label FontWeight="Bold">
                 Columna del Excel
             </Label>
-            <TextBox Margin="5" HorizontalAlignment="Left" MinWidth="40" Text="A"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="A"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="B"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="C"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="D"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="E"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="F"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="G"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="H"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="I"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="J"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="K"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="L"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="M"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="N"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="O"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="P"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Q"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="R"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="S"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="T"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="U"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="V"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="W"/>
+            <TextBox Margin="5,10" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="X"/>
+            <TextBox Margin="5,10" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Y"/>
         </StackPanel>
     </DockPanel>
 </Window>
