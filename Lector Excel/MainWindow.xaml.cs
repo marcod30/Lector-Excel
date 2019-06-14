@@ -119,6 +119,14 @@ namespace Lector_Excel
             }
         }
 
+        // Handles opening the Import Settings Window
+        private void Menu_ImportSettings_Click(object sender, RoutedEventArgs e)
+        {
+            ImportSettings importSettings = new ImportSettings();
+            importSettings.Owner = this;
+            importSettings.ShowDialog();
+        }
+
         //Handles background worker execution
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
