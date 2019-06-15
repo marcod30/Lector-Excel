@@ -15,9 +15,11 @@ namespace Lector_Excel
     {
         private ExcelManager ExcelManager;
         List<string> Type1Fields = new List<string>();
+        private string[] posiciones = { null, "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y" };
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private string saveLocation = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -124,7 +126,10 @@ namespace Lector_Excel
         {
             ImportSettings importSettings = new ImportSettings();
             importSettings.Owner = this;
-            importSettings.ShowDialog();
+            if(importSettings.ShowDialog() == true)
+            {
+                //TODO obtener las nuevas posiciones
+            }
         }
 
         //Handles background worker execution
