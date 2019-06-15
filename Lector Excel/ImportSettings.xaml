@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Opciones de importación" Height="750" Width="600" ResizeMode="CanMinimize">
+        Title="Opciones de importación" Height="775" Width="600" ResizeMode="CanMinimize">
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" Margin="5">
             <Label FontWeight="Bold" MinWidth="250">
@@ -19,6 +19,9 @@
             </Label>
             <Label>
                 Apellidos y nombre, razón social o denominación del declarado
+            </Label>
+            <Label Cursor="Help" ToolTip="Este campo es una constante, el programa se encargará de rellenarlo por usted.">
+                Tipo de hoja (?)
             </Label>
             <Label>
                 Código de provincia
@@ -92,6 +95,7 @@
             <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="A"/>
             <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="B"/>
             <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="C"/>
+            <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" IsEnabled="False" Text=""/>
             <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="D"/>
             <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="E"/>
             <TextBox Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="F"/>
