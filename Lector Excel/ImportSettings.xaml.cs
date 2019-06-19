@@ -39,22 +39,32 @@ namespace Lector_Excel
                 if (t.IsEnabled)
                 {
                     positions.Add(t.Text.ToUpper());
-                    Debug.WriteLine("Added " + t.Text);
+                    //Debug.WriteLine("Added " + t.Text);
                 }
             }
 
+            if (CheckForEmptyAndDuplicates())
+                return;
+
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        // Checks if there is any duplicate or empty fields. If there were any, returns true, otherwise returns false.
+        private bool CheckForEmptyAndDuplicates()
+        {
             if (positions.Count() != positions.Distinct().Count())   // Check if there are duplicates
             {
                 MessageBox.Show("Parece que ha introducido valores duplicados. Por favor, revise los campos e inténtelo de nuevo", "Valores repetidos", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return true;
             }
             else if (!positions.All(s => !s.Equals("")))  // Check if any field was empty
             {
                 MessageBox.Show("Parece que ha dejado algún campo vacío. Por favor, revise los campos e inténtelo de nuevo", "Campo vacío", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return true;
             }
-            this.DialogResult = true;
-            this.Close();
+
+            return false;
         }
 
         // Called after window is fully loaded
@@ -122,17 +132,27 @@ namespace Lector_Excel
             saveFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-            if(saveFileDialog.ShowDialog() == true)
+            positions.Clear();
+            foreach (TextBox t in stack_text.Children.OfType<TextBox>())
+            {
+                if (t.IsEnabled)
+                {
+                    positions.Add(t.Text.ToUpper());
+                    Debug.WriteLine("Added " + t.Text);
+                }
+            }
+
+            if (CheckForEmptyAndDuplicates())
+                return;
+
+            if (saveFileDialog.ShowDialog() == true)
             {
                 //The using statement automatically flushes AND CLOSES the stream and calls IDisposable.Dispose on the stream object.
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
                 {
-                    foreach (TextBox t in stack_text.Children.OfType<TextBox>())
+                    foreach (string s in positions)
                     {
-                        if(t.IsEnabled)
-                        {
-                            sw.WriteLine(t.Text);
-                        }
+                        sw.WriteLine(s);
                     }
                 }
             }
