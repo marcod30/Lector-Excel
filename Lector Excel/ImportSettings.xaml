@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
         Title="Opciones de importación" Height="800" Width="600" ResizeMode="CanMinimize"
-        Closed="Window_Closed">
+        Loaded="Window_Loaded">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
@@ -33,7 +33,26 @@
 
                 <Separator/>
 
-                <MenuItem Name="menu_CloseButton" Header="Cerrar" Click="Menu_CloseButton_Click"/>
+                <MenuItem Name="menu_ConfirmAndClose" Header="Confirmar y cerrar" Click="Menu_ConfirmAndClose_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.722,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menu_CloseButton" Header="Cerrar" Click="Menu_CloseButton_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.537,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Editar">
                 <MenuItem Header="Reiniciar valores">
