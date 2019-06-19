@@ -129,6 +129,7 @@ namespace Lector_Excel
             if(importSettings.ShowDialog() == true)
             {
                 //TODO obtener las nuevas posiciones
+                posiciones = importSettings.positions.ToArray();
             }
         }
 
