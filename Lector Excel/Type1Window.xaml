@@ -62,7 +62,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <Canvas DockPanel.Dock="Top" Height="25" Margin="0,5,0,5">
+        <Canvas Name="main_canvas" DockPanel.Dock="Top" Height="25" Margin="0,5,0,5">
             <Label >
                 Tipo de registro
             </Label>

@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Lector_Excel
 {
@@ -78,6 +80,13 @@ namespace Lector_Excel
             {
                 string[] temp;
                 temp = File.ReadAllLines(openFileDialog.FileName);
+                /*
+                if(temp.Count() != main_canvas.Children.OfType<TextBox>().Count() - 2)
+                {
+                    MessageBox.Show("El archivo no contiene una estructura de datos adecuada. Asegúrese de que se trata del archivo correcto.", "Error al importar", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                */
                 int index = 0;
                 Lista.Clear();
                 foreach(string s in temp)
