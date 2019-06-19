@@ -20,7 +20,7 @@ namespace Lector_Excel
         Excel.Range range;
                                             // Excel is not 0 based, thus the array's first position is not used
         private readonly int[] longitudes = {-1, 9, 9, 40, 1, 2, 2, 1, 1, 16, 1, 1, 15, 16, 4, 16, 16, 16, 16, 16, 16, 16, 16, 17, 1, 1, 1, 16, 201 };
-        const int MAX_ALLOWED_COLUMNS = 28; //Model 347 has 28 data fields only, so if further data is found, it will be ignored
+        const int MAX_ALLOWED_COLUMNS = 28; // Model 347 has 28 data fields only, so if further data is found, it will be ignored
 
         public ExcelManager(string path)
         {
@@ -78,7 +78,7 @@ namespace Lector_Excel
         }
 
         // Opens a text file and starts exporting the data
-        public void ExportData(List<string> Type1Data, BackgroundWorker bw, string exportingPath = "")
+        public void ExportData(List<string> Type1Data, BackgroundWorker bw, List<string> Positions, string exportingPath = "")
         {
             try
             {
