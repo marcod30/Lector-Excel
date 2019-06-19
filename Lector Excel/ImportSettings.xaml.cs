@@ -100,7 +100,11 @@ namespace Lector_Excel
                 int i = 0;
                 string[] temp;
                 temp = File.ReadAllLines(openFileDialog.FileName);
-
+                if(temp.Count() != stack_text.Children.OfType<TextBox>().Count() - 1)
+                {
+                    MessageBox.Show("El archivo no contiene una estructura de datos adecuada. Asegúrese de que se trata del archivo correcto.", "Error al importar", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
                 foreach (TextBox t in stack_text.Children.OfType<TextBox>())
                 {
                     if (t.IsEnabled)
