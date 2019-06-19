@@ -182,5 +182,8 @@
   <ItemGroup>
     <Resource Include="media\Lector Excel Logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="media\common_icons.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

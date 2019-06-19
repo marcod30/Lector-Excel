@@ -10,10 +10,56 @@
     <DockPanel Name="main_dockpanel" Margin="0"> <!-- Don't change this dockpanel-->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
-                <MenuItem Name="menu_importData" Header="Importar desde fichero" Click="Menu_importData_Click"/>
-                <MenuItem Name="menu_exportData" Header="Exportar a fichero" Click="Menu_exportData_Click" IsEnabled="False"/>
+                <MenuItem Name="menu_importData" Header="Importar desde fichero" Click="Menu_importData_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.722,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menu_exportData" Header="Exportar a fichero" Click="Menu_exportData_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.426,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator/>
                 <MenuItem Header="Cerrar" Click="Btn_Cancel_Click"/>
+            </MenuItem>
+            <MenuItem Header="Editar">
+                <MenuItem Command="Copy">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.13,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="Cut">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.166,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="Paste">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.907,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Canvas DockPanel.Dock="Top" Height="25" Margin="0,5,0,5">
