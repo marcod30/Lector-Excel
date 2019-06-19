@@ -19,7 +19,7 @@
                         </Rectangle>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menu_exportData" Header="Exportar a fichero" Click="Menu_exportData_Click" IsEnabled="False">
+                <MenuItem Name="menu_exportData" Header="Exportar a fichero" Click="Menu_exportData_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>

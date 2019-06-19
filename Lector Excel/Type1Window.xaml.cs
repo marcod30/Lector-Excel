@@ -136,7 +136,6 @@ namespace Lector_Excel
         {
             if (Lista != null && Lista.Count > 0)
             {
-                menu_exportData.IsEnabled = true;
                 txt_Ejercicio.Text = Lista[0];
                 txt_NIF.Text = Lista[1];
                 txt_Name.Text = Lista[2];
