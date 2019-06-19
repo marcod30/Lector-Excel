@@ -1,18 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.ComponentModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System;
+using System.IO;
 
 namespace Lector_Excel
 {
@@ -79,6 +72,65 @@ namespace Lector_Excel
                 }
 
                 positions.Clear();
+            }
+        }
+
+        // When called, resets all TextBoxes to their default values
+        private void Menu_ResetDefault_Click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+            foreach (TextBox t in stack_text.Children.OfType<TextBox>())
+            {
+                if (t.IsEnabled)
+                {
+                    t.Text = ((char)('A' + i++)).ToString().ToUpper();
+                }
+            }
+        }
+
+        // Handles opening file and writing in textboxes
+        private void Menu_LoadFromFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if(openFileDialog.ShowDialog() == true)
+            {
+                int i = 0;
+                string[] temp;
+                temp = File.ReadAllLines(openFileDialog.FileName);
+
+                foreach (TextBox t in stack_text.Children.OfType<TextBox>())
+                {
+                    if (t.IsEnabled)
+                    {
+                        t.Text = temp[i++];
+                    }
+                }
+            }
+        }
+
+        // Handles writing to a file the current content of the textboxes
+        private void Menu_SaveToFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if(saveFileDialog.ShowDialog() == true)
+            {
+                //The using statement automatically flushes AND CLOSES the stream and calls IDisposable.Dispose on the stream object.
+                using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
+                {
+                    foreach (TextBox t in stack_text.Children.OfType<TextBox>())
+                    {
+                        if(t.IsEnabled)
+                        {
+                            sw.WriteLine(t.Text);
+                        }
+                    }
+                }
             }
         }
     }

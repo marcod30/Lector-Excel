@@ -10,7 +10,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
-                <MenuItem Header="Cargar configuración">
+                <MenuItem Name="menu_LoadFromFile" Header="Cargar configuración" Click="Menu_LoadFromFile_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -20,7 +20,7 @@
 
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Guardar configuración actual">
+                <MenuItem Name="menu_SaveToFile" Header="Guardar configuración actual" Click="Menu_SaveToFile_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -55,7 +55,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Editar">
-                <MenuItem Header="Reiniciar valores">
+                <MenuItem Name="menu_ResetDefault" Header="Reiniciar valores" Click="Menu_ResetDefault_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
