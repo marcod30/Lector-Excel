@@ -60,7 +60,7 @@ namespace Lector_Excel
             }
             else if (!positions.All(s => !s.Equals("")) || !positions.All(s => !s.Contains(" ")))  // Check if any field was empty or contains blank spaces
             {
-                MessageBox.Show("Parece que ha dejado algún campo vacío. Por favor, revise los campos e inténtelo de nuevo", "Campo vacío", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Parece que ha dejado algún campo vacío o con espacios. Por favor, revise los campos e inténtelo de nuevo", "Campo erróneo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return true;
             }
 
