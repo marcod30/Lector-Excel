@@ -15,9 +15,11 @@ namespace Lector_Excel
     {
         private ExcelManager ExcelManager;
         List<string> Type1Fields = new List<string>();
+        private List<string> posiciones = new List<string>();
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private string saveLocation = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,8 +45,12 @@ namespace Lector_Excel
             }
             else
             {
-                menu_Export.IsEnabled = false;
-                btn_Export.IsEnabled = false;
+                if(ExcelManager != null)
+                {
+                    menu_Export.IsEnabled = false;
+                    btn_Export.IsEnabled = false;
+                }
+                
                 if (!openFileDialog.SafeFileName.Equals(""))
                 {
                     lbl_fileOpenStatus.Foreground = Brushes.Red;
@@ -88,10 +94,10 @@ namespace Lector_Excel
         {
             if (Type1Fields.Count < 5)
             {
-                MessageBox.Show("Rellene primero todos los datos de tipo 1","Error");
+                MessageBox.Show("Rellene primero todos los datos de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
-            MessageBoxResult msg = MessageBox.Show("Se van a exportart los datos. ¿Continuar?","OJOCUIDAO",MessageBoxButton.YesNo,MessageBoxImage.Question);
+            MessageBoxResult msg = MessageBox.Show("Se van a exportar los datos. ¿Continuar?","ATENCIÓN",MessageBoxButton.YesNo,MessageBoxImage.Question);
             
             if (msg != MessageBoxResult.Yes)
             {
@@ -119,10 +125,26 @@ namespace Lector_Excel
             }
         }
 
+        // Handles opening the Import Settings Window
+        private void Menu_ImportSettings_Click(object sender, RoutedEventArgs e)
+        {
+            ImportSettings importSettings = new ImportSettings();
+            importSettings.Owner = this;
+
+            if (this.posiciones != null && this.posiciones.Count > 0)
+                importSettings.positions = this.posiciones;
+
+            importSettings.ShowDialog();
+            if (importSettings.DialogResult == true)
+            {
+                posiciones = importSettings.positions;
+            }
+        }
+
         //Handles background worker execution
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            ExcelManager.ExportData(Type1Fields, sender as BackgroundWorker, saveLocation);
+            ExcelManager.ExportData(Type1Fields, sender as BackgroundWorker, posiciones, saveLocation);
         }
 
         //Handles background worker completion

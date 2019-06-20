@@ -80,6 +80,13 @@ namespace Lector_Excel
             {
                 string[] temp;
                 temp = File.ReadAllLines(openFileDialog.FileName);
+                /*
+                if(temp.Count() != main_canvas.Children.OfType<TextBox>().Count() - 2)
+                {
+                    MessageBox.Show("El archivo no contiene una estructura de datos adecuada. Asegúrese de que se trata del archivo correcto.", "Error al importar", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                */
                 int index = 0;
                 Lista.Clear();
                 foreach(string s in temp)
@@ -129,7 +136,6 @@ namespace Lector_Excel
         {
             if (Lista != null && Lista.Count > 0)
             {
-                menu_exportData.IsEnabled = true;
                 txt_Ejercicio.Text = Lista[0];
                 txt_NIF.Text = Lista[1];
                 txt_Name.Text = Lista[2];

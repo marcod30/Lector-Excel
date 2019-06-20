@@ -9,14 +9,65 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Opciones">
-				<MenuItem Name="menu_FillType1" Header="Rellenar datos tipo 1..." Click="Menu_FillType1_Click"/>
-				<MenuItem Name="menu_Export" Header="Exportar a Modelo 347" IsEnabled="False" Click="Menu_Export_Click"/>
-				<Separator/>
+                <MenuItem Name="menu_OpenFile" Header="Abrir archivo Excel" Click="BtnOpenFile_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.759,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menu_Export" Header="Exportar a Modelo 347" IsEnabled="False" Click="Menu_Export_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.796,0.93" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_FillType1" Header="Rellenar datos tipo 1..." Click="Menu_FillType1_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.351,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Name="menu_ImportSettings" Header="Opciones de importación..." Click="Menu_ImportSettings_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.277,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
 				<MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
 			</MenuItem>
 			<MenuItem Header="Acerca de">
-				<MenuItem Name="menu_About" Header="Lector Excel" Click="Menu_About_Click"/>
-			</MenuItem>
+                <MenuItem Name="menu_About" Header="Lector Excel" Click="Menu_About_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.870,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
 		</Menu>
 		<StackPanel Orientation="Vertical">
             <Image Source="media\Lector Excel Logo.png"/>
