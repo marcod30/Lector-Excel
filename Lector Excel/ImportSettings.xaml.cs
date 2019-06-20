@@ -58,7 +58,7 @@ namespace Lector_Excel
                 MessageBox.Show("Parece que ha introducido valores duplicados. Por favor, revise los campos e inténtelo de nuevo", "Valores repetidos", MessageBoxButton.OK, MessageBoxImage.Error);
                 return true;
             }
-            else if (!positions.All(s => !s.Equals("")))  // Check if any field was empty
+            else if (!positions.All(s => !s.Equals("")) || !positions.All(s => !s.Contains(" ")))  // Check if any field was empty or contains blank spaces
             {
                 MessageBox.Show("Parece que ha dejado algún campo vacío. Por favor, revise los campos e inténtelo de nuevo", "Campo vacío", MessageBoxButton.OK, MessageBoxImage.Error);
                 return true;
