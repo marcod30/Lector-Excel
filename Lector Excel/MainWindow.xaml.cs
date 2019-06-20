@@ -45,8 +45,12 @@ namespace Lector_Excel
             }
             else
             {
-                menu_Export.IsEnabled = false;
-                btn_Export.IsEnabled = false;
+                if(ExcelManager != null)
+                {
+                    menu_Export.IsEnabled = false;
+                    btn_Export.IsEnabled = false;
+                }
+                
                 if (!openFileDialog.SafeFileName.Equals(""))
                 {
                     lbl_fileOpenStatus.Foreground = Brushes.Red;
@@ -90,10 +94,10 @@ namespace Lector_Excel
         {
             if (Type1Fields.Count < 5)
             {
-                MessageBox.Show("Rellene primero todos los datos de tipo 1","Error");
+                MessageBox.Show("Rellene primero todos los datos de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
-            MessageBoxResult msg = MessageBox.Show("Se van a exportart los datos. ¿Continuar?","OJOCUIDAO",MessageBoxButton.YesNo,MessageBoxImage.Question);
+            MessageBoxResult msg = MessageBox.Show("Se van a exportar los datos. ¿Continuar?","ATENCIÓN",MessageBoxButton.YesNo,MessageBoxImage.Question);
             
             if (msg != MessageBoxResult.Yes)
             {
