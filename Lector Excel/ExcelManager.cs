@@ -6,7 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-
+using System.Windows;
 using Excel = Microsoft.Office.Interop.Excel;
 namespace Lector_Excel
 {
@@ -100,69 +100,85 @@ namespace Lector_Excel
                 Debug.WriteLine("El excel tiene " + rows + " filas y " + columns + " columnas");
                 
 
-                for (int i = 2; i <= rows; i++)
+                for (int i = 2; i <= rows; i++) // We skip the row that contains the header
                 {
                     if (range.Cells[i, 1].Value2 != null)
                         stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[1]); // We append Type1Data [0] and [1], as they are the same fields for Type 2
-                    for (int j = 1; j <= MAX_ALLOWED_COLUMNS; j++)
+
+                    int j = 1;
+                    foreach(string col in Positions)
                     {
 
-                        //Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, j].Value2.ToString());
+                        //Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, col].Value2.ToString());
                         /*
-                        if (range.Cells[i, j].Value2 != null)
-                            MessageBox.Show("Exporting cell " + i + ", " + j + ": " + range.Cells[i, j].Value2.ToString());
+                        if (range.Cells[i, col].Value2 != null)
+                            MessageBox.Show("Exporting cell " + i + ", " + col + ": " + range.Cells[i, col].Value2.ToString());
                         */
 
-                        // BLANK CELL
-                        if (range.Cells[i, j] != null)
-                            if (range.Cells[i, j].Value2 == null)
+                        // Check if we need to fill a constant field
+                        switch (j)
+                        {
+                            case 4:
+                                stringBuilder.Append("D");
+                                j++;
+                                break;
+                            case 7:
+                            case 28:
                                 for (int k = 0; k < longitudes[j]; k++)
                                 {
                                     stringBuilder.Append(" ");
                                 }
-                            else if(range.Cells[i,1].Value2 != null )
+
+                                j++;
+                                break;
+                        }
+
+                        // BLANK CELL (we keep this check for any field user desired to keep blank)
+                        if (range.Cells[i, col] != null)
+                            if (range.Cells[i, col].Value2 == null)
+                                for (int k = 0; k < longitudes[j]; k++)
+                                {
+                                    stringBuilder.Append(" ");
+                                }
+                            else if(range.Cells[i, Positions[0]].Value2 != null )   // NIF can't be empty, else we skip this row
                             {
                                 // NUMERIC CELL
-                                if (double.TryParse(range.Cells[i, j].Value2.ToString(), out double d))
+                                if (double.TryParse(range.Cells[i, col].Value2.ToString(), out double d))
                                     if (j == 5 || j == 6 || j == 14)
                                     {
-                                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes[j], false, true));
+                                        stringBuilder.Append(FormatNumber(range.Cells[i, col].Value2.ToString(), longitudes[j], false, true));
                                     }
                                     else if (j == 12)
                                     {
-                                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes[j], true, true));
+                                        stringBuilder.Append(FormatNumber(range.Cells[i, col].Value2.ToString(), longitudes[j], true, true));
                                     }
                                     else
                                     {
-                                        stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes[j], true, false));
+                                        stringBuilder.Append(FormatNumber(range.Cells[i, col].Value2.ToString(), longitudes[j], true, false));
                                     }
                                 else
                                 // STRING CELL
-                                if (!range.Cells[i, j].Value.ToString().Contains("-"))
+                                if (!range.Cells[i, col].Value.ToString().Contains("-"))
                                 {
                                     if (longitudes[j] != 1)
                                     {
-                                        //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, j].Value.ToString()).ToUpper()));
-                                        stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().PadRight(longitudes[j]).ToUpper()));
+                                        //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, col].Value.ToString()).ToUpper()));
+                                        stringBuilder.Append(deAccent(range.Cells[i, col].Value2.ToString().PadRight(longitudes[j]).ToUpper()));
                                     }
                                     else
                                     {
-                                        //stringBuilder.Append(deAccent(string.Format("%s", range.Cells[i, j].Value2.ToString()).ToUpper()));
-                                        stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().ToUpper()));
+                                        //stringBuilder.Append(deAccent(string.Format("%s", range.Cells[i, col].Value2.ToString()).ToUpper()));
+                                        stringBuilder.Append(deAccent(range.Cells[i, col].Value2.ToString().ToUpper()));
                                     }
                                 }
-                                /*
-                                else if (Regex.Match(range.Cells[i, j].Value2.ToString(), "^ -?\\d +\\.?\\d *$").Success)
-                                {
-                                    stringBuilder.Append(FormatNumber(range.Cells[i, j].Value2.ToString(), longitudes2[j], true, false));
-                                }
-                                */
                                 else
                                 {
-                                    //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, j].Value2.ToString()).ToUpper()));
-                                    stringBuilder.Append(deAccent(range.Cells[i, j].Value2.ToString().PadRight(longitudes[j]).ToUpper()));
+                                    //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, col].Value2.ToString()).ToUpper()));
+                                    stringBuilder.Append(deAccent(range.Cells[i, col].Value2.ToString().PadRight(longitudes[j]).ToUpper()));
                                 }
                             }
+
+                        j++;
                     }
                     stringBuilder.Append(Environment.NewLine);
                     float progress = (float)i / rows * 100;
