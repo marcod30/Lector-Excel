@@ -39,26 +39,26 @@ namespace Lector_Excel
             {
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
                 menu_Export.IsEnabled = true; // enable on correct file read
-                btn_Export.IsEnabled = true;
-                lbl_fileOpenStatus.Foreground = Brushes.Green;
-                lbl_fileOpenStatus.Content =openFileDialog.SafeFileName + " abierto con éxito.";
+                //btn_Export.IsEnabled = true;
+                //lbl_fileOpenStatus.Foreground = Brushes.Green;
+                //lbl_fileOpenStatus.Content =openFileDialog.SafeFileName + " abierto con éxito.";
             }
             else
             {
                 if(ExcelManager != null)
                 {
                     menu_Export.IsEnabled = false;
-                    btn_Export.IsEnabled = false;
+                    //btn_Export.IsEnabled = false;
                 }
                 
                 if (!openFileDialog.SafeFileName.Equals(""))
                 {
-                    lbl_fileOpenStatus.Foreground = Brushes.Red;
-                    lbl_fileOpenStatus.Content = "Error al intentar abrir " + openFileDialog.SafeFileName;
+                    //lbl_fileOpenStatus.Foreground = Brushes.Red;
+                    //lbl_fileOpenStatus.Content = "Error al intentar abrir " + openFileDialog.SafeFileName;
                 }
                 else
                 {
-                    lbl_fileOpenStatus.Content = "";
+                    //lbl_fileOpenStatus.Content = "";
                 }
 
             }
@@ -80,12 +80,12 @@ namespace Lector_Excel
             if (Type1Fields.Count > 0 && ExcelManager != null)
             {
                 menu_Export.IsEnabled = true;
-                btn_Export.IsEnabled = true;
+                //btn_Export.IsEnabled = true;
             }
             else
             {
                 menu_Export.IsEnabled = false;
-                btn_Export.IsEnabled = false;
+                //btn_Export.IsEnabled = false;
             }
         }
 
@@ -120,8 +120,8 @@ namespace Lector_Excel
                 Mouse.OverrideCursor = Cursors.Arrow;
 
                 menu_Export.IsEnabled = false;
-                btn_Export.IsEnabled = false;
-                lbl_fileOpenStatus.Content = "";
+                //btn_Export.IsEnabled = false;
+                //lbl_fileOpenStatus.Content = "";
             }
         }
 

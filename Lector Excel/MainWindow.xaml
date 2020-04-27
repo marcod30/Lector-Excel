@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Lector Excel" Height="400" Width="300" ResizeMode="CanMinimize">
+        Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize">
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="Opciones">
@@ -69,21 +69,35 @@
                 </MenuItem>
             </MenuItem>
 		</Menu>
-		<StackPanel Orientation="Vertical">
-            <Image Source="media\Lector Excel Logo.png"/>
-            <Label Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
-                Elija el fichero que quiere exportar
-            </Label>
-			<Button Name="btnOpenFile" Click="BtnOpenFile_Click" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center">
-				Abrir
-			</Button>
-            <Label Name="lbl_fileOpenStatus" FontWeight="Bold" Foreground="Green">
-                
-            </Label>
-            <Button Name="btn_Export" Click="Menu_Export_Click" MaxWidth="200" HorizontalAlignment="Center" IsEnabled="False">
-                Exportar a Modelo 347
-            </Button>
-		</StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
+            <GroupBox Header="Declarado 1">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="100"/>
+                        <ColumnDefinition Width="Auto" MinWidth="100"/>
+                        <ColumnDefinition Width="Auto" MinWidth="100"/>
+                        <ColumnDefinition Width="Auto" MinWidth="100"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <Label Grid.Row="0" Grid.Column="0">NIF Declarado:</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,5,10" />
+                    
+                    <Label Grid.Row="0" Grid.Column="2">NIF Repr. Legal:</Label>
+                    <TextBox Grid.Row="0" Grid.Column="3" Margin="0,5,5,10" />
+                    
+                    <Label Grid.Row="2">Apellidos y nombre, razón social o denominación del declarado:</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,5,10" />
+                </Grid>
+            </GroupBox>
+        </ScrollViewer>
+        
 
-		</DockPanel>
+    </DockPanel>
 </Window>
