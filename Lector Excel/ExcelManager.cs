@@ -112,9 +112,11 @@ namespace Lector_Excel
                         //Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, col].Value2.ToString());
                         /*
                         if (range.Cells[i, col].Value2 != null)
-                            MessageBox.Show("Exporting cell " + i + ", " + col + ": " + range.Cells[i, col].Value2.ToString());
+                            MessageBox.Show("Exporting cell [" + i + ", " + col + "]: " + range.Cells[i, col].Value2.ToString() + ". J is " + j);
+                        else
+                            MessageBox.Show("Exporting cell [" + i + ", " + col + "]: (BLANK). J is " + j);
                         */
-
+                        
                         // Check if we need to fill a constant field
                         switch (j)
                         {
@@ -123,19 +125,16 @@ namespace Lector_Excel
                                 j++;
                                 break;
                             case 7:
-                            case 28:
                                 for (int k = 0; k < longitudes[j]; k++)
                                 {
                                     stringBuilder.Append(" ");
                                 }
-
                                 j++;
                                 break;
                         }
-
                         // BLANK CELL (we keep this check for any field user desired to keep blank)
-                        if (range.Cells[i, col] != null)
-                            if (range.Cells[i, col].Value2 == null)
+                        //if (range.Cells[i, col] != null)
+                        if (range.Cells[i, col].Value2 == null)
                                 for (int k = 0; k < longitudes[j]; k++)
                                 {
                                     stringBuilder.Append(" ");
@@ -179,6 +178,14 @@ namespace Lector_Excel
                             }
 
                         j++;
+                        if(j == 28)
+                        {
+                            for (int k = 0; k < longitudes[j]; k++)
+                            {
+                                stringBuilder.Append(" ");
+                            }
+                            j++;
+                        }
                     }
                     stringBuilder.Append(Environment.NewLine);
                     float progress = (float)i / rows * 100;
@@ -192,6 +199,12 @@ namespace Lector_Excel
                     File.AppendAllText(exportingPath, stringBuilder.ToString());
 
             }
+            
+            catch (Exception e)
+            {
+                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La exportación se interrumpirá.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
             finally
             {
                 //cleanup
