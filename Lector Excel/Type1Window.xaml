@@ -166,35 +166,35 @@
         <Label DockPanel.Dock="Top">
             Nº total de personas y entidades
         </Label>
-        <TextBox Margin="2" Name="txt_Entities" DockPanel.Dock="Top" MaxLength="9" Height="20">
+        <TextBox Margin="5,2" Name="txt_Entities" DockPanel.Dock="Top" MaxLength="9" Height="20">
             
         </TextBox>
         
         <Label DockPanel.Dock="Top">
             Importe total anual de las operaciones
         </Label>
-        <TextBox Margin="2" Name="txt_TotalMoney" DockPanel.Dock="Top" Height="20" MaxLength="16" VerticalAlignment="Top">
+        <TextBox Margin="5,2" Name="txt_TotalMoney" DockPanel.Dock="Top" Height="20" MaxLength="16" VerticalAlignment="Top">
 
         </TextBox>
         
         <Label DockPanel.Dock="Top">
             Nº total de inmuebles
         </Label>
-        <TextBox Margin="2" Name="txt_TotalProperties" DockPanel.Dock="Top" Height="20" MaxLength="9" VerticalAlignment="Top">
+        <TextBox Margin="5,2" Name="txt_TotalProperties" DockPanel.Dock="Top" Height="20" MaxLength="9" VerticalAlignment="Top">
 
         </TextBox>
         
         <Label DockPanel.Dock="Top">
             Importe total de las operaciones de arrendamiento de locales de negocio
         </Label>
-        <TextBox Margin="2" Name="txt_TotalMoneyRental" DockPanel.Dock="Top" Height="20" MaxLength="16" VerticalAlignment="Top">
+        <TextBox Margin="5,2" Name="txt_TotalMoneyRental" DockPanel.Dock="Top" Height="20" MaxLength="16" VerticalAlignment="Top">
 
         </TextBox>
 
         <Label DockPanel.Dock="Top">
             NIF del representante legal
         </Label>
-        <TextBox Margin="2" Name="txt_NIFLegal" DockPanel.Dock="Top" MaxLength="9" Height="20">
+        <TextBox Margin="5,2" Name="txt_NIFLegal" DockPanel.Dock="Top" MaxLength="9" Height="20">
 
         </TextBox>
 
