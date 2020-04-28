@@ -7,19 +7,10 @@
         mc:Ignorable="d"
         Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize">
 	<DockPanel>
-		<Menu DockPanel.Dock="Top">
-			<MenuItem Header="Opciones">
-                <MenuItem Name="menu_OpenFile" Header="Abrir archivo Excel" Click="BtnOpenFile_Click">
-                    <MenuItem.Icon>
-                        <Rectangle>
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.759,1" Stretch="None"/>
-                            </Rectangle.Fill>
-                        </Rectangle>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Archivo">
 
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Name="menu_Export" Header="Exportar a Modelo 347" IsEnabled="False" Click="Menu_Export_Click">
+                <MenuItem Name="menu_Export" Header="Exportar a formato BOE" IsEnabled="False" Click="Menu_Export_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -32,18 +23,18 @@
 
                 <Separator/>
 
-                <MenuItem Name="menu_FillType1" Header="Rellenar datos tipo 1..." Click="Menu_FillType1_Click">
+                <MenuItem Name="menu_OpenFile" Header="Importar desde Excel" Click="BtnOpenFile_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.351,1" Stretch="None"/>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.759,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
                     </MenuItem.Icon>
                 </MenuItem>
-                
-                <MenuItem Name="menu_ImportSettings" Header="Opciones de importación..." Click="Menu_ImportSettings_Click">
+
+                <MenuItem Name="menu_ImportSettings" Header="Opciones de importación Excel..." Click="Menu_ImportSettings_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -54,9 +45,36 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-				<MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
-			</MenuItem>
-			<MenuItem Header="Acerca de">
+                <MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
+            </MenuItem>
+            
+            <MenuItem Header="Modelo 347">
+                <MenuItem Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click"> <!-- CHANGE CLICK FUNCTION!!! -->
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.77,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_FillType1" Header="Rellenar datos de tipo de registro 1..." Click="Menu_FillType1_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.351,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+            </MenuItem>
+            <MenuItem Header="Acerca de">
                 <MenuItem Name="menu_About" Header="Lector Excel" Click="Menu_About_Click">
                     <MenuItem.Icon>
                         <Rectangle>
@@ -68,34 +86,134 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-		</Menu>
+        </Menu>
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
-            <GroupBox Header="Declarado 1">
-                <Grid Margin="10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" MinWidth="100"/>
-                        <ColumnDefinition Width="Auto" MinWidth="100"/>
-                        <ColumnDefinition Width="Auto" MinWidth="100"/>
-                        <ColumnDefinition Width="Auto" MinWidth="100"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    
-                    <Label Grid.Row="0" Grid.Column="0">NIF Declarado:</Label>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,5,10" />
-                    
-                    <Label Grid.Row="0" Grid.Column="2">NIF Repr. Legal:</Label>
-                    <TextBox Grid.Row="0" Grid.Column="3" Margin="0,5,5,10" />
-                    
-                    <Label Grid.Row="2">Apellidos y nombre, razón social o denominación del declarado:</Label>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,5,5,10" />
-                </Grid>
-            </GroupBox>
+            <DockPanel Name="dock_DeclaredContainer">
+                <!--
+                <GroupBox Name="group_DeclaredInfo" DockPanel.Dock="Top" Header="Declarado 1" Margin="10,0,10,10">
+                    <StackPanel>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" MinWidth="300" MaxWidth="500"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" FontSize="10">NIF del declarado</Label>
+                            <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="100"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="1" FontSize="10">NIF repr. Legal</Label>
+                            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="100"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="2" FontSize="10">NIF operador comunitario</Label>
+                            <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="100"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="3" FontSize="10">Apellidos y nombre, razón social o denominación del declarado</Label>
+                            <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0"></TextBox>
+
+
+                        </Grid>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" FontSize="10" Content="Código&#10;de provincia"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="30"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="1" FontSize="10" Content="Código&#10;de país"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="30"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="2" FontSize="10" Content="Clave&#10;operación"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="20"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="3" FontSize="10" Content="Operación&#10;seguro"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0" MinWidth="20"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="4" FontSize="10" Content="Arrendamiento&#10;local negocio"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="4" Margin="5,0"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="5" FontSize="10" Content="Operación IVA&#10;de caja"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="5" Margin="5,0"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="6" FontSize="10" Content="OP. con inversión&#10;del sujeto pasivo"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="6" Margin="5,0"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="7" FontSize="10" Content="OP. régimen de depósito&#10;distinto del aduanero"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="7" Margin="5,0"></TextBox>
+                        </Grid>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe&#10;percibido en metálico"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual&#10;de las operaciones"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="2" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="3" FontSize="10" Content="Importe anual de las operaciones&#10;devengadas con criterio IVA de caja"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0"></TextBox>
+                        </Grid>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MaxWidth="300"/>
+                                <ColumnDefinition Width="Auto" MaxWidth="300"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe&#10;de las operaciones"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 1"></TextBox>
+                            <TextBox Grid.Row="2" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 2"></TextBox>
+                            <TextBox Grid.Row="3" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 3"></TextBox>
+                            <TextBox Grid.Row="4" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 4"></TextBox>
+
+                            <Label Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 1"></TextBox>
+                            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 2"></TextBox>
+                            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 3"></TextBox>
+                            <TextBox Grid.Row="4" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 4"></TextBox>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox> -->
+            </DockPanel>
         </ScrollViewer>
         
 

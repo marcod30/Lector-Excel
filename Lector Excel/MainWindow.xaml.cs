@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -14,8 +16,12 @@ namespace Lector_Excel
     public partial class MainWindow : Window
     {
         private ExcelManager ExcelManager;
+
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
+
+        const int DECLARED_AMOUNT_LIMIT = 4;
+
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private string saveLocation = "";
@@ -171,6 +177,44 @@ namespace Lector_Excel
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Owner = this;
             aboutWindow.ShowDialog();
+        }
+
+        //When window is completely loaded, execute this
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
+        //TODO Get fields from every declared and put them to structure to export
+        private void FormToStructure(object sender, RoutedEventArgs e)
+        {
+
+            /*
+            Visual v = (Visual) VisualTreeHelper.GetChild(group_DeclaredInfo, 0);
+            if(v is Grid)
+            {
+                Debug.WriteLine("YES YES YES YES");
+            }
+            else
+            {
+                Debug.WriteLine("NO NO NO NO");
+            }
+            */
+            return;
+        }
+
+        private void Menu_addNewDeclared_Click(object sender, RoutedEventArgs e)
+        {
+            if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
+            {
+                DeclaredFormControl d = new DeclaredFormControl();
+                DockPanel.SetDock(d, Dock.Top);
+                dock_DeclaredContainer.Children.Add(d); 
+            }
+            else
+            {
+                MessageBoxResult msg = MessageBox.Show("No se pueden añadir más de "+DECLARED_AMOUNT_LIMIT+" declarados.", "ATENCIÓN", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
         }
     }
 }
