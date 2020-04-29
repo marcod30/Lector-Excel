@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:Lector_Excel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <GroupBox Header="Declarado ???" Margin="10,0,10,10">
-            <StackPanel>
-                <Grid Margin="5">
+    <StackPanel Name="mainStack">
+        <GroupBox Name="mainGroupBox" Header="Declarado ???" Margin="10,0,10,10">
+            <StackPanel Name="groupStack">
+                <Button Name="btn_DeleteDeclared" Content="Eliminar declarado" Margin="15,10,0,0" MaxWidth="200" HorizontalAlignment="Left" Click="Btn_DeleteDeclared_Click"/>
+                <Grid Name="grid1" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -21,21 +22,19 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" FontSize="10">NIF del declarado</Label>
-                    <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="100"></TextBox>
+                    <Label Name="lbl_DeclaredNIF" Grid.Row="0" Grid.Column="0" FontSize="10">NIF del declarado</Label>
+                    <TextBox Name="txt_DeclaredNIF" Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="100" MaxLength="9" TextChanged="Txt_DeclaredNIF_TextChanged"></TextBox>
 
-                    <Label Grid.Row="0" Grid.Column="1" FontSize="10">NIF repr. Legal</Label>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="100"></TextBox>
+                    <Label Name="lbl_LegalRepNIF" Grid.Row="0" Grid.Column="1" FontSize="10">NIF repr. Legal</Label>
+                    <TextBox Name="txt_LegalRepNIF" Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="100" MaxLength="9"></TextBox>
 
-                    <Label Grid.Row="0" Grid.Column="2" FontSize="10">NIF operador comunitario</Label>
-                    <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="100"></TextBox>
+                    <Label Name="lbl_CommunityOpNIF" Grid.Row="0" Grid.Column="2" FontSize="10">NIF operador comunitario</Label>
+                    <TextBox Name="txt_CommunityOpNIF" Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="100" MaxLength="17" TextChanged="Txt_CommunityOpNIF_TextChanged"></TextBox>
 
-                    <Label Grid.Row="0" Grid.Column="3" FontSize="10">Apellidos y nombre, razón social o denominación del declarado</Label>
-                    <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0"></TextBox>
-
-
+                    <Label Name="lbl_DeclaredName" Grid.Row="0" Grid.Column="3" FontSize="10">Apellidos y nombre, razón social o denominación del declarado</Label>
+                    <TextBox Name="txt_DeclaredName" Grid.Row="1" Grid.Column="3" Margin="5,0" MaxLength="40"></TextBox>
                 </Grid>
-                <Grid Margin="5">
+                <Grid Name="grid2" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -50,31 +49,31 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" FontSize="10" Content="Código&#10;de provincia"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="30"></TextBox>
+                    <Label Name="lbl_ProvinceCode" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Código&#10;de provincia"></Label>
+                    <TextBox Name="txt_ProvinceCode" Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="30" MaxLength="2"></TextBox>
 
-                    <Label Grid.Row="0" Grid.Column="1" FontSize="10" Content="Código&#10;de país"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="30"></TextBox>
+                    <Label Name="lbl_CountryCode" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Código&#10;de país"></Label>
+                    <TextBox Name="txt_CountryCode" Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="30" MaxLength="2"></TextBox>
 
-                    <Label Grid.Row="0" Grid.Column="2" FontSize="10" Content="Clave&#10;operación"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="20"></TextBox>
+                    <Label Name="lbl_OpKey" Grid.Row="0" Grid.Column="2" FontSize="10" Content="Clave&#10;operación"></Label>
+                    <TextBox Name="txt_OpKey" Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="20" MaxLength="1"></TextBox>
 
-                    <Label Grid.Row="0" Grid.Column="3" FontSize="10" Content="Operación&#10;seguro"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0" MinWidth="20"></TextBox>
+                    <Label Name="lbl_OpInsurance" Grid.Row="0" Grid.Column="3" FontSize="10" Content="Operación&#10;seguro"></Label>
+                    <TextBox Name="txt_OpInsurance" Grid.Row="1" Grid.Column="3" Margin="5,0" MinWidth="20" MaxLength="1"></TextBox> <!-- Cambiar por una checkbox?-->
 
-                    <Label Grid.Row="0" Grid.Column="4" FontSize="10" Content="Arrendamiento&#10;local negocio"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="4" Margin="5,0"></TextBox>
+                    <Label Name="lbl_LocalBusinessLease" Grid.Row="0" Grid.Column="4" FontSize="10" Content="Arrendamiento&#10;local negocio"></Label>
+                    <TextBox Name="txt_LocalBusinessLease" Grid.Row="1" Grid.Column="4" Margin="5,0" MaxLength="1"></TextBox> <!-- Cambiar por una checkbox?-->
 
-                    <Label Grid.Row="0" Grid.Column="5" FontSize="10" Content="Operación IVA&#10;de caja"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="5" Margin="5,0"></TextBox>
+                    <Label Name="lbl_OpIVA" Grid.Row="0" Grid.Column="5" FontSize="10" Content="Operación IVA&#10;de caja"></Label>
+                    <TextBox Name="txt_OpIVA" Grid.Row="1" Grid.Column="5" Margin="5,0" MaxLength="1"></TextBox> <!-- Cambiar por una checkbox?-->
 
-                    <Label Grid.Row="0" Grid.Column="6" FontSize="10" Content="OP. con inversión&#10;del sujeto pasivo"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="6" Margin="5,0"></TextBox>
+                    <Label Name="lbl_OpPassive" Grid.Row="0" Grid.Column="6" FontSize="10" Content="OP. con inversión&#10;del sujeto pasivo"></Label>
+                    <TextBox Name="txt_OpPassive" Grid.Row="1" Grid.Column="6" Margin="5,0" MaxLength="1"></TextBox> <!-- Cambiar por una checkbox?-->
 
-                    <Label Grid.Row="0" Grid.Column="7" FontSize="10" Content="OP. régimen de depósito&#10;distinto del aduanero"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="7" Margin="5,0"></TextBox>
+                    <Label Name="lbl_OpCustoms" Grid.Row="0" Grid.Column="7" FontSize="10" Content="OP. régimen de depósito&#10;distinto del aduanero"></Label>
+                    <TextBox Name="txt_OpCustoms" Grid.Row="1" Grid.Column="7" Margin="5,0" MaxLength="1"></TextBox> <!-- Cambiar por una checkbox?-->
                 </Grid>
-                <Grid Margin="5">
+                <Grid Name="grid3" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -86,19 +85,19 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe&#10;percibido en metálico"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="0" Margin="5,0"></TextBox>
+                    <Label Name="lbl_TotalMoney" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe&#10;percibido en metálico"></Label>
+                    <TextBox Name="txt_TotalMoney" Grid.Row="1" Grid.Column="0" Margin="5,0" MaxLength="15"></TextBox> <!-- MaxLenght: numero float(15)-->
 
-                    <Label Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual&#10;de las operaciones"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5,0"></TextBox>
+                    <Label Name="lbl_AnualMoney" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual&#10;de las operaciones"></Label>
+                    <TextBox Name="txt_AnualMoney" Grid.Row="1" Grid.Column="1" Margin="5,0" MaxLength="16"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
 
-                    <Label Grid.Row="0" Grid.Column="2" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="2" Margin="5,0"></TextBox>
+                    <Label Name="lbl_AnualPropertyMoney" Grid.Row="0" Grid.Column="2" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
+                    <TextBox Name="txt_AnualPropertyMoney" Grid.Row="1" Grid.Column="2" Margin="5,0" MaxLength="16"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
 
-                    <Label Grid.Row="0" Grid.Column="3" FontSize="10" Content="Importe anual de las operaciones&#10;devengadas con criterio IVA de caja"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="3" Margin="5,0"></TextBox>
+                    <Label Name="lbl_AnualOpIVA" Grid.Row="0" Grid.Column="3" FontSize="10" Content="Importe anual de las operaciones&#10;devengadas con criterio IVA de caja"></Label>
+                    <TextBox Name="txt_AnualOpIVA" Grid.Row="1" Grid.Column="3" Margin="5,0" MaxLength="16"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
                 </Grid>
-                <Grid Margin="5">
+                <Grid Name="grid4" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MaxWidth="300"/>
                         <ColumnDefinition Width="Auto" MaxWidth="300"/>
@@ -116,17 +115,17 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe&#10;de las operaciones"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 1"></TextBox>
-                    <TextBox Grid.Row="2" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 2"></TextBox>
-                    <TextBox Grid.Row="3" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 3"></TextBox>
-                    <TextBox Grid.Row="4" Grid.Column="0" Margin="5,1" MinWidth="200" ToolTip="Trimestre 4"></TextBox>
+                    <Label Name="lbl_TrimestralOp" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe&#10;de las operaciones"></Label>
+                    <TextBox Name="txt_TrimestralOp1" Grid.Row="1" Grid.Column="0" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 1"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_TrimestralOp2" Grid.Row="2" Grid.Column="0" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 2"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_TrimestralOp3" Grid.Row="3" Grid.Column="0" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 3"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_TrimestralOp4" Grid.Row="4" Grid.Column="0" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 4"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
 
-                    <Label Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 1"></TextBox>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 2"></TextBox>
-                    <TextBox Grid.Row="3" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 3"></TextBox>
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="5,1" MinWidth="200" ToolTip="Trimestre 4"></TextBox>
+                    <Label Name="lbl_AnualPropertyIVAOp" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
+                    <TextBox Name="txt_AnualProperyIVAOp1" Grid.Row="1" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 1"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualProperyIVAOp2" Grid.Row="2" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 2"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualProperyIVAOp3" Grid.Row="3" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 3"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualProperyIVAOp4" Grid.Row="4" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 4"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
                 </Grid>
             </StackPanel>
         </GroupBox>

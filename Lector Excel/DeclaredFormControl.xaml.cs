@@ -24,5 +24,51 @@ namespace Lector_Excel
         {
             InitializeComponent();
         }
+
+        private void Btn_DeleteDeclared_Click(object sender, RoutedEventArgs e)
+        {
+            return;
+        }
+
+        private void Txt_DeclaredNIF_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if (txt_CommunityOpNIF.IsEnabled)
+            {
+                if(txt_DeclaredNIF.Text != "")
+                {
+                    txt_CommunityOpNIF.IsEnabled = false;
+                    lbl_CommunityOpNIF.IsEnabled = false;
+                }
+            }
+            else
+            {
+                if (txt_DeclaredNIF.Text == "")
+                {
+                    txt_CommunityOpNIF.IsEnabled = true;
+                    lbl_CommunityOpNIF.IsEnabled = true;
+                }
+            }
+        }
+
+        private void Txt_CommunityOpNIF_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txt_DeclaredNIF.IsEnabled)
+            {
+                if (txt_CommunityOpNIF.Text != "")
+                {
+                    txt_DeclaredNIF.IsEnabled = false;
+                    lbl_DeclaredNIF.IsEnabled = false;
+                }
+
+            }
+            else
+            {
+                if (txt_CommunityOpNIF.Text == "")
+                {
+                    txt_DeclaredNIF.IsEnabled = true;
+                    lbl_DeclaredNIF.IsEnabled = true;
+                }
+            }
+        }
     }
 }
