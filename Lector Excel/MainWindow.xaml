@@ -49,7 +49,7 @@
             </MenuItem>
             
             <MenuItem Header="Modelo 347">
-                <MenuItem Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click"> <!-- CHANGE CLICK FUNCTION!!! -->
+                <MenuItem Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>

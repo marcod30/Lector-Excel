@@ -148,11 +148,11 @@
             <TextBox Canvas.Left="15" Name="txt_DeclarationID" DockPanel.Dock="Top" MaxLength="13" Height="20" Width="120" HorizontalAlignment="Left">
 
             </TextBox>
-            <TextBox Canvas.Left="245" Name="txt_ComplementaryDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left">
+            <TextBox Canvas.Left="245" Name="txt_ComplementaryDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left"> <!-- Cambiar por checkbox?-->
 
             </TextBox>
             
-            <TextBox Canvas.Left="295" Name="txt_SustitutiveDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left">
+            <TextBox Canvas.Left="295" Name="txt_SustitutiveDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left"> <!-- Cambiar por checkbox?-->
 
             </TextBox>
         </Canvas>

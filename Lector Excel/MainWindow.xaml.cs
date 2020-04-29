@@ -19,7 +19,7 @@ namespace Lector_Excel
 
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
-
+        List<DeclaredFormControl> listaDeclarados = new List<DeclaredFormControl>();
         const int DECLARED_AMOUNT_LIMIT = 4;
 
         ProgressWindow exportProgressBar;
@@ -59,6 +59,7 @@ namespace Lector_Excel
                 
                 if (!openFileDialog.SafeFileName.Equals(""))
                 {
+                    MessageBoxResult msg = MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     //lbl_fileOpenStatus.Foreground = Brushes.Red;
                     //lbl_fileOpenStatus.Content = "Error al intentar abrir " + openFileDialog.SafeFileName;
                 }
@@ -208,8 +209,11 @@ namespace Lector_Excel
             if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
             {
                 DeclaredFormControl d = new DeclaredFormControl();
+
+                d.mainGroupBox.Header = "Declarado "+(listaDeclarados.Count+1);
                 DockPanel.SetDock(d, Dock.Top);
-                dock_DeclaredContainer.Children.Add(d); 
+                dock_DeclaredContainer.Children.Add(d);
+                listaDeclarados.Add(d);
             }
             else
             {
