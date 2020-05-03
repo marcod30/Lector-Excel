@@ -39,7 +39,7 @@ namespace Lector_Excel
         private void BtnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+            openFileDialog.Filter = "Hojas de cálculo Excel (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
@@ -62,10 +62,6 @@ namespace Lector_Excel
                     MessageBoxResult msg = MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     //lbl_fileOpenStatus.Foreground = Brushes.Red;
                     //lbl_fileOpenStatus.Content = "Error al intentar abrir " + openFileDialog.SafeFileName;
-                }
-                else
-                {
-                    //lbl_fileOpenStatus.Content = "";
                 }
 
             }
@@ -101,18 +97,17 @@ namespace Lector_Excel
         {
             if (Type1Fields.Count < 5)
             {
-                MessageBox.Show("Rellene primero todos los datos de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Rellene primero los datos del registro de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
+
             MessageBoxResult msg = MessageBox.Show("Se van a exportar los datos. ¿Continuar?","ATENCIÓN",MessageBoxButton.YesNo,MessageBoxImage.Question);
-            
             if (msg != MessageBoxResult.Yes)
             {
-                
                 return;
             }
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Text files (*.txt)|*.txt";
+            sfd.Filter = "Archivos 347 (*.347)|*.347|Ficheros de texto (*.txt)|*txt";
             sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if(sfd.ShowDialog() == true)
             {
@@ -186,24 +181,7 @@ namespace Lector_Excel
             return;
         }
 
-        //TODO Get fields from every declared and put them to structure to export
-        private void FormToStructure(object sender, RoutedEventArgs e)
-        {
-
-            /*
-            Visual v = (Visual) VisualTreeHelper.GetChild(group_DeclaredInfo, 0);
-            if(v is Grid)
-            {
-                Debug.WriteLine("YES YES YES YES");
-            }
-            else
-            {
-                Debug.WriteLine("NO NO NO NO");
-            }
-            */
-            return;
-        }
-
+        //Handles adding declared forms
         private void Menu_addNewDeclared_Click(object sender, RoutedEventArgs e)
         {
             if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
@@ -211,13 +189,52 @@ namespace Lector_Excel
                 DeclaredFormControl d = new DeclaredFormControl();
 
                 d.mainGroupBox.Header = "Declarado "+(listaDeclarados.Count+1);
+                d.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+
                 DockPanel.SetDock(d, Dock.Top);
                 dock_DeclaredContainer.Children.Add(d);
                 listaDeclarados.Add(d);
+
+                if (!menu_deleteAllDeclared.IsEnabled)
+                    menu_deleteAllDeclared.IsEnabled = true;
             }
             else
             {
                 MessageBoxResult msg = MessageBox.Show("No se pueden añadir más de "+DECLARED_AMOUNT_LIMIT+" declarados.", "ATENCIÓN", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+        }
+
+        //DeclaredContainer is deleted
+        private void DeclaredContainer_OnDeleteButtonClick(object sender, EventArgs e)
+        {
+            if(listaDeclarados.Contains(sender as DeclaredFormControl))
+            {
+                listaDeclarados.Remove(sender as DeclaredFormControl);
+                dock_DeclaredContainer.Children.Remove(sender as DeclaredFormControl);
+
+                //Reorganize items
+                foreach(DeclaredFormControl dfc in listaDeclarados)
+                {
+                    var pos = listaDeclarados.IndexOf(dfc);
+                    dfc.mainGroupBox.Header = "Declarado " + (pos+1);
+                }
+
+                if (listaDeclarados.Count == 0)
+                    menu_deleteAllDeclared.IsEnabled = false;
+            }
+        }
+
+        //Handles deleting all declareds
+        private void Menu_deleteAllDeclared_Click(object sender, RoutedEventArgs e)
+        {
+            if(listaDeclarados.Count > 0)
+            {
+                foreach(DeclaredFormControl dfc in listaDeclarados)
+                {
+                    dock_DeclaredContainer.Children.Remove(dfc);
+                }
+                listaDeclarados.Clear();
+                (sender as MenuItem).IsEnabled = false;
             }
         }
     }

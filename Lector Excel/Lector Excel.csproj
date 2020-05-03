@@ -73,9 +73,11 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Declared.cs" />
     <Compile Include="DeclaredFormControl.xaml.cs">
       <DependentUpon>DeclaredFormControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExportManager.cs" />
     <Compile Include="ImportSettings.xaml.cs">
       <DependentUpon>ImportSettings.xaml</DependentUpon>
     </Compile>
