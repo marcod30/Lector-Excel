@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -81,11 +82,13 @@ namespace Lector_Excel
             StringBuilder stringBuilder = new StringBuilder();
             ExportType1Data(this.exportPath);
             
-            stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[1]); // We append Type1Data [0] and [1], as they are the same fields for Type 2
             int i = 0;
 
             foreach (Declared dec in declareds)
             {
+                Debug.WriteLine("Appending declared " + i);
+                stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[1]); // We append Type1Data [0] and [1], as they are the same fields for Type 2
+
                 stringBuilder.Append(dec.declaredData["DeclaredNIF"].ToUpper().PadRight(9));
                 stringBuilder.Append(dec.declaredData["LegalRepNIF"].ToUpper().PadRight(9));
                 stringBuilder.Append(dec.declaredData["DeclaredName"].ToUpper().PadRight(40));
@@ -137,10 +140,11 @@ namespace Lector_Excel
 
                 //Report progress to Background Worker
                 i++;
-                int progress = i / declareds.Count * 100;
-                bw.ReportProgress(progress);
+                float progress = (float)i / declareds.Count * 100;
+                bw.ReportProgress((int)progress);
             }
-
+            stringBuilder.Append(Environment.NewLine); // Append a new line
+            File.AppendAllText(this.exportPath, stringBuilder.ToString());
             return true;
         }
 
