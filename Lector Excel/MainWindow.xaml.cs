@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -16,10 +18,11 @@ namespace Lector_Excel
     public partial class MainWindow : Window
     {
         private ExcelManager ExcelManager;
+        private ExportManager ExportManager;
 
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
-        List<DeclaredFormControl> listaDeclarados = new List<DeclaredFormControl>();
+        ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
         const int DECLARED_AMOUNT_LIMIT = 4;
 
         ProgressWindow exportProgressBar;
@@ -33,6 +36,7 @@ namespace Lector_Excel
             backgroundWorker.DoWork += Worker_DoWork;
             backgroundWorker.ProgressChanged += Worker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += Worker_Completed;
+            listaDeclarados.CollectionChanged += DeclaredListChanged;
         }
 
         //Handles file opening button
@@ -41,29 +45,30 @@ namespace Lector_Excel
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Hojas de cálculo Excel (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true && posiciones.Count != 0)
             {
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
-                menu_Export.IsEnabled = true; // enable on correct file read
-                //btn_Export.IsEnabled = true;
-                //lbl_fileOpenStatus.Foreground = Brushes.Green;
-                //lbl_fileOpenStatus.Content =openFileDialog.SafeFileName + " abierto con éxito.";
+                backgroundWorker.RunWorkerAsync(argument:"excelImport");
+
+                exportProgressBar = new ProgressWindow(false, "Importando desde Excel...");
+                exportProgressBar.ShowDialog();
             }
             else
             {
                 if(ExcelManager != null)
                 {
                     menu_Export.IsEnabled = false;
-                    //btn_Export.IsEnabled = false;
                 }
                 
                 if (!openFileDialog.SafeFileName.Equals(""))
                 {
                     MessageBoxResult msg = MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //lbl_fileOpenStatus.Foreground = Brushes.Red;
-                    //lbl_fileOpenStatus.Content = "Error al intentar abrir " + openFileDialog.SafeFileName;
                 }
 
+                if(posiciones.Count == 0)
+                {
+                    MessageBoxResult msg = MessageBox.Show("No se han establecido parámetros de importación", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -80,7 +85,7 @@ namespace Lector_Excel
                 //MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
             }
-            if (Type1Fields.Count > 0 && ExcelManager != null)
+            if (Type1Fields.Count > 0 && listaDeclarados.Count > 0)
             {
                 menu_Export.IsEnabled = true;
                 //btn_Export.IsEnabled = true;
@@ -111,19 +116,12 @@ namespace Lector_Excel
             sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if(sfd.ShowDialog() == true)
             {
-                Mouse.OverrideCursor = Cursors.Wait;
                 saveLocation = sfd.FileName;
                 
-                backgroundWorker.RunWorkerAsync();
+                backgroundWorker.RunWorkerAsync(argument:"exportAll");
 
                 exportProgressBar = new ProgressWindow(false, "Exportando...");
                 exportProgressBar.ShowDialog();
-
-                Mouse.OverrideCursor = Cursors.Arrow;
-
-                menu_Export.IsEnabled = false;
-                //btn_Export.IsEnabled = false;
-                //lbl_fileOpenStatus.Content = "";
             }
         }
 
@@ -146,13 +144,108 @@ namespace Lector_Excel
         //Handles background worker execution
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            ExcelManager.ExportData(Type1Fields, sender as BackgroundWorker, posiciones, saveLocation);
+            //ExcelManager.ExportData(Type1Fields, sender as BackgroundWorker, posiciones, saveLocation);
+
+            if((e.Argument as string).Equals("exportAll")){
+                List<Declared> temp = new List<Declared>();
+                ExportManager = new ExportManager(saveLocation, Type1Fields);
+                foreach (DeclaredFormControl dfc in listaDeclarados)
+                {
+                    temp.Add(dfc.declared);
+                }
+                ExportManager.ExportFromMain(temp, sender as BackgroundWorker);
+            }
+            
+            if((e.Argument as string).Equals("excelImport"))
+            {
+                List<Declared> temp = new List<Declared>();
+                temp = ExcelManager.ImportExcelData(posiciones, sender as BackgroundWorker);
+                e.Result = temp;
+            }
         }
 
         //Handles background worker completion
         private void Worker_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
+            List<Declared> result = e.Result as List<Declared>;
+            if(result != null)
+            {
+                ExcelToForm(result);
+            }
             exportProgressBar.Close();
+        }
+
+        private void ExcelToForm(List<Declared> result)
+        {
+            Menu_deleteAllDeclared_Click(this, null);
+            foreach (Declared d in result)
+            {
+                if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
+                {
+                    DeclaredFormControl dfc = new DeclaredFormControl();
+
+                    dfc.mainGroupBox.Header = "Declarado " + (listaDeclarados.Count + 1);
+                    dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+
+                    dfc.declared = d;
+                    dfc.txt_DeclaredNIF.Text = dfc.declared.declaredData["DeclaredNIF"];
+                    dfc.txt_LegalRepNIF.Text = dfc.declared.declaredData["LegalRepNIF"];
+                    dfc.txt_CommunityOpNIF.Text = dfc.declared.declaredData["CommunityOpNIF"];
+                    dfc.txt_DeclaredName.Text = dfc.declared.declaredData["DeclaredName"];
+                    dfc.txt_ProvinceCode.Text = dfc.declared.declaredData["ProvinceCode"];
+                    dfc.txt_CountryCode.Text = dfc.declared.declaredData["CountryCode"];
+                    dfc.txt_OpKey.Text = dfc.declared.declaredData["OpKey"];
+                    dfc.txt_TotalMoney.Text = dfc.declared.declaredData["TotalMoney"];
+                    dfc.txt_AnualMoney.Text = dfc.declared.declaredData["AnualMoney"];
+                    dfc.txt_AnualPropertyMoney.Text = dfc.declared.declaredData["AnualPropertyMoney"];
+                    dfc.txt_AnualOpIVA.Text = dfc.declared.declaredData["AnualOpIVA"];
+                    dfc.txt_Exercise.Text = dfc.declared.declaredData["Exercise"];
+                    dfc.txt_TrimestralOp1.Text = dfc.declared.declaredData["TrimestralOp1"];
+                    dfc.txt_TrimestralOp2.Text = dfc.declared.declaredData["TrimestralOp2"];
+                    dfc.txt_TrimestralOp3.Text = dfc.declared.declaredData["TrimestralOp3"];
+                    dfc.txt_TrimestralOp4.Text = dfc.declared.declaredData["TrimestralOp4"];
+                    dfc.txt_AnualPropertyIVAOp1.Text = dfc.declared.declaredData["AnualPropertyIVAOp1"];
+                    dfc.txt_AnualPropertyIVAOp2.Text = dfc.declared.declaredData["AnualPropertyIVAOp2"];
+                    dfc.txt_AnualPropertyIVAOp3.Text = dfc.declared.declaredData["AnualPropertyIVAOp3"];
+                    dfc.txt_AnualPropertyIVAOp4.Text = dfc.declared.declaredData["AnualPropertyIVAOp4"];
+
+                    if (dfc.declared.declaredData["OpInsurance"].Equals("X"))
+                    {
+                        dfc.chk_OpInsurance.IsChecked = true;
+                    }
+                    else
+                        dfc.declared.declaredData["OpInsurance"] = " ";
+                    if (dfc.declared.declaredData["LocalBusinessLease"].Equals("X"))
+                    {
+                        dfc.chk_LocalBusinessLease.IsChecked = true;
+                    }
+                    else
+                        dfc.declared.declaredData["LocalBusinessLease"] = " ";
+                    if (dfc.declared.declaredData["OpIVA"].Equals("X"))
+                    {
+                        dfc.chk_OpIVA.IsChecked = true;
+                    }
+                    else
+                        dfc.declared.declaredData["OpInsurance"] = " ";
+                    if (dfc.declared.declaredData["OpPassive"].Equals("X"))
+                    {
+                        dfc.chk_OpPassive.IsChecked = true;
+                    }
+                    else
+                        dfc.declared.declaredData["OpPassive"] = " ";
+                    if (dfc.declared.declaredData["OpCustoms"].Equals("X"))
+                    {
+                        dfc.chk_OpCustoms.IsChecked = true;
+                    }
+                    else
+                        dfc.declared.declaredData["OpCustoms"] = " ";
+                    DockPanel.SetDock(dfc, Dock.Top);
+                    dock_DeclaredContainer.Children.Add(dfc);
+                    listaDeclarados.Add(dfc);
+                }
+                else
+                    break;
+            }
         }
 
         //Handles background worker progress
@@ -194,9 +287,6 @@ namespace Lector_Excel
                 DockPanel.SetDock(d, Dock.Top);
                 dock_DeclaredContainer.Children.Add(d);
                 listaDeclarados.Add(d);
-
-                if (!menu_deleteAllDeclared.IsEnabled)
-                    menu_deleteAllDeclared.IsEnabled = true;
             }
             else
             {
@@ -234,8 +324,23 @@ namespace Lector_Excel
                     dock_DeclaredContainer.Children.Remove(dfc);
                 }
                 listaDeclarados.Clear();
-                (sender as MenuItem).IsEnabled = false;
             }
+        }
+
+        //Enable or disable export based on declared amount (fires automatically)
+        public void DeclaredListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (listaDeclarados.Count > 0)
+            {
+                menu_Export.IsEnabled = true;
+                menu_deleteAllDeclared.IsEnabled = true;
+            }
+            else
+            {
+                menu_Export.IsEnabled = false;
+                menu_deleteAllDeclared.IsEnabled = false;
+            }
+                
         }
     }
 }
