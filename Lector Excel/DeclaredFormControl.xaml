@@ -126,10 +126,10 @@
                     <TextBox Name="txt_TrimestralOp4" Grid.Row="4" Grid.Column="0" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 4" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
 
                     <Label Name="lbl_AnualPropertyIVAOp" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Importe anual percibido por&#10;transmisiones de inmuebles sujetas a IVA"></Label>
-                    <TextBox Name="txt_AnualProperyIVAOp1" Grid.Row="1" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 1" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
-                    <TextBox Name="txt_AnualProperyIVAOp2" Grid.Row="2" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 2" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
-                    <TextBox Name="txt_AnualProperyIVAOp3" Grid.Row="3" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 3" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
-                    <TextBox Name="txt_AnualProperyIVAOp4" Grid.Row="4" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 4" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualPropertyIVAOp1" Grid.Row="1" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 1" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualPropertyIVAOp2" Grid.Row="2" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 2" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualPropertyIVAOp3" Grid.Row="3" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 3" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
+                    <TextBox Name="txt_AnualPropertyIVAOp4" Grid.Row="4" Grid.Column="1" Margin="5,1" MinWidth="200" MaxLength="16" ToolTip="Trimestre 4" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
                 </Grid>
             </StackPanel>
         </GroupBox>

@@ -9,6 +9,7 @@ namespace Lector_Excel
     public class Declared
     {
         bool isPropertyDeclared;
+        public bool mayContainErrors = false;
         public Dictionary<string, string> declaredData;
 
         //Constructor
@@ -21,12 +22,12 @@ namespace Lector_Excel
             declaredData.Add("DeclaredName", "");
             declaredData.Add("ProvinceCode", "");
             declaredData.Add("CountryCode", "");
-            declaredData.Add("OpKey", "");
-            declaredData.Add("OpInsurance", "");
-            declaredData.Add("LocalBusinessLease", "");
-            declaredData.Add("OpIVA", "");
-            declaredData.Add("OpPassive", "");
-            declaredData.Add("OpCustoms", "");
+            declaredData.Add("OpKey", " ");
+            declaredData.Add("OpInsurance", " ");
+            declaredData.Add("LocalBusinessLease", " ");
+            declaredData.Add("OpIVA", " ");
+            declaredData.Add("OpPassive", " ");
+            declaredData.Add("OpCustoms", " ");
             declaredData.Add("TotalMoney", "");
             declaredData.Add("AnualMoney", "");
             declaredData.Add("AnualPropertyMoney", "");

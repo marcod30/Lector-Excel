@@ -23,7 +23,7 @@ namespace Lector_Excel
     public partial class DeclaredFormControl : UserControl
     {
         public event EventHandler DeleteButtonClick; //Delegate for deleting
-        protected Declared declared;
+        public Declared declared;
         //Regexps
         const string DNI_REGEX = @"^(\d{8})([A-Z])$";
         const string CIF_REGEX = @"^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9]|[A-J])$";
