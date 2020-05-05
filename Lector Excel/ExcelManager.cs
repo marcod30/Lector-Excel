@@ -28,69 +28,16 @@ namespace Lector_Excel
             this.path = path;
         }
 
-        // Exports the Type 1 data
-        public void ExportType1Data(List<string> Type1Data, string exportingPath = "")
-        {
-            StringBuilder sb = new StringBuilder();
-            Type1Data[2] = deAccent(Type1Data[2]);  // Delete special chars of Name
-            Type1Data[5] = deAccent(Type1Data[5]);  // Delete special chars of Relation Name
-            sb.Append("1347");
-
-            sb.Append(Type1Data[0].PadLeft(4, '0')); // Append Ejercicio, padding with zeroes
-            sb.Append(Type1Data[1]);    // Append NIF
-            sb.Append(Type1Data[2].PadRight(40));   // Append Name, requires padding
-            
-            sb.Append(Type1Data[3].PadLeft(1));    // Append Support Type, replacing if empty
-
-            sb.Append(Type1Data[4].PadRight(9, '0'));    // Append Phone, padding with zeroes if empty
-            sb.Append(Type1Data[5].PadRight(40));   // Append Relation Name, requires padding
-
-            sb.Append(Type1Data[6].PadRight(13, '0'));    // Append Declaration ID
-            sb.Append(Type1Data[7].PadLeft(1));    // Append Complementary Dec, replacing if empty
-            sb.Append(Type1Data[8].PadLeft(1));    // Append Sustitutive Dec, replacing if empty
-            sb.Append(Type1Data[9].PadRight(13, '0'));    // Append Previous Declaration ID, padding with zeroes
-
-            sb.Append(Type1Data[10].PadLeft(9, '0'));   // Append Total number of entities, padding with zeroes
-            
-            sb.Append(FormatNumber(Type1Data[11],16,true,false));   // Append Total Money, with floating point and sign formatting
-            
-            sb.Append(Type1Data[12].PadLeft(9, '0'));   // Append Properties amount, padding with zeroes if empty
-            sb.Append(FormatNumber(Type1Data[13], 16, true, false));    // Append Total Money Rental, with floating point and sign formatting
-
-            // Append 205 blank characters
-            for (int i = 0; i < 205; i++)
-            {
-                sb.Append(" ");
-            }
-            sb.Append(Type1Data[14].PadLeft(9));   // Append Legal NIF, padding with spaces if empty
-
-            // Append 101 blank characters
-            for (int i = 0; i < 101; i++)
-            {
-                sb.Append(" ");
-            }
-
-            sb.Append(Environment.NewLine); // Append a new line
-            if(exportingPath.Equals(""))
-                File.WriteAllText(Path.GetDirectoryName(this.path) + "\\result.txt", sb.ToString());
-            else
-                File.WriteAllText(exportingPath, sb.ToString());
-        }
-
-        // Opens a text file and starts exporting the data
-        public void ExportData(List<string> Type1Data, BackgroundWorker bw, List<string> Positions, string exportingPath = "")
+        public List<Declared> ImportExcelData(List<string> Positions, BackgroundWorker bw)
         {
             try
             {
-                StringBuilder stringBuilder = new StringBuilder();
                 excelApp = new Excel.Application();
                 workbooks = excelApp.Workbooks;
                 workbook = workbooks.Open(path);
 
                 int rows, columns;
-                Debug.WriteLine("STARTING EXPORT TO: " + Path.GetDirectoryName(this.path) + "\\result.txt");
-
-                ExportType1Data(Type1Data,exportingPath);
+                Debug.WriteLine("STARTING IMPORT FROM "+this.path);
 
                 worksheet = workbook.Sheets[1];
                 range = worksheet.UsedRange;
@@ -98,111 +45,52 @@ namespace Lector_Excel
                 columns = range.Columns.Count;
 
                 Debug.WriteLine("El excel tiene " + rows + " filas y " + columns + " columnas");
-                
 
-                for (int i = 2; i <= rows; i++) // We skip the row that contains the header
+                List<Declared> returnList = new List<Declared>();
+                for (int i = 2; i <= rows; i++) // We skip the row that contains the header?
                 {
-                    if (range.Cells[i, 1].Value2 != null)
-                        stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[1]); // We append Type1Data [0] and [1], as they are the same fields for Type 2
+                    Declared declared = new Declared();
 
-                    int j = 1;
-                    foreach(string col in Positions)
-                    {
+                    declared.declaredData["DeclaredNIF"] = (range.Cells[i, Positions[0]].Value2 != null) ? range.Cells[i, Positions[0]].Value2.ToString() : "";
+                    declared.declaredData["LegalRepNIF"] = (range.Cells[i, Positions[1]].Value2 != null) ? range.Cells[i, Positions[1]].Value2.ToString() : "";
+                    declared.declaredData["CommunityOpNIF"] = (range.Cells[i, Positions[20]].Value2 != null) ? range.Cells[i, Positions[20]].Value2.ToString() : "";
+                    declared.declaredData["DeclaredName"] = (range.Cells[i, Positions[2]].Value2 != null) ? range.Cells[i, Positions[2]].Value2.ToString() : "";
+                    declared.declaredData["ProvinceCode"] = (range.Cells[i, Positions[3]].Value2 != null) ? range.Cells[i, Positions[3]].Value2.ToString() : "";
+                    declared.declaredData["CountryCode"] = (range.Cells[i, Positions[4]].Value2 != null) ? range.Cells[i, Positions[4]].Value2.ToString() : "";
+                    declared.declaredData["OpKey"] = (range.Cells[i, Positions[5]].Value2 != null) ? range.Cells[i, Positions[5]].Value2.ToString() : "";
+                    declared.declaredData["OpInsurance"] = (range.Cells[i, Positions[7]].Value2 != null) ? range.Cells[i, Positions[7]].Value2.ToString() : "";
+                    declared.declaredData["LocalBusinessLease"] = (range.Cells[i, Positions[8]].Value2 != null) ? range.Cells[i, Positions[8]].Value2.ToString() : "";
+                    declared.declaredData["OpIVA"] = (range.Cells[i, Positions[21]].Value2 != null) ? range.Cells[i, Positions[21]].Value2.ToString() : "";
+                    declared.declaredData["OpPassive"] = (range.Cells[i, Positions[22]].Value2 != null) ? range.Cells[i, Positions[22]].Value2.ToString() : "";
+                    declared.declaredData["OpCustoms"] = (range.Cells[i, Positions[23]].Value2 != null) ? range.Cells[i, Positions[23]].Value2.ToString() : "";
+                    declared.declaredData["TotalMoney"] = (range.Cells[i, Positions[9]].Value2 != null) ? range.Cells[i, Positions[9]].Value2.ToString() : "";
+                    declared.declaredData["AnualMoney"] = (range.Cells[i, Positions[6]].Value2 != null) ? range.Cells[i, Positions[6]].Value2.ToString() : "";
+                    declared.declaredData["AnualPropertyMoney"] = (range.Cells[i, Positions[10]].Value2 != null) ? range.Cells[i, Positions[10]].Value2.ToString() : "";
+                    declared.declaredData["AnualOpIVA"] = (range.Cells[i, Positions[24]].Value2 != null) ? range.Cells[i, Positions[24]].Value2.ToString() : "";
+                    declared.declaredData["Exercise"] = (range.Cells[i, Positions[11]].Value2 != null) ? range.Cells[i, Positions[11]].Value2.ToString() : "" ;
+                    declared.declaredData["TrimestralOp1"] = (range.Cells[i, Positions[12]].Value2 != null) ? range.Cells[i, Positions[12]].Value2.ToString() : "";
+                    declared.declaredData["TrimestralOp2"] = (range.Cells[i, Positions[14]].Value2 != null) ? range.Cells[i, Positions[14]].Value2.ToString() : "";
+                    declared.declaredData["TrimestralOp3"] = (range.Cells[i, Positions[16]].Value2 != null) ? range.Cells[i, Positions[16]].Value2.ToString() : "";
+                    declared.declaredData["TrimestralOp4"] = (range.Cells[i, Positions[18]].Value2 != null) ? range.Cells[i, Positions[18]].Value2.ToString() : "";
+                    declared.declaredData["AnualPropertyIVAOp1"] = (range.Cells[i, Positions[13]].Value2 != null) ? range.Cells[i, Positions[13]].Value2.ToString() : "";
+                    declared.declaredData["AnualPropertyIVAOp2"] = (range.Cells[i, Positions[15]].Value2 != null) ? range.Cells[i, Positions[15]].Value2.ToString() : "";
+                    declared.declaredData["AnualPropertyIVAOp3"] = (range.Cells[i, Positions[17]].Value2 != null) ? range.Cells[i, Positions[17]].Value2.ToString() : "";
+                    declared.declaredData["AnualPropertyIVAOp4"] = (range.Cells[i, Positions[19]].Value2 != null) ? range.Cells[i, Positions[19]].Value2.ToString() : "";
 
-                        //Debug.Write("Exporting cell " + i + ", " + j + ": " + range.Cells[i, col].Value2.ToString());
-                        /*
-                        if (range.Cells[i, col].Value2 != null)
-                            MessageBox.Show("Exporting cell [" + i + ", " + col + "]: " + range.Cells[i, col].Value2.ToString() + ". J is " + j);
-                        else
-                            MessageBox.Show("Exporting cell [" + i + ", " + col + "]: (BLANK). J is " + j);
-                        */
-                        
-                        // Check if we need to fill a constant field
-                        switch (j)
-                        {
-                            case 4:
-                                stringBuilder.Append("D");
-                                j++;
-                                break;
-                            case 7:
-                                for (int k = 0; k < longitudes[j]; k++)
-                                {
-                                    stringBuilder.Append(" ");
-                                }
-                                j++;
-                                break;
-                        }
-                        // BLANK CELL (we keep this check for any field user desired to keep blank)
-                        //if (range.Cells[i, col] != null)
-                        if (range.Cells[i, col].Value2 == null)
-                                for (int k = 0; k < longitudes[j]; k++)
-                                {
-                                    stringBuilder.Append(" ");
-                                }
-                            else if(range.Cells[i, Positions[0]].Value2 != null )   // NIF can't be empty, else we skip this row
-                            {
-                                // NUMERIC CELL
-                                if (double.TryParse(range.Cells[i, col].Value2.ToString(), out double d))
-                                    if (j == 5 || j == 6 || j == 14)
-                                    {
-                                        stringBuilder.Append(FormatNumber(range.Cells[i, col].Value2.ToString(), longitudes[j], false, true));
-                                    }
-                                    else if (j == 12)
-                                    {
-                                        stringBuilder.Append(FormatNumber(range.Cells[i, col].Value2.ToString(), longitudes[j], true, true));
-                                    }
-                                    else
-                                    {
-                                        stringBuilder.Append(FormatNumber(range.Cells[i, col].Value2.ToString(), longitudes[j], true, false));
-                                    }
-                                else
-                                // STRING CELL
-                                if (!range.Cells[i, col].Value.ToString().Contains("-"))
-                                {
-                                    if (longitudes[j] != 1)
-                                    {
-                                        //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, col].Value.ToString()).ToUpper()));
-                                        stringBuilder.Append(deAccent(range.Cells[i, col].Value2.ToString().PadRight(longitudes[j]).ToUpper()));
-                                    }
-                                    else
-                                    {
-                                        //stringBuilder.Append(deAccent(string.Format("%s", range.Cells[i, col].Value2.ToString()).ToUpper()));
-                                        stringBuilder.Append(deAccent(range.Cells[i, col].Value2.ToString().ToUpper()));
-                                    }
-                                }
-                                else
-                                {
-                                    //stringBuilder.Append(deAccent(string.Format("%-" + longitudes2[j] + "s", range.Cells[i, col].Value2.ToString()).ToUpper()));
-                                    stringBuilder.Append(deAccent(range.Cells[i, col].Value2.ToString().PadRight(longitudes[j]).ToUpper()));
-                                }
-                            }
+                    returnList.Add(declared);
 
-                        j++;
-                        if(j == 28)
-                        {
-                            for (int k = 0; k < longitudes[j]; k++)
-                            {
-                                stringBuilder.Append(" ");
-                            }
-                            j++;
-                        }
-                    }
-                    stringBuilder.Append(Environment.NewLine);
                     float progress = (float)i / rows * 100;
                     Debug.WriteLine(progress + "%");
                     bw.ReportProgress((int)progress);
                 }
-                stringBuilder.Append(Environment.NewLine);
-                if(exportingPath.Equals(""))
-                    File.AppendAllText(Path.GetDirectoryName(this.path) + "\\result.txt", stringBuilder.ToString());
-                else
-                    File.AppendAllText(exportingPath, stringBuilder.ToString());
-
+                
+                return returnList;
             }
             
             catch (Exception e)
             {
-                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La exportación se interrumpirá.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La importación se interrumpirá.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
             
             finally
