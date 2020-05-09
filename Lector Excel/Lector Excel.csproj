@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>347icon_256.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -78,6 +81,7 @@
       <DependentUpon>DeclaredFormControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExportManager.cs" />
+    <Compile Include="ImportManager.cs" />
     <Compile Include="ImportSettings.xaml.cs">
       <DependentUpon>ImportSettings.xaml</DependentUpon>
     </Compile>
@@ -196,6 +200,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="media\AEAT_logo_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="347icon_256.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="347icon_32.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
