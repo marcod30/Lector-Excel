@@ -28,7 +28,9 @@ namespace Lector_Excel
         const string DNI_REGEX = @"^(\d{8})([A-Z])$";
         const string CIF_REGEX = @"^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9]|[A-J])$";
         const string NIE_REGEX = @"^[XYZ]\d{7,8}[A-Z]$";
-        const string STATE_CODE_REGEX = @"(\d{2})";
+        const string COMM_NIF_REGEX = @"^([A-Z]{2})(\d{2,15})";
+        const string PROV_CODE_REGEX = @"(\d{2})";
+        const string STATE_CODE_REGEX = @"([A-Z]{2})";
         const string UNSIGNED_FLOAT_REGEX = @"^(\d)+((\.|\,)(\d{1,2}))?$";
         const string SIGNED_FLOAT_REGEX = @"^\-?(\d)+((\.|\,)(\d{1,2}))?$";
 
@@ -133,13 +135,50 @@ namespace Lector_Excel
                     lbl_DeclaredNIF.IsEnabled = true;
                 }
             }
+
+            var thisTextBox = sender as TextBox;
+            if (!thisTextBox.Text.Equals("") && !Regex.IsMatch(thisTextBox.Text, COMM_NIF_REGEX))
+            {
+                thisTextBox.BorderBrush = Brushes.Red;
+            }
+            else
+            {
+                thisTextBox.ClearValue(TextBox.BorderBrushProperty);
+            }
         }
 
-        //If province code textbox changes OR State code textbox changes
+        //If province code textbox changes
         private void Txt_ProvinceCode_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
-            if (!thisTextBox.Text.Equals("") && !Regex.IsMatch(thisTextBox.Text,STATE_CODE_REGEX))
+            if (!thisTextBox.Text.Equals("") && !Regex.IsMatch(thisTextBox.Text,PROV_CODE_REGEX))
+            {
+                thisTextBox.BorderBrush = Brushes.Red;
+                txt_CountryCode.Text = "";
+            }
+            else
+            {
+                thisTextBox.ClearValue(TextBox.BorderBrushProperty);
+                if (thisTextBox.Text.Equals("99") && !txt_CountryCode.IsEnabled)
+                {
+                    txt_CountryCode.IsEnabled = true;
+                    lbl_CountryCode.IsEnabled = true;
+                }
+                else
+                {
+                    txt_CountryCode.IsEnabled = false;
+                    txt_CountryCode.Text = "";
+                    lbl_CountryCode.IsEnabled = false;
+                }
+
+            }
+        }
+
+        //If state code textbox changes
+        private void Txt_CountryCode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var thisTextBox = sender as TextBox;
+            if (!thisTextBox.Text.Equals("") && !Regex.IsMatch(thisTextBox.Text, STATE_CODE_REGEX))
             {
                 thisTextBox.BorderBrush = Brushes.Red;
             }

@@ -52,8 +52,8 @@
                     <Label Name="lbl_ProvinceCode" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Código de&#10;provincia"></Label>
                     <TextBox Name="txt_ProvinceCode" Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="30" MaxLength="2" TextChanged="Txt_ProvinceCode_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox>
 
-                    <Label Name="lbl_CountryCode" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Código de&#10;país"></Label>
-                    <TextBox Name="txt_CountryCode" Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="30" MaxLength="2" TextChanged="Txt_ProvinceCode_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <Label Name="lbl_CountryCode" Grid.Row="0" Grid.Column="1" FontSize="10" IsEnabled="False" Content="Código de&#10;país"></Label>
+                    <TextBox Name="txt_CountryCode" Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="30" MaxLength="2" IsEnabled="False" TextChanged="Txt_CountryCode_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox>
 
                     <Label Name="lbl_OpKey" Grid.Row="0" Grid.Column="2" FontSize="10" Content="Clave&#10;operación"></Label>
                     <TextBox Name="txt_OpKey" Grid.Row="1" Grid.Column="2" Margin="5,0" MinWidth="20" MaxLength="1" LostFocus="Txt_Any_LostFocus"></TextBox>
@@ -98,7 +98,7 @@
                     <Label Name="lbl_AnualOpIVA" Grid.Row="0" Grid.Column="3" FontSize="10" Content="Importe anual de las operaciones&#10;devengadas con criterio IVA de caja"></Label>
                     <TextBox Name="txt_AnualOpIVA" Grid.Row="1" Grid.Column="3" Margin="5,0" MaxLength="16" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: signo (1) + numero float(15)-->
 
-                    <Label Name="lbl_Exercise" Grid.Row="0" Grid.Column="4" FontSize="10" Content="Ejercicio"></Label>
+                    <Label Name="lbl_Exercise" Grid.Row="0" Grid.Column="4" FontSize="10" Content="Ejercicio (cobro&#10;en metálico >6000€)"></Label>
                     <TextBox Name="txt_Exercise" Grid.Row="1" Grid.Column="4" Margin="5,0" MaxLength="4" TextChanged="Txt_Exercise_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox> <!-- MaxLenght: numero int(4)-->
                 </Grid>
                 <Grid Name="grid4" Margin="5">

@@ -80,8 +80,6 @@ namespace Lector_Excel
                         t.Text = positions.ElementAt(i++);
                     }
                 }
-
-                positions.Clear();
             }
         }
 
@@ -102,7 +100,7 @@ namespace Lector_Excel
         private void Menu_LoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            openFileDialog.Filter = "Archivos de configuración de importación (*.is347)|*is347|Archivos de LectorExcel (*.lectorexcel)|*.lectorexcel";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             if(openFileDialog.ShowDialog() == true)
@@ -129,7 +127,7 @@ namespace Lector_Excel
         private void Menu_SaveToFile_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            saveFileDialog.Filter = "Archivos de configuración de importación (*.is347)|*is347|Archivos de LectorExcel (*.lectorexcel)|*.lectorexcel";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             positions.Clear();

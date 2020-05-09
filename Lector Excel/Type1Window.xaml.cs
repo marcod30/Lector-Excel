@@ -74,7 +74,7 @@ namespace Lector_Excel
         private void Menu_importData_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            openFileDialog.Filter = "Archivos de configuración tipo 1 (*.t1347)|*.t1347|Archivos de LectorExcel (*.lectorexcel)|*.lectorexcel";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
@@ -115,7 +115,7 @@ namespace Lector_Excel
         private void Menu_exportData_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "LectorExcel files (*.lectorexcel)|*.lectorexcel";
+            sfd.Filter = "Archivos de configuración tipo 1 (*.t1347)|*.t1347|Archivos de LectorExcel (*.lectorexcel)|*.lectorexcel";
             sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (sfd.ShowDialog() == true)
             {

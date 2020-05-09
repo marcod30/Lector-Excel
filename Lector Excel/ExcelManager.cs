@@ -89,7 +89,7 @@ namespace Lector_Excel
             
             catch (Exception e)
             {
-                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La importación se interrumpirá.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La importación se interrumpirá.\nCódigo del error: "+e, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
             
