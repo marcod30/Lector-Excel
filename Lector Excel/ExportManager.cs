@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Lector_Excel
 {
@@ -29,35 +30,35 @@ namespace Lector_Excel
             StringBuilder sb = new StringBuilder();
             Type1Data[2] = deAccent(Type1Data[2]);  // Delete special chars of Name
             Type1Data[5] = deAccent(Type1Data[5]);  // Delete special chars of Relation Name
-            sb.Append("1347");
+            sb.Append(EncodeToLatin("1347"));
 
-            sb.Append(Type1Data[0].PadLeft(4, '0')); // Append Ejercicio, padding with zeroes
-            sb.Append(Type1Data[1]);    // Append NIF
-            sb.Append(Type1Data[2].PadRight(40));   // Append Name, requires padding
+            sb.Append(EncodeToLatin(Type1Data[0].PadLeft(4, '0'))); // Append Ejercicio, padding with zeroes
+            sb.Append(EncodeToLatin(Type1Data[1]));    // Append NIF
+            sb.Append(EncodeToLatin(Type1Data[2].PadRight(40)));   // Append Name, requires padding
 
-            sb.Append(Type1Data[3].PadLeft(1));    // Append Support Type, replacing if empty
+            sb.Append(EncodeToLatin(Type1Data[3].PadLeft(1)));    // Append Support Type, replacing if empty
 
-            sb.Append(Type1Data[4].PadRight(9, '0'));    // Append Phone, padding with zeroes if empty
-            sb.Append(Type1Data[5].PadRight(40));   // Append Relation Name, requires padding
+            sb.Append(EncodeToLatin(Type1Data[4].PadRight(9, '0')));    // Append Phone, padding with zeroes if empty
+            sb.Append(EncodeToLatin(Type1Data[5].PadRight(40)));   // Append Relation Name, requires padding
 
-            sb.Append(Type1Data[6].PadRight(13, '0'));    // Append Declaration ID
-            sb.Append(Type1Data[7].PadLeft(1));    // Append Complementary Dec, replacing if empty
-            sb.Append(Type1Data[8].PadLeft(1));    // Append Sustitutive Dec, replacing if empty
-            sb.Append(Type1Data[9].PadRight(13, '0'));    // Append Previous Declaration ID, padding with zeroes
+            sb.Append(EncodeToLatin(Type1Data[6].PadRight(13, '0')));    // Append Declaration ID
+            sb.Append(EncodeToLatin(Type1Data[7].PadLeft(1)));    // Append Complementary Dec, replacing if empty
+            sb.Append(EncodeToLatin(Type1Data[8].PadLeft(1)));    // Append Sustitutive Dec, replacing if empty
+            sb.Append(EncodeToLatin(Type1Data[9].PadRight(13, '0')));    // Append Previous Declaration ID, padding with zeroes
 
-            sb.Append(Type1Data[10].PadLeft(9, '0'));   // Append Total number of entities, padding with zeroes
+            sb.Append(EncodeToLatin(Type1Data[10].PadLeft(9, '0')));   // Append Total number of entities, padding with zeroes
 
-            sb.Append(FormatNumber(Type1Data[11], 16, true, false));   // Append Total Money, with floating point and sign formatting
+            sb.Append(EncodeToLatin(FormatNumber(Type1Data[11], 16, true, false)));   // Append Total Money, with floating point and sign formatting
 
-            sb.Append(Type1Data[12].PadLeft(9, '0'));   // Append Properties amount, padding with zeroes if empty
-            sb.Append(FormatNumber(Type1Data[13], 16, true, false));    // Append Total Money Rental, with floating point and sign formatting
+            sb.Append(EncodeToLatin(Type1Data[12].PadLeft(9, '0')));   // Append Properties amount, padding with zeroes if empty
+            sb.Append(EncodeToLatin(FormatNumber(Type1Data[13], 16, true, false)));    // Append Total Money Rental, with floating point and sign formatting
 
             // Append 205 blank characters
             for (int i = 0; i < 205; i++)
             {
                 sb.Append(" ");
             }
-            sb.Append(Type1Data[14].PadLeft(9));   // Append Legal NIF, padding with spaces if empty
+            sb.Append(EncodeToLatin(Type1Data[14].PadLeft(9)));   // Append Legal NIF, padding with spaces if empty
 
             // Append 101 blank characters
             for (int i = 0; i < 101; i++)
@@ -67,90 +68,98 @@ namespace Lector_Excel
 
             sb.Append(Environment.NewLine); // Append a new line
             if (exportingPath.Equals(""))
-                File.WriteAllText(Path.GetDirectoryName(this.exportPath) + "\\result.txt", sb.ToString());
+                File.WriteAllText(Path.GetDirectoryName(this.exportPath) + "\\result.txt", sb.ToString(),Encoding.GetEncoding("ISO-8859-1"));
             else
-                File.WriteAllText(exportingPath, sb.ToString());
+                File.WriteAllText(exportingPath, sb.ToString(), Encoding.GetEncoding("ISO-8859-1"));
         }
 
 
         //Export Type 2
         public bool ExportFromMain(List<Declared> declareds, BackgroundWorker bw)
         {
-            if (declareds.Count == 0 || bw == null)
-                return false;
-
-            StringBuilder stringBuilder = new StringBuilder();
-            ExportType1Data(this.exportPath);
-            
-            int i = 0;
-
-            foreach (Declared dec in declareds)
+            try
             {
-                Debug.WriteLine("Appending declared " + i);
-                stringBuilder.Append("2347").Append(Type1Data[0]).Append(Type1Data[1]); // We append Type1Data [0] and [1], as they are the same fields for Type 2
+                if (declareds.Count == 0 || bw == null)
+                    return false;
 
-                stringBuilder.Append(dec.declaredData["DeclaredNIF"].ToUpper().PadRight(9));
-                stringBuilder.Append(dec.declaredData["LegalRepNIF"].ToUpper().PadRight(9));
-                stringBuilder.Append(dec.declaredData["DeclaredName"].ToUpper().PadRight(40));
+                StringBuilder stringBuilder = new StringBuilder();
+                ExportType1Data(this.exportPath);
 
-                stringBuilder.Append("D");
+                int i = 0;
 
-                stringBuilder.Append(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true));
-                stringBuilder.Append(FormatNumber(dec.declaredData["CountryCode"], 2, false, true));
-
-                stringBuilder.Append(" ");
-
-                stringBuilder.Append(dec.declaredData["OpKey"]);
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualMoney"], 16, true, false));
-                stringBuilder.Append(dec.declaredData["OpInsurance"]);
-                stringBuilder.Append(dec.declaredData["LocalBusinessLease"]);
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["TotalMoney"], 15, true, true));
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualPropertyMoney"], 16, true, false));
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["Exercise"], 4, false, true));
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["TrimestralOp1"], 16, true, false));
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualPropertyIVAOp1"], 16, true, false));
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["TrimestralOp2"], 16, true, false));
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualPropertyIVAOp2"], 16, true, false));
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["TrimestralOp3"], 16, true, false));
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualPropertyIVAOp3"], 16, true, false));
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["TrimestralOp4"], 16, true, false));
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualPropertyIVAOp4"], 16, true, false));
-
-                stringBuilder.Append(dec.declaredData["CommunityOpNIF"].ToUpper().PadRight(17));
-
-                stringBuilder.Append(dec.declaredData["OpIVA"]);
-                stringBuilder.Append(dec.declaredData["OpPassive"]);
-                stringBuilder.Append(dec.declaredData["OpCustoms"]);
-
-                stringBuilder.Append(FormatNumber(dec.declaredData["AnualOpIVA"], 16, true, false));
-
-                //Append 201 blank characters
-                for (int k = 0; k < 201; k++)
+                foreach (Declared dec in declareds)
                 {
-                    stringBuilder.Append(" ");
-                }
-                stringBuilder.Append(Environment.NewLine); // Append a new line
+                    Debug.WriteLine("Appending declared " + i);
+                    stringBuilder.Append(EncodeToLatin("2347")).Append(EncodeToLatin(Type1Data[0])).Append(EncodeToLatin(Type1Data[1])); // We append Type1Data [0] and [1], as they are the same fields for Type 2
 
-                //Report progress to Background Worker
-                i++;
-                float progress = (float)i / declareds.Count * 100;
-                bw.ReportProgress((int)progress);
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["DeclaredNIF"].ToUpper().PadRight(9)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["LegalRepNIF"].ToUpper().PadRight(9)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["DeclaredName"].ToUpper().PadRight(40)));
+
+                    stringBuilder.Append(EncodeToLatin("D"));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"]));
+
+                    stringBuilder.Append(" ");
+
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpKey"]));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualMoney"], 16, true, false)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpInsurance"]));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["LocalBusinessLease"]));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TotalMoney"], 15, true, true)));
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyMoney"], 16, true, false)));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["Exercise"], 4, false, true)));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp1"], 16, true, false)));
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp1"], 16, true, false)));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp2"], 16, true, false)));
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp2"], 16, true, false)));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp3"], 16, true, false)));
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp3"], 16, true, false)));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp4"], 16, true, false)));
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp4"], 16, true, false)));
+
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CommunityOpNIF"].ToUpper().PadRight(17)));
+
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpIVA"]));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpPassive"]));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpCustoms"]));
+
+                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualOpIVA"], 16, true, false)));
+
+                    //Append 201 blank characters
+                    for (int k = 0; k < 201; k++)
+                    {
+                        stringBuilder.Append(" ");
+                    }
+                    stringBuilder.Append(Environment.NewLine); // Append a new line
+
+                    //Report progress to Background Worker
+                    i++;
+                    float progress = (float)i / declareds.Count * 100;
+                    bw.ReportProgress((int)progress);
+                }
+                File.AppendAllText(this.exportPath, stringBuilder.ToString(), Encoding.GetEncoding("ISO-8859-1"));
+                return true;
             }
-            stringBuilder.Append(Environment.NewLine); // Append a new line
-            File.AppendAllText(this.exportPath, stringBuilder.ToString());
-            return true;
+            catch (Exception e)
+            {
+                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La exportación se interrumpirá.\nCódigo del error: " + e, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
+	
 
         // Puts the number in the required 347 Model Format
         // Imported from Old Lector Excel
-        public string FormatNumber(string number, int maxlength, bool shouldBeFloat, bool isUnsigned)
+        private string FormatNumber(string number, int maxlength, bool shouldBeFloat, bool isUnsigned)
         {
             string entera = "0", dec = "0";
             StringBuilder sb = new StringBuilder();
@@ -215,7 +224,7 @@ namespace Lector_Excel
         }
 
         // Tries to convert accentuated chars into their non-accentuated variants
-        static string deAccent(string text)
+        private string deAccent(string text)
         {
             var normalizedString = text.Normalize(NormalizationForm.FormD);
             var stringBuilder = new StringBuilder();
@@ -230,6 +239,17 @@ namespace Lector_Excel
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+
+        // Encodes string to Latin-1, as required from model
+        private string EncodeToLatin(string str)
+        {
+            Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+            //Encoding utf8 = Encoding.UTF8;
+            byte[] utfBytes = Encoding.Default.GetBytes(str);
+            byte[] isoBytes = Encoding.Convert(Encoding.Default, iso, utfBytes);
+            string msg = iso.GetString(isoBytes);
+            return msg;
         }
     }
 }
