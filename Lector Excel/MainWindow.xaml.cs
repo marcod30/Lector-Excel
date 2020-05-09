@@ -23,7 +23,7 @@ namespace Lector_Excel
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
         ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
-        const int DECLARED_AMOUNT_LIMIT = 4;
+        const int DECLARED_AMOUNT_LIMIT = 100;
 
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -51,6 +51,7 @@ namespace Lector_Excel
                 backgroundWorker.RunWorkerAsync(argument:"excelImport");
 
                 exportProgressBar = new ProgressWindow(false, "Importando desde Excel...");
+                exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 exportProgressBar.ShowDialog();
             }
             else
@@ -85,16 +86,6 @@ namespace Lector_Excel
                 //MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
             }
-            if (Type1Fields.Count > 0 && listaDeclarados.Count > 0)
-            {
-                menu_Export.IsEnabled = true;
-                //btn_Export.IsEnabled = true;
-            }
-            else
-            {
-                menu_Export.IsEnabled = false;
-                //btn_Export.IsEnabled = false;
-            }
         }
 
         //Handles text file exporting
@@ -121,8 +112,15 @@ namespace Lector_Excel
                 backgroundWorker.RunWorkerAsync(argument:"exportAll");
 
                 exportProgressBar = new ProgressWindow(false, "Exportando...");
+                exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 exportProgressBar.ShowDialog();
             }
+        }
+
+        //Handles text file importing
+        private void Menu_Import_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         // Handles opening the Import Settings Window
@@ -175,6 +173,7 @@ namespace Lector_Excel
             exportProgressBar.Close();
         }
 
+        //Adapts Excel imported file to forms
         private void ExcelToForm(List<Declared> result)
         {
             Menu_deleteAllDeclared_Click(this, null);
@@ -188,26 +187,26 @@ namespace Lector_Excel
                     dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
 
                     dfc.declared = d;
-                    dfc.txt_DeclaredNIF.Text = dfc.declared.declaredData["DeclaredNIF"];
-                    dfc.txt_LegalRepNIF.Text = dfc.declared.declaredData["LegalRepNIF"];
-                    dfc.txt_CommunityOpNIF.Text = dfc.declared.declaredData["CommunityOpNIF"];
-                    dfc.txt_DeclaredName.Text = dfc.declared.declaredData["DeclaredName"];
-                    dfc.txt_ProvinceCode.Text = dfc.declared.declaredData["ProvinceCode"];
-                    dfc.txt_CountryCode.Text = dfc.declared.declaredData["CountryCode"];
-                    dfc.txt_OpKey.Text = dfc.declared.declaredData["OpKey"];
-                    dfc.txt_TotalMoney.Text = dfc.declared.declaredData["TotalMoney"];
-                    dfc.txt_AnualMoney.Text = dfc.declared.declaredData["AnualMoney"];
-                    dfc.txt_AnualPropertyMoney.Text = dfc.declared.declaredData["AnualPropertyMoney"];
-                    dfc.txt_AnualOpIVA.Text = dfc.declared.declaredData["AnualOpIVA"];
-                    dfc.txt_Exercise.Text = dfc.declared.declaredData["Exercise"];
-                    dfc.txt_TrimestralOp1.Text = dfc.declared.declaredData["TrimestralOp1"];
-                    dfc.txt_TrimestralOp2.Text = dfc.declared.declaredData["TrimestralOp2"];
-                    dfc.txt_TrimestralOp3.Text = dfc.declared.declaredData["TrimestralOp3"];
-                    dfc.txt_TrimestralOp4.Text = dfc.declared.declaredData["TrimestralOp4"];
-                    dfc.txt_AnualPropertyIVAOp1.Text = dfc.declared.declaredData["AnualPropertyIVAOp1"];
-                    dfc.txt_AnualPropertyIVAOp2.Text = dfc.declared.declaredData["AnualPropertyIVAOp2"];
-                    dfc.txt_AnualPropertyIVAOp3.Text = dfc.declared.declaredData["AnualPropertyIVAOp3"];
-                    dfc.txt_AnualPropertyIVAOp4.Text = dfc.declared.declaredData["AnualPropertyIVAOp4"];
+                    dfc.txt_DeclaredNIF.Text = (dfc.declared.declaredData["DeclaredNIF"].Length >= 9) ? dfc.declared.declaredData["DeclaredNIF"].Substring(0, 9) : dfc.declared.declaredData["DeclaredNIF"];
+                    dfc.txt_LegalRepNIF.Text = (dfc.declared.declaredData["LegalRepNIF"].Length >= 9) ? dfc.declared.declaredData["LegalRepNIF"].Substring(0, 9) : dfc.declared.declaredData["LegalRepNIF"];
+                    dfc.txt_CommunityOpNIF.Text = (dfc.declared.declaredData["CommunityOpNIF"].Length >= 17) ? dfc.declared.declaredData["CommunityOpNIF"].Substring(0, 17) : dfc.declared.declaredData["CommunityOpNIF"];
+                    dfc.txt_DeclaredName.Text = (dfc.declared.declaredData["DeclaredName"].Length >= 40) ? dfc.declared.declaredData["DeclaredName"].Substring(0, 40) : dfc.declared.declaredData["DeclaredName"];
+                    dfc.txt_ProvinceCode.Text = (dfc.declared.declaredData["ProvinceCode"].Length >= 2) ? dfc.declared.declaredData["ProvinceCode"].Substring(0, 2) : dfc.declared.declaredData["ProvinceCode"];
+                    dfc.txt_CountryCode.Text = (dfc.declared.declaredData["CountryCode"].Length >= 2) ? dfc.declared.declaredData["CountryCode"].Substring(0, 2) : dfc.declared.declaredData["CountryCode"];
+                    dfc.txt_OpKey.Text = (dfc.declared.declaredData["OpKey"].Length >= 1) ? dfc.declared.declaredData["OpKey"].Substring(0, 1) : dfc.declared.declaredData["OpKey"];
+                    dfc.txt_TotalMoney.Text = (dfc.declared.declaredData["TotalMoney"].Length >= 15) ? dfc.declared.declaredData["TotalMoney"].Substring(0, 15) : dfc.declared.declaredData["TotalMoney"];
+                    dfc.txt_AnualMoney.Text = (dfc.declared.declaredData["AnualMoney"].Length >= 16) ? dfc.declared.declaredData["AnualMoney"].Substring(0, 16) : dfc.declared.declaredData["AnualMoney"];
+                    dfc.txt_AnualPropertyMoney.Text = (dfc.declared.declaredData["AnualPropertyMoney"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyMoney"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyMoney"];
+                    dfc.txt_AnualOpIVA.Text = (dfc.declared.declaredData["AnualOpIVA"].Length >= 16) ? dfc.declared.declaredData["AnualOpIVA"].Substring(0, 16) : dfc.declared.declaredData["AnualOpIVA"];
+                    dfc.txt_Exercise.Text = (dfc.declared.declaredData["Exercise"].Length >= 4) ? dfc.declared.declaredData["Exercise"].Substring(0, 4) : dfc.declared.declaredData["Exercise"];
+                    dfc.txt_TrimestralOp1.Text = (dfc.declared.declaredData["TrimestralOp1"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp1"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp1"];
+                    dfc.txt_TrimestralOp2.Text = (dfc.declared.declaredData["TrimestralOp2"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp2"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp2"]; ;
+                    dfc.txt_TrimestralOp3.Text = (dfc.declared.declaredData["TrimestralOp3"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp3"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp3"]; ;
+                    dfc.txt_TrimestralOp4.Text = (dfc.declared.declaredData["TrimestralOp4"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp4"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp4"]; ;
+                    dfc.txt_AnualPropertyIVAOp1.Text = (dfc.declared.declaredData["AnualPropertyIVAOp1"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp1"].Substring(0,16) : dfc.declared.declaredData["AnualPropertyIVAOp1"];
+                    dfc.txt_AnualPropertyIVAOp2.Text = (dfc.declared.declaredData["AnualPropertyIVAOp2"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp2"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp2"];
+                    dfc.txt_AnualPropertyIVAOp3.Text = (dfc.declared.declaredData["AnualPropertyIVAOp3"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp3"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp3"];
+                    dfc.txt_AnualPropertyIVAOp4.Text = (dfc.declared.declaredData["AnualPropertyIVAOp4"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp4"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp4"];
 
                     if (dfc.declared.declaredData["OpInsurance"].Equals("X"))
                     {
@@ -332,15 +331,23 @@ namespace Lector_Excel
         {
             if (listaDeclarados.Count > 0)
             {
-                menu_Export.IsEnabled = true;
+                if(Type1Fields.Count >= 5)
+                    menu_Export.IsEnabled = true;
                 menu_deleteAllDeclared.IsEnabled = true;
             }
             else
             {
-                menu_Export.IsEnabled = false;
+                if(Type1Fields.Count < 5)
+                    menu_Export.IsEnabled = false;
                 menu_deleteAllDeclared.IsEnabled = false;
             }
                 
+        }
+
+        //Launch AEAT WebPage
+        private void Menu_GoToAEAT_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www12.agenciatributaria.gob.es/wlpl/OVCT-CXEW/SelectorAcceso?ref=%2Fwlpl%2FPAIN-M347%2FE2019%2Findex.zul&aut=CP");
         }
     }
 }
