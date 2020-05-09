@@ -99,15 +99,15 @@ namespace Lector_Excel
                     stringBuilder.Append(EncodeToLatin("D"));
 
                     stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"]));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"].PadRight(2)));
 
                     stringBuilder.Append(" ");
 
                     stringBuilder.Append(EncodeToLatin(dec.declaredData["OpKey"]));
 
                     stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualMoney"], 16, true, false)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpInsurance"]));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["LocalBusinessLease"]));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpInsurance"].PadLeft(1)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["LocalBusinessLease"].PadLeft(1)));
 
                     stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TotalMoney"], 15, true, true)));
                     stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyMoney"], 16, true, false)));
@@ -128,9 +128,9 @@ namespace Lector_Excel
 
                     stringBuilder.Append(EncodeToLatin(dec.declaredData["CommunityOpNIF"].ToUpper().PadRight(17)));
 
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpIVA"]));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpPassive"]));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpCustoms"]));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpIVA"].PadLeft(1)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpPassive"].PadLeft(1)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpCustoms"].PadLeft(1)));
 
                     stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualOpIVA"], 16, true, false)));
 

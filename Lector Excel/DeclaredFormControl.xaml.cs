@@ -178,7 +178,7 @@ namespace Lector_Excel
         private void Txt_CountryCode_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
-            if (!thisTextBox.Text.Equals("") && !Regex.IsMatch(thisTextBox.Text, STATE_CODE_REGEX))
+            if (!thisTextBox.Text.Equals("") && txt_ProvinceCode.Text.Equals("99") && !Regex.IsMatch(thisTextBox.Text, STATE_CODE_REGEX))
             {
                 thisTextBox.BorderBrush = Brushes.Red;
             }
