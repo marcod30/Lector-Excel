@@ -23,7 +23,7 @@ namespace Lector_Excel
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
         ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
-        const int DECLARED_AMOUNT_LIMIT = 100;
+        const int DECLARED_AMOUNT_LIMIT = 500;
 
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -120,7 +120,42 @@ namespace Lector_Excel
         //Handles text file importing
         private void Menu_Import_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos 347 (*.347)|*.347|Ficheros de texto (*.txt)|*txt";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImportManager importManager = new ImportManager(openFileDialog.FileName);
+                List<string> _type1 = new List<string>();
+                List<Declared> _declareds = new List<Declared>();
 
+                if (importManager.ImportFromText(out _type1, out _declareds))
+                {
+                    if(_type1 != null && _declareds != null)
+                    {
+                        this.Type1Fields = _type1;
+                        ImportedFileToForm(_declareds);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Whoops! Something went wrong when importing!!!");
+                    }
+                }
+                /*
+                backgroundWorker.RunWorkerAsync(argument: "excelImport");
+
+                exportProgressBar = new ProgressWindow(false, "Importando desde Excel...");
+                exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                exportProgressBar.ShowDialog();
+                */
+            }
+            else
+            {
+                if (!openFileDialog.SafeFileName.Equals(""))
+                {
+                    MessageBoxResult msg = MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         // Handles opening the Import Settings Window
@@ -168,13 +203,13 @@ namespace Lector_Excel
             List<Declared> result = e.Result as List<Declared>;
             if(result != null)
             {
-                ExcelToForm(result);
+                ImportedFileToForm(result);
             }
             exportProgressBar.Close();
         }
 
-        //Adapts Excel imported file to forms
-        private void ExcelToForm(List<Declared> result)
+        //Adapts any imported file to forms
+        private void ImportedFileToForm(List<Declared> result)
         {
             Menu_deleteAllDeclared_Click(this, null);
             foreach (Declared d in result)

@@ -118,7 +118,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
+        <ScrollViewer Name="scrl_MainScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
             <DockPanel Name="dock_DeclaredContainer">
                 
             </DockPanel>
