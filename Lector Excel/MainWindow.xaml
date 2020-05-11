@@ -53,7 +53,22 @@
 
                     </MenuItem.Icon>
                 </MenuItem>
+                
                 <Separator/>
+                
+                <MenuItem Name="menu_ExportPDFDraft" Header="Exportar a PDF imprimible" IsEnabled="False" Click="Menu_ExportPDFDraft_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.13,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator/>
+                
                 <MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
             </MenuItem>
             

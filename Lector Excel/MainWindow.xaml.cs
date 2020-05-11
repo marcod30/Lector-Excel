@@ -86,6 +86,17 @@ namespace Lector_Excel
             {
                 //MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
+
+                if(Type1Fields.Count >= 5 && listaDeclarados.Count > 0)
+                {
+                    menu_Export.IsEnabled = true;
+                    menu_ExportPDFDraft.IsEnabled = true;
+                }
+                else
+                {
+                    menu_Export.IsEnabled = false;
+                    menu_ExportPDFDraft.IsEnabled = false;
+                }
             }
         }
 
@@ -366,16 +377,26 @@ namespace Lector_Excel
             if (listaDeclarados.Count > 0)
             {
                 if(Type1Fields.Count >= 5)
+                {
                     menu_Export.IsEnabled = true;
+                    menu_ExportPDFDraft.IsEnabled = true;
+                }
+                    
                 menu_deleteAllDeclared.IsEnabled = true;
                 menu_ScrollToControl.IsEnabled = true;
+                menu_ExportPDFDraft.IsEnabled = true;
             }
             else
             {
                 if(Type1Fields.Count < 5)
+                {
                     menu_Export.IsEnabled = false;
+                    menu_ExportPDFDraft.IsEnabled = false;
+                }
+
                 menu_deleteAllDeclared.IsEnabled = false;
                 menu_ScrollToControl.IsEnabled = false;
+                menu_ExportPDFDraft.IsEnabled = false;
             }
                 
         }
@@ -409,6 +430,35 @@ namespace Lector_Excel
             if (scrollToDialog.DialogResult == true)
             {
                 listaDeclarados[scrollToDialog.returnValue - 1].BringIntoView();
+            }
+        }
+
+        //Handles PDF Export
+        private void Menu_ExportPDFDraft_Click(object sender, RoutedEventArgs e)
+        {
+            if(listaDeclarados.Count > 6)
+            {
+                MessageBoxResult msg = MessageBox.Show(string.Format("La exportación a PDF solo está disponible para 6 o menos registros de declarados. Actualmente hay {0}. ¿Desea continuar y exportar solo los 6 primeros?", listaDeclarados.Count), "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if(msg != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+            }
+            
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Documentos PDF (*.pdf)|*.pdf";
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (sfd.ShowDialog() == true)
+            {
+                PDFManager pdfManager = new PDFManager(sfd.FileName);
+                List<Declared> temp = new List<Declared>();
+                foreach (DeclaredFormControl dfc in listaDeclarados)
+                {
+                    temp.Add(dfc.declared);
+                }
+
+                pdfManager.ExportToPDFDraft(this.Type1Fields, temp);
             }
         }
     }
