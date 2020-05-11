@@ -9,7 +9,7 @@
 	<DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
-                <MenuItem Name="menu_Import" Header="Abrir archivo BOE" Click="Menu_Import_Click"> <!-- Añadir evento de CLICK!!-->
+                <MenuItem Name="menu_Import" Header="Abrir archivo BOE" Click="Menu_Import_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -105,8 +105,42 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Herramientas">
+                <MenuItem Name="menu_ScrollToControl" Header="Desplazarse a declarado..." Click="Menu_ScrollToControl_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.39,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_ScrollToTop" Header="Desplazarse hasta arriba" Click="Menu_ScrollToTop_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.749,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_ScrollToBottom" Header="Desplazarse hasta abajo" Click="Menu_ScrollToBottom_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,0.41,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Acerca de">
-                <MenuItem Name="menu_About" Header="Lector Excel"> <!-- TODO: Rehabilitar Click!! -->
+                <MenuItem Name="menu_About" Header="347 Reader" Click="Menu_About_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>

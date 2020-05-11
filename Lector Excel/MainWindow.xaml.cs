@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Reader_347;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -297,9 +298,7 @@ namespace Lector_Excel
         //Handles showing about info
         private void Menu_About_Click(object sender, RoutedEventArgs e)
         {
-            AboutWindow aboutWindow = new AboutWindow();
-            aboutWindow.Owner = this;
-            aboutWindow.ShowDialog();
+            Process.Start("https://github.com/marcod30/Lector-Excel");
         }
 
         //When window is completely loaded, execute this
@@ -369,12 +368,14 @@ namespace Lector_Excel
                 if(Type1Fields.Count >= 5)
                     menu_Export.IsEnabled = true;
                 menu_deleteAllDeclared.IsEnabled = true;
+                menu_ScrollToControl.IsEnabled = true;
             }
             else
             {
                 if(Type1Fields.Count < 5)
                     menu_Export.IsEnabled = false;
                 menu_deleteAllDeclared.IsEnabled = false;
+                menu_ScrollToControl.IsEnabled = false;
             }
                 
         }
@@ -383,6 +384,32 @@ namespace Lector_Excel
         private void Menu_GoToAEAT_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://www12.agenciatributaria.gob.es/wlpl/OVCT-CXEW/SelectorAcceso?ref=%2Fwlpl%2FPAIN-M347%2FE2019%2Findex.zul&aut=CP");
+        }
+
+        //Scroll to top
+        private void Menu_ScrollToTop_Click(object sender, RoutedEventArgs e)
+        {
+            scrl_MainScrollViewer.ScrollToTop();
+        }
+
+        //Scroll to bottom
+        private void Menu_ScrollToBottom_Click(object sender, RoutedEventArgs e)
+        {
+            scrl_MainScrollViewer.ScrollToBottom();
+        }
+
+        //Scroll to selected declared
+        private void Menu_ScrollToControl_Click(object sender, RoutedEventArgs e)
+        {
+            ScrollToDialog scrollToDialog = new ScrollToDialog();
+            scrollToDialog.Owner = this;
+
+            scrollToDialog.maxValue = this.listaDeclarados.Count;
+            scrollToDialog.ShowDialog();
+            if (scrollToDialog.DialogResult == true)
+            {
+                listaDeclarados[scrollToDialog.returnValue - 1].BringIntoView();
+            }
         }
     }
 }

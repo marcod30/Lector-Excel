@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1029D9EC-E4AD-4E09-93FA-41E84F4B4835}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Lector_Excel</RootNamespace>
-    <AssemblyName>Lector Excel</AssemblyName>
+    <RootNamespace>Reader_347</RootNamespace>
+    <AssemblyName>347Reader</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -67,6 +67,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\Extended.WPF.Toolkit.Binaries.NET.4.x\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -87,6 +90,9 @@
     </Compile>
     <Compile Include="ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScrollToDialog.xaml.cs">
+      <DependentUpon>ScrollToDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Type1Window.xaml.cs">
       <DependentUpon>Type1Window.xaml</DependentUpon>
@@ -117,6 +123,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScrollToDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
