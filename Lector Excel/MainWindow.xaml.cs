@@ -384,7 +384,6 @@ namespace Lector_Excel
                     
                 menu_deleteAllDeclared.IsEnabled = true;
                 menu_ScrollToControl.IsEnabled = true;
-                menu_ExportPDFDraft.IsEnabled = true;
             }
             else
             {
@@ -396,7 +395,6 @@ namespace Lector_Excel
 
                 menu_deleteAllDeclared.IsEnabled = false;
                 menu_ScrollToControl.IsEnabled = false;
-                menu_ExportPDFDraft.IsEnabled = false;
             }
                 
         }

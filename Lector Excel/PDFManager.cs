@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,7 +17,6 @@ namespace Reader_347
     public class PDFManager
     {
         string DestinationPath;
-        
         public PDFManager(string destination)
         {
             this.DestinationPath = destination;
@@ -35,7 +35,8 @@ namespace Reader_347
 
                 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
                 Debug.WriteLine("Working in " + Directory.GetCurrentDirectory());
-                File.Copy(".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar +"Resources" + Path.DirectorySeparatorChar+"Modelo347-Editable.pdf",DestinationPath,true);
+                //File.WriteAllBytes(DestinationPath, );
+                File.Copy(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resources/Modelo347-Editable.pdf"), DestinationPath,true);
 
                 PdfDocument pdf = PdfReader.Open(DestinationPath);
                 PdfAcroForm forms = pdf.AcroForm;

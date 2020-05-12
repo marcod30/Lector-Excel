@@ -59,5 +59,15 @@ namespace Reader_347.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        internal static byte[] Modelo347_Editable {
+            get {
+                object obj = ResourceManager.GetObject("Modelo347_Editable", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
