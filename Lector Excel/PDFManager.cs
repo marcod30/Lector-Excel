@@ -22,8 +22,8 @@ namespace Reader_347
             this.DestinationPath = destination;
         }
 
-        //TODO : Create this export method
-        //  * Add/remove pages as needed!
+        //Handles exporting up to 6 declareds to a pdf.
+        //  * Due to Pdfsharp limitations, 6 is currently the max amount. (Change library in the future?)
         public bool ExportToPDFDraft(List<string> type1, List<Declared> declareds)
         {
             try
@@ -68,6 +68,14 @@ namespace Reader_347
                     SetPdfTextFieldValue("untitled15", type1[0], ref forms);
                     SetPdfTextFieldValue("untitled16", "1", ref forms);
                     SetPdfTextFieldValue("untitled17", declareds.Count <= 3 ? "1" : "2", ref forms);
+
+                    if(declareds.Count > 3)
+                    {
+                        SetPdfTextFieldValue("untitled135", type1[1], ref forms);
+                        SetPdfTextFieldValue("untitled136", type1[0], ref forms);
+                        SetPdfTextFieldValue("untitled137", "2", ref forms);
+                        SetPdfTextFieldValue("untitled138", "2", ref forms);
+                    }
                 }
 
                 //Set registry type 2 fields
@@ -411,7 +419,7 @@ namespace Reader_347
         hasta untitled 133
     Field [untitled134] = (importe operaciones TOTAL) as PdfSharp.Pdf.AcroForms.PdfTextField
 
-    PARTE COPIA DE LOS DECLARADOS (QUE ORDEN???)
+    DECLARADO 1 (PAG 2)
     [untitled43 hasta untitled67]
 
     Field [untitled135] = (comienza copia) as PdfSharp.Pdf.AcroForms.PdfTextField
