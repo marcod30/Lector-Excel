@@ -17,6 +17,13 @@ using Xceed.Wpf.Toolkit;
 
 namespace Reader_347
 {
+    public class ScrollEventArgs : EventArgs
+    {
+        public int Position;
+    }
+
+    public delegate void ScrollDialogDelegate(object sender, ScrollEventArgs e);
+
     /// <summary>
     /// Lógica de interacción para ScrollToDialog.xaml
     /// </summary>
@@ -27,40 +34,32 @@ namespace Reader_347
 
         const string NUMERICAL_REGEX = @"\d?";
 
+        public event ScrollDialogDelegate scrollDelegate;
+
         public ScrollToDialog()
         {
             InitializeComponent();
         }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             nud_MainNumericUpDown.Maximum = maxValue;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+
+        private void Nud_MainNumericUpDown_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Value_IsValid();
             returnValue = (int)nud_MainNumericUpDown.Value;
-            this.DialogResult = true;
+
+            ScrollEventArgs scrollEventArgs = new ScrollEventArgs();
+            scrollEventArgs.Position = returnValue;
+            OnPositionChanged(scrollEventArgs);
         }
 
-        private void Value_IsValid()
+        private void OnPositionChanged(ScrollEventArgs e)
         {
-            if(!Regex.IsMatch(nud_MainNumericUpDown.Value.ToString(), NUMERICAL_REGEX))
-            {
-                nud_MainNumericUpDown.Value = 1;
-                return;
-            }
-            if (nud_MainNumericUpDown.Value > maxValue)
-            {
-                nud_MainNumericUpDown.Value = maxValue;
-                return;
-            }
-            if (nud_MainNumericUpDown.Value < 1)
-            {
-                nud_MainNumericUpDown.Value = 1;
-                return;
-            }
+            scrollDelegate?.Invoke(this, e);
         }
     }
 }

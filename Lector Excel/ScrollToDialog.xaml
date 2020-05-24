@@ -6,9 +6,9 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Reader_347"
         mc:Ignorable="d"
-        Title="ScrollToDialog" Height="150" Width="300" ResizeMode="NoResize" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Desplazarse a declarado" Height="150" Width="300" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Canvas>
         <Label Canvas.Left="15" Canvas.Top="50"> Ir al declarado:</Label>
-        <xctk:IntegerUpDown Name="nud_MainNumericUpDown" Canvas.Left="110" Canvas.Top="50" Height="25" Width="100" Value="1" Minimum="1"/>
+        <xctk:IntegerUpDown Name="nud_MainNumericUpDown" Canvas.Left="110" Canvas.Top="50" Height="25" Width="100" Value="1" Minimum="1" ValueChanged="Nud_MainNumericUpDown_ValueChanged"/>
     </Canvas>
 </Window>
