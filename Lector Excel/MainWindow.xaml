@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize">
+        Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize" Loaded="Window_Loaded">
 	<DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
@@ -32,7 +32,7 @@
                 
                 <Separator/>
 
-                <MenuItem Name="menu_OpenFile" Header="Importar desde Excel" Click="BtnOpenFile_Click">
+                <MenuItem Name="menu_OpenFile" Header="Importar datos desde Excel" Click="BtnOpenFile_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -73,7 +73,7 @@
             </MenuItem>
             
             <MenuItem Header="Modelo 347">
-                <MenuItem Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click">
+                <MenuItem Name="menu_addNewDeclared" Header="Añadir registro de declarado" Click="Menu_addNewDeclared_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -83,7 +83,7 @@
 
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Name="menu_deleteAllDeclared" Header="Eliminar todos los declarados" IsEnabled="False" Click="Menu_deleteAllDeclared_Click">
+                <MenuItem Name="menu_deleteAllDeclared" Header="Eliminar todos los registros" IsEnabled="False" Click="Menu_deleteAllDeclared_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -132,7 +132,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Name="menu_ScrollToTop" Header="Desplazarse hasta arriba" Click="Menu_ScrollToTop_Click">
+                <MenuItem Name="menu_ScrollToTop" Header="Desplazarse al primer registro" Click="Menu_ScrollToTop_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -143,7 +143,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Name="menu_ScrollToBottom" Header="Desplazarse hasta abajo" Click="Menu_ScrollToBottom_Click">
+                <MenuItem Name="menu_ScrollToBottom" Header="Desplazarse al último registro" Click="Menu_ScrollToBottom_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -155,7 +155,19 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Acerca de">
-                <MenuItem Name="menu_About" Header="347 Reader" Click="Menu_About_Click">
+                
+                <MenuItem Name="menu_Updates" Header="Buscar actualizaciones" Click="Menu_Updates_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.23,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Name="menu_About" Header="Acerca de 347 Reader" Click="Menu_About_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>

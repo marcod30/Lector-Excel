@@ -8,11 +8,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Lector_Excel
 {
+    
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
@@ -24,7 +23,7 @@ namespace Lector_Excel
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
         ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
-        const int DECLARED_AMOUNT_LIMIT = 500;
+        const int DECLARED_AMOUNT_LIMIT = 1000;
 
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -52,6 +51,7 @@ namespace Lector_Excel
                 backgroundWorker.RunWorkerAsync(argument:"excelImport");
 
                 exportProgressBar = new ProgressWindow(false, "Importando desde Excel...");
+                exportProgressBar.Owner = this;
                 exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 exportProgressBar.ShowDialog();
             }
@@ -77,8 +77,12 @@ namespace Lector_Excel
         //Handles data filling of Type 1
         private void Menu_FillType1_Click(object sender, RoutedEventArgs e)
         {
-            Type1Window type1Window = new Type1Window();
-            type1Window.Owner = this;
+            Type1Window type1Window = new Type1Window
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
+
             if (Type1Fields != null && Type1Fields.Count > 0)
                 type1Window.Lista = Type1Fields;
             type1Window.ShowDialog();
@@ -105,14 +109,26 @@ namespace Lector_Excel
         {
             if (Type1Fields.Count < 5)
             {
-                MessageBox.Show("Rellene primero los datos del registro de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Rellene la información esencial del registro de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
                 return;
             }
-
-            MessageBoxResult msg = MessageBox.Show("Se van a exportar los datos. ¿Continuar?","ATENCIÓN",MessageBoxButton.YesNo,MessageBoxImage.Question);
-            if (msg != MessageBoxResult.Yes)
+            bool containsErrors = false;
+            foreach(DeclaredFormControl dfc in listaDeclarados)
             {
-                return;
+                
+                if (!dfc.IsAllDataValid())
+                {
+                    containsErrors = true;
+                    break;
+                }
+            }
+            if (containsErrors)
+            {
+                MessageBoxResult msg = MessageBox.Show("Hay errores en los campos de los declarados. Los campos con errores se exportarán como campos en blanco. ¿Continuar?", "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (msg != MessageBoxResult.Yes)
+                {
+                    return;
+                } 
             }
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Archivos 347 (*.347)|*.347|Ficheros de texto (*.txt)|*txt";
@@ -124,6 +140,7 @@ namespace Lector_Excel
                 backgroundWorker.RunWorkerAsync(argument:"exportAll");
 
                 exportProgressBar = new ProgressWindow(false, "Exportando...");
+                exportProgressBar.Owner = this;
                 exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 exportProgressBar.ShowDialog();
             }
@@ -173,9 +190,11 @@ namespace Lector_Excel
         // Handles opening the Import Settings Window
         private void Menu_ImportSettings_Click(object sender, RoutedEventArgs e)
         {
-            ImportSettings importSettings = new ImportSettings();
-            importSettings.Owner = this;
-
+            ImportSettings importSettings = new ImportSettings
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen
+            };
             if (this.posiciones != null && this.posiciones.Count > 0)
                 importSettings.positions = this.posiciones;
 
@@ -315,7 +334,7 @@ namespace Lector_Excel
         //When window is completely loaded, execute this
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            return;
+            Menu_addNewDeclared_Click(sender, e);
         }
 
         //Handles adding declared forms
@@ -361,6 +380,11 @@ namespace Lector_Excel
         //Handles deleting all declareds
         private void Menu_deleteAllDeclared_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCiÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (msg == MessageBoxResult.No)
+                return;
+
             if(listaDeclarados.Count > 0)
             {
                 foreach(DeclaredFormControl dfc in listaDeclarados)
@@ -371,7 +395,7 @@ namespace Lector_Excel
             }
         }
 
-        //Enable or disable export based on declared amount (fires automatically)
+        //Enable or disable buttons based on declared amount (fires automatically)
         public void DeclaredListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (listaDeclarados.Count > 0)
@@ -424,11 +448,21 @@ namespace Lector_Excel
             scrollToDialog.Owner = this;
 
             scrollToDialog.maxValue = this.listaDeclarados.Count;
-            scrollToDialog.ShowDialog();
+            scrollToDialog.Show();
+            scrollToDialog.scrollDelegate += AutoScroll;
+
+            /*
             if (scrollToDialog.DialogResult == true)
             {
                 listaDeclarados[scrollToDialog.returnValue - 1].BringIntoView();
             }
+            */
+        }
+
+        //Automatically scroll to declared when scrollDialog notifies
+        private void AutoScroll(object sender, ScrollEventArgs e)
+        {
+            listaDeclarados[e.Position - 1].BringIntoView();
         }
 
         //Handles PDF Export
@@ -457,6 +491,25 @@ namespace Lector_Excel
                 }
 
                 pdfManager.ExportToPDFDraft(this.Type1Fields, temp);
+            }
+        }
+
+        //Check Updates and see how everything blows up
+        private void Menu_Updates_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateChecker updateChecker = new UpdateChecker();
+
+            ProgressWindow pw = new ProgressWindow(true, "Buscando actualizaciones...")
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+            pw.Show();
+
+            bool end = updateChecker.GetReleases();
+            if (end || !end)
+            {
+                pw.Close();
             }
         }
     }
