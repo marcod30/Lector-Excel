@@ -38,6 +38,8 @@ namespace Lector_Excel
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Export_Progressbar.IsIndeterminate = isIndeterminate;
+            if (isIndeterminate)
+                txt_percentage.Visibility = Visibility.Hidden;
             this.Title = title;
             var hwnd = new WindowInteropHelper(this).Handle;
             SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);

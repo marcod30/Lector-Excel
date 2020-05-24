@@ -11,6 +11,6 @@
         <ProgressBar Name="Export_Progressbar" Minimum="0" Maximum="100" IsIndeterminate="False" Margin="2">
             
         </ProgressBar>
-        <TextBlock Text="{Binding ElementName=Export_Progressbar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Name="txt_percentage" Text="{Binding ElementName=Export_Progressbar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Window>
