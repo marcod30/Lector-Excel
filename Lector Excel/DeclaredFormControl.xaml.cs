@@ -24,6 +24,7 @@ namespace Lector_Excel
     {
         public event EventHandler DeleteButtonClick; //Delegate for deleting
         public Declared declared;
+
         //Regexps
         const string DNI_REGEX = @"^(\d{8})([A-Z])$";
         const string CIF_REGEX = @"^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9]|[A-J])$";
@@ -268,6 +269,22 @@ namespace Lector_Excel
             {
                 thisTextBox.ClearValue(TextBox.BorderBrushProperty);
             }
+        }
+
+        public bool IsAllDataValid()
+        {
+            foreach (Grid g in groupStack.Children.OfType<Grid>())
+            {
+                foreach(TextBox t in g.Children.OfType<TextBox>())
+                {
+                    if (t.BorderBrush == Brushes.Red)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
