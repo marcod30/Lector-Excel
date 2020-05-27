@@ -143,18 +143,25 @@
             <Label Canvas.Left="290">
                 Sust.
             </Label>
+            
+            <Label Canvas.Left="340">
+                Ninguno
+            </Label>
         </Canvas>
         <Canvas DockPanel.Dock="Top" Height="30">
             <TextBox Canvas.Left="15" Name="txt_DeclarationID" DockPanel.Dock="Top" MaxLength="13" Height="20" Width="120" HorizontalAlignment="Left">
 
             </TextBox>
-            <TextBox Canvas.Left="245" Name="txt_ComplementaryDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left"> <!-- Cambiar por checkbox?-->
+            <RadioButton Canvas.Left="245" Name="rad_ComplementaryDec" DockPanel.Dock="Top" GroupName="DeclarationType" Height="20" Width="20" HorizontalAlignment="Left">
 
-            </TextBox>
-            
-            <TextBox Canvas.Left="295" Name="txt_SustitutiveDec" DockPanel.Dock="Top" MaxLength="1" Height="20" Width="20" HorizontalAlignment="Left"> <!-- Cambiar por checkbox?-->
+            </RadioButton>
 
-            </TextBox>
+            <RadioButton Canvas.Left="295" Name="rad_SustitutiveDec" DockPanel.Dock="Top" GroupName="DeclarationType" Height="20" Width="20" HorizontalAlignment="Left">
+
+            </RadioButton>
+            <RadioButton Canvas.Left="345" Name="rad_NoTypeDec" DockPanel.Dock="Top" GroupName="DeclarationType" IsChecked="True" Height="20" Width="20" HorizontalAlignment="Left">
+
+            </RadioButton>
         </Canvas>
 
         <Label DockPanel.Dock="Top" Margin="10,0,2,2">

@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using Microsoft.Win32;
 using Reader_347;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Lector_Excel
     {
         private ExcelManager ExcelManager;
         private ExportManager ExportManager;
+        private ChartWindow ChartWindow;
 
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
@@ -251,6 +254,7 @@ namespace Lector_Excel
 
                     dfc.mainGroupBox.Header = "Declarado " + (listaDeclarados.Count + 1);
                     dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+                    dfc.PropertyChanged += DeclaredChanged;
 
                     dfc.declared = d;
                     dfc.txt_DeclaredNIF.Text = (dfc.declared.declaredData["DeclaredNIF"].Length >= 9) ? dfc.declared.declaredData["DeclaredNIF"].Substring(0, 9) : dfc.declared.declaredData["DeclaredNIF"];
@@ -380,7 +384,11 @@ namespace Lector_Excel
         //Handles deleting all declareds
         private void Menu_deleteAllDeclared_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCiÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult msg;
+            if (sender is MenuItem)
+                msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCiÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            else
+                msg = MessageBoxResult.Yes;
 
             if (msg == MessageBoxResult.No)
                 return;
@@ -420,13 +428,36 @@ namespace Lector_Excel
                 menu_deleteAllDeclared.IsEnabled = false;
                 menu_ScrollToControl.IsEnabled = false;
             }
+            
+            //Set PropertyChanged method for every item
+            foreach(DeclaredFormControl dfc in listaDeclarados)
+            {
+                dfc.PropertyChanged -= DeclaredChanged;
+                dfc.PropertyChanged += DeclaredChanged;
+            }
+        }
+
+        //When a Declared property changes, trigger this
+        public void DeclaredChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Split('_')[0].Equals("txt"))
+            {
+                //A textbox changed
+                Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
                 
+            }
+
+            if (e.PropertyName.Split('_')[0].Equals("chk"))
+            {
+                //A checkbox changed
+                Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
+            }
         }
 
         //Launch AEAT WebPage
         private void Menu_GoToAEAT_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://www12.agenciatributaria.gob.es/wlpl/OVCT-CXEW/SelectorAcceso?ref=%2Fwlpl%2FPAIN-M347%2FE2019%2Findex.zul&aut=CP");
+            Process.Start("https://www.agenciatributaria.gob.es/AEAT.sede/tramitacion/GI27.shtml");
         }
 
         //Scroll to top
@@ -449,7 +480,7 @@ namespace Lector_Excel
 
             scrollToDialog.maxValue = this.listaDeclarados.Count;
             scrollToDialog.Show();
-            scrollToDialog.scrollDelegate += AutoScroll;
+            scrollToDialog.ScrollDelegate += AutoScroll;
 
             /*
             if (scrollToDialog.DialogResult == true)
@@ -510,6 +541,70 @@ namespace Lector_Excel
             if (end || !end)
             {
                 pw.Close();
+            }
+        }
+
+        private void Menu_ChartVisor_Click(object sender, RoutedEventArgs e)
+        {
+            //Only instantiate one window at a time
+            if(this.ChartWindow == null || !ChartWindow.IsVisible)
+            {
+                ChartWindow = new ChartWindow();
+                ChartWindow.ChartDelegate += UpdateChartInfo;
+                ChartWindow.Show();
+            }
+        }
+
+        //Gets chart request and sends back data to display
+        private void UpdateChartInfo(object sender, ChartEventArgs e)
+        {
+            if(ChartWindow != null && ChartWindow.IsVisible)
+            {
+                switch (e.chartType)
+                {
+                    case "VerticalBar_RegistryPerOpKey":
+                        Debug.WriteLine("New Vertical chart!");
+                        ChartValues<int> values = new ChartValues<int>{0,0,0,0,0,0,0};
+                        foreach (DeclaredFormControl dfc in listaDeclarados)
+                        {
+                            switch (dfc.declared.declaredData["OpKey"])
+                            {
+                                case "A":
+                                    values[0] += 1;
+                                    break;
+                                case "B":
+                                    values[1] += 1;
+                                    break;
+                                case "C":
+                                    values[2] += 1;
+                                    break;
+                                case "D":
+                                    values[3] += 1;
+                                    break;
+                                case "E":
+                                    values[4] += 1;
+                                    break;
+                                case "F":
+                                    values[5] += 1;
+                                    break;
+                                case "G":
+                                    values[6] += 1;
+                                    break;
+                            }
+                        }
+                        SeriesCollection series = new SeriesCollection
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Registros",
+                                Values = values
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    default:
+                        return;
+                }
             }
         }
     }

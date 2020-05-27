@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize" Loaded="Window_Loaded">
+        Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize" Loaded="Window_Loaded"> <!-- TODO: add closing event handler for closing child windows-->
 	<DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
@@ -148,6 +148,19 @@
                         <Rectangle>
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,0.41,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator/>
+
+                <MenuItem Name="menu_ChartVisor" Header="Abrir visor de gráficas...." Click="Menu_ChartVisor_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,0.19,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 

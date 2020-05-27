@@ -52,8 +52,24 @@ namespace Lector_Excel
             Lista.Add(txt_Phone.Text);
             Lista.Add(txt_RelationName.Text.ToUpper());
             Lista.Add(txt_DeclarationID.Text);
-            Lista.Add(txt_ComplementaryDec.Text.ToUpper());
-            Lista.Add(txt_SustitutiveDec.Text.ToUpper());
+            if (rad_ComplementaryDec.IsChecked == true)
+            {
+                Lista.Add("C");
+            }
+            else
+            {
+                Lista.Add("");
+            }
+            if (rad_SustitutiveDec.IsChecked == true)
+            {
+                Lista.Add("S");
+            }
+            else
+            {
+                Lista.Add("");
+            }
+            //Lista.Add(txt_ComplementaryDec.Text.ToUpper());
+            //Lista.Add(txt_SustitutiveDec.Text.ToUpper());
             Lista.Add(txt_PrevDeclarationID.Text);
             Lista.Add(txt_Entities.Text);
             Lista.Add(txt_TotalMoney.Text);
@@ -101,8 +117,26 @@ namespace Lector_Excel
                 txt_Phone.Text = Lista[4];
                 txt_RelationName.Text = Lista[5];
                 txt_DeclarationID.Text = Lista[6];
-                txt_ComplementaryDec.Text = Lista[7];
-                txt_SustitutiveDec.Text = Lista[8];
+                if (Lista[7].Equals("C"))
+                {
+                    rad_ComplementaryDec.IsChecked = true;
+                }
+                else
+                {
+                    rad_ComplementaryDec.IsChecked = false;
+                }
+                if (Lista[8].Equals("S"))
+                {
+                    rad_SustitutiveDec.IsChecked = true;
+                }
+                else
+                {
+                    rad_SustitutiveDec.IsChecked = false;
+                }
+                if (!Lista[7].Equals("C") && !Lista[8].Equals("S"))
+                {
+                    rad_NoTypeDec.IsChecked = true;
+                }
                 txt_PrevDeclarationID.Text = Lista[9];
                 txt_Entities.Text = Lista[10];
                 txt_TotalMoney.Text = Lista[11];
@@ -143,8 +177,26 @@ namespace Lector_Excel
                 txt_Phone.Text = Lista[4];
                 txt_RelationName.Text = Lista[5];
                 txt_DeclarationID.Text = Lista[6];
-                txt_ComplementaryDec.Text = Lista[7];
-                txt_SustitutiveDec.Text = Lista[8];
+                if (Lista[7].Equals("C"))
+                {
+                    rad_ComplementaryDec.IsChecked = true;
+                }
+                else
+                {
+                    rad_ComplementaryDec.IsChecked = false;
+                }
+                if (Lista[8].Equals("S"))
+                {
+                    rad_SustitutiveDec.IsChecked = true;
+                }
+                else
+                {
+                    rad_SustitutiveDec.IsChecked = false;
+                }
+                if (!Lista[7].Equals("C") && !Lista[8].Equals("S"))
+                {
+                    rad_NoTypeDec.IsChecked = true;
+                }
                 txt_PrevDeclarationID.Text = Lista[9];
                 txt_Entities.Text = Lista[10];
                 txt_TotalMoney.Text = Lista[11];
