@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 
 using LiveCharts;
 using LiveCharts.Wpf;
@@ -32,7 +34,8 @@ namespace Reader_347
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
-
+        public Dictionary<string,double> MapValues { get; set; }
+        public string ChartType { get; set; }
         public event ChartSetterDelegate ChartDelegate;
 
         public ChartWindow()
@@ -52,6 +55,12 @@ namespace Reader_347
             Labels = new[] { "A", "B", "C", "D" , "E"};
             Formatter = value => value.ToString("N");
             //---
+            MapValues = new Dictionary<string, double>();
+            Random random = new Random();
+            for (int i = 1; i <= 52; i++)
+            {
+                MapValues[i.ToString().PadLeft(2, '0')] = random.NextDouble();
+            }
 
             DataContext = this;
         }
@@ -71,7 +80,7 @@ namespace Reader_347
             {
                 i++;
             }
-            if(dock_Main.Children[i-1] is Chart)
+            if(dock_Main.Children[i-1] is  Chart || dock_Main.Children[i - 1] is GeoMap)
                 dock_Main.Children.RemoveAt(i-1);
 
             //Initialize new Series Collection
@@ -128,7 +137,7 @@ namespace Reader_347
             {
                 i++;
             }
-            if (dock_Main.Children[i - 1] is Chart)
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
                 dock_Main.Children.RemoveAt(i - 1);
 
             //Initialize new chart
@@ -162,7 +171,260 @@ namespace Reader_347
             //Set dock and add to DockPanel
             DockPanel.SetDock(cartesianChart, Dock.Bottom);
             dock_Main.Children.Add(cartesianChart);
+            this.ChartType = "VerticalBar_RegistryPerOpKey";
+        }
+
+        //Request a CartesianChart, Vertical Bars, showing money of buy/sell operation per trimester
+        private void Menu_VertBar_BuySellPerTrimester_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "VerticalBar_BuySellPerTrimester" };
+            OnChartSelection(chartEventArgs);
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            //Initialize new chart
+            CartesianChart cartesianChart = new CartesianChart
+            {
+                AxisX = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Trimestre",
+                    }
+                },
+
+                AxisY = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Importe"
+                    }
+                }
+            };
+
+            Labels = new[] { "Trimestre 1", "Trimestre 2", "Trimestre 3", "Trimestre 4" };
+            Formatter = value => value.ToString("N");
+
+            //Set all necessary bindings
+            cartesianChart.AxisX[0].SetBinding(Axis.LabelsProperty, new Binding { Source = this.Labels });
+            cartesianChart.AxisY[0].SetBinding(Axis.LabelFormatterProperty, new Binding { Source = this.Formatter });
+            cartesianChart.SetBinding(CartesianChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
+
+            //Set dock and add to DockPanel
+            DockPanel.SetDock(cartesianChart, Dock.Bottom);
+            dock_Main.Children.Add(cartesianChart);
+            this.ChartType = "VerticalBar_BuySellPerTrimester";
+        }
+
+        //Request a CartesianChart, Horizontal Bars, comparing Amount of registries per Op. Key
+        private void HorizBar_RegPerOpKey_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "HorizontalBar_RegistryPerOpKey" };
+            OnChartSelection(chartEventArgs);
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            //Initialize new chart
+            CartesianChart cartesianChart = new CartesianChart
+            {
+                AxisX = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Cantidad de registros",
+                    }
+                },
+
+                AxisY = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Clave de operación"
+                    }
+                }
+            };
+
+            Labels = new[] { "A", "B", "C", "D", "E", "F", "G" };
+            Formatter = value => value.ToString("N");
+
+            //Set all necessary bindings
+            cartesianChart.AxisX[0].SetBinding(Axis.LabelFormatterProperty, new Binding { Source = this.Formatter });
+            cartesianChart.AxisY[0].SetBinding(Axis.LabelsProperty, new Binding { Source = this.Labels });
+            cartesianChart.SetBinding(CartesianChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
+
+            //Set dock and add to DockPanel
+            DockPanel.SetDock(cartesianChart, Dock.Bottom);
+            dock_Main.Children.Add(cartesianChart);
+            this.ChartType = "HorizontalBar_RegistryPerOpKey";
+        }
+
+        //Request a CartesianChart, Horizontal Bars, showing money of buy/sell operation per trimester
+        private void HorizBar_BuySellPerTrimester_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "HorizontalBar_BuySellPerTrimester" };
+            OnChartSelection(chartEventArgs);
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            //Initialize new chart
+            CartesianChart cartesianChart = new CartesianChart
+            {
+                AxisX = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Importe",
+                    }
+                },
+
+                AxisY = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Trimestre"
+                    }
+                }
+            };
+
+            Labels = new[] { "Trimestre 1", "Trimestre 2", "Trimestre 3", "Trimestre 4" };
+            Formatter = value => value.ToString("N");
+
+            //Set all necessary bindings
+            cartesianChart.AxisX[0].SetBinding(Axis.LabelFormatterProperty, new Binding { Source = this.Formatter });
+            cartesianChart.AxisY[0].SetBinding(Axis.LabelsProperty, new Binding { Source = this.Labels });
+            cartesianChart.SetBinding(CartesianChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
+
+            //Set dock and add to DockPanel
+            DockPanel.SetDock(cartesianChart, Dock.Bottom);
+            dock_Main.Children.Add(cartesianChart);
+            this.ChartType = "HorizontalBar_BuySellPerTrimester";
+        }
+
+        //Request a CartesianChart, Lines, showing money of buy/sell operation per trimester
+        private void Menu_Line_BuySellPerTrimester_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Line_BuySellPerTrimester" };
+            OnChartSelection(chartEventArgs);
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            //Initialize new chart
+            CartesianChart cartesianChart = new CartesianChart
+            {
+                AxisX = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Trimestre",
+                    }
+                },
+
+                AxisY = new AxesCollection
+                {
+                    new Axis
+                    {
+                        Title = "Importe"
+                    }
+                }
+            };
+
+            Labels = new[] { "Trimestre 1", "Trimestre 2", "Trimestre 3", "Trimestre 4" };
+            Formatter = value => value.ToString("N");
+
+            //Set all necessary bindings
+            cartesianChart.AxisX[0].SetBinding(Axis.LabelsProperty, new Binding { Source = this.Labels });
+            cartesianChart.AxisY[0].SetBinding(Axis.LabelFormatterProperty, new Binding { Source = this.Formatter });
+            cartesianChart.SetBinding(CartesianChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
+
+            //Set dock and add to DockPanel
+            DockPanel.SetDock(cartesianChart, Dock.Bottom);
+            dock_Main.Children.Add(cartesianChart);
+            this.ChartType = "Line_BuySellPerTrimester";
+        }
+
+        //Request a Geo Map, showing money of buy operations per trimester
+        private void Menu_Map_BuyTotal_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Map_BuyTotal" };
+            OnChartSelection(chartEventArgs);
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            //Initialize new chart
+            GeoMap geoMap = new GeoMap
+            {
+                Source = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources\\Spain.xml"),
+                HeatMap = MapValues,
+                Hoverable = true
+            };
             
+
+            //geoMap.SetBinding(GeoMap.HeatMapProperty, new Binding { Source = this.MapValues });
+            //Set dock and add to DockPanel
+            DockPanel.SetDock(geoMap, Dock.Bottom);
+            dock_Main.Children.Add(geoMap);
+            this.ChartType = "Map_BuyTotal";
+        }
+
+        private void Menu_Map_SellTotal_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Map_SellTotal" };
+            OnChartSelection(chartEventArgs);
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            //Initialize new chart
+            GeoMap geoMap = new GeoMap
+            {
+                Source = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources\\Spain.xml"),
+                HeatMap = MapValues,
+                Hoverable = true
+            };
+
+
+            //geoMap.SetBinding(GeoMap.HeatMapProperty, new Binding { Source = this.MapValues });
+            //Set dock and add to DockPanel
+            DockPanel.SetDock(geoMap, Dock.Bottom);
+            dock_Main.Children.Add(geoMap);
+            this.ChartType = "Map_SellTotal";
         }
     }
 }

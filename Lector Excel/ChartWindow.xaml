@@ -10,7 +10,7 @@
     <DockPanel Name="dock_Main">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Opciones">
-                <MenuItem Header="Gráfico de barras">
+                <MenuItem Header="Barras">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -19,13 +19,13 @@
                         </Rectangle>
                     </MenuItem.Icon>
                     <MenuItem Name="menu_VertBar_RegPerOpKey" Header="Registros por clave de operación" Click="Menu_VertBar_RegPerOpKey_Click">
-                        
+
                     </MenuItem>
-                    <MenuItem Header="Compras/Ventas por trimestre">
-                        
+                    <MenuItem Name="menu_VertBar_BuySellPerTrimester" Header="Compras/Ventas por trimestre" Click="Menu_VertBar_BuySellPerTrimester_Click">
+
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Gráfico de barras laterales">
+                <MenuItem Header="Barras laterales">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -33,16 +33,16 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>
-                    
-                    <MenuItem Header="Registros por clave de operación">
+
+                    <MenuItem Name="HorizBar_RegPerOpKey" Header="Registros por clave de operación" Click="HorizBar_RegPerOpKey_Click">
 
                     </MenuItem>
-                    <MenuItem Header="Compras/Ventas por trimestre">
+                    <MenuItem Name="HorizBar_BuySellPerTrimester" Header="Compras/Ventas por trimestre" Click="HorizBar_BuySellPerTrimester_Click">
 
                     </MenuItem>
 
                 </MenuItem>
-                <MenuItem Header="Gráfico de líneas">
+                <MenuItem Header="Líneas">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -50,15 +50,12 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>
-                    
-                    <MenuItem Header="Registros por clave de operación">
 
-                    </MenuItem>
-                    <MenuItem Header="Compras/Ventas por trimestre">
+                    <MenuItem Name="menu_Line_BuySellPerTrimester" Header="Compras/Ventas por trimestre" Click="Menu_Line_BuySellPerTrimester_Click">
 
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Gráfico circular">
+                <MenuItem Header="Circular">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
@@ -67,19 +64,28 @@
                         </Rectangle>
                     </MenuItem.Icon>
                     <MenuItem Header="Compras por región">
-                        
+
+                    </MenuItem>
+                    <MenuItem Header="Ventas por región">
+
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Mapa regional">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.17,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                    <MenuItem Name="menu_Map_BuyTotal" Header="Compras por región" Click="Menu_Map_BuyTotal_Click">
+
+                    </MenuItem>
+                    <MenuItem Name="menu_Map_SellTotal" Header="Ventas por región" Click="Menu_Map_SellTotal_Click">
+
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
-            <!-- Maybe add a GeoHeatMap chart? -->
         </Menu>
-        <lvc:CartesianChart Name="mainChart" Series="{Binding SeriesCollection}" DockPanel.Dock="Bottom">
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Tiempo" Labels="{Binding Labels}"></lvc:Axis>
-            </lvc:CartesianChart.AxisX>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Cantidad de penes" LabelFormatter="{Binding Formatter}"></lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-        </lvc:CartesianChart>
     </DockPanel>
 </Window>
