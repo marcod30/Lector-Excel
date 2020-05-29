@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,6 +23,7 @@ namespace Lector_Excel
         private ExcelManager ExcelManager;
         private ExportManager ExportManager;
         private ChartWindow ChartWindow;
+        private ScrollToDialog ScrollDialog;
 
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
@@ -440,11 +442,27 @@ namespace Lector_Excel
         //When a Declared property changes, trigger this
         public void DeclaredChanged(object sender, PropertyChangedEventArgs e)
         {
+            //FIXME - Remove this condition so deleting a declared also updates chart
             if (e.PropertyName.Split('_')[0].Equals("txt"))
             {
                 //A textbox changed
                 Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
-                
+                if(ChartWindow != null && ChartWindow.IsVisible)
+                {
+                    switch (ChartWindow.ChartType)
+                    {
+                        case "VerticalBar_RegistryPerOpKey":
+                        case "HorizontalBar_RegistryPerOpKey":
+                            ChartWindow.SeriesCollection[0].Values = GetRegistriesPerOpKey();
+                            break;
+                        case "VerticalBar_BuySellPerTrimester":
+                        case "HorizontalBar_BuySellPerTrimester":
+                        case "Line_BuySellPerTrimester":
+                            ChartWindow.SeriesCollection[0].Values = GetBuySellsPerTrimester(false);
+                            ChartWindow.SeriesCollection[1].Values = GetBuySellsPerTrimester(true);
+                            break;
+                    }
+                }
             }
 
             if (e.PropertyName.Split('_')[0].Equals("chk"))
@@ -475,19 +493,17 @@ namespace Lector_Excel
         //Scroll to selected declared
         private void Menu_ScrollToControl_Click(object sender, RoutedEventArgs e)
         {
-            ScrollToDialog scrollToDialog = new ScrollToDialog();
-            scrollToDialog.Owner = this;
-
-            scrollToDialog.maxValue = this.listaDeclarados.Count;
-            scrollToDialog.Show();
-            scrollToDialog.ScrollDelegate += AutoScroll;
-
-            /*
-            if (scrollToDialog.DialogResult == true)
+            if(ScrollDialog  == null || !ScrollDialog.IsVisible)
             {
-                listaDeclarados[scrollToDialog.returnValue - 1].BringIntoView();
+                ScrollDialog = new ScrollToDialog()
+                {
+                    Owner = this,
+                    maxValue = this.listaDeclarados.Count,
+                };
+
+                ScrollDialog.Show();
+                ScrollDialog.ScrollDelegate += AutoScroll;
             }
-            */
         }
 
         //Automatically scroll to declared when scrollDialog notifies
@@ -560,51 +576,254 @@ namespace Lector_Excel
         {
             if(ChartWindow != null && ChartWindow.IsVisible)
             {
+                SeriesCollection series;
                 switch (e.chartType)
                 {
+                    
                     case "VerticalBar_RegistryPerOpKey":
-                        Debug.WriteLine("New Vertical chart!");
-                        ChartValues<int> values = new ChartValues<int>{0,0,0,0,0,0,0};
-                        foreach (DeclaredFormControl dfc in listaDeclarados)
-                        {
-                            switch (dfc.declared.declaredData["OpKey"])
-                            {
-                                case "A":
-                                    values[0] += 1;
-                                    break;
-                                case "B":
-                                    values[1] += 1;
-                                    break;
-                                case "C":
-                                    values[2] += 1;
-                                    break;
-                                case "D":
-                                    values[3] += 1;
-                                    break;
-                                case "E":
-                                    values[4] += 1;
-                                    break;
-                                case "F":
-                                    values[5] += 1;
-                                    break;
-                                case "G":
-                                    values[6] += 1;
-                                    break;
-                            }
-                        }
-                        SeriesCollection series = new SeriesCollection
+                        
+                        series = new SeriesCollection
                         {
                             new ColumnSeries
                             {
                                 Title = "Registros",
-                                Values = values
+                                Values = GetRegistriesPerOpKey()
                             }
                         };
                         ChartWindow.SeriesCollection = series;
                         break;
+                    case "VerticalBar_BuySellPerTrimester":
+                        series = new SeriesCollection
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Compras",
+                                Values = GetBuySellsPerTrimester(false)
+                            },
+
+                            new ColumnSeries
+                            {
+                                Title = "Ventas",
+                                Values = GetBuySellsPerTrimester(true)
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "HorizontalBar_RegistryPerOpKey":
+
+                        series = new SeriesCollection
+                        {
+                            new RowSeries
+                            {
+                                Title = "Registros",
+                                Values = GetRegistriesPerOpKey()
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "HorizontalBar_BuySellPerTrimester":
+                        series = new SeriesCollection
+                        {
+                            new RowSeries
+                            {
+                                Title = "Compras",
+                                Values = GetBuySellsPerTrimester(false)
+                            },
+
+                            new RowSeries
+                            {
+                                Title = "Ventas",
+                                Values = GetBuySellsPerTrimester(true)
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "Line_BuySellPerTrimester":
+                        series = new SeriesCollection
+                        {
+                            new LineSeries
+                            {
+                                Title = "Compras",
+                                Values = GetBuySellsPerTrimester(false)
+                            },
+
+                            new LineSeries
+                            {
+                                Title = "Ventas",
+                                Values = GetBuySellsPerTrimester(true)
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "Map_BuyTotal":
+                        ChartWindow.MapValues = GetBuySellsPerRegion(false);
+                        break;
+                    case "Map_SellTotal":
+                        ChartWindow.MapValues = GetBuySellsPerRegion(true);
+                        break;
                     default:
                         return;
                 }
+            }
+        }
+
+        //Counts the registries with the same OpKey and returns them as ChartValues
+        private ChartValues<int> GetRegistriesPerOpKey()
+        {
+            ChartValues<int> values = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0 };
+            foreach (DeclaredFormControl dfc in listaDeclarados)
+            {
+                switch (dfc.declared.declaredData["OpKey"])
+                {
+                    case "A":
+                        values[0] += 1;
+                        break;
+                    case "B":
+                        values[1] += 1;
+                        break;
+                    case "C":
+                        values[2] += 1;
+                        break;
+                    case "D":
+                        values[3] += 1;
+                        break;
+                    case "E":
+                        values[4] += 1;
+                        break;
+                    case "F":
+                        values[5] += 1;
+                        break;
+                    case "G":
+                        values[6] += 1;
+                        break;
+                }
+                
+            }
+            foreach (int i in values)
+            {
+                if (i == 0)
+                    values.Remove(i);
+            }
+            return values;
+        }
+
+        //Adds up money per trimester depending on Op Key
+        private ChartValues<float> GetBuySellsPerTrimester(bool getSells)
+        {
+            ChartValues<float> values = new ChartValues<float> {0,0,0,0};
+            Dictionary<string, string> tempDeclaredData;
+            foreach(DeclaredFormControl dfc in listaDeclarados)
+            {
+                tempDeclaredData = dfc.declared.declaredData;
+                if (getSells)
+                {
+                    if (tempDeclaredData["OpKey"].Equals("B"))
+                    {
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"])){
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace('.',','),NumberStyles.Float,CultureInfo.CurrentCulture);
+                            values[0] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[1] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[2] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[3] += temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    {
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[0] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[1] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[2] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            values[3] += temp;
+                        }
+                    }
+                }
+            }
+
+            return values;
+        }
+
+        //Gets anual money per province and stores in a dictionary
+        private Dictionary<string,double> GetBuySellsPerRegion(bool getSells)
+        {
+            Dictionary<string, double> data = new Dictionary<string, double>();
+            Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
+
+            for(int i = 1; i <= 52; i++)
+            {
+                data.Add(i.ToString().PadLeft(2, '0'), 0);
+            }
+
+            foreach (DeclaredFormControl declaredFormControl in listaDeclarados)
+            {
+                tempDeclaredData = declaredFormControl.declared.declaredData;
+
+                if (getSells)
+                {
+                    if (tempDeclaredData["OpKey"].Equals("B"))
+                    {
+                        if(!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]))
+                            data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.',','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                    }
+                }
+                else
+                {
+                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    {
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]))
+                            data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        //Converts a Province code to its correspondent province name
+        private string ProvinceCodeToName(string provinceCode)
+        {
+            return "";
+        }
+
+        //On Main Window Closing, close every child window that's still open
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if(ScrollDialog != null && ScrollDialog.IsVisible)
+            {
+                ScrollDialog.Close();
+            }
+
+            if(ChartWindow != null && ChartWindow.IsVisible)
+            {
+                ChartWindow.Close();
             }
         }
     }
