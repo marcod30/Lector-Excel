@@ -791,7 +791,8 @@ namespace Lector_Excel
                     if (tempDeclaredData["OpKey"].Equals("B"))
                     {
                         if(!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]))
-                            data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.',','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            if(data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.',','), NumberStyles.Float, CultureInfo.CurrentCulture);
                     }
                 }
                 else
@@ -799,7 +800,8 @@ namespace Lector_Excel
                     if (tempDeclaredData["OpKey"].Equals("A"))
                     {
                         if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]))
-                            data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            if(data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
                     }
                 }
             }
