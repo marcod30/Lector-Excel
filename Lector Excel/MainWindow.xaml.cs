@@ -461,6 +461,12 @@ namespace Lector_Excel
                             ChartWindow.SeriesCollection[0].Values = GetBuySellsPerTrimester(false);
                             ChartWindow.SeriesCollection[1].Values = GetBuySellsPerTrimester(true);
                             break;
+                        case "Map_BuyTotal":
+                            ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(false);
+                            break;
+                        case "Map_SellTotal":
+                            ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(true);
+                            break;
                     }
                 }
             }
@@ -488,6 +494,20 @@ namespace Lector_Excel
         private void Menu_ScrollToBottom_Click(object sender, RoutedEventArgs e)
         {
             scrl_MainScrollViewer.ScrollToBottom();
+        }
+
+        //On Main Window Closing, close every child window that's still open
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (ScrollDialog != null && ScrollDialog.IsVisible)
+            {
+                ScrollDialog.Close();
+            }
+
+            if (ChartWindow != null && ChartWindow.IsVisible)
+            {
+                ChartWindow.Close();
+            }
         }
 
         //Scroll to selected declared
@@ -720,22 +740,22 @@ namespace Lector_Excel
                     if (tempDeclaredData["OpKey"].Equals("B"))
                     {
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"])){
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace('.',','),NumberStyles.Float,CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',','.'),NumberStyles.Float,CultureInfo.InvariantCulture);
                             values[0] += temp;
                         }
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[1] += temp;
                         }
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[2] += temp;
                         }
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[3] += temp;
                         }
                     }
@@ -746,22 +766,22 @@ namespace Lector_Excel
                     {
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[0] += temp;
                         }
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[1] += temp;
                         }
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[2] += temp;
                         }
                         if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             values[3] += temp;
                         }
                     }
@@ -777,11 +797,6 @@ namespace Lector_Excel
             Dictionary<string, double> data = new Dictionary<string, double>();
             Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
 
-            for(int i = 1; i <= 52; i++)
-            {
-                data.Add(i.ToString().PadLeft(2, '0'), 0);
-            }
-
             foreach (DeclaredFormControl declaredFormControl in listaDeclarados)
             {
                 tempDeclaredData = declaredFormControl.declared.declaredData;
@@ -790,43 +805,55 @@ namespace Lector_Excel
                 {
                     if (tempDeclaredData["OpKey"].Equals("B"))
                     {
-                        if(!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]))
-                            if(data.ContainsKey(tempDeclaredData["ProvinceCode"]))
-                                data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.',','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                        double amount;
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        {
+                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            amount = 0;
+                        }
+
+                        if(amount != 0)
+                        {
+                            if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                data[tempDeclaredData["ProvinceCode"]] += amount;
+                            else
+                            {
+                                data.Add(tempDeclaredData["ProvinceCode"], amount);
+                            }
+                        }
                     }
                 }
                 else
                 {
                     if (tempDeclaredData["OpKey"].Equals("A"))
                     {
-                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]))
-                            if(data.ContainsKey(tempDeclaredData["ProvinceCode"]))
-                                data[tempDeclaredData["ProvinceCode"]] += double.Parse(tempDeclaredData["AnualMoney"].Replace('.', ','), NumberStyles.Float, CultureInfo.CurrentCulture);
+                        double amount;
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        {
+                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            amount = 0;
+                        }
+
+                        if (amount != 0)
+                        {
+                            if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                data[tempDeclaredData["ProvinceCode"]] += amount;
+                            else
+                            {
+                                data.Add(tempDeclaredData["ProvinceCode"], amount);
+                            }
+                        }
                     }
                 }
             }
 
             return data;
-        }
-
-        //Converts a Province code to its correspondent province name
-        private string ProvinceCodeToName(string provinceCode)
-        {
-            return "";
-        }
-
-        //On Main Window Closing, close every child window that's still open
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            if(ScrollDialog != null && ScrollDialog.IsVisible)
-            {
-                ScrollDialog.Close();
-            }
-
-            if(ChartWindow != null && ChartWindow.IsVisible)
-            {
-                ChartWindow.Close();
-            }
         }
     }
 }

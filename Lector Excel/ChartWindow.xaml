@@ -87,5 +87,8 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
+        <Label Name="lbl_ChartNotSelected" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False">
+            Seleccione una gráfica del menú superior
+        </Label>
     </DockPanel>
 </Window>

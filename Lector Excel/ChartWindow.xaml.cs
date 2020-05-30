@@ -36,38 +36,19 @@ namespace Reader_347
         public Func<double, string> Formatter { get; set; }
         public Dictionary<string,double> MapValues { get; set; }
         public string ChartType { get; set; }
+        public GeoMap GeoMap { get; set; }
         public event ChartSetterDelegate ChartDelegate;
 
         public ChartWindow()
         {
             InitializeComponent();
-
-            //Remove this placeholder code!!
-            SeriesCollection = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title = "A la mierda",
-                    Values = new ChartValues<int> {0,5,10,50}
-                }
-            };
-
-            Labels = new[] { "A", "B", "C", "D" , "E"};
-            Formatter = value => value.ToString("N");
-            //---
-            MapValues = new Dictionary<string, double>();
-            Random random = new Random();
-            for (int i = 1; i <= 52; i++)
-            {
-                MapValues[i.ToString().PadLeft(2, '0')] = random.NextDouble();
-            }
-
             DataContext = this;
         }
 
         //Sends info to parent window
         private void OnChartSelection(ChartEventArgs e)
         {
+            dock_Main.Children.Remove(lbl_ChartNotSelected);
             ChartDelegate?.Invoke(this, e);
         }
 
@@ -382,7 +363,7 @@ namespace Reader_347
                 dock_Main.Children.RemoveAt(i - 1);
 
             //Initialize new chart
-            GeoMap geoMap = new GeoMap
+            GeoMap = new GeoMap
             {
                 Source = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources\\Spain.xml"),
                 HeatMap = MapValues,
@@ -392,8 +373,8 @@ namespace Reader_347
 
             //geoMap.SetBinding(GeoMap.HeatMapProperty, new Binding { Source = this.MapValues });
             //Set dock and add to DockPanel
-            DockPanel.SetDock(geoMap, Dock.Bottom);
-            dock_Main.Children.Add(geoMap);
+            DockPanel.SetDock(GeoMap, Dock.Bottom);
+            dock_Main.Children.Add(GeoMap);
             this.ChartType = "Map_BuyTotal";
         }
 
@@ -412,18 +393,19 @@ namespace Reader_347
                 dock_Main.Children.RemoveAt(i - 1);
 
             //Initialize new chart
-            GeoMap geoMap = new GeoMap
+            GeoMap = new GeoMap
             {
                 Source = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Resources\\Spain.xml"),
                 HeatMap = MapValues,
-                Hoverable = true
+                Hoverable = true,
+                DefaultLandFill = Brushes.White
             };
 
 
             //geoMap.SetBinding(GeoMap.HeatMapProperty, new Binding { Source = this.MapValues });
             //Set dock and add to DockPanel
-            DockPanel.SetDock(geoMap, Dock.Bottom);
-            dock_Main.Children.Add(geoMap);
+            DockPanel.SetDock(GeoMap, Dock.Bottom);
+            dock_Main.Children.Add(GeoMap);
             this.ChartType = "Map_SellTotal";
         }
     }
