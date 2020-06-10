@@ -109,6 +109,7 @@ namespace Lector_Excel
 
                 //close and release
                 workbook.Close();
+                Marshal.ReleaseComObject(workbooks);
                 Marshal.ReleaseComObject(workbook);
 
                 //quit and release
@@ -117,88 +118,5 @@ namespace Lector_Excel
             }
         }
 
-        // Puts the number in the required 347 Model Format
-        // Imported from Old Lector Excel
-        public string FormatNumber(string number, int maxlength, bool shouldBeFloat, bool isUnsigned)
-        {
-            string entera = "0", dec = "0";
-            StringBuilder sb = new StringBuilder();
-            bool isNegative = false;
-
-            //Si el numero es negativo
-            if (number.Contains("-"))
-            {
-                isNegative = true;
-                number = number.Split('-')[1];
-            }
-
-            //Si es decimal
-            if (number.Contains(","))
-            {
-                entera = number.Split(',')[0];
-
-                dec = number.Split(',')[1];
-            }
-            else if (number.Contains("."))
-            {
-                entera = number.Split('.')[0];
-
-                dec = number.Split('.')[1];
-            }//Si es entero
-            else
-            {
-                entera = number;
-            }
-
-            //Agregar simbolo segun el numero
-            if (isNegative)
-            {
-                sb.Append("N");
-            }
-            else if ((shouldBeFloat) && (!isUnsigned))
-            {
-                sb.Append(" ");
-            }
-
-            if (shouldBeFloat)
-            {
-                if (!isUnsigned)
-                {
-                    maxlength -= 3;
-                }
-                else
-                {
-                    maxlength -= 2;
-                }
-                sb.Append(entera.PadLeft(maxlength,'0'));
-                
-                sb.Append(dec.PadRight(2,'0'));
-                
-            }
-            else
-            {
-                sb.Append(entera.PadLeft(maxlength,'0'));
-            }
-
-            return sb.ToString();
-        }
-
-        // Tries to convert accentuated chars into their non-accentuated variants
-        static string deAccent(string text)
-        {
-            var normalizedString = text.Normalize(NormalizationForm.FormD);
-            var stringBuilder = new StringBuilder();
-
-            foreach (var c in normalizedString)
-            {
-                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
-                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-                {
-                    stringBuilder.Append(c);
-                }
-            }
-
-            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-        }
     }
 }
