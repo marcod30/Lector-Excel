@@ -63,10 +63,10 @@
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>
-                    <MenuItem Header="Compras por región">
+                    <MenuItem Name="menu_Pie_BuyPerRegion" Header="Compras por región" Click="Menu_Pie_BuyPerRegion_Click">
 
                     </MenuItem>
-                    <MenuItem Header="Ventas por región">
+                    <MenuItem Name="menu_Pie_SellPerRegion" Header="Ventas por región" Click="Menu_Pie_SellPerRegion_Click">
 
                     </MenuItem>
                 </MenuItem>

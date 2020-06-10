@@ -34,9 +34,11 @@ namespace Reader_347
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
+        public Func<ChartPoint, string> PieFormatter { get; set; }
         public Dictionary<string,double> MapValues { get; set; }
         public string ChartType { get; set; }
         public GeoMap GeoMap { get; set; }
+
         public event ChartSetterDelegate ChartDelegate;
 
         public ChartWindow()
@@ -50,61 +52,6 @@ namespace Reader_347
         {
             dock_Main.Children.Remove(lbl_ChartNotSelected);
             ChartDelegate?.Invoke(this, e);
-        }
-
-        //Creates a new CartesianChart (placeholder code!)
-        private void CreateCartesianChart()
-        {
-            //Clear all charts from dockpanel
-            int i = 0;
-            foreach (object o in dock_Main.Children)
-            {
-                i++;
-            }
-            if(dock_Main.Children[i-1] is  Chart || dock_Main.Children[i - 1] is GeoMap)
-                dock_Main.Children.RemoveAt(i-1);
-
-            //Initialize new Series Collection
-            SeriesCollection = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title = "A la mierda",
-                    Values = new ChartValues<int> {0,5,10,50}
-                }
-            };
-
-            Labels = new[] { "A", "B", "C", "D" };
-            Formatter = value => value.ToString("N");
-
-            //Initialize new chart
-            CartesianChart cartesianChart = new CartesianChart
-            {
-                AxisX = new AxesCollection
-                {
-                    new Axis
-                    {
-                        Title = "Eje x",
-                    }
-                },
-
-                AxisY = new AxesCollection
-                {
-                    new Axis
-                    {
-                        Title = "Eje y"
-                    }
-                }
-            };
-
-            //Set all necessary bindings
-            cartesianChart.AxisX[0].SetBinding(Axis.LabelsProperty, new Binding { Source = this.Labels });
-            cartesianChart.AxisY[0].SetBinding(Axis.LabelFormatterProperty, new Binding { Source = this.Formatter });
-            cartesianChart.SetBinding(CartesianChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
-
-            //Set dock and add to DockPanel
-            DockPanel.SetDock(cartesianChart, Dock.Bottom);
-            dock_Main.Children.Add(cartesianChart);
         }
 
         //Request a CartesianChart, Vertical Bars, comparing Amount of registries per Op. Key
@@ -347,7 +294,7 @@ namespace Reader_347
             this.ChartType = "Line_BuySellPerTrimester";
         }
 
-        //Request a Geo Map, showing money of buy operations per trimester
+        //Request a Geo Map, showing money of buy operations per region
         private void Menu_Map_BuyTotal_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Map_BuyTotal" };
@@ -378,6 +325,7 @@ namespace Reader_347
             this.ChartType = "Map_BuyTotal";
         }
 
+        //Request a Geo Map, showing money of sell operations per region
         private void Menu_Map_SellTotal_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Map_SellTotal" };
@@ -407,6 +355,66 @@ namespace Reader_347
             DockPanel.SetDock(GeoMap, Dock.Bottom);
             dock_Main.Children.Add(GeoMap);
             this.ChartType = "Map_SellTotal";
+        }
+
+        //Request Pie Chart, showing money of buy operations per region
+        private void Menu_Pie_BuyPerRegion_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Pie_BuyTotal" };
+            OnChartSelection(chartEventArgs);
+
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+            
+
+            PieChart pieChart = new PieChart
+            {
+                LegendLocation = LegendLocation.Right,
+                Hoverable = true,
+            };
+
+            pieChart.SetBinding(PieChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
+            DockPanel.SetDock(pieChart, Dock.Bottom);
+            dock_Main.Children.Add(pieChart);
+            this.ChartType = "Pie_BuyTotal";
+        }
+
+        //Request a Pie Chart, showing money of sell operations per region
+        private void Menu_Pie_SellPerRegion_Click(object sender, RoutedEventArgs e)
+        {
+            ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Pie_SellTotal" };
+            OnChartSelection(chartEventArgs);
+
+            //Clear all charts from dockpanel
+            int i = 0;
+            foreach (object o in dock_Main.Children)
+            {
+                i++;
+            }
+
+            if (dock_Main.Children[i - 1] is Chart || dock_Main.Children[i - 1] is GeoMap)
+                dock_Main.Children.RemoveAt(i - 1);
+
+
+
+            PieChart pieChart = new PieChart
+            {
+                LegendLocation = LegendLocation.Right,
+                Hoverable = true,
+            };
+
+            pieChart.SetBinding(PieChart.SeriesProperty, new Binding { Source = this.SeriesCollection });
+            DockPanel.SetDock(pieChart, Dock.Bottom);
+            dock_Main.Children.Add(pieChart);
+            this.ChartType = "Pie_SellTotal";
         }
     }
 }
