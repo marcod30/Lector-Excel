@@ -9,7 +9,7 @@
         Title="Visor de gráficas" Height="480" Width="720" ResizeMode="CanResize">
     <DockPanel Name="dock_Main">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Opciones">
+            <MenuItem Header="Gráfico">
                 <MenuItem Header="Barras">
                     <MenuItem.Icon>
                         <Rectangle>
@@ -84,6 +84,18 @@
                     <MenuItem Name="menu_Map_SellTotal" Header="Ventas por región" Click="Menu_Map_SellTotal_Click">
 
                     </MenuItem>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_SaveGraphAs" Header="Guardar como..." Click="Menu_SaveGraphAs_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.426,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>

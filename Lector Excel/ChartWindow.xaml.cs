@@ -12,11 +12,13 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 //using System.Windows.Shapes;
 
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
+using Lector_Excel;
 
 namespace Reader_347
 {
@@ -51,6 +53,10 @@ namespace Reader_347
         private void OnChartSelection(ChartEventArgs e)
         {
             dock_Main.Children.Remove(lbl_ChartNotSelected);
+            if (!menu_SaveGraphAs.IsEnabled)
+            {
+                menu_SaveGraphAs.IsEnabled = true;
+            }
             ChartDelegate?.Invoke(this, e);
         }
 
@@ -415,6 +421,183 @@ namespace Reader_347
             DockPanel.SetDock(pieChart, Dock.Bottom);
             dock_Main.Children.Add(pieChart);
             this.ChartType = "Pie_SellTotal";
+        }
+
+        //Saves the current graph as the desired format
+        private void Menu_SaveGraphAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Informe PDF (*.pdf)|*.pdf|Imagen PNG (*.png)|*.png";
+            saveDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (saveDialog.ShowDialog() == true)
+            {
+                switch (saveDialog.FileName.Substring(saveDialog.FileName.Length-3, 3).ToLower())
+                {
+                    case "pdf":
+                        PDFManager manager = new PDFManager(saveDialog.FileName);
+                        ChartDataHolder chd = new ChartDataHolder(this.ChartType, dock_Main.Children.OfType<Chart>().DefaultIfEmpty(null).FirstOrDefault(), dock_Main.Children.OfType<GeoMap>().DefaultIfEmpty(null).FirstOrDefault());
+                        manager.CreatePDFWithImage(CaptureScreen(this), chd);
+                        break;
+                    case "png":
+                        PngBitmapEncoder encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(CaptureScreen(this)));
+                        using (FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create, FileAccess.Write))
+                        {
+                            encoder.Save(stream);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                
+            }
+        }
+
+        //Capture UIElement and save as MemoryStream
+        public MemoryStream CaptureScreen(UIElement source)
+        {
+            try
+            {
+                double Height, renderHeight, Width, renderWidth;
+
+                Height = renderHeight = source.RenderSize.Height;
+                Width = renderWidth = source.RenderSize.Width;
+
+                //Specification for target bitmap like width/height pixel etc.
+                RenderTargetBitmap renderTarget = new RenderTargetBitmap((int)renderWidth, (int)renderHeight, 96, 96, PixelFormats.Pbgra32);
+                //creates Visual Brush of UIElement
+                VisualBrush visualBrush = new VisualBrush(source);
+
+                DrawingVisual drawingVisual = new DrawingVisual();
+                using (DrawingContext drawingContext = drawingVisual.RenderOpen())
+                {
+                    //draws image of element
+                    drawingContext.DrawRectangle(visualBrush, null, new Rect(new Point(0, 0), new Point(Width, Height)));
+                }
+                //renders image
+                renderTarget.Render(drawingVisual);
+
+                //PNG encoder for creating PNG file
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(renderTarget));
+                MemoryStream stream = new MemoryStream();
+                encoder.Save(stream);
+
+                return stream;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message,"ERROR",MessageBoxButton.OK,MessageBoxImage.Error);
+                return null;
+            }
+        }
+    }
+
+    public class ChartDataHolder
+    {
+        public List<string> ChartData;
+        private string ChartType;
+        private Chart CurrentChart;
+        private GeoMap CurrentMapChart;
+
+        public ChartDataHolder(string chartType, Chart chart = null, GeoMap map = null)
+        {
+            CurrentChart = chart;
+            CurrentMapChart = map;
+            ChartType = chartType;
+
+            OrganizeChartData();
+        }
+
+        private void OrganizeChartData()
+        {
+            if(ChartData is null)
+            {
+                ChartData = new List<string>();
+            }
+            else
+            {
+                ChartData.Clear();
+            }
+
+            if (CurrentChart != null)
+            {
+                switch (ChartType)
+                {
+                    case "VerticalBar_RegistryPerOpKey":
+                        ChartData.Add("Informe de registros por clave de operación");
+                        int index = 0;
+                        foreach (int v in CurrentChart.Series[0].Values)
+                        {
+                            ChartData.Add("Registros de tipo " + CurrentChart.AxisX[0].Labels[index++] + ": " + v);
+                        }
+                        break;
+                    case "HorizontalBar_RegistryPerOpKey":
+                        ChartData.Add("Informe de registros por clave de operación");
+                        index = 0;
+                        foreach (int v in CurrentChart.Series[0].Values)
+                        {
+                            ChartData.Add("Registros de tipo " + CurrentChart.AxisY[0].Labels[index++] + ": " + v);
+                        }
+                        break;
+                    case "Line_BuySellPerTrimester":
+                    case "VerticalBar_BuySellPerTrimester":
+                        ChartData.Add("Informe de compra-venta por trimestre");
+                        index = 0;
+                        foreach(float v in CurrentChart.Series[0].Values)
+                        {
+                            ChartData.Add("Compras en Trimestre "+CurrentChart.AxisX[0].Labels[index] + ": " + v);
+                            ChartData.Add("Ventas en Trimestre " + CurrentChart.AxisX[0].Labels[index] + ": " + CurrentChart.Series[1].Values[index++]);
+                        }
+                        break;
+                    case "HorizontalBar_BuySellPerTrimester":
+                        ChartData.Add("Informe de compra-venta por trimestre");
+                        index = 0;
+                        foreach (float v in CurrentChart.Series[0].Values)
+                        {
+                            ChartData.Add("Compras en Trimestre " + CurrentChart.AxisY[0].Labels[index] + ": " + v);
+                            ChartData.Add("Ventas en Trimestre " + CurrentChart.AxisY[0].Labels[index] + ": " + CurrentChart.Series[1].Values[index++]);
+                        }
+                        break;
+                    case "Pie_BuyTotal":
+                        ChartData.Add("Informe de compras por región");
+                        foreach(object o in CurrentChart.Series)
+                        {
+                            PieSeries currentPieSlice = o as PieSeries;
+                            ChartData.Add("Compras en " + currentPieSlice.Title + ": "+ currentPieSlice.Values[0]);
+                        }
+                        break;
+                    case "Pie_SellTotal":
+                        ChartData.Add("Informe de ventas por región");
+                        foreach (object o in CurrentChart.Series)
+                        {
+                            PieSeries currentPieSlice = o as PieSeries;
+                            ChartData.Add("Ventas en " + currentPieSlice.Title + ": " + currentPieSlice.Values[0]);
+                        }
+                        break;
+                }
+            }
+            else if(CurrentMapChart != null)
+            {
+                switch (ChartType)
+                {
+                    case "Map_BuyTotal":
+                        ChartData.Add("Mapa de compras por región");
+                        foreach(KeyValuePair<string,double> o in CurrentMapChart.HeatMap)
+                        {
+                            ChartData.Add("Compras en " + Province.CodeToName(o.Key) + ": " + o.Value);
+                        }
+                        break;
+                    case "Map_SellTotal":
+                        ChartData.Add("Mapa de ventas por región");
+                        foreach (KeyValuePair<string, double> o in CurrentMapChart.HeatMap)
+                        {
+                            ChartData.Add("Ventas en " + Province.CodeToName(o.Key) + ": " + o.Value);
+                        }
+                        break;
+                }
+            }
         }
     }
 }
