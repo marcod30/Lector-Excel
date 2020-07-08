@@ -34,7 +34,7 @@ namespace Reader_347
 
         const string NUMERICAL_REGEX = @"\d?";
 
-        public event ScrollDialogDelegate scrollDelegate;
+        public event ScrollDialogDelegate ScrollDelegate;
 
         public ScrollToDialog()
         {
@@ -59,7 +59,7 @@ namespace Reader_347
 
         private void OnPositionChanged(ScrollEventArgs e)
         {
-            scrollDelegate?.Invoke(this, e);
+            ScrollDelegate?.Invoke(this, e);
         }
     }
 }

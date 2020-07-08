@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using Microsoft.Win32;
 using Reader_347;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,6 +22,8 @@ namespace Lector_Excel
     {
         private ExcelManager ExcelManager;
         private ExportManager ExportManager;
+        private ChartWindow ChartWindow;
+        private ScrollToDialog ScrollDialog;
 
         List<string> Type1Fields = new List<string>();
         private List<string> posiciones = new List<string>();
@@ -28,7 +33,7 @@ namespace Lector_Excel
         ProgressWindow exportProgressBar;
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private string saveLocation = "";
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -251,6 +256,7 @@ namespace Lector_Excel
 
                     dfc.mainGroupBox.Header = "Declarado " + (listaDeclarados.Count + 1);
                     dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+                    dfc.PropertyChanged += DeclaredChanged;
 
                     dfc.declared = d;
                     dfc.txt_DeclaredNIF.Text = (dfc.declared.declaredData["DeclaredNIF"].Length >= 9) ? dfc.declared.declaredData["DeclaredNIF"].Substring(0, 9) : dfc.declared.declaredData["DeclaredNIF"];
@@ -380,7 +386,11 @@ namespace Lector_Excel
         //Handles deleting all declareds
         private void Menu_deleteAllDeclared_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCiÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult msg;
+            if (sender is MenuItem)
+                msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCiÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            else
+                msg = MessageBoxResult.Yes;
 
             if (msg == MessageBoxResult.No)
                 return;
@@ -420,13 +430,65 @@ namespace Lector_Excel
                 menu_deleteAllDeclared.IsEnabled = false;
                 menu_ScrollToControl.IsEnabled = false;
             }
-                
+            
+            //Set PropertyChanged method for every item
+            foreach(DeclaredFormControl dfc in listaDeclarados)
+            {
+                dfc.PropertyChanged -= DeclaredChanged;
+                dfc.PropertyChanged += DeclaredChanged;
+            }
+        }
+
+        //When a Declared property changes, trigger this
+        public void DeclaredChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //FIXME - Remove this condition so deleting a declared also updates chart
+            if (e.PropertyName.Split('_')[0].Equals("txt"))
+            {
+                //A textbox changed
+                Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
+                if(ChartWindow != null && ChartWindow.IsVisible)
+                {
+                    switch (ChartWindow.ChartType)
+                    {
+                        case "VerticalBar_RegistryPerOpKey":
+                        case "HorizontalBar_RegistryPerOpKey":
+                            ChartWindow.SeriesCollection[0].Values = GetRegistriesPerOpKey();
+                            break;
+                        case "VerticalBar_BuySellPerTrimester":
+                        case "HorizontalBar_BuySellPerTrimester":
+                        case "Line_BuySellPerTrimester":
+                            ChartWindow.SeriesCollection[0].Values = GetBuySellsPerTrimester(false);
+                            ChartWindow.SeriesCollection[1].Values = GetBuySellsPerTrimester(true);
+                            break;
+                            //FIXME Pie charts are not updating correctly!
+                        case "Pie_BuyTotal":
+                            ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(false);
+                            break;
+                        case "Pie_SellTotal":
+                            ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(true);
+                            break;
+                        case "Map_BuyTotal":
+                            ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(false);
+                            break;
+                        case "Map_SellTotal":
+                            ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(true);
+                            break;
+                    }
+                }
+            }
+
+            if (e.PropertyName.Split('_')[0].Equals("chk"))
+            {
+                //A checkbox changed
+                Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
+            }
         }
 
         //Launch AEAT WebPage
         private void Menu_GoToAEAT_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://www12.agenciatributaria.gob.es/wlpl/OVCT-CXEW/SelectorAcceso?ref=%2Fwlpl%2FPAIN-M347%2FE2019%2Findex.zul&aut=CP");
+            Process.Start("https://www.agenciatributaria.gob.es/AEAT.sede/tramitacion/GI27.shtml");
         }
 
         //Scroll to top
@@ -441,22 +503,34 @@ namespace Lector_Excel
             scrl_MainScrollViewer.ScrollToBottom();
         }
 
+        //On Main Window Closing, close every child window that's still open
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (ScrollDialog != null && ScrollDialog.IsVisible)
+            {
+                ScrollDialog.Close();
+            }
+
+            if (ChartWindow != null && ChartWindow.IsVisible)
+            {
+                ChartWindow.Close();
+            }
+        }
+
         //Scroll to selected declared
         private void Menu_ScrollToControl_Click(object sender, RoutedEventArgs e)
         {
-            ScrollToDialog scrollToDialog = new ScrollToDialog();
-            scrollToDialog.Owner = this;
-
-            scrollToDialog.maxValue = this.listaDeclarados.Count;
-            scrollToDialog.Show();
-            scrollToDialog.scrollDelegate += AutoScroll;
-
-            /*
-            if (scrollToDialog.DialogResult == true)
+            if(ScrollDialog  == null || !ScrollDialog.IsVisible)
             {
-                listaDeclarados[scrollToDialog.returnValue - 1].BringIntoView();
+                ScrollDialog = new ScrollToDialog()
+                {
+                    Owner = this,
+                    maxValue = this.listaDeclarados.Count,
+                };
+
+                ScrollDialog.Show();
+                ScrollDialog.ScrollDelegate += AutoScroll;
             }
-            */
         }
 
         //Automatically scroll to declared when scrollDialog notifies
@@ -510,6 +584,536 @@ namespace Lector_Excel
             if (end || !end)
             {
                 pw.Close();
+            }
+        }
+
+        private void Menu_ChartVisor_Click(object sender, RoutedEventArgs e)
+        {
+            //Only instantiate one window at a time
+            if(this.ChartWindow == null || !ChartWindow.IsVisible)
+            {
+                ChartWindow = new ChartWindow();
+                ChartWindow.ChartDelegate += UpdateChartInfo;
+                ChartWindow.Show();
+            }
+        }
+
+        //Gets chart request and sends back data to display
+        private void UpdateChartInfo(object sender, ChartEventArgs e)
+        {
+            if(ChartWindow != null && ChartWindow.IsVisible)
+            {
+                SeriesCollection series;
+                switch (e.chartType)
+                {
+                    
+                    case "VerticalBar_RegistryPerOpKey":
+                        
+                        series = new SeriesCollection
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Registros",
+                                Values = GetRegistriesPerOpKey()
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "VerticalBar_BuySellPerTrimester":
+                        series = new SeriesCollection
+                        {
+                            new ColumnSeries
+                            {
+                                Title = "Compras",
+                                Values = GetBuySellsPerTrimester(false)
+                            },
+
+                            new ColumnSeries
+                            {
+                                Title = "Ventas",
+                                Values = GetBuySellsPerTrimester(true)
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "HorizontalBar_RegistryPerOpKey":
+
+                        series = new SeriesCollection
+                        {
+                            new RowSeries
+                            {
+                                Title = "Registros",
+                                Values = GetRegistriesPerOpKey()
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "HorizontalBar_BuySellPerTrimester":
+                        series = new SeriesCollection
+                        {
+                            new RowSeries
+                            {
+                                Title = "Compras",
+                                Values = GetBuySellsPerTrimester(false)
+                            },
+
+                            new RowSeries
+                            {
+                                Title = "Ventas",
+                                Values = GetBuySellsPerTrimester(true)
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "Line_BuySellPerTrimester":
+                        series = new SeriesCollection
+                        {
+                            new LineSeries
+                            {
+                                Title = "Compras",
+                                Values = GetBuySellsPerTrimester(false)
+                            },
+
+                            new LineSeries
+                            {
+                                Title = "Ventas",
+                                Values = GetBuySellsPerTrimester(true)
+                            }
+                        };
+                        ChartWindow.SeriesCollection = series;
+                        break;
+                    case "Pie_BuyTotal":
+                        ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(false);
+                        break;
+                    case "Pie_SellTotal":
+                        ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(true);
+                        break;
+                    case "Map_BuyTotal":
+                        ChartWindow.MapValues = GetBuySellsPerRegion(false);
+                        break;
+                    case "Map_SellTotal":
+                        ChartWindow.MapValues = GetBuySellsPerRegion(true);
+                        break;
+                    default:
+                        return;
+                }
+            }
+        }
+
+        //Counts the registries with the same OpKey and returns them as ChartValues
+        private ChartValues<int> GetRegistriesPerOpKey()
+        {
+            ChartValues<int> values = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0 };
+            foreach (DeclaredFormControl dfc in listaDeclarados)
+            {
+                switch (dfc.declared.declaredData["OpKey"])
+                {
+                    case "A":
+                        values[0] += 1;
+                        break;
+                    case "B":
+                        values[1] += 1;
+                        break;
+                    case "C":
+                        values[2] += 1;
+                        break;
+                    case "D":
+                        values[3] += 1;
+                        break;
+                    case "E":
+                        values[4] += 1;
+                        break;
+                    case "F":
+                        values[5] += 1;
+                        break;
+                    case "G":
+                        values[6] += 1;
+                        break;
+                }
+                
+            }
+            foreach (int i in values)
+            {
+                if (i == 0)
+                    values.Remove(i);
+            }
+            return values;
+        }
+
+        //Adds up money per trimester depending on Op Key
+        private ChartValues<float> GetBuySellsPerTrimester(bool getSells)
+        {
+            ChartValues<float> values = new ChartValues<float> {0,0,0,0};
+            Dictionary<string, string> tempDeclaredData;
+            foreach(DeclaredFormControl dfc in listaDeclarados)
+            {
+                tempDeclaredData = dfc.declared.declaredData;
+                if (getSells)
+                {
+                    if (tempDeclaredData["OpKey"].Equals("B"))
+                    {
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"])){
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',','.'),NumberStyles.Float,CultureInfo.InvariantCulture);
+                            values[0] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[1] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[2] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[3] += temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    {
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[0] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[1] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[2] += temp;
+                        }
+                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
+                        {
+                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            values[3] += temp;
+                        }
+                    }
+                }
+            }
+
+            return values;
+        }
+
+        //Gets anual money per province and stores in a dictionary
+        private Dictionary<string,double> GetBuySellsPerRegion(bool getSells)
+        {
+            Dictionary<string, double> data = new Dictionary<string, double>();
+            Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
+
+            foreach (DeclaredFormControl declaredFormControl in listaDeclarados)
+            {
+                tempDeclaredData = declaredFormControl.declared.declaredData;
+
+                if (getSells)
+                {
+                    if (tempDeclaredData["OpKey"].Equals("B"))
+                    {
+                        double amount;
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        {
+                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            amount = 0;
+                        }
+
+                        if(amount != 0)
+                        {
+                            if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                data[tempDeclaredData["ProvinceCode"]] += amount;
+                            else
+                            {
+                                data.Add(tempDeclaredData["ProvinceCode"], amount);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    {
+                        double amount;
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        {
+                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            amount = 0;
+                        }
+
+                        if (amount != 0)
+                        {
+                            if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                data[tempDeclaredData["ProvinceCode"]] += amount;
+                            else
+                            {
+                                data.Add(tempDeclaredData["ProvinceCode"], amount);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        //Gets anual money per province and stores in a SeriesCollection of PieSeries
+        private SeriesCollection GetBuySellsPerRegionAsPie(bool getSells)
+        {
+            SeriesCollection series = new SeriesCollection();
+            Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
+            Func<ChartPoint, string> PieFormatter;
+            foreach (DeclaredFormControl declaredFormControl in listaDeclarados)
+            {
+                tempDeclaredData = declaredFormControl.declared.declaredData;
+
+                if (getSells)
+                {
+                    if (tempDeclaredData["OpKey"].Equals("B"))
+                    {
+                        double amount;
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !string.IsNullOrWhiteSpace(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        {
+                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            amount = 0;
+                        }
+
+                        if (amount != 0 && Province.CodeToName(tempDeclaredData["ProvinceCode"]) != null)
+                        {
+                            if(series.Count == 0)
+                            {
+                                series.Add(new PieSeries
+                                {
+                                    Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
+                                    Values = new ChartValues<double> { amount },
+                                    DataLabels = true,
+                                    LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})",chartPoint.Y,chartPoint.Participation))
+                                });
+                            }
+                            else
+                            {
+                                bool foundEqual = false;
+                                foreach (PieSeries ps in series)
+                                {
+                                    if (ps.Title.Equals(Province.CodeToName(tempDeclaredData["ProvinceCode"])))
+                                    {
+                                        (ps.Values as ChartValues<double>)[0] += amount;
+                                        foundEqual = true;
+                                        break;
+                                    }
+
+                                    
+                                }
+
+                                if (!foundEqual)
+                                {
+                                    series.Add(new PieSeries
+                                    {
+                                        Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
+                                        Values = new ChartValues<double> { amount },
+                                        DataLabels = true,
+                                        LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    {
+                        double amount;
+                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !string.IsNullOrWhiteSpace(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        {
+                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                        }
+                        else
+                        {
+                            amount = 0;
+                        }
+
+                        if (amount != 0 && Province.CodeToName(tempDeclaredData["ProvinceCode"]) != null)
+                        {
+                            if (series.Count == 0)
+                            {
+                                series.Add(new PieSeries
+                                {
+                                    Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
+                                    Values = new ChartValues<double> { amount },
+                                    DataLabels = true,
+                                    LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
+                                });
+                            }
+                            else
+                            {
+                                bool foundEqual = false;
+                                foreach (PieSeries ps in series)
+                                {
+                                    if (ps.Title.Equals(Province.CodeToName(tempDeclaredData["ProvinceCode"])))
+                                    {
+                                        (ps.Values as ChartValues<double>)[0] += amount;
+                                        foundEqual = true;
+                                        break;
+                                    }
+
+
+                                }
+
+                                if (!foundEqual)
+                                {
+                                    series.Add(new PieSeries
+                                    {
+                                        Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
+                                        Values = new ChartValues<double> { amount },
+                                        DataLabels = true,
+                                        LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return series;
+        }
+        
+    }
+
+    public class Province
+    {
+        public Province()
+        {
+
+        }
+
+        public static string CodeToName(string code)
+        {
+            switch (code)
+            {
+                case "01":
+                    return "Álava";
+                case "02":
+                    return "Albacete";
+                case "03":
+                    return "Alicante";
+                case "04":
+                    return "Almería";
+                case "05":
+                    return "Ávila";
+                case "06":
+                    return "Badajoz";
+                case "07":
+                    return "Baleares";
+                case "08":
+                    return "Barcelona";
+                case "09":
+                    return "Burgos";
+                case "10":
+                    return "Cáceres";
+                case "11":
+                    return "Cádiz";
+                case "12":
+                    return "Castellón";
+                case "13":
+                    return "Ciudad Real";
+                case "14":
+                    return "Córdoba";
+                case "15":
+                    return "A Coruña";
+                case "16":
+                    return "Cuenca";
+                case "17":
+                    return "Girona";
+                case "18":
+                    return "Granada";
+                case "19":
+                    return "Guadalajara";
+                case "20":
+                    return "Gipúzkoa";
+                case "21":
+                    return "Huelva";
+                case "22":
+                    return "Huesca";
+                case "23":
+                    return "Jaén";
+                case "24":
+                    return "León";
+                case "25":
+                    return "Lleida";
+                case "26":
+                    return "La Rioja";
+                case "27":
+                    return "Lugo";
+                case "28":
+                    return "Madrid";
+                case "29":
+                    return "Málaga";
+                case "30":
+                    return "Murcia";
+                case "31":
+                    return "Navarra";
+                case "32":
+                    return "Ourense";
+                case "33":
+                    return "Asturias";
+                case "34":
+                    return "Palencia";
+                case "35":
+                    return "Las Palmas";
+                case "36":
+                    return "Pontevedra";
+                case "37":
+                    return "Salamanca";
+                case "38":
+                    return "Sta. Cruz de Tenerife";
+                case "39":
+                    return "Cantabria";
+                case "40":
+                    return "Segovia";
+                case "41":
+                    return "Sevilla";
+                case "42":
+                    return "Soria";
+                case "43":
+                    return "Tarragona";
+                case "44":
+                    return "Teruel";
+                case "45":
+                    return "Toledo";
+                case "46":
+                    return "Valencia";
+                case "47":
+                    return "Valladolid";
+                case "48":
+                    return "Bizkaia";
+                case "49":
+                    return "Zamora";
+                case "50":
+                    return "Zaragoza";
+                case "51":
+                    return "Ceuta";
+                case "52":
+                    return "Melilla";
+
+                default:
+                    return null;
             }
         }
     }

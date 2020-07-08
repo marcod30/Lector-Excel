@@ -99,7 +99,7 @@ namespace Lector_Excel
                     stringBuilder.Append(EncodeToLatin("D"));
 
                     stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"].PadRight(2)));
+                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"].ToUpper().PadRight(2)));
 
                     stringBuilder.Append(" ");
 

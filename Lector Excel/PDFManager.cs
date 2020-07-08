@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Lector_Excel;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.AcroForms;
 using PdfSharp.Pdf.IO;
@@ -358,6 +361,84 @@ namespace Reader_347
             }
         }
 
+        //Creates PDF from scratch with graph picture and related text using Migradoc Library
+        public bool CreatePDFWithImage(MemoryStream imageStream, ChartDataHolder chartDataHolder)
+        {
+            //Create document and define fonts, sections, etc.
+            Document pdf = new Document();
+            Section section0 = pdf.AddSection();
+            
+            Font fntTitle = new Font("Times New Roman", 28);
+            Font fntNormal = new Font("Calibri", 12);
+
+            //Add title
+            Paragraph paragraph0 = section0.AddParagraph();
+            paragraph0.Format.Alignment = ParagraphAlignment.Center;
+            paragraph0.AddFormattedText(chartDataHolder.ChartData[0], fntTitle);
+            paragraph0.AddLineBreak();
+
+            //Add image chart
+            byte[] image_AsArray = imageStream.ToArray();
+            string image_AsString = "base64:" + Convert.ToBase64String(image_AsArray);
+            paragraph0.AddImage(image_AsString);
+
+            paragraph0.AddLineBreak();    //Add line break for separation
+
+            //Add ChartData as a bulleted list
+            MigraDoc.DocumentObjectModel.Style listStyle = pdf.AddStyle("BulletedList", "Normal");
+            listStyle.ParagraphFormat.LeftIndent = "0.5cm";
+            Paragraph paragraph1;
+            bool isFirstItem = true;
+            foreach(string s in chartDataHolder.ChartData)
+            {
+                if (isFirstItem)
+                {
+                    isFirstItem = false;
+                    continue;
+                }
+                ListInfo info = new ListInfo();
+                info.ContinuePreviousList = !isFirstItem;
+                info.ListType = ListType.BulletList1;
+                paragraph1 = section0.AddParagraph();
+                paragraph1.Style = "BulletedList";
+                paragraph1.AddFormattedText(s, fntNormal);
+                paragraph1.Format.ListInfo = info;
+            }
+
+            //Render document
+            PdfDocumentRenderer pdfDocumentRenderer = new PdfDocumentRenderer(false);
+            pdfDocumentRenderer.Document = pdf;
+            pdfDocumentRenderer.RenderDocument();
+            pdfDocumentRenderer.PdfDocument.Save(DestinationPath);
+            return true;
+        }
+
+        //Creates PDF with graph picture using PDFSharp library
+        public void CreatePDFWithImage_OLD(MemoryStream imageStream, ChartDataHolder chartDataHolder)
+        {
+            PdfDocument pdf = new PdfDocument(DestinationPath);
+            PdfPage page = new PdfPage();
+            pdf.AddPage(page);
+
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            XFont fntTitle = new XFont("Times New Roman", 28, XFontStyle.Bold);
+            XFont fntText = new XFont("Arial", 14, XFontStyle.Regular);
+            gfx.DrawString(chartDataHolder.ChartData[0], fntTitle, XBrushes.Black, new XPoint(page.Width / 2, 32), XStringFormats.Center);
+
+            XImage image = XImage.FromStream(imageStream);
+            gfx.DrawImage(image, new XPoint(32, 64));
+
+
+            int index = 0;
+            foreach (string s in chartDataHolder.ChartData)
+            {
+                if (index == 0)
+                    continue;
+                gfx.DrawString(s, fntText, XBrushes.Black, new XPoint(page.Width / 2, image.PixelHeight + 32 + index++ * 32), XStringFormats.Center);
+            }
+
+            pdf.Close();
+        }
         /*
  *  DECLARANTE
     Field [untitled68] = (nif declarante) as PdfSharp.Pdf.AcroForms.PdfTextField

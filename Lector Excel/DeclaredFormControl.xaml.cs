@@ -14,24 +14,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace Lector_Excel
 {
     /// <summary>
     /// Lógica de interacción para DeclaredFormControl.xaml
     /// </summary>
-    public partial class DeclaredFormControl : UserControl
+    
+    public partial class DeclaredFormControl : UserControl, INotifyPropertyChanged
     {
         public event EventHandler DeleteButtonClick; //Delegate for deleting
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public Declared declared;
 
         //Regexps
-        const string DNI_REGEX = @"^(\d{8})([A-Z])$";
-        const string CIF_REGEX = @"^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9]|[A-J])$";
-        const string NIE_REGEX = @"^[XYZ]\d{7,8}[A-Z]$";
-        const string COMM_NIF_REGEX = @"^([A-Z]{2})(\d{2,15})";
+        const string DNI_REGEX = @"^(\d{8})([a-zA-Z])$";
+        const string CIF_REGEX = @"^([abcdefghjklmnpqrsuvwABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9]|[a-jA-J])$";
+        const string NIE_REGEX = @"^[xyzXYZ]\d{7,8}[a-zA-Z]$";
+        const string COMM_NIF_REGEX = @"^([a-zA-Z]{2})(\d{2,15})";
         const string PROV_CODE_REGEX = @"(\d{2})";
-        const string STATE_CODE_REGEX = @"([A-Z]{2})";
+        const string STATE_CODE_REGEX = @"([a-zA-Z]{2})";
         const string UNSIGNED_FLOAT_REGEX = @"^(\d)+((\.|\,)(\d{1,2}))?$";
         const string SIGNED_FLOAT_REGEX = @"^\-?(\d)+((\.|\,)(\d{1,2}))?$";
 
@@ -84,6 +88,7 @@ namespace Lector_Excel
             }
             else
             {
+                //PropertyChanged(this,new PropertyChangedEventArgs(thisTextBox.Name));
                 thisTextBox.ClearValue(TextBox.BorderBrushProperty);
             }
         }
@@ -230,6 +235,9 @@ namespace Lector_Excel
                     Debug.WriteLine("Key " + keyName + " exists!");
                     Debug.WriteLine("Updating dict value to " + thisTextBox.Text);
                     declared.declaredData[keyName] = thisTextBox.Text;
+
+                    //Notify of property change
+                    PropertyChanged(this, new PropertyChangedEventArgs(thisTextBox.Name));
                 }
             }
             else
@@ -247,17 +255,24 @@ namespace Lector_Excel
                 {
                     Debug.WriteLine(thisCheckbox.Name + " HAS BEEN CHECKED!!!");
                     declared.declaredData[keyName] = "X";
+
+                    //Notify of property change
+                    PropertyChanged(this, new PropertyChangedEventArgs(thisCheckbox.Name));
                 }
                 else if (thisCheckbox.IsChecked == false)
                 {
                     Debug.WriteLine(thisCheckbox.Name + " HAS BEEN UNCHECKED!!!");
                     declared.declaredData[keyName] = " ";
+
+                    //Notify of property change
+                    PropertyChanged(this, new PropertyChangedEventArgs(thisCheckbox.Name));
                 }
                 else
                     Debug.WriteLine(thisCheckbox.Name + ": ERROR PARSING ISCHECKED PROPERTY!!!");
             }
         }
 
+        //If Exercise TextBox changes
         private void Txt_Exercise_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -271,6 +286,7 @@ namespace Lector_Excel
             }
         }
 
+        //If there is a TextBox with invalid data, return false
         public bool IsAllDataValid()
         {
             foreach (Grid g in groupStack.Children.OfType<Grid>())
