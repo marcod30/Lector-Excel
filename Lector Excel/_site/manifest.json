@@ -1,0 +1,476 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/Marco30/Source/Repos/marcod30/Lector-Excel/Lector Excel",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "yMm7thTLpMaUVEEFY4GmvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "UxZrpZc5J8eSvoWexbjnng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "gB8AESyvNru97tzIZofEEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "IJ+48hdNdSbVJNVwXEUBzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.AboutWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.AboutWindow.html",
+          "hash": "6KO6i/df9EFdRHti1FcCfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.App.html",
+          "hash": "oTJMVX0oLB939JCUsjRdiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.BadFileFormattingException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.BadFileFormattingException.html",
+          "hash": "zqjdNed56cArNzkFpCDWZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.Declared.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.Declared.html",
+          "hash": "v4cW6JXm3kOgBQOA+vI5RA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.DeclaredFormControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.DeclaredFormControl.html",
+          "hash": "cA6gqcUDQ1tIbtAmWP7O1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.ExcelManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.ExcelManager.html",
+          "hash": "VSrjcMI+jB+WDSJL3b/yig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.ExportManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.ExportManager.html",
+          "hash": "rWJ+EqeixL123yoxBSPqkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.ImportManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.ImportManager.html",
+          "hash": "rouvfmvG0XxouUJznRaAOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.ImportSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.ImportSettings.html",
+          "hash": "uMoWNePLPYjjfUWwcEuvmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.MainWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.MainWindow.html",
+          "hash": "FfO8sxZl4LQpO0rHAEz4bA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.ProgressWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.ProgressWindow.html",
+          "hash": "nROeFXnnK3fhYiDA0wb+6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.Province.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.Province.html",
+          "hash": "st5J8z5j4isHOkE5E/5UAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.Type1Window.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.Type1Window.html",
+          "hash": "2DYqLUNTUWAYKbrOU5WfDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Lector_Excel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Lector_Excel.html",
+          "hash": "nznQ5ho0Ps8DlSTTuToB+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.BadApplicationVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.BadApplicationVersion.html",
+          "hash": "nFU03H7F1VJaG/mar8qvwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ChartDataHolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ChartDataHolder.html",
+          "hash": "JHPzAIXkz5Kw6SlFmsMrBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ChartEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ChartEventArgs.html",
+          "hash": "DWh+KOczJ3wRQTmK8rpewA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ChartSetterDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ChartSetterDelegate.html",
+          "hash": "XZ+QuDc9iX1fx7dYxaCUNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ChartWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ChartWindow.html",
+          "hash": "5kwL1jpYayGQaLr6vneCHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.DeclaredAmountException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.DeclaredAmountException.html",
+          "hash": "rUqS42tuHj28hWIfy065Zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.PDFManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.PDFManager.html",
+          "hash": "PZoKBnlSaw0DxzVgK7lAfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Properties.Resources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Properties.Resources.html",
+          "hash": "7IdGLde91GzsmKkEA8HZEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Properties.Settings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Properties.Settings.html",
+          "hash": "w3shPprTh8wZPWoO9aZ6Xw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Properties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Properties.html",
+          "hash": "r+jfRPUUXztqaOenu8sBGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ScrollDialogDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ScrollDialogDelegate.html",
+          "hash": "HP9Tfr67YPaBHr0J09wY5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ScrollEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ScrollEventArgs.html",
+          "hash": "OwR5/o3rJbW/Jf1Hj3zMyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.ScrollToDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.ScrollToDialog.html",
+          "hash": "YxmnPfaic2Znzn8N1951UQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.UpdateChecker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.UpdateChecker.html",
+          "hash": "yqdvzgPrlca7GAABJL3Y6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.html",
+          "hash": "qhoC6WHXSQebeSCoBCrDtw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "eDRHeIqpPSFeBdTPYBN+nA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "G2AoE5T/2VarbHvzLEo4TQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 29,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
