@@ -19,14 +19,17 @@ using System.ComponentModel;
 namespace Lector_Excel
 {
     /// <summary>
-    /// Lógica de interacción para DeclaredFormControl.xaml
+    /// Clase de agrupación de formularios de un registro de declarado.
     /// </summary>
     
     public partial class DeclaredFormControl : UserControl, INotifyPropertyChanged
     {
+        /// <value>Evento de delegado cuando se elimina un registro.</value>
         public event EventHandler DeleteButtonClick; //Delegate for deleting
+        /// <value>Evento que se lanza cuando una propiedad del registro cambia.</value>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <value> El declarado asociado al formulario.</value>
         public Declared declared;
 
         //Regexps
@@ -39,6 +42,9 @@ namespace Lector_Excel
         const string UNSIGNED_FLOAT_REGEX = @"^(\d)+((\.|\,)(\d{1,2}))?$";
         const string SIGNED_FLOAT_REGEX = @"^\-?(\d)+((\.|\,)(\d{1,2}))?$";
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>DeclaredFormControl</c>.
+        /// </summary>
         public DeclaredFormControl()
         {
             InitializeComponent();
@@ -46,6 +52,10 @@ namespace Lector_Excel
         }
 
         //Send delegate handler
+        /// <summary>
+        /// Evento que despliega el delegado.
+        /// </summary>
+        /// <param name="e"></param>
         protected virtual void OnDeleteButtonClick(EventArgs e)
         {
             var handler = DeleteButtonClick;
@@ -56,12 +66,24 @@ namespace Lector_Excel
         }
 
         //On delete button click
+        /// <summary>
+        /// Función de evento de click izquiero asociado a "Eliminar registro".
+        /// </summary>
+        /// <remarks>Invoca al delegado.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_DeleteDeclared_Click(object sender, RoutedEventArgs e)
         {
             OnDeleteButtonClick(e);
         }
 
         //If NIF Textbox changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a "NIF de declarado".
+        /// </summary>
+        /// <remarks>Activa o desactiva otro campo por incompatibilidad en el modelo 347.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_DeclaredNIF_TextChanged(object sender, RoutedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -94,6 +116,11 @@ namespace Lector_Excel
         }
 
         //If Legal Representative NIF textbox changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a "NIF de rep. legal".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_LegalRepNIF_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -108,6 +135,11 @@ namespace Lector_Excel
         }
 
         //Function to validate a NIF through regular expressions
+        /// <summary>
+        /// Valida un NIF, NIE o CIF.
+        /// </summary>
+        /// <param name="nif">El NIF que se desea validar.</param>
+        /// <returns>True si el NIF es válido, de lo contrario false.</returns>
         private bool IsNIFValid(string nif)
         {
             if (Regex.IsMatch(nif, DNI_REGEX))
@@ -121,6 +153,12 @@ namespace Lector_Excel
         }
 
         //If community NIF textbox changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a "NIF de op. comunitario".
+        /// </summary>
+        /// <remarks>Activa o desactiva otro campo por incompatibilidad en el modelo 347.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_CommunityOpNIF_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Disable Declared NIF textbox as they are incompatible
@@ -154,6 +192,12 @@ namespace Lector_Excel
         }
 
         //If province code textbox changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a "Código de provincia".
+        /// </summary>
+        /// <remarks>Activa o desactiva el código de país según el valor.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_ProvinceCode_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -181,6 +225,11 @@ namespace Lector_Excel
         }
 
         //If state code textbox changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a "Código de país".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_CountryCode_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -195,6 +244,11 @@ namespace Lector_Excel
         }
 
         //If any textbox that should contain a signed float number changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a cualquier campo que pueda contener un <c>float</c> con signo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_SignedFloat_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -209,6 +263,11 @@ namespace Lector_Excel
         }
 
         //If any textbox that should contain an unsigned float number changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a cualquier campo que pueda contener un <c>float</c> sin signo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_UnsignedFloat_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -223,6 +282,12 @@ namespace Lector_Excel
         }
 
         //If any textbox loses focus, try to send content to data class Declared
+        /// <summary>
+        /// Función de evento de pérdida de foco asociado a todos los campos.
+        /// </summary>
+        /// <remarks> Actualiza el dato correspondiente del <c>Declared</c> asociado.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_Any_LostFocus(object sender, RoutedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -245,6 +310,12 @@ namespace Lector_Excel
         }
 
         //If any checkbox is checked or unchecked, try to send content to data class Declared
+        /// <summary>
+        /// Función de evento de cambio de estado asociado a todas las casillas de verificación.
+        /// </summary>
+        /// <remarks> Actualiza el dato correspondiente del <c>Declared</c> asociado.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Chk_Any_Checked_Changed(object sender, RoutedEventArgs e)
         {
             var thisCheckbox = sender as CheckBox;
@@ -273,6 +344,12 @@ namespace Lector_Excel
         }
 
         //If Exercise TextBox changes
+        /// <summary>
+        /// Función de evento de cambio de texto asociado a "Número de ejercicio".
+        /// </summary>
+        /// <remarks>Activa o desactiva el código de país según el valor.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Txt_Exercise_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
@@ -287,6 +364,10 @@ namespace Lector_Excel
         }
 
         //If there is a TextBox with invalid data, return false
+        /// <summary>
+        /// Comprueba que todos los campos contienen datos válidos.
+        /// </summary>
+        /// <returns>False si algún campo contiene algún error, de lo contrario devuelve true.</returns>
         public bool IsAllDataValid()
         {
             foreach (Grid g in groupStack.Children.OfType<Grid>())

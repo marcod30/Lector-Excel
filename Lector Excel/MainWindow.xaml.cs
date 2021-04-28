@@ -16,24 +16,37 @@ namespace Lector_Excel
 {
     
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// La clase para la ventana principal de la aplicación.
     /// </summary>
     public partial class MainWindow : Window
     {
+        ///<value> La referencia al gestor de Excel.</value>
         private ExcelManager ExcelManager;
+        ///<value> La referencia al gestor de exportación.</value>
         private ExportManager ExportManager;
+        ///<value> La referencia al visor de gráficas.</value>
         private ChartWindow ChartWindow;
+        ///<value> La referencia al selector de declarados para desplazamientos.</value>
         private ScrollToDialog ScrollDialog;
-
-        List<string> Type1Fields = new List<string>();
-        private List<string> posiciones = new List<string>();
-        ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
-        const int DECLARED_AMOUNT_LIMIT = 1000;
-
+        ///<value> La referencia a la ventana de progreso.</value>
         ProgressWindow exportProgressBar;
+
+        ///<value> Contiene los valores del registro de tipo 1.</value>
+        List<string> Type1Fields = new List<string>();
+        ///<value> Contiene los valores de la configuración de Excel.</value>
+        private List<string> posiciones = new List<string>();
+        ///<value> Contiene los registros de declarados.</value>
+        ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
+        ///<value> Límite de declarados.</value>
+        readonly int DECLARED_AMOUNT_LIMIT = 1000;
+
+        ///<value> La referencia al BackgroundWorker.</value>
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private string saveLocation = "";
         
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <c>MainWindow</c>.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -45,6 +58,11 @@ namespace Lector_Excel
         }
 
         //Handles file opening button
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir archivo Excel".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -80,6 +98,11 @@ namespace Lector_Excel
         }
 
         //Handles data filling of Type 1
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir registro de tipo 1".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_FillType1_Click(object sender, RoutedEventArgs e)
         {
             Type1Window type1Window = new Type1Window
@@ -110,6 +133,11 @@ namespace Lector_Excel
         }
 
         //Handles text file exporting
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Exportar a archivo BOE".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
             if (Type1Fields.Count < 5)
@@ -152,6 +180,11 @@ namespace Lector_Excel
         }
 
         //Handles text file importing
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir archivo BOE".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Import_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -193,6 +226,11 @@ namespace Lector_Excel
         }
 
         // Handles opening the Import Settings Window
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir configuración Excel".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ImportSettings_Click(object sender, RoutedEventArgs e)
         {
             ImportSettings importSettings = new ImportSettings
@@ -211,6 +249,12 @@ namespace Lector_Excel
         }
 
         //Handles background worker execution
+        /// <summary>
+        /// Inicia la actividad del <c>BackgroundWorker</c>.
+        /// </summary>
+        /// <remarks>Se encarga de registrar el progreso de importación/exportación.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             //ExcelManager.ExportData(Type1Fields, sender as BackgroundWorker, posiciones, saveLocation);
@@ -234,6 +278,11 @@ namespace Lector_Excel
         }
 
         //Handles background worker completion
+        /// <summary>
+        /// Se lanza automáticamente cuando el <c>BackgroundWorker</c> finaliza.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
             List<Declared> result = e.Result as List<Declared>;
@@ -245,6 +294,12 @@ namespace Lector_Excel
         }
 
         //Adapts any imported file to forms
+        /// <summary>
+        /// Adapta los datos recibidos en bruto a estructuras <c>DeclaredFormControl</c>.
+        /// </summary>
+        /// <param name="result"> Una lista de <c>Declared</c> </param>
+        /// See <see cref="MainWindow.Menu_Import_Click(object, RoutedEventArgs)"/>
+        /// <seealso cref="MainWindow.Worker_Completed(object, RunWorkerCompletedEventArgs)"/>
         private void ImportedFileToForm(List<Declared> result)
         {
             Menu_deleteAllDeclared_Click(this, null);
@@ -320,30 +375,56 @@ namespace Lector_Excel
         }
 
         //Handles background worker progress
+        /// <summary>
+        /// Se lanza automáticamente cada vez que el progreso del <c>BackgroundWorker</c> cambia.
+        /// </summary>
+        /// <remarks>Actualiza la barra de progreso con el progreso del <c>BackgroundWorker</c>.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             exportProgressBar.Export_Progressbar.Value = e.ProgressPercentage;
         }
 
         //Handles program exiting
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Salir de la aplicación".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
         //Handles showing about info
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Acerca de".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_About_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/marcod30/Lector-Excel");
         }
 
         //When window is completely loaded, execute this
+        /// <summary>
+        /// Función de evento de carga de <c>MainWindow</c>.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Menu_addNewDeclared_Click(sender, e);
         }
 
         //Handles adding declared forms
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Añadir declarado".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_addNewDeclared_Click(object sender, RoutedEventArgs e)
         {
             if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
@@ -364,6 +445,11 @@ namespace Lector_Excel
         }
 
         //DeclaredContainer is deleted
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Eliminar" en un declarado.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeclaredContainer_OnDeleteButtonClick(object sender, EventArgs e)
         {
             if(listaDeclarados.Contains(sender as DeclaredFormControl))
@@ -384,6 +470,11 @@ namespace Lector_Excel
         }
 
         //Handles deleting all declareds
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Eliminar todos los declarados".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_deleteAllDeclared_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult msg;
@@ -406,6 +497,14 @@ namespace Lector_Excel
         }
 
         //Enable or disable buttons based on declared amount (fires automatically)
+        /// <summary>
+        /// Evento de delegado que activa o desactiva botones del menú.
+        /// </summary>
+        /// <remarks>
+        /// El estado de los botones cambia según la cantidad de declarados actual.
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void DeclaredListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (listaDeclarados.Count > 0)
@@ -440,6 +539,12 @@ namespace Lector_Excel
         }
 
         //When a Declared property changes, trigger this
+        /// <summary>
+        /// Evento de delegado que actualiza los gráficos cuando un declarado cambia.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// See <see cref="ChartWindow"/>
         public void DeclaredChanged(object sender, PropertyChangedEventArgs e)
         {
             //FIXME - Remove this condition so deleting a declared also updates chart
@@ -486,24 +591,44 @@ namespace Lector_Excel
         }
 
         //Launch AEAT WebPage
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir página de la AEAT".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_GoToAEAT_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://www.agenciatributaria.gob.es/AEAT.sede/tramitacion/GI27.shtml");
         }
 
         //Scroll to top
+        /// <summary>
+        /// Mueve la barra de desplazamiento hasta arriba.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ScrollToTop_Click(object sender, RoutedEventArgs e)
         {
             scrl_MainScrollViewer.ScrollToTop();
         }
 
         //Scroll to bottom
+        /// <summary>
+        /// Mueve la barra de desplazamiento hasta abajo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ScrollToBottom_Click(object sender, RoutedEventArgs e)
         {
             scrl_MainScrollViewer.ScrollToBottom();
         }
 
         //On Main Window Closing, close every child window that's still open
+        /// <summary>
+        /// Cuando <c>MainWindow</c> se cierra, cierra todas las ventanas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             if (ScrollDialog != null && ScrollDialog.IsVisible)
@@ -518,6 +643,14 @@ namespace Lector_Excel
         }
 
         //Scroll to selected declared
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Desplazarse a declarado".
+        /// </summary>
+        /// <remarks>
+        /// Abre la ventana de desplazamientos o cambia el foco a ella.
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ScrollToControl_Click(object sender, RoutedEventArgs e)
         {
             if(ScrollDialog  == null || !ScrollDialog.IsVisible)
@@ -534,12 +667,23 @@ namespace Lector_Excel
         }
 
         //Automatically scroll to declared when scrollDialog notifies
+        /// <summary>
+        /// Evento de delegado que mueve la barra de desplazamiento.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AutoScroll(object sender, ScrollEventArgs e)
         {
             listaDeclarados[e.Position - 1].BringIntoView();
         }
 
         //Handles PDF Export
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Exportar a PDF".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// See <see cref="PDFManager"/>
         private void Menu_ExportPDFDraft_Click(object sender, RoutedEventArgs e)
         {
             if(listaDeclarados.Count > 6)
@@ -569,6 +713,11 @@ namespace Lector_Excel
         }
 
         //Check Updates and see how everything blows up
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Buscar actualizaciones".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Updates_Click(object sender, RoutedEventArgs e)
         {
             UpdateChecker updateChecker = new UpdateChecker();
@@ -587,6 +736,11 @@ namespace Lector_Excel
             }
         }
 
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir visor de gráficas".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ChartVisor_Click(object sender, RoutedEventArgs e)
         {
             //Only instantiate one window at a time
@@ -599,6 +753,12 @@ namespace Lector_Excel
         }
 
         //Gets chart request and sends back data to display
+        /// <summary>
+        /// Evento de delegado que recibe datos de un gráfico y los actualiza.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// See <see cref="ChartWindow"/>
         private void UpdateChartInfo(object sender, ChartEventArgs e)
         {
             if(ChartWindow != null && ChartWindow.IsVisible)
@@ -701,6 +861,10 @@ namespace Lector_Excel
         }
 
         //Counts the registries with the same OpKey and returns them as ChartValues
+        /// <summary>
+        /// Función que cuenta los registros con la misma clave de operación y los devuelve en una estructura adaptada para un gráfico.
+        /// </summary>
+        /// <returns> Una lista de valores de gráfico.</returns>
         private ChartValues<int> GetRegistriesPerOpKey()
         {
             ChartValues<int> values = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0 };
@@ -741,6 +905,11 @@ namespace Lector_Excel
         }
 
         //Adds up money per trimester depending on Op Key
+        /// <summary>
+        /// Función que suma el valor de compra/venta de cada registro y lo devuelve en una estructura adaptada para un gráfico.
+        /// </summary>
+        /// <param name="getSells"> Comprueba las ventas en lugar de las compras.</param>
+        /// <returns> Una lista de valores de gráfico.</returns>
         private ChartValues<float> GetBuySellsPerTrimester(bool getSells)
         {
             ChartValues<float> values = new ChartValues<float> {0,0,0,0};
@@ -805,6 +974,11 @@ namespace Lector_Excel
         }
 
         //Gets anual money per province and stores in a dictionary
+        /// <summary>
+        /// Suma el dinero de compra/venta de cada registro, clasificando por provincias.
+        /// </summary>
+        /// <param name="getSells"> Comprueba las ventas en lugar de las compras.</param>
+        /// <returns>Un diccionario cuya clave es la provincia.</returns>
         private Dictionary<string,double> GetBuySellsPerRegion(bool getSells)
         {
             Dictionary<string, double> data = new Dictionary<string, double>();
@@ -870,6 +1044,11 @@ namespace Lector_Excel
         }
 
         //Gets anual money per province and stores in a SeriesCollection of PieSeries
+        /// <summary>
+        /// Suma el dinero de compra/venta de cada registro y lo devuelve en una estructura adaptada a un gráfico de tarta.
+        /// </summary>
+        /// <param name="getSells"> Comprueba las ventas en lugar de las compras.</param>
+        /// <returns> Una serie de colecciones de datos de gráfico.</returns>
         private SeriesCollection GetBuySellsPerRegionAsPie(bool getSells)
         {
             SeriesCollection series = new SeriesCollection();
@@ -996,13 +1175,24 @@ namespace Lector_Excel
         
     }
 
+    /// <summary>
+    /// Clase abstracta de provincia
+    /// </summary>
     public class Province
     {
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>Province</c>
+        /// </summary>
         public Province()
         {
 
         }
 
+        /// <summary>
+        /// Transforma el código numérico de una provincia en su nombre real
+        /// </summary>
+        /// <param name="code"> El código numérico de la provincia.</param>
+        /// <returns> El nombre de la provincia como cadena.</returns>
         public static string CodeToName(string code)
         {
             switch (code)

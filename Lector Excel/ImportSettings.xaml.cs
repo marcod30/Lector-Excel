@@ -10,13 +10,16 @@ using System.IO;
 namespace Lector_Excel
 {
     /// <summary>
-    /// Lógica de interacción para ImportSettings.xaml
+    /// Clase de la ventana de configuración de Excel.
     /// </summary>
     public partial class ImportSettings : Window
     {
+        /// <value> Contiene las posiciones de cada campo en el Excel.</value>
         public List<string> positions { get; set; }
 
-        // Constructor
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ImportSettings</c>.
+        /// </summary>
         public ImportSettings()
         {
             InitializeComponent();
@@ -24,6 +27,11 @@ namespace Lector_Excel
         }
 
         // Handles manual window closing, without saving changes
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Cerrar ventana".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_CloseButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
@@ -31,6 +39,11 @@ namespace Lector_Excel
         }
 
         // Handles manual window closing and saves changes
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Guardar cambios".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ConfirmAndClose_Click(object sender, RoutedEventArgs e)
         {
             positions.Clear();
@@ -51,6 +64,10 @@ namespace Lector_Excel
         }
 
         // Checks if there is any duplicate or empty fields. If there were any, returns true, otherwise returns false.
+        /// <summary>
+        /// Comprueba si algún campo está vacío o duplicado y avisa al usuario.
+        /// </summary>
+        /// <returns>True si algún campo estaba vacío o duplicado, de lo contrario false.</returns>
         private bool CheckForEmptyAndDuplicates()
         {
             if (positions.Count() != positions.Distinct().Count())   // Check if there are duplicates
@@ -68,6 +85,12 @@ namespace Lector_Excel
         }
 
         // Called after window is fully loaded
+        /// <summary>
+        /// Función de evento de carga de ventana.
+        /// </summary>
+        /// <remarks>Comprueba si ya hay datos en la aplicación y de ser así los muestra.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if(positions != null && positions.Count > 0)
@@ -84,6 +107,12 @@ namespace Lector_Excel
         }
 
         // When called, resets all TextBoxes to their default values
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Reiniciar configuración".
+        /// </summary>
+        /// <remarks>Pone todos los campos a sus valores por defecto.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_ResetDefault_Click(object sender, RoutedEventArgs e)
         {
             int i = 0;
@@ -97,6 +126,14 @@ namespace Lector_Excel
         }
 
         // Handles opening file and writing in textboxes
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir archivo".
+        /// </summary>
+        /// <remarks>
+        /// Carga la configuración de Excel desde un archivo y la escribe en los campos.
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_LoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -124,6 +161,12 @@ namespace Lector_Excel
         }
 
         // Handles writing to a file the current content of the textboxes
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Guardar archivo".
+        /// </summary>
+        /// <remarks>Guarda los datos de los campos en un archivo.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_SaveToFile_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();

@@ -9,11 +9,17 @@ using System.Windows;
 
 namespace Lector_Excel
 {
+    /// <summary>
+    /// Clase encargada de importar los datos de un archivo BOE.
+    /// </summary>
     public class ImportManager
     {
         private string importFilePath;
 
-        //Constructor
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ImportManager</c>.
+        /// </summary>
+        /// <param name="path"> El archivo del que importar los datos.</param>
         public ImportManager(string path)
         {
             this.importFilePath = path;
@@ -21,6 +27,12 @@ namespace Lector_Excel
 
 
         //Imports all data fields from a BOE formatted text file
+        /// <summary>
+        /// Importa los datos y los encapsula en estructuras <c>Declared</c>.
+        /// </summary>
+        /// <param name="Type1Fields">La lista donde guardar los datos de tipo 1.</param>
+        /// <param name="declaredList">La lista de declarados donde guardar los datos.</param>
+        /// <returns>True si la importación se produjo sin errores.</returns>
         public bool ImportFromText(out List<string> Type1Fields, out List<Declared> declaredList)
         {
             StreamReader file = new StreamReader(importFilePath, Encoding.GetEncoding("ISO-8859-1"));
@@ -125,6 +137,12 @@ namespace Lector_Excel
         }
 
         //Formats number from BOE style to standard style
+        /// <summary>
+        /// Convierte un número de un campo del modelo 347 a su lectura original.
+        /// </summary>
+        /// <param name="number">El número a formatear.</param>
+        /// <param name="isUnsigned">True si el número es sin signo.</param>
+        /// <returns></returns>
         private string FormatNumber(string number, bool isUnsigned)
         {
             string parteEntera, parteDecimal;
@@ -152,6 +170,14 @@ namespace Lector_Excel
         }
 
         //Formats string from BOE style to standard
+        /// <summary>
+        /// Convierte una cadena de un campo del modelo 347 a su lectura original.
+        /// </summary>
+        /// <remarks>
+        /// Este método se utiliza principalmente para las cadenas vacías y de solo espacios.
+        /// </remarks>
+        /// <param name="s">La cadena a convertir.</param>
+        /// <returns>La cadena modificada.</returns>
         private string FormatString(string s)
         {
             if (string.IsNullOrWhiteSpace(s) && s != null)
@@ -163,6 +189,11 @@ namespace Lector_Excel
         }
 
         // Encodes string from Latin-1 to default UTF8
+        /// <summary>
+        /// Codifica una cadena desde Latin-1 a UTF8.
+        /// </summary>
+        /// <param name="str">La cadena a codificar.</param>
+        /// <returns>Una cadena codificada en UTF-8.</returns>
         private string EncodeToUTF8(string str)
         {
             Encoding iso = Encoding.GetEncoding("ISO-8859-1");
@@ -175,14 +206,24 @@ namespace Lector_Excel
         }
     }
 
+    /// <summary>
+    /// Clase de excepción utilizada por <c>ImportManager</c>.
+    /// </summary>
     [Serializable]
     class BadFileFormattingException : Exception
     {
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>BadFileFormattingException</c>.
+        /// </summary>
         public BadFileFormattingException()
         {
 
         }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>BadFileFormattingException</c>, para la línea del fichero que ha fallado.
+        /// </summary>
+        /// <param name="lineNumber">El número de la línea errónea del fichero.</param>
         public BadFileFormattingException(int lineNumber)
             : base(string.Format("Archivo mal formado. Error al leer la línea: {0}", lineNumber))
         {

@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 
 namespace Lector_Excel
 {
+    /// <summary>
+    /// La clase de un declarado del modelo 347.
+    /// </summary>
     public class Declared
     {
+        /// <value>Marca el declarado como una propiedad física.</value>
         bool isPropertyDeclared;
+        /// <value>Marca el declarado si tiene errores.</value>
         public bool mayContainErrors = false;
+        /// <value> El diccionario de datos del declarado.</value>
         public Dictionary<string, string> declaredData;
 
-        //Constructor
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>Declared</c>.
+        /// </summary>
         public Declared()
         {
             declaredData = new Dictionary<string, string>();
@@ -44,6 +52,11 @@ namespace Lector_Excel
             isPropertyDeclared = false;
         }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>Declared</c>, modificando sus propiedades.
+        /// </summary>
+        /// <param name="dict"> El diccionario de datos.</param>
+        /// <param name="isProperty"> El declarado es de una propiedad física.</param>
         public Declared(Dictionary<string,string> dict, bool isProperty)
         {
             isPropertyDeclared = isProperty;

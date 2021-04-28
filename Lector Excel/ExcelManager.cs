@@ -10,24 +10,42 @@ using System.Windows;
 using Excel = Microsoft.Office.Interop.Excel;
 namespace Lector_Excel
 {
+    /// <summary>
+    /// Clase del gestor de archivos Excel.
+    /// </summary>
     public class ExcelManager
     {
         string path;
+        ///<value>La referencia al proceso de Excel.</value>
         Excel.Application excelApp;
+        ///<value>La referencia a la colección de libros.</value>
         Excel.Workbooks workbooks;
+        ///<value>La referencia al libro.</value>
         Excel.Workbook workbook;
+        ///<value>La referencia a la hoja.</value>
         Excel._Worksheet worksheet;
+        ///<value>La referencia al rango de celdas.</value>
         Excel.Range range;
                                             // Excel is not 0 based, thus the array's first position is not used
         private readonly int[] longitudes = {-1, 9, 9, 40, 1, 2, 2, 1, 1, 16, 1, 1, 15, 16, 4, 16, 16, 16, 16, 16, 16, 16, 16, 17, 1, 1, 1, 16, 201 };
         const int MAX_ALLOWED_COLUMNS = 28; // Model 347 has 28 data fields only, so if further data is found, it will be ignored
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ExcelManager</c>.
+        /// </summary>
+        /// <param name="path"> El directorio del archivo Excel.</param>
         public ExcelManager(string path)
         {
             
             this.path = path;
         }
 
+        /// <summary>
+        /// Obtiene los datos en bruto del archivo Excel.
+        /// </summary>
+        /// <param name="Positions"> Posiciones en las que se encuentran los datos.</param>
+        /// <param name="bw"> El <c>BackgroundWorker</c> encargado de reportar el progreso.</param>
+        /// <returns> Una lista con estructuras <c>Declared</c>.</returns>
         public List<Declared> ImportExcelData(List<string> Positions, BackgroundWorker bw)
         {
             try

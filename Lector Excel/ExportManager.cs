@@ -11,13 +11,22 @@ using System.Windows;
 
 namespace Lector_Excel
 {
+    /// <summary>
+    /// Clase encargada de exportar los datos a ficheros BOE.
+    /// </summary>
     public class ExportManager
     {
+        ///<value>El fichero de destino de la exportación.</value>
         private string exportPath;
         //private readonly int[] longitudes = {9, 9, 40, 1, 2, 2, 1, 1, 16, 1, 1, 15, 16, 4, 16, 16, 16, 16, 16, 16, 16, 16, 17, 1, 1, 1, 16, 201 };
+        ///<value>Los datos del registro de tipo 1.</value>
         private List<string> Type1Data;
 
-        //Contructor
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ExportManager</c>.
+        /// </summary>
+        /// <param name="exportPath">El directorio del fichero donde exportar.</param>
+        /// <param name="type1">Los datos del registro de tipo 1.</param>
         public ExportManager(string exportPath, List<string> type1)
         {
             this.exportPath = exportPath;
@@ -25,6 +34,10 @@ namespace Lector_Excel
         }
 
         // Exports the Type 1 data
+        /// <summary>
+        /// Exporta la información del registro de tipo 1.
+        /// </summary>
+        /// <param name="exportingPath"> El directorio del fichero.</param>
         public void ExportType1Data(string exportingPath = "")
         {
             StringBuilder sb = new StringBuilder();
@@ -75,6 +88,12 @@ namespace Lector_Excel
 
 
         //Export Type 2
+        /// <summary>
+        /// Exporta los datos de tipo 2.
+        /// </summary>
+        /// <param name="declareds"> La lista de declarados que se va a exportar.</param>
+        /// <param name="bw"> El <c>BackgroundWorker</c> encargado de reportar el progreso.</param>
+        /// <returns></returns>
         public bool ExportFromMain(List<Declared> declareds, BackgroundWorker bw)
         {
             try
@@ -159,6 +178,14 @@ namespace Lector_Excel
 
         // Puts the number in the required 347 Model Format
         // Imported from Old Lector Excel
+        /// <summary>
+        /// Pone el número recibido en el formato requerido por el campo del modelo 347.
+        /// </summary>
+        /// <param name="number">El número a formatear.</param>
+        /// <param name="maxlength">La longitud máxima del campo.</param>
+        /// <param name="shouldBeFloat">True si el número debería ser formateado como número de coma flotante.</param>
+        /// <param name="isUnsigned">True si el número es sin signo.</param>
+        /// <returns></returns>
         private string FormatNumber(string number, int maxlength, bool shouldBeFloat, bool isUnsigned)
         {
             string entera = "0", dec = "0";
@@ -224,6 +251,11 @@ namespace Lector_Excel
         }
 
         // Tries to convert accentuated chars into their non-accentuated variants
+        /// <summary>
+        /// Convierte los caracteres acentuados en sus variantes sin acentuar.
+        /// </summary>
+        /// <param name="text">El texto del que quitar los acentos.</param>
+        /// <returns>Una cadena con el texto sin acentos.</returns>
         private string deAccent(string text)
         {
             var normalizedString = text.Normalize(NormalizationForm.FormD);
@@ -242,6 +274,11 @@ namespace Lector_Excel
         }
 
         // Encodes string to Latin-1, as required from model
+        /// <summary>
+        /// Codifica el texto en Latin-1.
+        /// </summary>
+        /// <param name="str">El texto a codificar.</param>
+        /// <returns>Una cadena con el texto codificado en Latin-1.</returns>
         private string EncodeToLatin(string str)
         {
             Encoding iso = Encoding.GetEncoding("ISO-8859-1");

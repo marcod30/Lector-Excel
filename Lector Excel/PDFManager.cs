@@ -17,9 +17,16 @@ using PdfSharp.Pdf.IO;
 
 namespace Reader_347
 {
+    /// <summary>
+    /// Clase del gestor de archivos PDF.
+    /// </summary>
     public class PDFManager
     {
         string DestinationPath;
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>PDFManager</c>.
+        /// </summary>
+        /// <param name="destination"></param>
         public PDFManager(string destination)
         {
             this.DestinationPath = destination;
@@ -27,6 +34,12 @@ namespace Reader_347
 
         //Handles exporting up to 6 declareds to a pdf.
         //  * Due to Pdfsharp limitations, 6 is currently the max amount. (Change library in the future?)
+        /// <summary>
+        /// Exporta los datos recibidos a un PDF.
+        /// </summary>
+        /// <param name="type1">Los datos del registro de tipo 1.</param>
+        /// <param name="declareds">Los datos de los declarados.</param>
+        /// <returns>True si la exportación se produjo con éxito, de lo contrario false.</returns>
         public bool ExportToPDFDraft(List<string> type1, List<Declared> declareds)
         {
             try
@@ -343,6 +356,12 @@ namespace Reader_347
             }
         }
 
+        /// <summary>
+        /// Accede al campo de texto del PDF y lo modifica.
+        /// </summary>
+        /// <param name="fieldName">El nombre del campo.</param>
+        /// <param name="value">El valor que se quiere asignar al campo.</param>
+        /// <param name="formList">La lista de campos del PDF.</param>
         private void SetPdfTextFieldValue(string fieldName, string value, ref PdfAcroForm formList)
         {
             if(formList.Fields[fieldName] != null)
@@ -352,6 +371,12 @@ namespace Reader_347
             }
         }
 
+        /// <summary>
+        /// Accede a una casilla de verificación del PDF y la modifica.
+        /// </summary>
+        /// <param name="fieldName">El nombre de la casilla.</param>
+        /// <param name="value">El valor que se quiere asignar a la casilla.</param>
+        /// <param name="formList">La lista de campos del PDF.</param>
         private void SetPdfCheckBoxValue(string fieldName, bool value, ref PdfAcroForm formList)
         {
             if(formList.Fields[fieldName] != null)
@@ -362,6 +387,13 @@ namespace Reader_347
         }
 
         //Creates PDF from scratch with graph picture and related text using Migradoc Library
+        /// <summary>
+        /// Crea un PDF desde cero, incluyendo una imagen del gráfico y sus datos empleando Migradoc.
+        /// </summary>
+        /// <param name="imageStream">El flujo de memoria que contiene la imagen del gráfico.</param>
+        /// <param name="chartDataHolder">Los datos del gráfico.</param>
+        /// <returns>True si la creación se produjo con éxito, de lo contrario false.</returns>
+        /// Ver <see cref="ChartWindow.Menu_SaveGraphAs_Click(object, RoutedEventArgs)"/>
         public bool CreatePDFWithImage(MemoryStream imageStream, ChartDataHolder chartDataHolder)
         {
             //Create document and define fonts, sections, etc.
@@ -414,6 +446,15 @@ namespace Reader_347
         }
 
         //Creates PDF with graph picture using PDFSharp library
+        /// <summary>
+        /// Crea un PDF desde 0, con la imagen de un gráfico y sus datos empleando PDFSharp.
+        /// </summary>
+        /// <remarks>
+        /// Este método está obsoleto y actualmente no se usa.
+        /// </remarks>
+        /// <param name="imageStream"></param>
+        /// <param name="chartDataHolder"></param>
+        /// Ver <see cref="PDFManager.CreatePDFWithImage(MemoryStream, ChartDataHolder)"/>
         public void CreatePDFWithImage_OLD(MemoryStream imageStream, ChartDataHolder chartDataHolder)
         {
             PdfDocument pdf = new PdfDocument(DestinationPath);
@@ -590,8 +631,15 @@ namespace Reader_347
         }
     }
 
+    /// <summary>
+    /// Clase de excepción usada por <c>PDFManager</c>.
+    /// </summary>
     [Serializable] class DeclaredAmountException : Exception
     {
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>DeclaredAmountException</c>.
+        /// </summary>
+        /// <param name="amount">La cantidad de declarados recibidos.</param>
         public DeclaredAmountException (int amount) : base (string.Format("El número de declarados ({0}) es incompatible", amount))
         {
 

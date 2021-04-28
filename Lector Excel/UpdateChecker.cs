@@ -7,9 +7,14 @@ using System.Windows;
 
 namespace Reader_347
 {
+    /// <summary>
+    /// Clase encargada de buscar actualizaciones.
+    /// </summary>
     public class UpdateChecker
     {
-        //Constructor
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>UpdateChecker</c>.
+        /// </summary>
         public UpdateChecker()
         {
             
@@ -18,6 +23,10 @@ namespace Reader_347
         private readonly string ReleasesURI = "https://api.github.com/repos/marcod30/Lector-Excel/releases/latest";
         private readonly Version CurrentApplicationVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
+        /// <summary>
+        /// Usa la API de GitHub y obtiene el número de versión actual.
+        /// </summary>
+        /// <returns>True si la solicitud se realizó con éxito, de lo contrario false.</returns>
         public bool GetReleases()
         {
             try
@@ -68,13 +77,24 @@ namespace Reader_347
         }
     }
 
+    /// <summary>
+    /// Clase de excepción usada por <c>UpdateChecker</c>.
+    /// </summary>
     [Serializable] class BadApplicationVersion : Exception
     {
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>BadApplicationVersion</c>.
+        /// </summary>
         public BadApplicationVersion()
         {
 
         }
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>BadApplicationVersion</c>, indicando la incompatibilidad de versiones.
+        /// </summary>
+        /// <param name="current">La versión de aplicación actual.</param>
+        /// <param name="newV">La versión de aplicación nueva.</param>
         public BadApplicationVersion(Version current, Version newV) : base (string.Format("La aplicación actual contiene un número de versión ({0}) incompatible con el actual ({1})",current.ToString(),newV.ToString()))
         {
 

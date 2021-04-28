@@ -22,27 +22,49 @@ using Lector_Excel;
 
 namespace Reader_347
 {
+    /// <summary>
+    /// Clase de EventArgs usada por el delegado del visor de gráficos.
+    /// </summary>
     public class ChartEventArgs : EventArgs
     {
+        /// <value> El tipo de gráfico</value>
         public string chartType;
     }
-
-    public delegate void ChartSetterDelegate(object sender, ChartEventArgs e);
     /// <summary>
-    /// Lógica de interacción para ChartWindow.xaml
+    /// Delegado empleado por el visor de gráficos para la comunicación con <c>MainWindow</c>
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public delegate void ChartSetterDelegate(object sender, ChartEventArgs e);
+
+    /// <summary>
+    /// La clase de la ventana del visor de gráficos.
     /// </summary>
     public partial class ChartWindow : Window
     {
+        ///<value> Obtiene o cambia la serie de colecciones de datos del gráfico actual.</value>
         public SeriesCollection SeriesCollection { get; set; }
+        ///<value> Obtiene o cambia la lista de etiquetas del gráfico actual.</value>
         public string[] Labels { get; set; }
+        ///<value> Obtiene o cambia el formateador del gráfico actual.</value>
         public Func<double, string> Formatter { get; set; }
+        ///<value> Obtiene o cambia el formateador del gráfico de tarta actual.</value>
         public Func<ChartPoint, string> PieFormatter { get; set; }
+        ///<value> Obtiene o cambia el diccionario de valores del gráfico de mapa actual.</value>
         public Dictionary<string,double> MapValues { get; set; }
+        ///<value> Obtiene o cambia el tipo de gráfico actual.</value>
         public string ChartType { get; set; }
+        ///<value> Obtiene o cambia el gráfico de mapa actual.</value>
         public GeoMap GeoMap { get; set; }
 
+        /// <summary>
+        /// Evento asociado al delegado del visor de gráficos.
+        /// </summary>
         public event ChartSetterDelegate ChartDelegate;
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ChartWindow</c>.
+        /// </summary>
         public ChartWindow()
         {
             InitializeComponent();
@@ -50,6 +72,10 @@ namespace Reader_347
         }
 
         //Sends info to parent window
+        /// <summary>
+        /// Invoca el delegado y envía información a <c>MainWindow</c>.
+        /// </summary>
+        /// <param name="e"></param>
         private void OnChartSelection(ChartEventArgs e)
         {
             dock_Main.Children.Remove(lbl_ChartNotSelected);
@@ -61,6 +87,12 @@ namespace Reader_347
         }
 
         //Request a CartesianChart, Vertical Bars, comparing Amount of registries per Op. Key
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de barras verticales".
+        /// </summary>
+        /// <remarks>El gráfico muestra los registros por clave de operación.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_VertBar_RegPerOpKey_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "VerticalBar_RegistryPerOpKey" };
@@ -109,6 +141,12 @@ namespace Reader_347
         }
 
         //Request a CartesianChart, Vertical Bars, showing money of buy/sell operation per trimester
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de barras verticales".
+        /// </summary>
+        /// <remarks>El gráfico muestra las compras/ventas por trimestre.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_VertBar_BuySellPerTrimester_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "VerticalBar_BuySellPerTrimester" };
@@ -157,6 +195,12 @@ namespace Reader_347
         }
 
         //Request a CartesianChart, Horizontal Bars, comparing Amount of registries per Op. Key
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de barras horizontales".
+        /// </summary>
+        /// <remarks>El gráfico muestra los registros por clave de operación.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorizBar_RegPerOpKey_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "HorizontalBar_RegistryPerOpKey" };
@@ -205,6 +249,12 @@ namespace Reader_347
         }
 
         //Request a CartesianChart, Horizontal Bars, showing money of buy/sell operation per trimester
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de barras horizontales".
+        /// </summary>
+        /// <remarks>El gráfico muestra las compras/ventas por trimestre.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HorizBar_BuySellPerTrimester_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "HorizontalBar_BuySellPerTrimester" };
@@ -253,6 +303,12 @@ namespace Reader_347
         }
 
         //Request a CartesianChart, Lines, showing money of buy/sell operation per trimester
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de líneas".
+        /// </summary>
+        /// <remarks>El gráfico muestra las compras/ventas por trimestre.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Line_BuySellPerTrimester_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Line_BuySellPerTrimester" };
@@ -301,6 +357,12 @@ namespace Reader_347
         }
 
         //Request a Geo Map, showing money of buy operations per region
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de mapa".
+        /// </summary>
+        /// <remarks>El gráfico muestra las compras por región.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Map_BuyTotal_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Map_BuyTotal" };
@@ -332,6 +394,12 @@ namespace Reader_347
         }
 
         //Request a Geo Map, showing money of sell operations per region
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de mapa".
+        /// </summary>
+        /// <remarks>El gráfico muestra las ventas por región.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Map_SellTotal_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Map_SellTotal" };
@@ -364,6 +432,12 @@ namespace Reader_347
         }
 
         //Request Pie Chart, showing money of buy operations per region
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de tarta".
+        /// </summary>
+        /// <remarks>El gráfico muestra las compras por región.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Pie_BuyPerRegion_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Pie_BuyTotal" };
@@ -394,6 +468,12 @@ namespace Reader_347
         }
 
         //Request a Pie Chart, showing money of sell operations per region
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Mostrar gráfico de tarta".
+        /// </summary>
+        /// <remarks>El gráfico muestra las ventas por región.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Pie_SellPerRegion_Click(object sender, RoutedEventArgs e)
         {
             ChartEventArgs chartEventArgs = new ChartEventArgs { chartType = "Pie_SellTotal" };
@@ -424,6 +504,13 @@ namespace Reader_347
         }
 
         //Saves the current graph as the desired format
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Guardar gráfico".
+        /// </summary>
+        /// <remarks>Permite guardar el gráfico como imagen o PDF.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <see cref="PDFManager.CreatePDFWithImage(MemoryStream, ChartDataHolder)"/>
         private void Menu_SaveGraphAs_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveDialog = new SaveFileDialog();
@@ -455,7 +542,12 @@ namespace Reader_347
         }
 
         //Capture UIElement and save as MemoryStream
-        public MemoryStream CaptureScreen(UIElement source)
+        /// <summary>
+        /// Hace una captura de pantalla para guardar el gráfico.
+        /// </summary>
+        /// <param name="source"> El elemento a capturar.</param>
+        /// <returns> La captura en forma de <c>MemoryStream</c></returns>
+        private MemoryStream CaptureScreen(UIElement source)
         {
             try
             {
@@ -493,14 +585,26 @@ namespace Reader_347
             }
         }
     }
-
+    /// <summary>
+    /// Clase auxiliar empleada para almacenar datos de un gráfico.
+    /// </summary>
     public class ChartDataHolder
     {
+        /// <value> La lista de datos del gráfico.</value>
         public List<string> ChartData;
+        ///<value> El tipo de gráfico.</value>
         private string ChartType;
+        ///<value> La referencia al gráfico.</value>
         private Chart CurrentChart;
+        ///<value> La referencia al gráfico de mapa.</value>
         private GeoMap CurrentMapChart;
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ChartDataHolder</c>.
+        /// </summary>
+        /// <param name="chartType">El tipo de gráfico.</param>
+        /// <param name="chart">La referencia al gráfico.</param>
+        /// <param name="map">La referencia al gráfico de mapa.</param>
         public ChartDataHolder(string chartType, Chart chart = null, GeoMap map = null)
         {
             CurrentChart = chart;
@@ -510,6 +614,9 @@ namespace Reader_347
             OrganizeChartData();
         }
 
+        /// <summary>
+        /// Recoge la información del gráfico y la organiza para su posterior representación.
+        /// </summary>
         private void OrganizeChartData()
         {
             if(ChartData is null)

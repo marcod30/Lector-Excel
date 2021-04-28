@@ -10,16 +10,19 @@ using System.Windows.Controls;
 namespace Lector_Excel
 {
     /// <summary>
-    /// Lógica de interacción para Type1Window.xaml
+    /// Clase de la ventana de edición del registro de tipo 1.
     /// </summary>
     public partial class Type1Window : Window
     {
-        
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>Type1Window</c>.
+        /// </summary>
         public Type1Window()
         {
             InitializeComponent();
             Lista = new List<string>();
         }
+        /// <value>Obtiene o cambia la lista de datos del registro.</value>
         public List<string> Lista { get; set; }
         /*
          * Lista holds the information from Type1Window's TextBoxes in order of appearance
@@ -42,6 +45,11 @@ namespace Lector_Excel
          *  14 => txt_NIFLegal
         */
         // Handles changes confirmation
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Guardar cambios".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_OK_Click(object sender, RoutedEventArgs e)
         {
             Lista.Clear();
@@ -81,12 +89,23 @@ namespace Lector_Excel
         }
 
         // Handles window force close
+        /// <summary>
+        /// Función de evento de click izquiero asociado a "No guardar".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
             this.Close();
         }
 
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Abrir archivo".
+        /// </summary>
+        /// <remarks>Recupera los datos de registro de tipo 1 de un archivo.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_importData_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -146,6 +165,12 @@ namespace Lector_Excel
             }
         }
 
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Guardar en archivo".
+        /// </summary>
+        /// <remarks>Almacena los datos del registro de tipo 1 en un archivo.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_exportData_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -166,6 +191,12 @@ namespace Lector_Excel
         }
 
         // When Window is completely loaded, execute this
+        /// <summary>
+        /// Función de evento de carga de la ventana.
+        /// </summary>
+        /// <remarks>Comprueba si había datos del registro de tipo 1 en memoria y, de ser así, los carga.</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (Lista != null && Lista.Count > 0)

@@ -20,6 +20,9 @@ namespace Lector_Excel
     /// </summary>
     public partial class AboutWindow : Window
     {
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>AboutWindow</c>
+        /// </summary>
         public AboutWindow()
         {
             InitializeComponent();

@@ -6,7 +6,7 @@ using System.Windows.Interop;
 namespace Lector_Excel
 {
     /// <summary>
-    /// Lógica de interacción para ProgressWindow.xaml
+    /// Ventana con una barra de progreso.
     /// </summary>
     public partial class ProgressWindow : Window
     {
@@ -21,6 +21,11 @@ namespace Lector_Excel
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        /// <summary>
+        /// Inicializa una nueva instancia de <c>ProgressWindow</c>.
+        /// </summary>
+        /// <param name="isIndeterminate">True si la barra de progreso debe ser indeterminada.</param>
+        /// <param name="title">Título de la ventana.</param>
         public ProgressWindow(bool isIndeterminate, string title)
         {
             InitializeComponent();
@@ -29,12 +34,18 @@ namespace Lector_Excel
         }
 
         // Property that has progress
+        /// <value>Obtiene o cambia el valor de la barra de progreso.</value>
         public int Amount
         {
             get { return Amount; }
             set { Amount = value; }
         }
 
+        /// <summary>
+        /// Función de evento de carga de la ventana.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Export_Progressbar.IsIndeterminate = isIndeterminate;
