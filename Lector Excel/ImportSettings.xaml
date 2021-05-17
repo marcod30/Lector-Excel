@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="Opciones de importación" Height="800" Width="600" ResizeMode="CanMinimize"
+        Title="Configuración de Excel" Height="900" Width="600" ResizeMode="CanMinimize"
         Loaded="Window_Loaded">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -98,7 +98,7 @@
         </Menu>
         <StackPanel DockPanel.Dock="Left" Margin="5">
             <Label FontWeight="Bold" MinWidth="250">
-                Dato a importar
+                Tipo de dato
             </Label>
             <Label HorizontalAlignment="Right">
                 NIF del declarado
@@ -175,7 +175,9 @@
             <Label HorizontalAlignment="Right" Content="Operación con bienes vinculados o destinados a&#10;vincularse al régimen de depósito distinto del aduanero"/>
 
             <Label HorizontalAlignment="Right" Content="Importe anual de las operaciones devengadas conforme&#10;al criterio de caja del IVA"/>
-
+            
+            <Label FontWeight="Bold" Content="Otras opciones"></Label>
+            <CheckBox Name="chk_TitleRow" Margin="50,25,0,0" IsChecked="True">La fila 1 contiene títulos</CheckBox>
         </StackPanel>
         <StackPanel Name="stack_text" DockPanel.Dock="Right" Margin="5">
             <Label FontWeight="Bold">

@@ -400,13 +400,15 @@ namespace Reader_347
             Document pdf = new Document();
             Section section0 = pdf.AddSection();
             
-            Font fntTitle = new Font("Times New Roman", 28);
+            Font fntTitle = new Font("Calibri", 28);
             Font fntNormal = new Font("Calibri", 12);
 
             //Add title
             Paragraph paragraph0 = section0.AddParagraph();
             paragraph0.Format.Alignment = ParagraphAlignment.Center;
             paragraph0.AddFormattedText(chartDataHolder.ChartData[0], fntTitle);
+
+            paragraph0.AddLineBreak();    //Add a couple of line breaks
             paragraph0.AddLineBreak();
 
             //Add image chart

@@ -123,6 +123,8 @@ namespace Lector_Excel
                     t.Text = ((char)('A' + i++)).ToString().ToUpper();
                 }
             }
+
+            chk_TitleRow.IsChecked = true;
         }
 
         // Handles opening file and writing in textboxes
@@ -170,7 +172,7 @@ namespace Lector_Excel
         private void Menu_SaveToFile_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Archivos de configuración de importación (*.is347)|*is347|Archivos de LectorExcel (*.lectorexcel)|*.lectorexcel";
+            saveFileDialog.Filter = "Archivos de configuración de Excel (*.is347)|*is347|Archivos de LectorExcel (*.lectorexcel)|*.lectorexcel";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             positions.Clear();
