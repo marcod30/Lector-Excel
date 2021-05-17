@@ -136,5 +136,137 @@ namespace Lector_Excel
             }
         }
 
+        // TODO Add method for exporting to Excel?
+        /// <summary>
+        /// Exporta el contenido a un archivo Excel.
+        /// </summary>
+        /// <returns> True si la exportación se hizo con éxito. </returns>
+        /// <remarks> TODO METHOD </remarks>
+        public bool ExportToExcel(List<string> Positions, List<Declared> declareds, BackgroundWorker bw)
+        {
+            try
+            {
+                excelApp = new Excel.Application();
+                excelApp.Visible = false;
+
+                workbooks = excelApp.Workbooks;
+                workbook = workbooks.Add();
+                worksheet = excelApp.ActiveSheet;
+
+                Debug.WriteLine("STARTING IMPORT FROM " + this.path);
+
+                range = worksheet.UsedRange;
+
+                //Set title row
+                worksheet.Rows[1].Font.Bold = true;
+
+                worksheet.Cells[1, Positions[0]] = "NIF Declarado";
+                worksheet.Cells[1, Positions[1]] = "NIF Rep. Legal";
+                worksheet.Cells[1, Positions[20]] = "NIF Op. Comunitario";
+                worksheet.Cells[1, Positions[2]] = "Nombre Declarado";
+                worksheet.Cells[1, Positions[3]] = "Cod. Provincia";
+                worksheet.Cells[1, Positions[4]] = "Cod. Pais";
+                worksheet.Cells[1, Positions[5]] = "Clave Op.";
+                worksheet.Cells[1, Positions[7]] = "Op. Seguros" ;
+                worksheet.Cells[1, Positions[8]] = "Arr. local negocio";
+                worksheet.Cells[1, Positions[21]] = "Op. IVA caja";
+                worksheet.Cells[1, Positions[22]] = "Op. Inv. sujeto pasivo";
+                worksheet.Cells[1, Positions[23]] = "Op. Reg. no aduanero";
+                worksheet.Cells[1, Positions[9]] = "Importe metalico";
+                worksheet.Cells[1, Positions[6]] = "Importe anual";
+                worksheet.Cells[1, Positions[10]] = "Imp. anual por t. de inmueble";
+                worksheet.Cells[1, Positions[24]] = "Imp. anual de op. devengadas";
+                worksheet.Cells[1, Positions[11]] = "Ejercicio";
+                worksheet.Cells[1, Positions[12]] = "Imp. op. T1";
+                worksheet.Cells[1, Positions[14]] = "Imp. op. T2";
+                worksheet.Cells[1, Positions[16]] = "Imp. op. T3";
+                worksheet.Cells[1, Positions[18]] = "Imp. op. T4";
+                worksheet.Cells[1, Positions[13]] = "Imp. anual t. de inmueble T1";
+                worksheet.Cells[1, Positions[15]] = "Imp. anual t. de inmueble T1";
+                worksheet.Cells[1, Positions[17]] = "Imp. anual t. de inmueble T1";
+                worksheet.Cells[1, Positions[19]] = "Imp. anual t. de inmueble T1";
+
+                for (int i = 0; i < declareds.Count; i++)
+                {
+                    worksheet.Cells[i + 2, Positions[0]] = declareds[i].declaredData["DeclaredNIF"];
+                    worksheet.Cells[i + 2, Positions[1]] = declareds[i].declaredData["LegalRepNIF"];
+                    worksheet.Cells[i + 2, Positions[20]] = declareds[i].declaredData["CommunityOpNIF"];
+                    worksheet.Cells[i + 2, Positions[2]] = declareds[i].declaredData["DeclaredName"];
+                    worksheet.Cells[i + 2, Positions[3]] = declareds[i].declaredData["ProvinceCode"];
+                    worksheet.Cells[i + 2, Positions[4]] = declareds[i].declaredData["CountryCode"];
+                    worksheet.Cells[i + 2, Positions[5]] = declareds[i].declaredData["OpKey"];
+                    worksheet.Cells[i + 2, Positions[7]] = declareds[i].declaredData["OpInsurance"];
+                    worksheet.Cells[i + 2, Positions[8]] = declareds[i].declaredData["LocalBusinessLease"];
+                    worksheet.Cells[i + 2, Positions[21]] = declareds[i].declaredData["OpIVA"];
+                    worksheet.Cells[i + 2, Positions[22]] = declareds[i].declaredData["OpPassive"];
+                    worksheet.Cells[i + 2, Positions[23]] = declareds[i].declaredData["OpCustoms"];
+                    worksheet.Cells[i + 2, Positions[9]] = declareds[i].declaredData["TotalMoney"];
+                    worksheet.Cells[i + 2, Positions[6]] = declareds[i].declaredData["AnualMoney"];
+                    worksheet.Cells[i + 2, Positions[10]] = declareds[i].declaredData["AnualPropertyMoney"];
+                    worksheet.Cells[i + 2, Positions[24]] = declareds[i].declaredData["AnualOpIVA"];
+                    worksheet.Cells[i + 2, Positions[11]] = declareds[i].declaredData["Exercise"];
+                    worksheet.Cells[i + 2, Positions[12]] = declareds[i].declaredData["TrimestralOp1"];
+                    worksheet.Cells[i + 2, Positions[14]] = declareds[i].declaredData["TrimestralOp2"];
+                    worksheet.Cells[i + 2, Positions[16]] = declareds[i].declaredData["TrimestralOp3"];
+                    worksheet.Cells[i + 2, Positions[18]] = declareds[i].declaredData["TrimestralOp4"];
+                    worksheet.Cells[i + 2, Positions[13]] = declareds[i].declaredData["AnualPropertyIVAOp1"];
+                    worksheet.Cells[i + 2, Positions[15]] = declareds[i].declaredData["AnualPropertyIVAOp2"];
+                    worksheet.Cells[i + 2, Positions[17]] = declareds[i].declaredData["AnualPropertyIVAOp3"];
+                    worksheet.Cells[i + 2, Positions[19]] = declareds[i].declaredData["AnualPropertyIVAOp4"];
+
+
+                    //Report progress through BackgroundWorker
+                    float progress = (float)i / declareds.Count * 100;
+                    Debug.WriteLine(progress + "%");
+                    bw.ReportProgress((int)progress);
+                }
+
+                //Set column size to fit text
+                for(int i = 1; i <= declareds[0].declaredData.Keys.Count; i++)
+                {
+                    worksheet.Columns[i].AutoFit();
+                }
+
+                //Disable alerts so overwrite popup does not appear
+                excelApp.DisplayAlerts = false; 
+                //Save document with this spaghet
+                workbook.SaveAs(path, Excel.XlFileFormat.xlOpenXMLWorkbook, System.Reflection.Missing.Value, System.Reflection.Missing.Value, false, false, Excel.XlSaveAsAccessMode.xlNoChange,
+                    Excel.XlSaveConflictResolution.xlUserResolution, true, System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value);
+
+                //Reenable alerts
+                excelApp.DisplayAlerts = true;
+                return true;
+            }
+
+            catch (Exception e)
+            {
+                MessageBoxResult msg = MessageBox.Show("Ha ocurrido un error. La exportación se interrumpirá.\nCódigo del error: " + e, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            finally
+            {
+                //cleanup
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                //rule of thumb for releasing com objects:
+                //  never use two dots, all COM objects must be referenced and released individually
+                //  ex: [somthing].[something].[something] is bad
+
+                //release com objects to fully kill excel process from running in the background
+                Marshal.ReleaseComObject(range);
+                Marshal.ReleaseComObject(worksheet);
+
+                //close and release
+                workbook.Close();
+                Marshal.ReleaseComObject(workbooks);
+                Marshal.ReleaseComObject(workbook);
+
+                //quit and release
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+            }
+        }
     }
 }
