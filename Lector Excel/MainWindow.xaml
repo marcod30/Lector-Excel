@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lector_Excel"
         mc:Ignorable="d"
-        Title="347 Reader" Height="480" Width="720" ResizeMode="CanResize" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="347 Reader" Height="480" Width="720" MinHeight="240" MinWidth="360" WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize" Loaded="Window_Loaded" Closing="Window_Closing">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
@@ -43,7 +44,18 @@
                     </MenuItem.Icon>
                 </MenuItem>
 
-                <MenuItem Name="menu_ImportSettings" Header="Opciones de importación Excel..." Click="Menu_ImportSettings_Click">
+                <MenuItem Name="menu_SaveExcel" Header="Exportar datos a Excel" Click="Menu_SaveExcel_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.796,0.93" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_ImportSettings" Header="Opciones de Excel..." Click="Menu_ImportSettings_Click">
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>

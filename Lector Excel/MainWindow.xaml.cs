@@ -92,7 +92,41 @@ namespace Lector_Excel
 
                 if(posiciones.Count == 0)
                 {
-                    MessageBoxResult msg = MessageBox.Show("No se han establecido parámetros de importación", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Función de evento de click izquierdo asociado a "Exportar datos a Excel".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Menu_SaveExcel_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Hojas de cálculo Excel (*.xlsx)|*.xlsx";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (saveFileDialog.ShowDialog() == true && posiciones.Count != 0)
+            {
+                ExcelManager = new ExcelManager(saveFileDialog.FileName);
+                backgroundWorker.RunWorkerAsync(argument: "excelExport");
+
+                exportProgressBar = new ProgressWindow(false, "Exportando a Excel...");
+                exportProgressBar.Owner = this;
+                exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                exportProgressBar.ShowDialog();
+            }
+            else
+            {
+                if (ExcelManager != null)
+                {
+                    menu_Export.IsEnabled = false;
+                }
+
+                if (posiciones.Count == 0)
+                {
+                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -275,6 +309,17 @@ namespace Lector_Excel
                 temp = ExcelManager.ImportExcelData(posiciones, sender as BackgroundWorker);
                 e.Result = temp;
             }
+
+            if ((e.Argument as string).Equals("excelExport"))
+            {
+                List<Declared> temp = new List<Declared>();
+                foreach (DeclaredFormControl dfc in listaDeclarados)
+                {
+                    temp.Add(dfc.declared);
+                }
+
+                ExcelManager.ExportToExcel(posiciones, temp, sender as BackgroundWorker);
+            }
         }
 
         //Handles background worker completion
@@ -452,7 +497,11 @@ namespace Lector_Excel
         /// <param name="e"></param>
         private void DeclaredContainer_OnDeleteButtonClick(object sender, EventArgs e)
         {
-            if(listaDeclarados.Contains(sender as DeclaredFormControl))
+            MessageBoxResult msg = MessageBox.Show("¿Eliminar el registro? Los datos borrados no se pueden recuperar.", "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (msg == MessageBoxResult.No)
+                return;
+
+            if (listaDeclarados.Contains(sender as DeclaredFormControl))
             {
                 listaDeclarados.Remove(sender as DeclaredFormControl);
                 dock_DeclaredContainer.Children.Remove(sender as DeclaredFormControl);
@@ -479,7 +528,7 @@ namespace Lector_Excel
         {
             MessageBoxResult msg;
             if (sender is MenuItem)
-                msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCiÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             else
                 msg = MessageBoxResult.Yes;
 
@@ -1172,7 +1221,6 @@ namespace Lector_Excel
 
             return series;
         }
-        
     }
 
     /// <summary>
