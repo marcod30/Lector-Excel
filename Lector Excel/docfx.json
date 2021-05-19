@@ -6,6 +6,7 @@
           "files": [
             "*.csproj"
           ],
+          "cwd": ".",
           "exclude": [
             "**/obj/**",
             "**/bin/**",
@@ -13,8 +14,7 @@
           ]
         }
       ],
-      "dest": "obj/api",
-	  "disableDefaultFilter": true
+      "dest": "obj/api"
     }
   ],
   "build": {

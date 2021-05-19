@@ -1,15 +1,18 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/Marco30/Source/Repos/marcod30/Lector-Excel/Lector Excel",
+  "source_base_path": "C:/Users/Marco30/source/repos/marcod30/Lector-Excel/Lector Excel",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "yMm7thTLpMaUVEEFY4GmvA=="
+          "hash": "bDFTC5m79qHtVmqIDRfU23/jbFOgvwgssPHjxvr3sLw="
         }
       },
       "is_incremental": true,
@@ -21,7 +24,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "UxZrpZc5J8eSvoWexbjnng=="
+          "hash": "ZWwrQTxwiw4whBucNmeG7Q60lSVebaDeNrSBsQkcfzY="
         }
       },
       "is_incremental": true,
@@ -33,19 +36,22 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "gB8AESyvNru97tzIZofEEg=="
+          "hash": "BlPxk5mtl2kgfcZUgkEguqiSAR/EUyUTT4EdebwkQvs="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "IJ+48hdNdSbVJNVwXEUBzw=="
+          "hash": "UphMTvyzVpRwxs7ZABNZrkiQplKEfbopr1Ve1yFWeBM="
         }
       },
       "is_incremental": true,
@@ -57,7 +63,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.AboutWindow.html",
-          "hash": "6KO6i/df9EFdRHti1FcCfg=="
+          "hash": "3CqUbp7DLY6XR6Ie5ajg+wMv82EJZdPBWK6WHlmEiR4="
         }
       },
       "is_incremental": true,
@@ -69,19 +75,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.App.html",
-          "hash": "oTJMVX0oLB939JCUsjRdiw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Lector_Excel.BadFileFormattingException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lector_Excel.BadFileFormattingException.html",
-          "hash": "zqjdNed56cArNzkFpCDWZA=="
+          "hash": "TrymDUfagg7KlJQ1wxGlP4Dy4EANbpBfyOnZK4/Mz6U="
         }
       },
       "is_incremental": true,
@@ -93,7 +87,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.Declared.html",
-          "hash": "v4cW6JXm3kOgBQOA+vI5RA=="
+          "hash": "sE1jxh4YZXNU/RZHdbCqzKn1ASFvdOP/KIfP83uYZn8="
         }
       },
       "is_incremental": true,
@@ -105,7 +99,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.DeclaredFormControl.html",
-          "hash": "cA6gqcUDQ1tIbtAmWP7O1g=="
+          "hash": "/+si/QUnTM1icIkod9zV5SAkabKKr3FdiwTRuGp1HZg="
         }
       },
       "is_incremental": true,
@@ -117,7 +111,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ExcelManager.html",
-          "hash": "bMerWC/rXp0deAaN/danmQ=="
+          "hash": "3ze1KkYlD9wR+nDbJ4bu4UXeKq63QriPIRMhRjnkYQM="
         }
       },
       "is_incremental": true,
@@ -129,7 +123,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ExportManager.html",
-          "hash": "rWJ+EqeixL123yoxBSPqkQ=="
+          "hash": "14t4/I82+cTHJtcdbgZBiRVJErBlFppLLWWrCyWOag4="
         }
       },
       "is_incremental": true,
@@ -141,7 +135,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ImportManager.html",
-          "hash": "rouvfmvG0XxouUJznRaAOA=="
+          "hash": "PU9iKX130M926HK/h6lnP5rK6ShSa8gsda0qqB55ll4="
         }
       },
       "is_incremental": true,
@@ -153,7 +147,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ImportSettings.html",
-          "hash": "uMoWNePLPYjjfUWwcEuvmg=="
+          "hash": "OF5ZzqXKHjyFoW7g8DOY0g2/XnU4MA6ZRHxlNSHliSE="
         }
       },
       "is_incremental": true,
@@ -165,7 +159,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.MainWindow.html",
-          "hash": "dhKLU1BNC4waZEbtILOuWA=="
+          "hash": "ZoQRL75a/uQPZSg0MQd9xAUKiK87C9IsMDbW1r539WA="
         }
       },
       "is_incremental": true,
@@ -177,7 +171,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ProgressWindow.html",
-          "hash": "nROeFXnnK3fhYiDA0wb+6A=="
+          "hash": "TmgyR0LlzNHiNHUlOQIjNRxsWozNTGQtwsRWBkJD/rA="
         }
       },
       "is_incremental": true,
@@ -189,7 +183,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.Province.html",
-          "hash": "st5J8z5j4isHOkE5E/5UAg=="
+          "hash": "Ao8vsllL0DHC//BqFa0x/ZwvTydgbYG1nMDZHs4JwAE="
         }
       },
       "is_incremental": true,
@@ -201,7 +195,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.Type1Window.html",
-          "hash": "2DYqLUNTUWAYKbrOU5WfDg=="
+          "hash": "P2FLmDoCmVpVAAAARExZa7g0m8Z34dcHXzqE9DZUwsM="
         }
       },
       "is_incremental": true,
@@ -213,19 +207,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.html",
-          "hash": "nznQ5ho0Ps8DlSTTuToB+Q=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.BadApplicationVersion.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.BadApplicationVersion.html",
-          "hash": "nFU03H7F1VJaG/mar8qvwQ=="
+          "hash": "isS8PMtJ7omyej865vvDirwL/iemd5EV3Ot+wLNIYSQ="
         }
       },
       "is_incremental": true,
@@ -237,7 +219,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ChartDataHolder.html",
-          "hash": "JHPzAIXkz5Kw6SlFmsMrBw=="
+          "hash": "Mt7Ll4US5PEImguGZYyZga7NzGyO05vQTw6nzNMTn/M="
         }
       },
       "is_incremental": true,
@@ -249,7 +231,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ChartEventArgs.html",
-          "hash": "DWh+KOczJ3wRQTmK8rpewA=="
+          "hash": "JTybT6io1TKLAWifyIqZghpCDLi91AbKZXPiGVzn2g4="
         }
       },
       "is_incremental": true,
@@ -261,7 +243,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ChartSetterDelegate.html",
-          "hash": "XZ+QuDc9iX1fx7dYxaCUNg=="
+          "hash": "edI8xarmURoi5pYBo6dCZn5IXRb6sMzVDwFpJDiooqA="
         }
       },
       "is_incremental": true,
@@ -273,19 +255,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ChartWindow.html",
-          "hash": "5kwL1jpYayGQaLr6vneCHA=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.DeclaredAmountException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.DeclaredAmountException.html",
-          "hash": "rUqS42tuHj28hWIfy065Zw=="
+          "hash": "Qpyi01yiR9lZAFx8Hor50PXEbNgXSTyltHNSRdd/up0="
         }
       },
       "is_incremental": true,
@@ -297,43 +267,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.PDFManager.html",
-          "hash": "PZoKBnlSaw0DxzVgK7lAfQ=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.Properties.Resources.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.Properties.Resources.html",
-          "hash": "7IdGLde91GzsmKkEA8HZEg=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.Properties.Settings.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.Properties.Settings.html",
-          "hash": "w3shPprTh8wZPWoO9aZ6Xw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.Properties.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.Properties.html",
-          "hash": "r+jfRPUUXztqaOenu8sBGw=="
+          "hash": "enjqsGcUGvwj5REPtdLOC6kLjbxos5vh15DrKIQe1/U="
         }
       },
       "is_incremental": true,
@@ -345,7 +279,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ScrollDialogDelegate.html",
-          "hash": "HP9Tfr67YPaBHr0J09wY5g=="
+          "hash": "gxhAxOMB1PE5pQ7/c7h8nShOl7oemLeaQX5B3pyycS4="
         }
       },
       "is_incremental": true,
@@ -357,7 +291,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ScrollEventArgs.html",
-          "hash": "OwR5/o3rJbW/Jf1Hj3zMyA=="
+          "hash": "vIuMCYig6G4XKZG+1E8KlMcfHZAOTFF887IR54abRVs="
         }
       },
       "is_incremental": true,
@@ -369,7 +303,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.ScrollToDialog.html",
-          "hash": "YxmnPfaic2Znzn8N1951UQ=="
+          "hash": "26AryWkSHtpIFZj5haGLu0gqbWxwW9jP4ciMHxfFHG8="
         }
       },
       "is_incremental": true,
@@ -381,7 +315,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.UpdateChecker.html",
-          "hash": "yqdvzgPrlca7GAABJL3Y6Q=="
+          "hash": "oNppGtxJ75DEg474QR5U9NUJjMvch2iTwcy4RJFRknA="
         }
       },
       "is_incremental": true,
@@ -393,7 +327,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.html",
-          "hash": "qhoC6WHXSQebeSCoBCrDtw=="
+          "hash": "CsYqpROSfcPSO0/OK5Q638bmrGWLb8kEDUq1s0aUtaA="
         }
       },
       "is_incremental": true,
@@ -405,7 +339,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "eDRHeIqpPSFeBdTPYBN+nA=="
+          "hash": "m2QmXgpqiP7/pu93eNWP8ugDNuq3GMSsSVf4japO+WI="
         }
       },
       "is_incremental": false,
@@ -417,7 +351,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "G2AoE5T/2VarbHvzLEo4TQ=="
+          "hash": "Oa9PuD4E1hvZnCkVjUgzNBX6S00Zo5YilamTERTZo54="
         }
       },
       "is_incremental": false,
@@ -442,8 +376,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 29,
-          "skipped_file_count": 29
+          "total_file_count": 23,
+          "skipped_file_count": 23
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

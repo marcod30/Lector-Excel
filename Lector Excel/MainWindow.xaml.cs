@@ -68,8 +68,14 @@ namespace Lector_Excel
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Hojas de cálculo Excel (*.xlsx)|*.xlsx";
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (openFileDialog.ShowDialog() == true && posiciones.Count != 0)
+            if (openFileDialog.ShowDialog() == true)
             {
+                if (posiciones.Count == 0)
+                {
+                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 ExcelManager = new ExcelManager(openFileDialog.FileName);
                 backgroundWorker.RunWorkerAsync(argument:"excelImport");
 
@@ -90,10 +96,6 @@ namespace Lector_Excel
                     MessageBoxResult msg = MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
-                if(posiciones.Count == 0)
-                {
-                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 
@@ -107,8 +109,14 @@ namespace Lector_Excel
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Hojas de cálculo Excel (*.xlsx)|*.xlsx";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            if (saveFileDialog.ShowDialog() == true && posiciones.Count != 0)
+            if (saveFileDialog.ShowDialog() == true)
             {
+                if (posiciones.Count == 0)
+                {
+                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 ExcelManager = new ExcelManager(saveFileDialog.FileName);
                 backgroundWorker.RunWorkerAsync(argument: "excelExport");
 
@@ -122,11 +130,6 @@ namespace Lector_Excel
                 if (ExcelManager != null)
                 {
                     menu_Export.IsEnabled = false;
-                }
-
-                if (posiciones.Count == 0)
-                {
-                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -343,7 +346,7 @@ namespace Lector_Excel
         /// Adapta los datos recibidos en bruto a estructuras <c>DeclaredFormControl</c>.
         /// </summary>
         /// <param name="result"> Una lista de <c>Declared</c> </param>
-        /// See <see cref="MainWindow.Menu_Import_Click(object, RoutedEventArgs)"/>
+        /// <seealso cref="MainWindow.Menu_Import_Click(object, RoutedEventArgs)"/>
         /// <seealso cref="MainWindow.Worker_Completed(object, RunWorkerCompletedEventArgs)"/>
         private void ImportedFileToForm(List<Declared> result)
         {

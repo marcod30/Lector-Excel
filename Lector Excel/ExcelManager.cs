@@ -141,7 +141,6 @@ namespace Lector_Excel
         /// Exporta el contenido a un archivo Excel.
         /// </summary>
         /// <returns> True si la exportación se hizo con éxito. </returns>
-        /// <remarks> TODO METHOD </remarks>
         public bool ExportToExcel(List<string> Positions, List<Declared> declareds, BackgroundWorker bw)
         {
             try

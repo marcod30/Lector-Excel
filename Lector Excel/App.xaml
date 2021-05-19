@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Lector_Excel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml"/>
     </Application.Resources>
 </Application>

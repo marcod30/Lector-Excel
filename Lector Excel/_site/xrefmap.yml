@@ -26,50 +26,12 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.AboutWindow.AboutWindow
   nameWithType: AboutWindow.AboutWindow
-- uid: Lector_Excel.AboutWindow.Hyperlink_RequestNavigate(System.Object,System.Windows.Navigation.RequestNavigateEventArgs)
-  name: Hyperlink_RequestNavigate(Object, RequestNavigateEventArgs)
-  href: api/Lector_Excel.AboutWindow.html#Lector_Excel_AboutWindow_Hyperlink_RequestNavigate_System_Object_System_Windows_Navigation_RequestNavigateEventArgs_
-  commentId: M:Lector_Excel.AboutWindow.Hyperlink_RequestNavigate(System.Object,System.Windows.Navigation.RequestNavigateEventArgs)
-  fullName: Lector_Excel.AboutWindow.Hyperlink_RequestNavigate(System.Object, System.Windows.Navigation.RequestNavigateEventArgs)
-  nameWithType: AboutWindow.Hyperlink_RequestNavigate(Object, RequestNavigateEventArgs)
-- uid: Lector_Excel.AboutWindow.Hyperlink_RequestNavigate*
-  name: Hyperlink_RequestNavigate
-  href: api/Lector_Excel.AboutWindow.html#Lector_Excel_AboutWindow_Hyperlink_RequestNavigate_
-  commentId: Overload:Lector_Excel.AboutWindow.Hyperlink_RequestNavigate
-  isSpec: "True"
-  fullName: Lector_Excel.AboutWindow.Hyperlink_RequestNavigate
-  nameWithType: AboutWindow.Hyperlink_RequestNavigate
 - uid: Lector_Excel.App
   name: App
   href: api/Lector_Excel.App.html
   commentId: T:Lector_Excel.App
   fullName: Lector_Excel.App
   nameWithType: App
-- uid: Lector_Excel.BadFileFormattingException
-  name: BadFileFormattingException
-  href: api/Lector_Excel.BadFileFormattingException.html
-  commentId: T:Lector_Excel.BadFileFormattingException
-  fullName: Lector_Excel.BadFileFormattingException
-  nameWithType: BadFileFormattingException
-- uid: Lector_Excel.BadFileFormattingException.#ctor
-  name: BadFileFormattingException()
-  href: api/Lector_Excel.BadFileFormattingException.html#Lector_Excel_BadFileFormattingException__ctor
-  commentId: M:Lector_Excel.BadFileFormattingException.#ctor
-  fullName: Lector_Excel.BadFileFormattingException.BadFileFormattingException()
-  nameWithType: BadFileFormattingException.BadFileFormattingException()
-- uid: Lector_Excel.BadFileFormattingException.#ctor(System.Int32)
-  name: BadFileFormattingException(Int32)
-  href: api/Lector_Excel.BadFileFormattingException.html#Lector_Excel_BadFileFormattingException__ctor_System_Int32_
-  commentId: M:Lector_Excel.BadFileFormattingException.#ctor(System.Int32)
-  fullName: Lector_Excel.BadFileFormattingException.BadFileFormattingException(System.Int32)
-  nameWithType: BadFileFormattingException.BadFileFormattingException(Int32)
-- uid: Lector_Excel.BadFileFormattingException.#ctor*
-  name: BadFileFormattingException
-  href: api/Lector_Excel.BadFileFormattingException.html#Lector_Excel_BadFileFormattingException__ctor_
-  commentId: Overload:Lector_Excel.BadFileFormattingException.#ctor
-  isSpec: "True"
-  fullName: Lector_Excel.BadFileFormattingException.BadFileFormattingException
-  nameWithType: BadFileFormattingException.BadFileFormattingException
 - uid: Lector_Excel.Declared
   name: Declared
   href: api/Lector_Excel.Declared.html
@@ -104,12 +66,6 @@ references:
   commentId: F:Lector_Excel.Declared.declaredData
   fullName: Lector_Excel.Declared.declaredData
   nameWithType: Declared.declaredData
-- uid: Lector_Excel.Declared.isPropertyDeclared
-  name: isPropertyDeclared
-  href: api/Lector_Excel.Declared.html#Lector_Excel_Declared_isPropertyDeclared
-  commentId: F:Lector_Excel.Declared.isPropertyDeclared
-  fullName: Lector_Excel.Declared.isPropertyDeclared
-  nameWithType: Declared.isPropertyDeclared
 - uid: Lector_Excel.Declared.mayContainErrors
   name: mayContainErrors
   href: api/Lector_Excel.Declared.html#Lector_Excel_Declared_mayContainErrors
@@ -135,44 +91,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.DeclaredFormControl.DeclaredFormControl
   nameWithType: DeclaredFormControl.DeclaredFormControl
-- uid: Lector_Excel.DeclaredFormControl.Btn_DeleteDeclared_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Btn_DeleteDeclared_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Btn_DeleteDeclared_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Btn_DeleteDeclared_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Btn_DeleteDeclared_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: DeclaredFormControl.Btn_DeleteDeclared_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Btn_DeleteDeclared_Click*
-  name: Btn_DeleteDeclared_Click
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Btn_DeleteDeclared_Click_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Btn_DeleteDeclared_Click
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Btn_DeleteDeclared_Click
-  nameWithType: DeclaredFormControl.Btn_DeleteDeclared_Click
-- uid: Lector_Excel.DeclaredFormControl.Chk_Any_Checked_Changed(System.Object,System.Windows.RoutedEventArgs)
-  name: Chk_Any_Checked_Changed(Object, RoutedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Chk_Any_Checked_Changed_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Chk_Any_Checked_Changed(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Chk_Any_Checked_Changed(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: DeclaredFormControl.Chk_Any_Checked_Changed(Object, RoutedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Chk_Any_Checked_Changed*
-  name: Chk_Any_Checked_Changed
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Chk_Any_Checked_Changed_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Chk_Any_Checked_Changed
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Chk_Any_Checked_Changed
-  nameWithType: DeclaredFormControl.Chk_Any_Checked_Changed
-- uid: Lector_Excel.DeclaredFormControl.CIF_REGEX
-  name: CIF_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_CIF_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.CIF_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.CIF_REGEX
-  nameWithType: DeclaredFormControl.CIF_REGEX
-- uid: Lector_Excel.DeclaredFormControl.COMM_NIF_REGEX
-  name: COMM_NIF_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_COMM_NIF_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.COMM_NIF_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.COMM_NIF_REGEX
-  nameWithType: DeclaredFormControl.COMM_NIF_REGEX
 - uid: Lector_Excel.DeclaredFormControl.declared
   name: declared
   href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_declared
@@ -185,12 +103,6 @@ references:
   commentId: E:Lector_Excel.DeclaredFormControl.DeleteButtonClick
   fullName: Lector_Excel.DeclaredFormControl.DeleteButtonClick
   nameWithType: DeclaredFormControl.DeleteButtonClick
-- uid: Lector_Excel.DeclaredFormControl.DNI_REGEX
-  name: DNI_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_DNI_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.DNI_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.DNI_REGEX
-  nameWithType: DeclaredFormControl.DNI_REGEX
 - uid: Lector_Excel.DeclaredFormControl.IsAllDataValid
   name: IsAllDataValid()
   href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_IsAllDataValid
@@ -204,25 +116,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.DeclaredFormControl.IsAllDataValid
   nameWithType: DeclaredFormControl.IsAllDataValid
-- uid: Lector_Excel.DeclaredFormControl.IsNIFValid(System.String)
-  name: IsNIFValid(String)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_IsNIFValid_System_String_
-  commentId: M:Lector_Excel.DeclaredFormControl.IsNIFValid(System.String)
-  fullName: Lector_Excel.DeclaredFormControl.IsNIFValid(System.String)
-  nameWithType: DeclaredFormControl.IsNIFValid(String)
-- uid: Lector_Excel.DeclaredFormControl.IsNIFValid*
-  name: IsNIFValid
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_IsNIFValid_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.IsNIFValid
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.IsNIFValid
-  nameWithType: DeclaredFormControl.IsNIFValid
-- uid: Lector_Excel.DeclaredFormControl.NIE_REGEX
-  name: NIE_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_NIE_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.NIE_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.NIE_REGEX
-  nameWithType: DeclaredFormControl.NIE_REGEX
 - uid: Lector_Excel.DeclaredFormControl.OnDeleteButtonClick(System.EventArgs)
   name: OnDeleteButtonClick(EventArgs)
   href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_OnDeleteButtonClick_System_EventArgs_
@@ -242,147 +135,6 @@ references:
   commentId: E:Lector_Excel.DeclaredFormControl.PropertyChanged
   fullName: Lector_Excel.DeclaredFormControl.PropertyChanged
   nameWithType: DeclaredFormControl.PropertyChanged
-- uid: Lector_Excel.DeclaredFormControl.PROV_CODE_REGEX
-  name: PROV_CODE_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_PROV_CODE_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.PROV_CODE_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.PROV_CODE_REGEX
-  nameWithType: DeclaredFormControl.PROV_CODE_REGEX
-- uid: Lector_Excel.DeclaredFormControl.SIGNED_FLOAT_REGEX
-  name: SIGNED_FLOAT_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_SIGNED_FLOAT_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.SIGNED_FLOAT_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.SIGNED_FLOAT_REGEX
-  nameWithType: DeclaredFormControl.SIGNED_FLOAT_REGEX
-- uid: Lector_Excel.DeclaredFormControl.STATE_CODE_REGEX
-  name: STATE_CODE_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_STATE_CODE_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.STATE_CODE_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.STATE_CODE_REGEX
-  nameWithType: DeclaredFormControl.STATE_CODE_REGEX
-- uid: Lector_Excel.DeclaredFormControl.Txt_Any_LostFocus(System.Object,System.Windows.RoutedEventArgs)
-  name: Txt_Any_LostFocus(Object, RoutedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_Any_LostFocus_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_Any_LostFocus(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_Any_LostFocus(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_Any_LostFocus(Object, RoutedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_Any_LostFocus*
-  name: Txt_Any_LostFocus
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_Any_LostFocus_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_Any_LostFocus
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_Any_LostFocus
-  nameWithType: DeclaredFormControl.Txt_Any_LostFocus
-- uid: Lector_Excel.DeclaredFormControl.Txt_CommunityOpNIF_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_CommunityOpNIF_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_CommunityOpNIF_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_CommunityOpNIF_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_CommunityOpNIF_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_CommunityOpNIF_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_CommunityOpNIF_TextChanged*
-  name: Txt_CommunityOpNIF_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_CommunityOpNIF_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_CommunityOpNIF_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_CommunityOpNIF_TextChanged
-  nameWithType: DeclaredFormControl.Txt_CommunityOpNIF_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_CountryCode_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_CountryCode_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_CountryCode_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_CountryCode_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_CountryCode_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_CountryCode_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_CountryCode_TextChanged*
-  name: Txt_CountryCode_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_CountryCode_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_CountryCode_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_CountryCode_TextChanged
-  nameWithType: DeclaredFormControl.Txt_CountryCode_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_DeclaredNIF_TextChanged(System.Object,System.Windows.RoutedEventArgs)
-  name: Txt_DeclaredNIF_TextChanged(Object, RoutedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_DeclaredNIF_TextChanged_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_DeclaredNIF_TextChanged(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_DeclaredNIF_TextChanged(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_DeclaredNIF_TextChanged(Object, RoutedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_DeclaredNIF_TextChanged*
-  name: Txt_DeclaredNIF_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_DeclaredNIF_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_DeclaredNIF_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_DeclaredNIF_TextChanged
-  nameWithType: DeclaredFormControl.Txt_DeclaredNIF_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_Exercise_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_Exercise_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_Exercise_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_Exercise_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_Exercise_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_Exercise_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_Exercise_TextChanged*
-  name: Txt_Exercise_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_Exercise_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_Exercise_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_Exercise_TextChanged
-  nameWithType: DeclaredFormControl.Txt_Exercise_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_LegalRepNIF_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_LegalRepNIF_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_LegalRepNIF_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_LegalRepNIF_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_LegalRepNIF_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_LegalRepNIF_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_LegalRepNIF_TextChanged*
-  name: Txt_LegalRepNIF_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_LegalRepNIF_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_LegalRepNIF_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_LegalRepNIF_TextChanged
-  nameWithType: DeclaredFormControl.Txt_LegalRepNIF_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_ProvinceCode_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_ProvinceCode_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_ProvinceCode_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_ProvinceCode_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_ProvinceCode_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_ProvinceCode_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_ProvinceCode_TextChanged*
-  name: Txt_ProvinceCode_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_ProvinceCode_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_ProvinceCode_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_ProvinceCode_TextChanged
-  nameWithType: DeclaredFormControl.Txt_ProvinceCode_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_SignedFloat_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_SignedFloat_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_SignedFloat_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_SignedFloat_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_SignedFloat_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_SignedFloat_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_SignedFloat_TextChanged*
-  name: Txt_SignedFloat_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_SignedFloat_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_SignedFloat_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_SignedFloat_TextChanged
-  nameWithType: DeclaredFormControl.Txt_SignedFloat_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.Txt_UnsignedFloat_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  name: Txt_UnsignedFloat_TextChanged(Object, TextChangedEventArgs)
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_UnsignedFloat_TextChanged_System_Object_System_Windows_Controls_TextChangedEventArgs_
-  commentId: M:Lector_Excel.DeclaredFormControl.Txt_UnsignedFloat_TextChanged(System.Object,System.Windows.Controls.TextChangedEventArgs)
-  fullName: Lector_Excel.DeclaredFormControl.Txt_UnsignedFloat_TextChanged(System.Object, System.Windows.Controls.TextChangedEventArgs)
-  nameWithType: DeclaredFormControl.Txt_UnsignedFloat_TextChanged(Object, TextChangedEventArgs)
-- uid: Lector_Excel.DeclaredFormControl.Txt_UnsignedFloat_TextChanged*
-  name: Txt_UnsignedFloat_TextChanged
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_Txt_UnsignedFloat_TextChanged_
-  commentId: Overload:Lector_Excel.DeclaredFormControl.Txt_UnsignedFloat_TextChanged
-  isSpec: "True"
-  fullName: Lector_Excel.DeclaredFormControl.Txt_UnsignedFloat_TextChanged
-  nameWithType: DeclaredFormControl.Txt_UnsignedFloat_TextChanged
-- uid: Lector_Excel.DeclaredFormControl.UNSIGNED_FLOAT_REGEX
-  name: UNSIGNED_FLOAT_REGEX
-  href: api/Lector_Excel.DeclaredFormControl.html#Lector_Excel_DeclaredFormControl_UNSIGNED_FLOAT_REGEX
-  commentId: F:Lector_Excel.DeclaredFormControl.UNSIGNED_FLOAT_REGEX
-  fullName: Lector_Excel.DeclaredFormControl.UNSIGNED_FLOAT_REGEX
-  nameWithType: DeclaredFormControl.UNSIGNED_FLOAT_REGEX
 - uid: Lector_Excel.ExcelManager
   name: ExcelManager
   href: api/Lector_Excel.ExcelManager.html
@@ -402,12 +154,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExcelManager.ExcelManager
   nameWithType: ExcelManager.ExcelManager
-- uid: Lector_Excel.ExcelManager.excelApp
-  name: excelApp
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_excelApp
-  commentId: F:Lector_Excel.ExcelManager.excelApp
-  fullName: Lector_Excel.ExcelManager.excelApp
-  nameWithType: ExcelManager.excelApp
 - uid: Lector_Excel.ExcelManager.ExportToExcel(System.Collections.Generic.List{System.String},System.Collections.Generic.List{Lector_Excel.Declared},System.ComponentModel.BackgroundWorker)
   name: ExportToExcel(List<String>, List<Declared>, BackgroundWorker)
   href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ExportToExcel_System_Collections_Generic_List_System_String__System_Collections_Generic_List_Lector_Excel_Declared__System_ComponentModel_BackgroundWorker_
@@ -440,48 +186,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExcelManager.ImportExcelData
   nameWithType: ExcelManager.ImportExcelData
-- uid: Lector_Excel.ExcelManager.longitudes
-  name: longitudes
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_longitudes
-  commentId: F:Lector_Excel.ExcelManager.longitudes
-  fullName: Lector_Excel.ExcelManager.longitudes
-  nameWithType: ExcelManager.longitudes
-- uid: Lector_Excel.ExcelManager.MAX_ALLOWED_COLUMNS
-  name: MAX_ALLOWED_COLUMNS
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_MAX_ALLOWED_COLUMNS
-  commentId: F:Lector_Excel.ExcelManager.MAX_ALLOWED_COLUMNS
-  fullName: Lector_Excel.ExcelManager.MAX_ALLOWED_COLUMNS
-  nameWithType: ExcelManager.MAX_ALLOWED_COLUMNS
-- uid: Lector_Excel.ExcelManager.path
-  name: path
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_path
-  commentId: F:Lector_Excel.ExcelManager.path
-  fullName: Lector_Excel.ExcelManager.path
-  nameWithType: ExcelManager.path
-- uid: Lector_Excel.ExcelManager.range
-  name: range
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_range
-  commentId: F:Lector_Excel.ExcelManager.range
-  fullName: Lector_Excel.ExcelManager.range
-  nameWithType: ExcelManager.range
-- uid: Lector_Excel.ExcelManager.workbook
-  name: workbook
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_workbook
-  commentId: F:Lector_Excel.ExcelManager.workbook
-  fullName: Lector_Excel.ExcelManager.workbook
-  nameWithType: ExcelManager.workbook
-- uid: Lector_Excel.ExcelManager.workbooks
-  name: workbooks
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_workbooks
-  commentId: F:Lector_Excel.ExcelManager.workbooks
-  fullName: Lector_Excel.ExcelManager.workbooks
-  nameWithType: ExcelManager.workbooks
-- uid: Lector_Excel.ExcelManager.worksheet
-  name: worksheet
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_worksheet
-  commentId: F:Lector_Excel.ExcelManager.worksheet
-  fullName: Lector_Excel.ExcelManager.worksheet
-  nameWithType: ExcelManager.worksheet
 - uid: Lector_Excel.ExportManager
   name: ExportManager
   href: api/Lector_Excel.ExportManager.html
@@ -504,32 +208,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExportManager.ExportManager
   nameWithType: ExportManager.ExportManager
-- uid: Lector_Excel.ExportManager.deAccent(System.String)
-  name: deAccent(String)
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_deAccent_System_String_
-  commentId: M:Lector_Excel.ExportManager.deAccent(System.String)
-  fullName: Lector_Excel.ExportManager.deAccent(System.String)
-  nameWithType: ExportManager.deAccent(String)
-- uid: Lector_Excel.ExportManager.deAccent*
-  name: deAccent
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_deAccent_
-  commentId: Overload:Lector_Excel.ExportManager.deAccent
-  isSpec: "True"
-  fullName: Lector_Excel.ExportManager.deAccent
-  nameWithType: ExportManager.deAccent
-- uid: Lector_Excel.ExportManager.EncodeToLatin(System.String)
-  name: EncodeToLatin(String)
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_EncodeToLatin_System_String_
-  commentId: M:Lector_Excel.ExportManager.EncodeToLatin(System.String)
-  fullName: Lector_Excel.ExportManager.EncodeToLatin(System.String)
-  nameWithType: ExportManager.EncodeToLatin(String)
-- uid: Lector_Excel.ExportManager.EncodeToLatin*
-  name: EncodeToLatin
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_EncodeToLatin_
-  commentId: Overload:Lector_Excel.ExportManager.EncodeToLatin
-  isSpec: "True"
-  fullName: Lector_Excel.ExportManager.EncodeToLatin
-  nameWithType: ExportManager.EncodeToLatin
 - uid: Lector_Excel.ExportManager.ExportFromMain(System.Collections.Generic.List{Lector_Excel.Declared},System.ComponentModel.BackgroundWorker)
   name: ExportFromMain(List<Declared>, BackgroundWorker)
   href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_ExportFromMain_System_Collections_Generic_List_Lector_Excel_Declared__System_ComponentModel_BackgroundWorker_
@@ -546,12 +224,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExportManager.ExportFromMain
   nameWithType: ExportManager.ExportFromMain
-- uid: Lector_Excel.ExportManager.exportPath
-  name: exportPath
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_exportPath
-  commentId: F:Lector_Excel.ExportManager.exportPath
-  fullName: Lector_Excel.ExportManager.exportPath
-  nameWithType: ExportManager.exportPath
 - uid: Lector_Excel.ExportManager.ExportType1Data(System.String)
   name: ExportType1Data(String)
   href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_ExportType1Data_System_String_
@@ -565,25 +237,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExportManager.ExportType1Data
   nameWithType: ExportManager.ExportType1Data
-- uid: Lector_Excel.ExportManager.FormatNumber(System.String,System.Int32,System.Boolean,System.Boolean)
-  name: FormatNumber(String, Int32, Boolean, Boolean)
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_FormatNumber_System_String_System_Int32_System_Boolean_System_Boolean_
-  commentId: M:Lector_Excel.ExportManager.FormatNumber(System.String,System.Int32,System.Boolean,System.Boolean)
-  fullName: Lector_Excel.ExportManager.FormatNumber(System.String, System.Int32, System.Boolean, System.Boolean)
-  nameWithType: ExportManager.FormatNumber(String, Int32, Boolean, Boolean)
-- uid: Lector_Excel.ExportManager.FormatNumber*
-  name: FormatNumber
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_FormatNumber_
-  commentId: Overload:Lector_Excel.ExportManager.FormatNumber
-  isSpec: "True"
-  fullName: Lector_Excel.ExportManager.FormatNumber
-  nameWithType: ExportManager.FormatNumber
-- uid: Lector_Excel.ExportManager.Type1Data
-  name: Type1Data
-  href: api/Lector_Excel.ExportManager.html#Lector_Excel_ExportManager_Type1Data
-  commentId: F:Lector_Excel.ExportManager.Type1Data
-  fullName: Lector_Excel.ExportManager.Type1Data
-  nameWithType: ExportManager.Type1Data
 - uid: Lector_Excel.ImportManager
   name: ImportManager
   href: api/Lector_Excel.ImportManager.html
@@ -603,51 +256,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ImportManager.ImportManager
   nameWithType: ImportManager.ImportManager
-- uid: Lector_Excel.ImportManager.EncodeToUTF8(System.String)
-  name: EncodeToUTF8(String)
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_EncodeToUTF8_System_String_
-  commentId: M:Lector_Excel.ImportManager.EncodeToUTF8(System.String)
-  fullName: Lector_Excel.ImportManager.EncodeToUTF8(System.String)
-  nameWithType: ImportManager.EncodeToUTF8(String)
-- uid: Lector_Excel.ImportManager.EncodeToUTF8*
-  name: EncodeToUTF8
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_EncodeToUTF8_
-  commentId: Overload:Lector_Excel.ImportManager.EncodeToUTF8
-  isSpec: "True"
-  fullName: Lector_Excel.ImportManager.EncodeToUTF8
-  nameWithType: ImportManager.EncodeToUTF8
-- uid: Lector_Excel.ImportManager.FormatNumber(System.String,System.Boolean)
-  name: FormatNumber(String, Boolean)
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_FormatNumber_System_String_System_Boolean_
-  commentId: M:Lector_Excel.ImportManager.FormatNumber(System.String,System.Boolean)
-  fullName: Lector_Excel.ImportManager.FormatNumber(System.String, System.Boolean)
-  nameWithType: ImportManager.FormatNumber(String, Boolean)
-- uid: Lector_Excel.ImportManager.FormatNumber*
-  name: FormatNumber
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_FormatNumber_
-  commentId: Overload:Lector_Excel.ImportManager.FormatNumber
-  isSpec: "True"
-  fullName: Lector_Excel.ImportManager.FormatNumber
-  nameWithType: ImportManager.FormatNumber
-- uid: Lector_Excel.ImportManager.FormatString(System.String)
-  name: FormatString(String)
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_FormatString_System_String_
-  commentId: M:Lector_Excel.ImportManager.FormatString(System.String)
-  fullName: Lector_Excel.ImportManager.FormatString(System.String)
-  nameWithType: ImportManager.FormatString(String)
-- uid: Lector_Excel.ImportManager.FormatString*
-  name: FormatString
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_FormatString_
-  commentId: Overload:Lector_Excel.ImportManager.FormatString
-  isSpec: "True"
-  fullName: Lector_Excel.ImportManager.FormatString
-  nameWithType: ImportManager.FormatString
-- uid: Lector_Excel.ImportManager.importFilePath
-  name: importFilePath
-  href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_importFilePath
-  commentId: F:Lector_Excel.ImportManager.importFilePath
-  fullName: Lector_Excel.ImportManager.importFilePath
-  nameWithType: ImportManager.importFilePath
 - uid: Lector_Excel.ImportManager.ImportFromText(System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{Lector_Excel.Declared}@)
   name: ImportFromText(out List<String>, out List<Declared>)
   href: api/Lector_Excel.ImportManager.html#Lector_Excel_ImportManager_ImportFromText_System_Collections_Generic_List_System_String___System_Collections_Generic_List_Lector_Excel_Declared___
@@ -683,84 +291,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ImportSettings.ImportSettings
   nameWithType: ImportSettings.ImportSettings
-- uid: Lector_Excel.ImportSettings.CheckForEmptyAndDuplicates
-  name: CheckForEmptyAndDuplicates()
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_CheckForEmptyAndDuplicates
-  commentId: M:Lector_Excel.ImportSettings.CheckForEmptyAndDuplicates
-  fullName: Lector_Excel.ImportSettings.CheckForEmptyAndDuplicates()
-  nameWithType: ImportSettings.CheckForEmptyAndDuplicates()
-- uid: Lector_Excel.ImportSettings.CheckForEmptyAndDuplicates*
-  name: CheckForEmptyAndDuplicates
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_CheckForEmptyAndDuplicates_
-  commentId: Overload:Lector_Excel.ImportSettings.CheckForEmptyAndDuplicates
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.CheckForEmptyAndDuplicates
-  nameWithType: ImportSettings.CheckForEmptyAndDuplicates
-- uid: Lector_Excel.ImportSettings.Menu_CloseButton_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_CloseButton_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_CloseButton_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ImportSettings.Menu_CloseButton_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ImportSettings.Menu_CloseButton_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ImportSettings.Menu_CloseButton_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.ImportSettings.Menu_CloseButton_Click*
-  name: Menu_CloseButton_Click
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_CloseButton_Click_
-  commentId: Overload:Lector_Excel.ImportSettings.Menu_CloseButton_Click
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.Menu_CloseButton_Click
-  nameWithType: ImportSettings.Menu_CloseButton_Click
-- uid: Lector_Excel.ImportSettings.Menu_ConfirmAndClose_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ConfirmAndClose_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_ConfirmAndClose_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ImportSettings.Menu_ConfirmAndClose_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ImportSettings.Menu_ConfirmAndClose_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ImportSettings.Menu_ConfirmAndClose_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.ImportSettings.Menu_ConfirmAndClose_Click*
-  name: Menu_ConfirmAndClose_Click
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_ConfirmAndClose_Click_
-  commentId: Overload:Lector_Excel.ImportSettings.Menu_ConfirmAndClose_Click
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.Menu_ConfirmAndClose_Click
-  nameWithType: ImportSettings.Menu_ConfirmAndClose_Click
-- uid: Lector_Excel.ImportSettings.Menu_LoadFromFile_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_LoadFromFile_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_LoadFromFile_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ImportSettings.Menu_LoadFromFile_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ImportSettings.Menu_LoadFromFile_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ImportSettings.Menu_LoadFromFile_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.ImportSettings.Menu_LoadFromFile_Click*
-  name: Menu_LoadFromFile_Click
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_LoadFromFile_Click_
-  commentId: Overload:Lector_Excel.ImportSettings.Menu_LoadFromFile_Click
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.Menu_LoadFromFile_Click
-  nameWithType: ImportSettings.Menu_LoadFromFile_Click
-- uid: Lector_Excel.ImportSettings.Menu_ResetDefault_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ResetDefault_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_ResetDefault_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ImportSettings.Menu_ResetDefault_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ImportSettings.Menu_ResetDefault_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ImportSettings.Menu_ResetDefault_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.ImportSettings.Menu_ResetDefault_Click*
-  name: Menu_ResetDefault_Click
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_ResetDefault_Click_
-  commentId: Overload:Lector_Excel.ImportSettings.Menu_ResetDefault_Click
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.Menu_ResetDefault_Click
-  nameWithType: ImportSettings.Menu_ResetDefault_Click
-- uid: Lector_Excel.ImportSettings.Menu_SaveToFile_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_SaveToFile_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_SaveToFile_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ImportSettings.Menu_SaveToFile_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ImportSettings.Menu_SaveToFile_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ImportSettings.Menu_SaveToFile_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.ImportSettings.Menu_SaveToFile_Click*
-  name: Menu_SaveToFile_Click
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Menu_SaveToFile_Click_
-  commentId: Overload:Lector_Excel.ImportSettings.Menu_SaveToFile_Click
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.Menu_SaveToFile_Click
-  nameWithType: ImportSettings.Menu_SaveToFile_Click
 - uid: Lector_Excel.ImportSettings.positions
   name: positions
   href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_positions
@@ -774,19 +304,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ImportSettings.positions
   nameWithType: ImportSettings.positions
-- uid: Lector_Excel.ImportSettings.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  name: Window_Loaded(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Window_Loaded_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ImportSettings.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ImportSettings.Window_Loaded(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ImportSettings.Window_Loaded(Object, RoutedEventArgs)
-- uid: Lector_Excel.ImportSettings.Window_Loaded*
-  name: Window_Loaded
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_Window_Loaded_
-  commentId: Overload:Lector_Excel.ImportSettings.Window_Loaded
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.Window_Loaded
-  nameWithType: ImportSettings.Window_Loaded
 - uid: Lector_Excel.MainWindow
   name: MainWindow
   href: api/Lector_Excel.MainWindow.html
@@ -806,50 +323,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.MainWindow.MainWindow
   nameWithType: MainWindow.MainWindow
-- uid: Lector_Excel.MainWindow.AutoScroll(System.Object,Reader_347.ScrollEventArgs)
-  name: AutoScroll(Object, ScrollEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_AutoScroll_System_Object_Reader_347_ScrollEventArgs_
-  commentId: M:Lector_Excel.MainWindow.AutoScroll(System.Object,Reader_347.ScrollEventArgs)
-  fullName: Lector_Excel.MainWindow.AutoScroll(System.Object, Reader_347.ScrollEventArgs)
-  nameWithType: MainWindow.AutoScroll(Object, ScrollEventArgs)
-- uid: Lector_Excel.MainWindow.AutoScroll*
-  name: AutoScroll
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_AutoScroll_
-  commentId: Overload:Lector_Excel.MainWindow.AutoScroll
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.AutoScroll
-  nameWithType: MainWindow.AutoScroll
-- uid: Lector_Excel.MainWindow.backgroundWorker
-  name: backgroundWorker
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_backgroundWorker
-  commentId: F:Lector_Excel.MainWindow.backgroundWorker
-  fullName: Lector_Excel.MainWindow.backgroundWorker
-  nameWithType: MainWindow.backgroundWorker
-- uid: Lector_Excel.MainWindow.BtnOpenFile_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: BtnOpenFile_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_BtnOpenFile_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.BtnOpenFile_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.BtnOpenFile_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.BtnOpenFile_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.BtnOpenFile_Click*
-  name: BtnOpenFile_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_BtnOpenFile_Click_
-  commentId: Overload:Lector_Excel.MainWindow.BtnOpenFile_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.BtnOpenFile_Click
-  nameWithType: MainWindow.BtnOpenFile_Click
-- uid: Lector_Excel.MainWindow.ChartWindow
-  name: ChartWindow
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_ChartWindow
-  commentId: F:Lector_Excel.MainWindow.ChartWindow
-  fullName: Lector_Excel.MainWindow.ChartWindow
-  nameWithType: MainWindow.ChartWindow
-- uid: Lector_Excel.MainWindow.DECLARED_AMOUNT_LIMIT
-  name: DECLARED_AMOUNT_LIMIT
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_DECLARED_AMOUNT_LIMIT
-  commentId: F:Lector_Excel.MainWindow.DECLARED_AMOUNT_LIMIT
-  fullName: Lector_Excel.MainWindow.DECLARED_AMOUNT_LIMIT
-  nameWithType: MainWindow.DECLARED_AMOUNT_LIMIT
 - uid: Lector_Excel.MainWindow.DeclaredChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)
   name: DeclaredChanged(Object, PropertyChangedEventArgs)
   href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_DeclaredChanged_System_Object_System_ComponentModel_PropertyChangedEventArgs_
@@ -863,19 +336,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.MainWindow.DeclaredChanged
   nameWithType: MainWindow.DeclaredChanged
-- uid: Lector_Excel.MainWindow.DeclaredContainer_OnDeleteButtonClick(System.Object,System.EventArgs)
-  name: DeclaredContainer_OnDeleteButtonClick(Object, EventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_DeclaredContainer_OnDeleteButtonClick_System_Object_System_EventArgs_
-  commentId: M:Lector_Excel.MainWindow.DeclaredContainer_OnDeleteButtonClick(System.Object,System.EventArgs)
-  fullName: Lector_Excel.MainWindow.DeclaredContainer_OnDeleteButtonClick(System.Object, System.EventArgs)
-  nameWithType: MainWindow.DeclaredContainer_OnDeleteButtonClick(Object, EventArgs)
-- uid: Lector_Excel.MainWindow.DeclaredContainer_OnDeleteButtonClick*
-  name: DeclaredContainer_OnDeleteButtonClick
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_DeclaredContainer_OnDeleteButtonClick_
-  commentId: Overload:Lector_Excel.MainWindow.DeclaredContainer_OnDeleteButtonClick
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.DeclaredContainer_OnDeleteButtonClick
-  nameWithType: MainWindow.DeclaredContainer_OnDeleteButtonClick
 - uid: Lector_Excel.MainWindow.DeclaredListChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   name: DeclaredListChanged(Object, NotifyCollectionChangedEventArgs)
   href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_DeclaredListChanged_System_Object_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
@@ -889,408 +349,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.MainWindow.DeclaredListChanged
   nameWithType: MainWindow.DeclaredListChanged
-- uid: Lector_Excel.MainWindow.ExcelManager
-  name: ExcelManager
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_ExcelManager
-  commentId: F:Lector_Excel.MainWindow.ExcelManager
-  fullName: Lector_Excel.MainWindow.ExcelManager
-  nameWithType: MainWindow.ExcelManager
-- uid: Lector_Excel.MainWindow.ExportManager
-  name: ExportManager
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_ExportManager
-  commentId: F:Lector_Excel.MainWindow.ExportManager
-  fullName: Lector_Excel.MainWindow.ExportManager
-  nameWithType: MainWindow.ExportManager
-- uid: Lector_Excel.MainWindow.exportProgressBar
-  name: exportProgressBar
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_exportProgressBar
-  commentId: F:Lector_Excel.MainWindow.exportProgressBar
-  fullName: Lector_Excel.MainWindow.exportProgressBar
-  nameWithType: MainWindow.exportProgressBar
-- uid: Lector_Excel.MainWindow.GetBuySellsPerRegion(System.Boolean)
-  name: GetBuySellsPerRegion(Boolean)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetBuySellsPerRegion_System_Boolean_
-  commentId: M:Lector_Excel.MainWindow.GetBuySellsPerRegion(System.Boolean)
-  fullName: Lector_Excel.MainWindow.GetBuySellsPerRegion(System.Boolean)
-  nameWithType: MainWindow.GetBuySellsPerRegion(Boolean)
-- uid: Lector_Excel.MainWindow.GetBuySellsPerRegion*
-  name: GetBuySellsPerRegion
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetBuySellsPerRegion_
-  commentId: Overload:Lector_Excel.MainWindow.GetBuySellsPerRegion
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.GetBuySellsPerRegion
-  nameWithType: MainWindow.GetBuySellsPerRegion
-- uid: Lector_Excel.MainWindow.GetBuySellsPerRegionAsPie(System.Boolean)
-  name: GetBuySellsPerRegionAsPie(Boolean)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetBuySellsPerRegionAsPie_System_Boolean_
-  commentId: M:Lector_Excel.MainWindow.GetBuySellsPerRegionAsPie(System.Boolean)
-  fullName: Lector_Excel.MainWindow.GetBuySellsPerRegionAsPie(System.Boolean)
-  nameWithType: MainWindow.GetBuySellsPerRegionAsPie(Boolean)
-- uid: Lector_Excel.MainWindow.GetBuySellsPerRegionAsPie*
-  name: GetBuySellsPerRegionAsPie
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetBuySellsPerRegionAsPie_
-  commentId: Overload:Lector_Excel.MainWindow.GetBuySellsPerRegionAsPie
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.GetBuySellsPerRegionAsPie
-  nameWithType: MainWindow.GetBuySellsPerRegionAsPie
-- uid: Lector_Excel.MainWindow.GetBuySellsPerTrimester(System.Boolean)
-  name: GetBuySellsPerTrimester(Boolean)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetBuySellsPerTrimester_System_Boolean_
-  commentId: M:Lector_Excel.MainWindow.GetBuySellsPerTrimester(System.Boolean)
-  fullName: Lector_Excel.MainWindow.GetBuySellsPerTrimester(System.Boolean)
-  nameWithType: MainWindow.GetBuySellsPerTrimester(Boolean)
-- uid: Lector_Excel.MainWindow.GetBuySellsPerTrimester*
-  name: GetBuySellsPerTrimester
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetBuySellsPerTrimester_
-  commentId: Overload:Lector_Excel.MainWindow.GetBuySellsPerTrimester
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.GetBuySellsPerTrimester
-  nameWithType: MainWindow.GetBuySellsPerTrimester
-- uid: Lector_Excel.MainWindow.GetRegistriesPerOpKey
-  name: GetRegistriesPerOpKey()
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetRegistriesPerOpKey
-  commentId: M:Lector_Excel.MainWindow.GetRegistriesPerOpKey
-  fullName: Lector_Excel.MainWindow.GetRegistriesPerOpKey()
-  nameWithType: MainWindow.GetRegistriesPerOpKey()
-- uid: Lector_Excel.MainWindow.GetRegistriesPerOpKey*
-  name: GetRegistriesPerOpKey
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_GetRegistriesPerOpKey_
-  commentId: Overload:Lector_Excel.MainWindow.GetRegistriesPerOpKey
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.GetRegistriesPerOpKey
-  nameWithType: MainWindow.GetRegistriesPerOpKey
-- uid: Lector_Excel.MainWindow.ImportedFileToForm(System.Collections.Generic.List{Lector_Excel.Declared})
-  name: ImportedFileToForm(List<Declared>)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_ImportedFileToForm_System_Collections_Generic_List_Lector_Excel_Declared__
-  commentId: M:Lector_Excel.MainWindow.ImportedFileToForm(System.Collections.Generic.List{Lector_Excel.Declared})
-  name.vb: ImportedFileToForm(List(Of Declared))
-  fullName: Lector_Excel.MainWindow.ImportedFileToForm(System.Collections.Generic.List<Lector_Excel.Declared>)
-  fullName.vb: Lector_Excel.MainWindow.ImportedFileToForm(System.Collections.Generic.List(Of Lector_Excel.Declared))
-  nameWithType: MainWindow.ImportedFileToForm(List<Declared>)
-  nameWithType.vb: MainWindow.ImportedFileToForm(List(Of Declared))
-- uid: Lector_Excel.MainWindow.ImportedFileToForm*
-  name: ImportedFileToForm
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_ImportedFileToForm_
-  commentId: Overload:Lector_Excel.MainWindow.ImportedFileToForm
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.ImportedFileToForm
-  nameWithType: MainWindow.ImportedFileToForm
-- uid: Lector_Excel.MainWindow.listaDeclarados
-  name: listaDeclarados
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_listaDeclarados
-  commentId: F:Lector_Excel.MainWindow.listaDeclarados
-  fullName: Lector_Excel.MainWindow.listaDeclarados
-  nameWithType: MainWindow.listaDeclarados
-- uid: Lector_Excel.MainWindow.Menu_About_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_About_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_About_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_About_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_About_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_About_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_About_Click*
-  name: Menu_About_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_About_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_About_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_About_Click
-  nameWithType: MainWindow.Menu_About_Click
-- uid: Lector_Excel.MainWindow.Menu_addNewDeclared_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_addNewDeclared_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_addNewDeclared_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_addNewDeclared_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_addNewDeclared_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_addNewDeclared_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_addNewDeclared_Click*
-  name: Menu_addNewDeclared_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_addNewDeclared_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_addNewDeclared_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_addNewDeclared_Click
-  nameWithType: MainWindow.Menu_addNewDeclared_Click
-- uid: Lector_Excel.MainWindow.Menu_ChartVisor_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ChartVisor_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ChartVisor_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_ChartVisor_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_ChartVisor_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_ChartVisor_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_ChartVisor_Click*
-  name: Menu_ChartVisor_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ChartVisor_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_ChartVisor_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_ChartVisor_Click
-  nameWithType: MainWindow.Menu_ChartVisor_Click
-- uid: Lector_Excel.MainWindow.Menu_deleteAllDeclared_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_deleteAllDeclared_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_deleteAllDeclared_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_deleteAllDeclared_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_deleteAllDeclared_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_deleteAllDeclared_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_deleteAllDeclared_Click*
-  name: Menu_deleteAllDeclared_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_deleteAllDeclared_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_deleteAllDeclared_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_deleteAllDeclared_Click
-  nameWithType: MainWindow.Menu_deleteAllDeclared_Click
-- uid: Lector_Excel.MainWindow.Menu_Exit_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Exit_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Exit_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_Exit_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_Exit_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_Exit_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_Exit_Click*
-  name: Menu_Exit_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Exit_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_Exit_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_Exit_Click
-  nameWithType: MainWindow.Menu_Exit_Click
-- uid: Lector_Excel.MainWindow.Menu_Export_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Export_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Export_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_Export_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_Export_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_Export_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_Export_Click*
-  name: Menu_Export_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Export_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_Export_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_Export_Click
-  nameWithType: MainWindow.Menu_Export_Click
-- uid: Lector_Excel.MainWindow.Menu_ExportPDFDraft_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ExportPDFDraft_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ExportPDFDraft_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_ExportPDFDraft_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_ExportPDFDraft_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_ExportPDFDraft_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_ExportPDFDraft_Click*
-  name: Menu_ExportPDFDraft_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ExportPDFDraft_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_ExportPDFDraft_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_ExportPDFDraft_Click
-  nameWithType: MainWindow.Menu_ExportPDFDraft_Click
-- uid: Lector_Excel.MainWindow.Menu_FillType1_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_FillType1_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_FillType1_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_FillType1_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_FillType1_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_FillType1_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_FillType1_Click*
-  name: Menu_FillType1_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_FillType1_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_FillType1_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_FillType1_Click
-  nameWithType: MainWindow.Menu_FillType1_Click
-- uid: Lector_Excel.MainWindow.Menu_GoToAEAT_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_GoToAEAT_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_GoToAEAT_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_GoToAEAT_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_GoToAEAT_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_GoToAEAT_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_GoToAEAT_Click*
-  name: Menu_GoToAEAT_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_GoToAEAT_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_GoToAEAT_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_GoToAEAT_Click
-  nameWithType: MainWindow.Menu_GoToAEAT_Click
-- uid: Lector_Excel.MainWindow.Menu_Import_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Import_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Import_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_Import_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_Import_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_Import_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_Import_Click*
-  name: Menu_Import_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Import_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_Import_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_Import_Click
-  nameWithType: MainWindow.Menu_Import_Click
-- uid: Lector_Excel.MainWindow.Menu_ImportSettings_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ImportSettings_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ImportSettings_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_ImportSettings_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_ImportSettings_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_ImportSettings_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_ImportSettings_Click*
-  name: Menu_ImportSettings_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ImportSettings_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_ImportSettings_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_ImportSettings_Click
-  nameWithType: MainWindow.Menu_ImportSettings_Click
-- uid: Lector_Excel.MainWindow.Menu_SaveExcel_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_SaveExcel_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_SaveExcel_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_SaveExcel_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_SaveExcel_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_SaveExcel_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_SaveExcel_Click*
-  name: Menu_SaveExcel_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_SaveExcel_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_SaveExcel_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_SaveExcel_Click
-  nameWithType: MainWindow.Menu_SaveExcel_Click
-- uid: Lector_Excel.MainWindow.Menu_ScrollToBottom_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ScrollToBottom_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ScrollToBottom_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_ScrollToBottom_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_ScrollToBottom_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_ScrollToBottom_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_ScrollToBottom_Click*
-  name: Menu_ScrollToBottom_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ScrollToBottom_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_ScrollToBottom_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_ScrollToBottom_Click
-  nameWithType: MainWindow.Menu_ScrollToBottom_Click
-- uid: Lector_Excel.MainWindow.Menu_ScrollToControl_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ScrollToControl_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ScrollToControl_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_ScrollToControl_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_ScrollToControl_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_ScrollToControl_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_ScrollToControl_Click*
-  name: Menu_ScrollToControl_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ScrollToControl_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_ScrollToControl_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_ScrollToControl_Click
-  nameWithType: MainWindow.Menu_ScrollToControl_Click
-- uid: Lector_Excel.MainWindow.Menu_ScrollToTop_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_ScrollToTop_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ScrollToTop_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_ScrollToTop_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_ScrollToTop_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_ScrollToTop_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_ScrollToTop_Click*
-  name: Menu_ScrollToTop_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_ScrollToTop_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_ScrollToTop_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_ScrollToTop_Click
-  nameWithType: MainWindow.Menu_ScrollToTop_Click
-- uid: Lector_Excel.MainWindow.Menu_Updates_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Updates_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Updates_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Menu_Updates_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Menu_Updates_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Menu_Updates_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Menu_Updates_Click*
-  name: Menu_Updates_Click
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Menu_Updates_Click_
-  commentId: Overload:Lector_Excel.MainWindow.Menu_Updates_Click
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Menu_Updates_Click
-  nameWithType: MainWindow.Menu_Updates_Click
-- uid: Lector_Excel.MainWindow.posiciones
-  name: posiciones
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_posiciones
-  commentId: F:Lector_Excel.MainWindow.posiciones
-  fullName: Lector_Excel.MainWindow.posiciones
-  nameWithType: MainWindow.posiciones
-- uid: Lector_Excel.MainWindow.saveLocation
-  name: saveLocation
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_saveLocation
-  commentId: F:Lector_Excel.MainWindow.saveLocation
-  fullName: Lector_Excel.MainWindow.saveLocation
-  nameWithType: MainWindow.saveLocation
-- uid: Lector_Excel.MainWindow.ScrollDialog
-  name: ScrollDialog
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_ScrollDialog
-  commentId: F:Lector_Excel.MainWindow.ScrollDialog
-  fullName: Lector_Excel.MainWindow.ScrollDialog
-  nameWithType: MainWindow.ScrollDialog
-- uid: Lector_Excel.MainWindow.Type1Fields
-  name: Type1Fields
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Type1Fields
-  commentId: F:Lector_Excel.MainWindow.Type1Fields
-  fullName: Lector_Excel.MainWindow.Type1Fields
-  nameWithType: MainWindow.Type1Fields
-- uid: Lector_Excel.MainWindow.UpdateChartInfo(System.Object,Reader_347.ChartEventArgs)
-  name: UpdateChartInfo(Object, ChartEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_UpdateChartInfo_System_Object_Reader_347_ChartEventArgs_
-  commentId: M:Lector_Excel.MainWindow.UpdateChartInfo(System.Object,Reader_347.ChartEventArgs)
-  fullName: Lector_Excel.MainWindow.UpdateChartInfo(System.Object, Reader_347.ChartEventArgs)
-  nameWithType: MainWindow.UpdateChartInfo(Object, ChartEventArgs)
-- uid: Lector_Excel.MainWindow.UpdateChartInfo*
-  name: UpdateChartInfo
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_UpdateChartInfo_
-  commentId: Overload:Lector_Excel.MainWindow.UpdateChartInfo
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.UpdateChartInfo
-  nameWithType: MainWindow.UpdateChartInfo
-- uid: Lector_Excel.MainWindow.Window_Closing(System.Object,System.ComponentModel.CancelEventArgs)
-  name: Window_Closing(Object, CancelEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Window_Closing_System_Object_System_ComponentModel_CancelEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Window_Closing(System.Object,System.ComponentModel.CancelEventArgs)
-  fullName: Lector_Excel.MainWindow.Window_Closing(System.Object, System.ComponentModel.CancelEventArgs)
-  nameWithType: MainWindow.Window_Closing(Object, CancelEventArgs)
-- uid: Lector_Excel.MainWindow.Window_Closing*
-  name: Window_Closing
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Window_Closing_
-  commentId: Overload:Lector_Excel.MainWindow.Window_Closing
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Window_Closing
-  nameWithType: MainWindow.Window_Closing
-- uid: Lector_Excel.MainWindow.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  name: Window_Loaded(Object, RoutedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Window_Loaded_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.MainWindow.Window_Loaded(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: MainWindow.Window_Loaded(Object, RoutedEventArgs)
-- uid: Lector_Excel.MainWindow.Window_Loaded*
-  name: Window_Loaded
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Window_Loaded_
-  commentId: Overload:Lector_Excel.MainWindow.Window_Loaded
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Window_Loaded
-  nameWithType: MainWindow.Window_Loaded
-- uid: Lector_Excel.MainWindow.Worker_Completed(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)
-  name: Worker_Completed(Object, RunWorkerCompletedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Worker_Completed_System_Object_System_ComponentModel_RunWorkerCompletedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Worker_Completed(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)
-  fullName: Lector_Excel.MainWindow.Worker_Completed(System.Object, System.ComponentModel.RunWorkerCompletedEventArgs)
-  nameWithType: MainWindow.Worker_Completed(Object, RunWorkerCompletedEventArgs)
-- uid: Lector_Excel.MainWindow.Worker_Completed*
-  name: Worker_Completed
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Worker_Completed_
-  commentId: Overload:Lector_Excel.MainWindow.Worker_Completed
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Worker_Completed
-  nameWithType: MainWindow.Worker_Completed
-- uid: Lector_Excel.MainWindow.Worker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)
-  name: Worker_DoWork(Object, DoWorkEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Worker_DoWork_System_Object_System_ComponentModel_DoWorkEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Worker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)
-  fullName: Lector_Excel.MainWindow.Worker_DoWork(System.Object, System.ComponentModel.DoWorkEventArgs)
-  nameWithType: MainWindow.Worker_DoWork(Object, DoWorkEventArgs)
-- uid: Lector_Excel.MainWindow.Worker_DoWork*
-  name: Worker_DoWork
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Worker_DoWork_
-  commentId: Overload:Lector_Excel.MainWindow.Worker_DoWork
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Worker_DoWork
-  nameWithType: MainWindow.Worker_DoWork
-- uid: Lector_Excel.MainWindow.Worker_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)
-  name: Worker_ProgressChanged(Object, ProgressChangedEventArgs)
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Worker_ProgressChanged_System_Object_System_ComponentModel_ProgressChangedEventArgs_
-  commentId: M:Lector_Excel.MainWindow.Worker_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)
-  fullName: Lector_Excel.MainWindow.Worker_ProgressChanged(System.Object, System.ComponentModel.ProgressChangedEventArgs)
-  nameWithType: MainWindow.Worker_ProgressChanged(Object, ProgressChangedEventArgs)
-- uid: Lector_Excel.MainWindow.Worker_ProgressChanged*
-  name: Worker_ProgressChanged
-  href: api/Lector_Excel.MainWindow.html#Lector_Excel_MainWindow_Worker_ProgressChanged_
-  commentId: Overload:Lector_Excel.MainWindow.Worker_ProgressChanged
-  isSpec: "True"
-  fullName: Lector_Excel.MainWindow.Worker_ProgressChanged
-  nameWithType: MainWindow.Worker_ProgressChanged
 - uid: Lector_Excel.ProgressWindow
   name: ProgressWindow
   href: api/Lector_Excel.ProgressWindow.html
@@ -1323,67 +381,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ProgressWindow.Amount
   nameWithType: ProgressWindow.Amount
-- uid: Lector_Excel.ProgressWindow.GetWindowLong(System.IntPtr,System.Int32)
-  name: GetWindowLong(IntPtr, Int32)
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_GetWindowLong_System_IntPtr_System_Int32_
-  commentId: M:Lector_Excel.ProgressWindow.GetWindowLong(System.IntPtr,System.Int32)
-  fullName: Lector_Excel.ProgressWindow.GetWindowLong(System.IntPtr, System.Int32)
-  nameWithType: ProgressWindow.GetWindowLong(IntPtr, Int32)
-- uid: Lector_Excel.ProgressWindow.GetWindowLong*
-  name: GetWindowLong
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_GetWindowLong_
-  commentId: Overload:Lector_Excel.ProgressWindow.GetWindowLong
-  fullName: Lector_Excel.ProgressWindow.GetWindowLong
-  nameWithType: ProgressWindow.GetWindowLong
-- uid: Lector_Excel.ProgressWindow.GWL_STYLE
-  name: GWL_STYLE
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_GWL_STYLE
-  commentId: F:Lector_Excel.ProgressWindow.GWL_STYLE
-  fullName: Lector_Excel.ProgressWindow.GWL_STYLE
-  nameWithType: ProgressWindow.GWL_STYLE
-- uid: Lector_Excel.ProgressWindow.isIndeterminate
-  name: isIndeterminate
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_isIndeterminate
-  commentId: F:Lector_Excel.ProgressWindow.isIndeterminate
-  fullName: Lector_Excel.ProgressWindow.isIndeterminate
-  nameWithType: ProgressWindow.isIndeterminate
-- uid: Lector_Excel.ProgressWindow.SetWindowLong(System.IntPtr,System.Int32,System.Int32)
-  name: SetWindowLong(IntPtr, Int32, Int32)
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_SetWindowLong_System_IntPtr_System_Int32_System_Int32_
-  commentId: M:Lector_Excel.ProgressWindow.SetWindowLong(System.IntPtr,System.Int32,System.Int32)
-  fullName: Lector_Excel.ProgressWindow.SetWindowLong(System.IntPtr, System.Int32, System.Int32)
-  nameWithType: ProgressWindow.SetWindowLong(IntPtr, Int32, Int32)
-- uid: Lector_Excel.ProgressWindow.SetWindowLong*
-  name: SetWindowLong
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_SetWindowLong_
-  commentId: Overload:Lector_Excel.ProgressWindow.SetWindowLong
-  fullName: Lector_Excel.ProgressWindow.SetWindowLong
-  nameWithType: ProgressWindow.SetWindowLong
-- uid: Lector_Excel.ProgressWindow.title
-  name: title
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_title
-  commentId: F:Lector_Excel.ProgressWindow.title
-  fullName: Lector_Excel.ProgressWindow.title
-  nameWithType: ProgressWindow.title
-- uid: Lector_Excel.ProgressWindow.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  name: Window_Loaded(Object, RoutedEventArgs)
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_Window_Loaded_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.ProgressWindow.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.ProgressWindow.Window_Loaded(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ProgressWindow.Window_Loaded(Object, RoutedEventArgs)
-- uid: Lector_Excel.ProgressWindow.Window_Loaded*
-  name: Window_Loaded
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_Window_Loaded_
-  commentId: Overload:Lector_Excel.ProgressWindow.Window_Loaded
-  isSpec: "True"
-  fullName: Lector_Excel.ProgressWindow.Window_Loaded
-  nameWithType: ProgressWindow.Window_Loaded
-- uid: Lector_Excel.ProgressWindow.WS_SYSMENU
-  name: WS_SYSMENU
-  href: api/Lector_Excel.ProgressWindow.html#Lector_Excel_ProgressWindow_WS_SYSMENU
-  commentId: F:Lector_Excel.ProgressWindow.WS_SYSMENU
-  fullName: Lector_Excel.ProgressWindow.WS_SYSMENU
-  nameWithType: ProgressWindow.WS_SYSMENU
 - uid: Lector_Excel.Province
   name: Province
   href: api/Lector_Excel.Province.html
@@ -1435,32 +432,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.Type1Window.Type1Window
   nameWithType: Type1Window.Type1Window
-- uid: Lector_Excel.Type1Window.Btn_Cancel_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Btn_Cancel_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Btn_Cancel_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.Type1Window.Btn_Cancel_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.Type1Window.Btn_Cancel_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: Type1Window.Btn_Cancel_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.Type1Window.Btn_Cancel_Click*
-  name: Btn_Cancel_Click
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Btn_Cancel_Click_
-  commentId: Overload:Lector_Excel.Type1Window.Btn_Cancel_Click
-  isSpec: "True"
-  fullName: Lector_Excel.Type1Window.Btn_Cancel_Click
-  nameWithType: Type1Window.Btn_Cancel_Click
-- uid: Lector_Excel.Type1Window.Btn_OK_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Btn_OK_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Btn_OK_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.Type1Window.Btn_OK_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.Type1Window.Btn_OK_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: Type1Window.Btn_OK_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.Type1Window.Btn_OK_Click*
-  name: Btn_OK_Click
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Btn_OK_Click_
-  commentId: Overload:Lector_Excel.Type1Window.Btn_OK_Click
-  isSpec: "True"
-  fullName: Lector_Excel.Type1Window.Btn_OK_Click
-  nameWithType: Type1Window.Btn_OK_Click
 - uid: Lector_Excel.Type1Window.Lista
   name: Lista
   href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Lista
@@ -1474,76 +445,12 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.Type1Window.Lista
   nameWithType: Type1Window.Lista
-- uid: Lector_Excel.Type1Window.Menu_exportData_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_exportData_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Menu_exportData_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.Type1Window.Menu_exportData_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.Type1Window.Menu_exportData_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: Type1Window.Menu_exportData_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.Type1Window.Menu_exportData_Click*
-  name: Menu_exportData_Click
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Menu_exportData_Click_
-  commentId: Overload:Lector_Excel.Type1Window.Menu_exportData_Click
-  isSpec: "True"
-  fullName: Lector_Excel.Type1Window.Menu_exportData_Click
-  nameWithType: Type1Window.Menu_exportData_Click
-- uid: Lector_Excel.Type1Window.Menu_importData_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_importData_Click(Object, RoutedEventArgs)
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Menu_importData_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.Type1Window.Menu_importData_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.Type1Window.Menu_importData_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: Type1Window.Menu_importData_Click(Object, RoutedEventArgs)
-- uid: Lector_Excel.Type1Window.Menu_importData_Click*
-  name: Menu_importData_Click
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Menu_importData_Click_
-  commentId: Overload:Lector_Excel.Type1Window.Menu_importData_Click
-  isSpec: "True"
-  fullName: Lector_Excel.Type1Window.Menu_importData_Click
-  nameWithType: Type1Window.Menu_importData_Click
-- uid: Lector_Excel.Type1Window.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  name: Window_Loaded(Object, RoutedEventArgs)
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Window_Loaded_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Lector_Excel.Type1Window.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Lector_Excel.Type1Window.Window_Loaded(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: Type1Window.Window_Loaded(Object, RoutedEventArgs)
-- uid: Lector_Excel.Type1Window.Window_Loaded*
-  name: Window_Loaded
-  href: api/Lector_Excel.Type1Window.html#Lector_Excel_Type1Window_Window_Loaded_
-  commentId: Overload:Lector_Excel.Type1Window.Window_Loaded
-  isSpec: "True"
-  fullName: Lector_Excel.Type1Window.Window_Loaded
-  nameWithType: Type1Window.Window_Loaded
 - uid: Reader_347
   name: Reader_347
   href: api/Reader_347.html
   commentId: N:Reader_347
   fullName: Reader_347
   nameWithType: Reader_347
-- uid: Reader_347.BadApplicationVersion
-  name: BadApplicationVersion
-  href: api/Reader_347.BadApplicationVersion.html
-  commentId: T:Reader_347.BadApplicationVersion
-  fullName: Reader_347.BadApplicationVersion
-  nameWithType: BadApplicationVersion
-- uid: Reader_347.BadApplicationVersion.#ctor
-  name: BadApplicationVersion()
-  href: api/Reader_347.BadApplicationVersion.html#Reader_347_BadApplicationVersion__ctor
-  commentId: M:Reader_347.BadApplicationVersion.#ctor
-  fullName: Reader_347.BadApplicationVersion.BadApplicationVersion()
-  nameWithType: BadApplicationVersion.BadApplicationVersion()
-- uid: Reader_347.BadApplicationVersion.#ctor(System.Version,System.Version)
-  name: BadApplicationVersion(Version, Version)
-  href: api/Reader_347.BadApplicationVersion.html#Reader_347_BadApplicationVersion__ctor_System_Version_System_Version_
-  commentId: M:Reader_347.BadApplicationVersion.#ctor(System.Version,System.Version)
-  fullName: Reader_347.BadApplicationVersion.BadApplicationVersion(System.Version, System.Version)
-  nameWithType: BadApplicationVersion.BadApplicationVersion(Version, Version)
-- uid: Reader_347.BadApplicationVersion.#ctor*
-  name: BadApplicationVersion
-  href: api/Reader_347.BadApplicationVersion.html#Reader_347_BadApplicationVersion__ctor_
-  commentId: Overload:Reader_347.BadApplicationVersion.#ctor
-  isSpec: "True"
-  fullName: Reader_347.BadApplicationVersion.BadApplicationVersion
-  nameWithType: BadApplicationVersion.BadApplicationVersion
 - uid: Reader_347.ChartDataHolder
   name: ChartDataHolder
   href: api/Reader_347.ChartDataHolder.html
@@ -1569,37 +476,6 @@ references:
   commentId: F:Reader_347.ChartDataHolder.ChartData
   fullName: Reader_347.ChartDataHolder.ChartData
   nameWithType: ChartDataHolder.ChartData
-- uid: Reader_347.ChartDataHolder.ChartType
-  name: ChartType
-  href: api/Reader_347.ChartDataHolder.html#Reader_347_ChartDataHolder_ChartType
-  commentId: F:Reader_347.ChartDataHolder.ChartType
-  fullName: Reader_347.ChartDataHolder.ChartType
-  nameWithType: ChartDataHolder.ChartType
-- uid: Reader_347.ChartDataHolder.CurrentChart
-  name: CurrentChart
-  href: api/Reader_347.ChartDataHolder.html#Reader_347_ChartDataHolder_CurrentChart
-  commentId: F:Reader_347.ChartDataHolder.CurrentChart
-  fullName: Reader_347.ChartDataHolder.CurrentChart
-  nameWithType: ChartDataHolder.CurrentChart
-- uid: Reader_347.ChartDataHolder.CurrentMapChart
-  name: CurrentMapChart
-  href: api/Reader_347.ChartDataHolder.html#Reader_347_ChartDataHolder_CurrentMapChart
-  commentId: F:Reader_347.ChartDataHolder.CurrentMapChart
-  fullName: Reader_347.ChartDataHolder.CurrentMapChart
-  nameWithType: ChartDataHolder.CurrentMapChart
-- uid: Reader_347.ChartDataHolder.OrganizeChartData
-  name: OrganizeChartData()
-  href: api/Reader_347.ChartDataHolder.html#Reader_347_ChartDataHolder_OrganizeChartData
-  commentId: M:Reader_347.ChartDataHolder.OrganizeChartData
-  fullName: Reader_347.ChartDataHolder.OrganizeChartData()
-  nameWithType: ChartDataHolder.OrganizeChartData()
-- uid: Reader_347.ChartDataHolder.OrganizeChartData*
-  name: OrganizeChartData
-  href: api/Reader_347.ChartDataHolder.html#Reader_347_ChartDataHolder_OrganizeChartData_
-  commentId: Overload:Reader_347.ChartDataHolder.OrganizeChartData
-  isSpec: "True"
-  fullName: Reader_347.ChartDataHolder.OrganizeChartData
-  nameWithType: ChartDataHolder.OrganizeChartData
 - uid: Reader_347.ChartEventArgs
   name: ChartEventArgs
   href: api/Reader_347.ChartEventArgs.html
@@ -1637,19 +513,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.ChartWindow.ChartWindow
   nameWithType: ChartWindow.ChartWindow
-- uid: Reader_347.ChartWindow.CaptureScreen(System.Windows.UIElement)
-  name: CaptureScreen(UIElement)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_CaptureScreen_System_Windows_UIElement_
-  commentId: M:Reader_347.ChartWindow.CaptureScreen(System.Windows.UIElement)
-  fullName: Reader_347.ChartWindow.CaptureScreen(System.Windows.UIElement)
-  nameWithType: ChartWindow.CaptureScreen(UIElement)
-- uid: Reader_347.ChartWindow.CaptureScreen*
-  name: CaptureScreen
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_CaptureScreen_
-  commentId: Overload:Reader_347.ChartWindow.CaptureScreen
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.CaptureScreen
-  nameWithType: ChartWindow.CaptureScreen
 - uid: Reader_347.ChartWindow.ChartDelegate
   name: ChartDelegate
   href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_ChartDelegate
@@ -1695,32 +558,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.ChartWindow.GeoMap
   nameWithType: ChartWindow.GeoMap
-- uid: Reader_347.ChartWindow.HorizBar_BuySellPerTrimester_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: HorizBar_BuySellPerTrimester_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_HorizBar_BuySellPerTrimester_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.HorizBar_BuySellPerTrimester_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.HorizBar_BuySellPerTrimester_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.HorizBar_BuySellPerTrimester_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.HorizBar_BuySellPerTrimester_Click*
-  name: HorizBar_BuySellPerTrimester_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_HorizBar_BuySellPerTrimester_Click_
-  commentId: Overload:Reader_347.ChartWindow.HorizBar_BuySellPerTrimester_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.HorizBar_BuySellPerTrimester_Click
-  nameWithType: ChartWindow.HorizBar_BuySellPerTrimester_Click
-- uid: Reader_347.ChartWindow.HorizBar_RegPerOpKey_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: HorizBar_RegPerOpKey_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_HorizBar_RegPerOpKey_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.HorizBar_RegPerOpKey_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.HorizBar_RegPerOpKey_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.HorizBar_RegPerOpKey_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.HorizBar_RegPerOpKey_Click*
-  name: HorizBar_RegPerOpKey_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_HorizBar_RegPerOpKey_Click_
-  commentId: Overload:Reader_347.ChartWindow.HorizBar_RegPerOpKey_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.HorizBar_RegPerOpKey_Click
-  nameWithType: ChartWindow.HorizBar_RegPerOpKey_Click
 - uid: Reader_347.ChartWindow.Labels
   name: Labels
   href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Labels
@@ -1747,123 +584,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.ChartWindow.MapValues
   nameWithType: ChartWindow.MapValues
-- uid: Reader_347.ChartWindow.Menu_Line_BuySellPerTrimester_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Line_BuySellPerTrimester_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Line_BuySellPerTrimester_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_Line_BuySellPerTrimester_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_Line_BuySellPerTrimester_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_Line_BuySellPerTrimester_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_Line_BuySellPerTrimester_Click*
-  name: Menu_Line_BuySellPerTrimester_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Line_BuySellPerTrimester_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_Line_BuySellPerTrimester_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_Line_BuySellPerTrimester_Click
-  nameWithType: ChartWindow.Menu_Line_BuySellPerTrimester_Click
-- uid: Reader_347.ChartWindow.Menu_Map_BuyTotal_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Map_BuyTotal_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Map_BuyTotal_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_Map_BuyTotal_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_Map_BuyTotal_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_Map_BuyTotal_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_Map_BuyTotal_Click*
-  name: Menu_Map_BuyTotal_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Map_BuyTotal_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_Map_BuyTotal_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_Map_BuyTotal_Click
-  nameWithType: ChartWindow.Menu_Map_BuyTotal_Click
-- uid: Reader_347.ChartWindow.Menu_Map_SellTotal_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Map_SellTotal_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Map_SellTotal_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_Map_SellTotal_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_Map_SellTotal_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_Map_SellTotal_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_Map_SellTotal_Click*
-  name: Menu_Map_SellTotal_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Map_SellTotal_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_Map_SellTotal_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_Map_SellTotal_Click
-  nameWithType: ChartWindow.Menu_Map_SellTotal_Click
-- uid: Reader_347.ChartWindow.Menu_Pie_BuyPerRegion_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Pie_BuyPerRegion_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Pie_BuyPerRegion_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_Pie_BuyPerRegion_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_Pie_BuyPerRegion_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_Pie_BuyPerRegion_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_Pie_BuyPerRegion_Click*
-  name: Menu_Pie_BuyPerRegion_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Pie_BuyPerRegion_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_Pie_BuyPerRegion_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_Pie_BuyPerRegion_Click
-  nameWithType: ChartWindow.Menu_Pie_BuyPerRegion_Click
-- uid: Reader_347.ChartWindow.Menu_Pie_SellPerRegion_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_Pie_SellPerRegion_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Pie_SellPerRegion_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_Pie_SellPerRegion_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_Pie_SellPerRegion_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_Pie_SellPerRegion_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_Pie_SellPerRegion_Click*
-  name: Menu_Pie_SellPerRegion_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_Pie_SellPerRegion_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_Pie_SellPerRegion_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_Pie_SellPerRegion_Click
-  nameWithType: ChartWindow.Menu_Pie_SellPerRegion_Click
-- uid: Reader_347.ChartWindow.Menu_SaveGraphAs_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_SaveGraphAs_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_SaveGraphAs_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_SaveGraphAs_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_SaveGraphAs_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_SaveGraphAs_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_SaveGraphAs_Click*
-  name: Menu_SaveGraphAs_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_SaveGraphAs_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_SaveGraphAs_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_SaveGraphAs_Click
-  nameWithType: ChartWindow.Menu_SaveGraphAs_Click
-- uid: Reader_347.ChartWindow.Menu_VertBar_BuySellPerTrimester_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_VertBar_BuySellPerTrimester_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_VertBar_BuySellPerTrimester_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_VertBar_BuySellPerTrimester_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_VertBar_BuySellPerTrimester_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_VertBar_BuySellPerTrimester_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_VertBar_BuySellPerTrimester_Click*
-  name: Menu_VertBar_BuySellPerTrimester_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_VertBar_BuySellPerTrimester_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_VertBar_BuySellPerTrimester_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_VertBar_BuySellPerTrimester_Click
-  nameWithType: ChartWindow.Menu_VertBar_BuySellPerTrimester_Click
-- uid: Reader_347.ChartWindow.Menu_VertBar_RegPerOpKey_Click(System.Object,System.Windows.RoutedEventArgs)
-  name: Menu_VertBar_RegPerOpKey_Click(Object, RoutedEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_VertBar_RegPerOpKey_Click_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ChartWindow.Menu_VertBar_RegPerOpKey_Click(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ChartWindow.Menu_VertBar_RegPerOpKey_Click(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ChartWindow.Menu_VertBar_RegPerOpKey_Click(Object, RoutedEventArgs)
-- uid: Reader_347.ChartWindow.Menu_VertBar_RegPerOpKey_Click*
-  name: Menu_VertBar_RegPerOpKey_Click
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_Menu_VertBar_RegPerOpKey_Click_
-  commentId: Overload:Reader_347.ChartWindow.Menu_VertBar_RegPerOpKey_Click
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.Menu_VertBar_RegPerOpKey_Click
-  nameWithType: ChartWindow.Menu_VertBar_RegPerOpKey_Click
-- uid: Reader_347.ChartWindow.OnChartSelection(Reader_347.ChartEventArgs)
-  name: OnChartSelection(ChartEventArgs)
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_OnChartSelection_Reader_347_ChartEventArgs_
-  commentId: M:Reader_347.ChartWindow.OnChartSelection(Reader_347.ChartEventArgs)
-  fullName: Reader_347.ChartWindow.OnChartSelection(Reader_347.ChartEventArgs)
-  nameWithType: ChartWindow.OnChartSelection(ChartEventArgs)
-- uid: Reader_347.ChartWindow.OnChartSelection*
-  name: OnChartSelection
-  href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_OnChartSelection_
-  commentId: Overload:Reader_347.ChartWindow.OnChartSelection
-  isSpec: "True"
-  fullName: Reader_347.ChartWindow.OnChartSelection
-  nameWithType: ChartWindow.OnChartSelection
 - uid: Reader_347.ChartWindow.PieFormatter
   name: PieFormatter
   href: api/Reader_347.ChartWindow.html#Reader_347_ChartWindow_PieFormatter
@@ -1890,25 +610,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.ChartWindow.SeriesCollection
   nameWithType: ChartWindow.SeriesCollection
-- uid: Reader_347.DeclaredAmountException
-  name: DeclaredAmountException
-  href: api/Reader_347.DeclaredAmountException.html
-  commentId: T:Reader_347.DeclaredAmountException
-  fullName: Reader_347.DeclaredAmountException
-  nameWithType: DeclaredAmountException
-- uid: Reader_347.DeclaredAmountException.#ctor(System.Int32)
-  name: DeclaredAmountException(Int32)
-  href: api/Reader_347.DeclaredAmountException.html#Reader_347_DeclaredAmountException__ctor_System_Int32_
-  commentId: M:Reader_347.DeclaredAmountException.#ctor(System.Int32)
-  fullName: Reader_347.DeclaredAmountException.DeclaredAmountException(System.Int32)
-  nameWithType: DeclaredAmountException.DeclaredAmountException(Int32)
-- uid: Reader_347.DeclaredAmountException.#ctor*
-  name: DeclaredAmountException
-  href: api/Reader_347.DeclaredAmountException.html#Reader_347_DeclaredAmountException__ctor_
-  commentId: Overload:Reader_347.DeclaredAmountException.#ctor
-  isSpec: "True"
-  fullName: Reader_347.DeclaredAmountException.DeclaredAmountException
-  nameWithType: DeclaredAmountException.DeclaredAmountException
 - uid: Reader_347.PDFManager
   name: PDFManager
   href: api/Reader_347.PDFManager.html
@@ -1954,12 +655,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.PDFManager.CreatePDFWithImage_OLD
   nameWithType: PDFManager.CreatePDFWithImage_OLD
-- uid: Reader_347.PDFManager.DestinationPath
-  name: DestinationPath
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_DestinationPath
-  commentId: F:Reader_347.PDFManager.DestinationPath
-  fullName: Reader_347.PDFManager.DestinationPath
-  nameWithType: PDFManager.DestinationPath
 - uid: Reader_347.PDFManager.ExportToPDFDraft(System.Collections.Generic.List{System.String},System.Collections.Generic.List{Lector_Excel.Declared})
   name: ExportToPDFDraft(List<String>, List<Declared>)
   href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_ExportToPDFDraft_System_Collections_Generic_List_System_String__System_Collections_Generic_List_Lector_Excel_Declared__
@@ -1976,152 +671,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.PDFManager.ExportToPDFDraft
   nameWithType: PDFManager.ExportToPDFDraft
-- uid: Reader_347.PDFManager.GetFieldNames(System.String)
-  name: GetFieldNames(String)
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_GetFieldNames_System_String_
-  commentId: M:Reader_347.PDFManager.GetFieldNames(System.String)
-  fullName: Reader_347.PDFManager.GetFieldNames(System.String)
-  nameWithType: PDFManager.GetFieldNames(String)
-- uid: Reader_347.PDFManager.GetFieldNames*
-  name: GetFieldNames
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_GetFieldNames_
-  commentId: Overload:Reader_347.PDFManager.GetFieldNames
-  isSpec: "True"
-  fullName: Reader_347.PDFManager.GetFieldNames
-  nameWithType: PDFManager.GetFieldNames
-- uid: Reader_347.PDFManager.SetPdfCheckBoxValue(System.String,System.Boolean,PdfSharp.Pdf.AcroForms.PdfAcroForm@)
-  name: SetPdfCheckBoxValue(String, Boolean, ref PdfAcroForm)
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_SetPdfCheckBoxValue_System_String_System_Boolean_PdfSharp_Pdf_AcroForms_PdfAcroForm__
-  commentId: M:Reader_347.PDFManager.SetPdfCheckBoxValue(System.String,System.Boolean,PdfSharp.Pdf.AcroForms.PdfAcroForm@)
-  name.vb: SetPdfCheckBoxValue(String, Boolean, ByRef PdfAcroForm)
-  fullName: Reader_347.PDFManager.SetPdfCheckBoxValue(System.String, System.Boolean, ref PdfSharp.Pdf.AcroForms.PdfAcroForm)
-  fullName.vb: Reader_347.PDFManager.SetPdfCheckBoxValue(System.String, System.Boolean, ByRef PdfSharp.Pdf.AcroForms.PdfAcroForm)
-  nameWithType: PDFManager.SetPdfCheckBoxValue(String, Boolean, ref PdfAcroForm)
-  nameWithType.vb: PDFManager.SetPdfCheckBoxValue(String, Boolean, ByRef PdfAcroForm)
-- uid: Reader_347.PDFManager.SetPdfCheckBoxValue*
-  name: SetPdfCheckBoxValue
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_SetPdfCheckBoxValue_
-  commentId: Overload:Reader_347.PDFManager.SetPdfCheckBoxValue
-  isSpec: "True"
-  fullName: Reader_347.PDFManager.SetPdfCheckBoxValue
-  nameWithType: PDFManager.SetPdfCheckBoxValue
-- uid: Reader_347.PDFManager.SetPdfTextFieldValue(System.String,System.String,PdfSharp.Pdf.AcroForms.PdfAcroForm@)
-  name: SetPdfTextFieldValue(String, String, ref PdfAcroForm)
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_SetPdfTextFieldValue_System_String_System_String_PdfSharp_Pdf_AcroForms_PdfAcroForm__
-  commentId: M:Reader_347.PDFManager.SetPdfTextFieldValue(System.String,System.String,PdfSharp.Pdf.AcroForms.PdfAcroForm@)
-  name.vb: SetPdfTextFieldValue(String, String, ByRef PdfAcroForm)
-  fullName: Reader_347.PDFManager.SetPdfTextFieldValue(System.String, System.String, ref PdfSharp.Pdf.AcroForms.PdfAcroForm)
-  fullName.vb: Reader_347.PDFManager.SetPdfTextFieldValue(System.String, System.String, ByRef PdfSharp.Pdf.AcroForms.PdfAcroForm)
-  nameWithType: PDFManager.SetPdfTextFieldValue(String, String, ref PdfAcroForm)
-  nameWithType.vb: PDFManager.SetPdfTextFieldValue(String, String, ByRef PdfAcroForm)
-- uid: Reader_347.PDFManager.SetPdfTextFieldValue*
-  name: SetPdfTextFieldValue
-  href: api/Reader_347.PDFManager.html#Reader_347_PDFManager_SetPdfTextFieldValue_
-  commentId: Overload:Reader_347.PDFManager.SetPdfTextFieldValue
-  isSpec: "True"
-  fullName: Reader_347.PDFManager.SetPdfTextFieldValue
-  nameWithType: PDFManager.SetPdfTextFieldValue
-- uid: Reader_347.Properties
-  name: Reader_347.Properties
-  href: api/Reader_347.Properties.html
-  commentId: N:Reader_347.Properties
-  fullName: Reader_347.Properties
-  nameWithType: Reader_347.Properties
-- uid: Reader_347.Properties.Resources
-  name: Resources
-  href: api/Reader_347.Properties.Resources.html
-  commentId: T:Reader_347.Properties.Resources
-  fullName: Reader_347.Properties.Resources
-  nameWithType: Resources
-- uid: Reader_347.Properties.Resources.#ctor
-  name: Resources()
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources__ctor
-  commentId: M:Reader_347.Properties.Resources.#ctor
-  fullName: Reader_347.Properties.Resources.Resources()
-  nameWithType: Resources.Resources()
-- uid: Reader_347.Properties.Resources.#ctor*
-  name: Resources
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources__ctor_
-  commentId: Overload:Reader_347.Properties.Resources.#ctor
-  isSpec: "True"
-  fullName: Reader_347.Properties.Resources.Resources
-  nameWithType: Resources.Resources
-- uid: Reader_347.Properties.Resources.Culture
-  name: Culture
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_Culture
-  commentId: P:Reader_347.Properties.Resources.Culture
-  fullName: Reader_347.Properties.Resources.Culture
-  nameWithType: Resources.Culture
-- uid: Reader_347.Properties.Resources.Culture*
-  name: Culture
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_Culture_
-  commentId: Overload:Reader_347.Properties.Resources.Culture
-  isSpec: "True"
-  fullName: Reader_347.Properties.Resources.Culture
-  nameWithType: Resources.Culture
-- uid: Reader_347.Properties.Resources.Modelo347_Editable
-  name: Modelo347_Editable
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_Modelo347_Editable
-  commentId: P:Reader_347.Properties.Resources.Modelo347_Editable
-  fullName: Reader_347.Properties.Resources.Modelo347_Editable
-  nameWithType: Resources.Modelo347_Editable
-- uid: Reader_347.Properties.Resources.Modelo347_Editable*
-  name: Modelo347_Editable
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_Modelo347_Editable_
-  commentId: Overload:Reader_347.Properties.Resources.Modelo347_Editable
-  isSpec: "True"
-  fullName: Reader_347.Properties.Resources.Modelo347_Editable
-  nameWithType: Resources.Modelo347_Editable
-- uid: Reader_347.Properties.Resources.resourceCulture
-  name: resourceCulture
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_resourceCulture
-  commentId: F:Reader_347.Properties.Resources.resourceCulture
-  fullName: Reader_347.Properties.Resources.resourceCulture
-  nameWithType: Resources.resourceCulture
-- uid: Reader_347.Properties.Resources.resourceMan
-  name: resourceMan
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_resourceMan
-  commentId: F:Reader_347.Properties.Resources.resourceMan
-  fullName: Reader_347.Properties.Resources.resourceMan
-  nameWithType: Resources.resourceMan
-- uid: Reader_347.Properties.Resources.ResourceManager
-  name: ResourceManager
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_ResourceManager
-  commentId: P:Reader_347.Properties.Resources.ResourceManager
-  fullName: Reader_347.Properties.Resources.ResourceManager
-  nameWithType: Resources.ResourceManager
-- uid: Reader_347.Properties.Resources.ResourceManager*
-  name: ResourceManager
-  href: api/Reader_347.Properties.Resources.html#Reader_347_Properties_Resources_ResourceManager_
-  commentId: Overload:Reader_347.Properties.Resources.ResourceManager
-  isSpec: "True"
-  fullName: Reader_347.Properties.Resources.ResourceManager
-  nameWithType: Resources.ResourceManager
-- uid: Reader_347.Properties.Settings
-  name: Settings
-  href: api/Reader_347.Properties.Settings.html
-  commentId: T:Reader_347.Properties.Settings
-  fullName: Reader_347.Properties.Settings
-  nameWithType: Settings
-- uid: Reader_347.Properties.Settings.Default
-  name: Default
-  href: api/Reader_347.Properties.Settings.html#Reader_347_Properties_Settings_Default
-  commentId: P:Reader_347.Properties.Settings.Default
-  fullName: Reader_347.Properties.Settings.Default
-  nameWithType: Settings.Default
-- uid: Reader_347.Properties.Settings.Default*
-  name: Default
-  href: api/Reader_347.Properties.Settings.html#Reader_347_Properties_Settings_Default_
-  commentId: Overload:Reader_347.Properties.Settings.Default
-  isSpec: "True"
-  fullName: Reader_347.Properties.Settings.Default
-  nameWithType: Settings.Default
-- uid: Reader_347.Properties.Settings.defaultInstance
-  name: defaultInstance
-  href: api/Reader_347.Properties.Settings.html#Reader_347_Properties_Settings_defaultInstance
-  commentId: F:Reader_347.Properties.Settings.defaultInstance
-  fullName: Reader_347.Properties.Settings.defaultInstance
-  nameWithType: Settings.defaultInstance
 - uid: Reader_347.ScrollDialogDelegate
   name: ScrollDialogDelegate
   href: api/Reader_347.ScrollDialogDelegate.html
@@ -2172,41 +721,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.ScrollToDialog.maxValue
   nameWithType: ScrollToDialog.maxValue
-- uid: Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged(System.Object,System.Windows.RoutedPropertyChangedEventArgs{System.Object})
-  name: Nud_MainNumericUpDown_ValueChanged(Object, RoutedPropertyChangedEventArgs<Object>)
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_Nud_MainNumericUpDown_ValueChanged_System_Object_System_Windows_RoutedPropertyChangedEventArgs_System_Object__
-  commentId: M:Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged(System.Object,System.Windows.RoutedPropertyChangedEventArgs{System.Object})
-  name.vb: Nud_MainNumericUpDown_ValueChanged(Object, RoutedPropertyChangedEventArgs(Of Object))
-  fullName: Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged(System.Object, System.Windows.RoutedPropertyChangedEventArgs<System.Object>)
-  fullName.vb: Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged(System.Object, System.Windows.RoutedPropertyChangedEventArgs(Of System.Object))
-  nameWithType: ScrollToDialog.Nud_MainNumericUpDown_ValueChanged(Object, RoutedPropertyChangedEventArgs<Object>)
-  nameWithType.vb: ScrollToDialog.Nud_MainNumericUpDown_ValueChanged(Object, RoutedPropertyChangedEventArgs(Of Object))
-- uid: Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged*
-  name: Nud_MainNumericUpDown_ValueChanged
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_Nud_MainNumericUpDown_ValueChanged_
-  commentId: Overload:Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged
-  isSpec: "True"
-  fullName: Reader_347.ScrollToDialog.Nud_MainNumericUpDown_ValueChanged
-  nameWithType: ScrollToDialog.Nud_MainNumericUpDown_ValueChanged
-- uid: Reader_347.ScrollToDialog.NUMERICAL_REGEX
-  name: NUMERICAL_REGEX
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_NUMERICAL_REGEX
-  commentId: F:Reader_347.ScrollToDialog.NUMERICAL_REGEX
-  fullName: Reader_347.ScrollToDialog.NUMERICAL_REGEX
-  nameWithType: ScrollToDialog.NUMERICAL_REGEX
-- uid: Reader_347.ScrollToDialog.OnPositionChanged(Reader_347.ScrollEventArgs)
-  name: OnPositionChanged(ScrollEventArgs)
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_OnPositionChanged_Reader_347_ScrollEventArgs_
-  commentId: M:Reader_347.ScrollToDialog.OnPositionChanged(Reader_347.ScrollEventArgs)
-  fullName: Reader_347.ScrollToDialog.OnPositionChanged(Reader_347.ScrollEventArgs)
-  nameWithType: ScrollToDialog.OnPositionChanged(ScrollEventArgs)
-- uid: Reader_347.ScrollToDialog.OnPositionChanged*
-  name: OnPositionChanged
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_OnPositionChanged_
-  commentId: Overload:Reader_347.ScrollToDialog.OnPositionChanged
-  isSpec: "True"
-  fullName: Reader_347.ScrollToDialog.OnPositionChanged
-  nameWithType: ScrollToDialog.OnPositionChanged
 - uid: Reader_347.ScrollToDialog.returnValue
   name: returnValue
   href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_returnValue
@@ -2226,19 +740,6 @@ references:
   commentId: E:Reader_347.ScrollToDialog.ScrollDelegate
   fullName: Reader_347.ScrollToDialog.ScrollDelegate
   nameWithType: ScrollToDialog.ScrollDelegate
-- uid: Reader_347.ScrollToDialog.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  name: Window_Loaded(Object, RoutedEventArgs)
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_Window_Loaded_System_Object_System_Windows_RoutedEventArgs_
-  commentId: M:Reader_347.ScrollToDialog.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)
-  fullName: Reader_347.ScrollToDialog.Window_Loaded(System.Object, System.Windows.RoutedEventArgs)
-  nameWithType: ScrollToDialog.Window_Loaded(Object, RoutedEventArgs)
-- uid: Reader_347.ScrollToDialog.Window_Loaded*
-  name: Window_Loaded
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_Window_Loaded_
-  commentId: Overload:Reader_347.ScrollToDialog.Window_Loaded
-  isSpec: "True"
-  fullName: Reader_347.ScrollToDialog.Window_Loaded
-  nameWithType: ScrollToDialog.Window_Loaded
 - uid: Reader_347.UpdateChecker
   name: UpdateChecker
   href: api/Reader_347.UpdateChecker.html
@@ -2258,12 +759,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.UpdateChecker.UpdateChecker
   nameWithType: UpdateChecker.UpdateChecker
-- uid: Reader_347.UpdateChecker.CurrentApplicationVersion
-  name: CurrentApplicationVersion
-  href: api/Reader_347.UpdateChecker.html#Reader_347_UpdateChecker_CurrentApplicationVersion
-  commentId: F:Reader_347.UpdateChecker.CurrentApplicationVersion
-  fullName: Reader_347.UpdateChecker.CurrentApplicationVersion
-  nameWithType: UpdateChecker.CurrentApplicationVersion
 - uid: Reader_347.UpdateChecker.GetReleases
   name: GetReleases()
   href: api/Reader_347.UpdateChecker.html#Reader_347_UpdateChecker_GetReleases
@@ -2277,9 +772,3 @@ references:
   isSpec: "True"
   fullName: Reader_347.UpdateChecker.GetReleases
   nameWithType: UpdateChecker.GetReleases
-- uid: Reader_347.UpdateChecker.ReleasesURI
-  name: ReleasesURI
-  href: api/Reader_347.UpdateChecker.html#Reader_347_UpdateChecker_ReleasesURI
-  commentId: F:Reader_347.UpdateChecker.ReleasesURI
-  fullName: Reader_347.UpdateChecker.ReleasesURI
-  nameWithType: UpdateChecker.ReleasesURI
