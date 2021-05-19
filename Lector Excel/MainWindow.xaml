@@ -9,7 +9,20 @@
         Title="347 Reader" Height="480" Width="720" MinHeight="240" MinWidth="360" WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize" Loaded="Window_Loaded" Closing="Window_Closing">
     <DockPanel>
-        
+        <Fluent:Ribbon DockPanel.Dock="Top">
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage>
+                    
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+            <Fluent:RibbonTabItem Header="Home">
+                <Fluent:RibbonGroupBox Header="Group">
+                    <Fluent:Button Header="Green"
+                           Icon="media\AEAT_logo_48x48.png"
+                           LargeIcon="media\AEAT_logo_48x48.png" />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Archivo">
                 <MenuItem Name="menu_Import" Header="Abrir archivo BOE" Click="Menu_Import_Click">
