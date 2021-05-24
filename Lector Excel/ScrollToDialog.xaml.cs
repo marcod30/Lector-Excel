@@ -20,6 +20,7 @@ namespace Reader_347
     /// <summary>
     /// Clase de argumentos de evento para el delegado de la barra de desplazamiento.
     /// </summary>
+    [Obsolete("Use el spinner del control Ribbon.")]
     public class ScrollEventArgs : EventArgs
     {
         ///<value>La posición a la que se debe desplazar.</value>
@@ -31,11 +32,13 @@ namespace Reader_347
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
+    [Obsolete("Use el spinner del control Ribbon.")]
     public delegate void ScrollDialogDelegate(object sender, ScrollEventArgs e);
 
     /// <summary>
     /// Clase de la ventana del selector de registros.
     /// </summary>
+    [Obsolete("Use el spinner del control Ribbon.")]
     public partial class ScrollToDialog : Window
     {
         /// <value>Obtiene o cambia el máximo valor seleccionable.</value>
