@@ -216,6 +216,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="media\graph_icon.png" />
+    <Resource Include="media\addDeclared_icon.png" />
+    <Resource Include="media\deleteAll_icon.png" />
+    <Resource Include="media\fillForm_icon.png" />
+    <Resource Include="media\excelConfig_icon.png" />
+    <Resource Include="media\updateCheck_icon.png" />
+    <Resource Include="media\info_logo.png" />
     <Content Include="Resources\Spain.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

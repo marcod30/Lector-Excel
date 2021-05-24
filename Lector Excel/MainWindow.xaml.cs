@@ -26,8 +26,6 @@ namespace Lector_Excel
         private ExportManager ExportManager;
         ///<value> La referencia al visor de gráficas.</value>
         private ChartWindow ChartWindow;
-        ///<value> La referencia al selector de declarados para desplazamientos.</value>
-        private ScrollToDialog ScrollDialog;
         ///<value> La referencia a la ventana de progreso.</value>
         ProgressWindow exportProgressBar;
 
@@ -36,7 +34,7 @@ namespace Lector_Excel
         ///<value> Contiene los valores de la configuración de Excel.</value>
         private List<string> posiciones = new List<string>();
         ///<value> Contiene los registros de declarados.</value>
-        ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
+        ObservableCollection<DeclaredFormControl> listaDeclarados;
         ///<value> Límite de declarados.</value>
         readonly int DECLARED_AMOUNT_LIMIT = 1000;
 
@@ -54,6 +52,7 @@ namespace Lector_Excel
             backgroundWorker.DoWork += Worker_DoWork;
             backgroundWorker.ProgressChanged += Worker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += Worker_Completed;
+            listaDeclarados = new ObservableCollection<DeclaredFormControl>();
             listaDeclarados.CollectionChanged += DeclaredListChanged;
         }
 
@@ -72,7 +71,7 @@ namespace Lector_Excel
             {
                 if (posiciones.Count == 0)
                 {
-                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -86,14 +85,9 @@ namespace Lector_Excel
             }
             else
             {
-                if(ExcelManager != null)
-                {
-                    menu_Export.IsEnabled = false;
-                }
-                
                 if (!openFileDialog.SafeFileName.Equals(""))
                 {
-                    MessageBoxResult msg = MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al intentar abrir " + openFileDialog.SafeFileName, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             }
@@ -113,7 +107,7 @@ namespace Lector_Excel
             {
                 if (posiciones.Count == 0)
                 {
-                    MessageBoxResult msg = MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -124,13 +118,6 @@ namespace Lector_Excel
                 exportProgressBar.Owner = this;
                 exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 exportProgressBar.ShowDialog();
-            }
-            else
-            {
-                if (ExcelManager != null)
-                {
-                    menu_Export.IsEnabled = false;
-                }
             }
         }
 
@@ -155,17 +142,6 @@ namespace Lector_Excel
             {
                 //MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
                 Type1Fields = type1Window.Lista;
-
-                if(Type1Fields.Count >= 5 && listaDeclarados.Count > 0)
-                {
-                    menu_Export.IsEnabled = true;
-                    menu_ExportPDFDraft.IsEnabled = true;
-                }
-                else
-                {
-                    menu_Export.IsEnabled = false;
-                    menu_ExportPDFDraft.IsEnabled = false;
-                }
             }
         }
 
@@ -233,9 +209,11 @@ namespace Lector_Excel
                 List<string> _type1 = new List<string>();
                 List<Declared> _declareds = new List<Declared>();
 
-                if (importManager.ImportFromText(out _type1, out _declareds))
+                //FIXME: We need to show a progressbar!
+                bool importResult = importManager.ImportFromText(out _type1, out _declareds);
+                if (importResult)
                 {
-                    if(_type1 != null && _declareds != null)
+                    if (_type1 != null && _declareds != null)
                     {
                         this.Type1Fields = _type1;
                         ImportedFileToForm(_declareds);
@@ -245,13 +223,6 @@ namespace Lector_Excel
                         Debug.WriteLine("Whoops! Something went wrong when importing!!!");
                     }
                 }
-                /*
-                backgroundWorker.RunWorkerAsync(argument: "excelImport");
-
-                exportProgressBar = new ProgressWindow(false, "Importando desde Excel...");
-                exportProgressBar.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                exportProgressBar.ShowDialog();
-                */
             }
             else
             {
@@ -485,6 +456,7 @@ namespace Lector_Excel
                 DockPanel.SetDock(d, Dock.Top);
                 dock_DeclaredContainer.Children.Add(d);
                 listaDeclarados.Add(d);
+                scrl_MainScrollViewer.ScrollToBottom(); //Scroll to bottom, where new declared was added
             }
             else
             {
@@ -530,7 +502,7 @@ namespace Lector_Excel
         private void Menu_deleteAllDeclared_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult msg;
-            if (sender is MenuItem)
+            if (sender is Fluent.Button)
                 msg = MessageBox.Show("¿Está completamente seguro de querer eliminar TODOS los registros?", "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             else
                 msg = MessageBoxResult.Yes;
@@ -561,25 +533,23 @@ namespace Lector_Excel
         {
             if (listaDeclarados.Count > 0)
             {
-                if(Type1Fields.Count >= 5)
-                {
-                    menu_Export.IsEnabled = true;
-                    menu_ExportPDFDraft.IsEnabled = true;
-                }
-                    
                 menu_deleteAllDeclared.IsEnabled = true;
-                menu_ScrollToControl.IsEnabled = true;
+                menu_ScrollSpinner.IsEnabled = true;
+                menu_ScrollSpinner.Maximum = listaDeclarados.Count;
+                menu_ScrollSpinner.Minimum = 1;
+                menu_ScrollSpinner.Value = listaDeclarados.Count;
+                menu_ScrollToTop.IsEnabled = true;
+                menu_ScrollToBottom.IsEnabled = true;
             }
             else
             {
-                if(Type1Fields.Count < 5)
-                {
-                    menu_Export.IsEnabled = false;
-                    menu_ExportPDFDraft.IsEnabled = false;
-                }
-
                 menu_deleteAllDeclared.IsEnabled = false;
-                menu_ScrollToControl.IsEnabled = false;
+                menu_ScrollSpinner.IsEnabled = false;
+                menu_ScrollSpinner.Maximum = 0;
+                menu_ScrollSpinner.Minimum = 0;
+                menu_ScrollSpinner.Value = 0;
+                menu_ScrollToTop.IsEnabled = false;
+                menu_ScrollToBottom.IsEnabled = false;
             }
             
             //Set PropertyChanged method for every item
@@ -596,7 +566,7 @@ namespace Lector_Excel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// See <see cref="ChartWindow"/>
+        /// <seealso cref="Reader_347.ChartWindow"/>
         public void DeclaredChanged(object sender, PropertyChangedEventArgs e)
         {
             //FIXME - Remove this condition so deleting a declared also updates chart
@@ -683,50 +653,25 @@ namespace Lector_Excel
         /// <param name="e"></param>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            if (ScrollDialog != null && ScrollDialog.IsVisible)
-            {
-                ScrollDialog.Close();
-            }
-
             if (ChartWindow != null && ChartWindow.IsVisible)
             {
                 ChartWindow.Close();
             }
         }
 
-        //Scroll to selected declared
+        //Automatically scroll to declared when Spinner changes
         /// <summary>
-        /// Función de evento de click izquierdo asociado a "Desplazarse a declarado".
+        /// Evento de cambio del valor del Spinner, que mueve la barra de desplazamiento.
         /// </summary>
-        /// <remarks>
-        /// Abre la ventana de desplazamientos o cambia el foco a ella.
-        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Menu_ScrollToControl_Click(object sender, RoutedEventArgs e)
+        private void menu_ScrollSpinner_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(ScrollDialog  == null || !ScrollDialog.IsVisible)
+            int value = (int)e.NewValue;
+            if(value > 0)
             {
-                ScrollDialog = new ScrollToDialog()
-                {
-                    Owner = this,
-                    maxValue = this.listaDeclarados.Count,
-                };
-
-                ScrollDialog.Show();
-                ScrollDialog.ScrollDelegate += AutoScroll;
+                listaDeclarados[value - 1].BringIntoView();
             }
-        }
-
-        //Automatically scroll to declared when scrollDialog notifies
-        /// <summary>
-        /// Evento de delegado que mueve la barra de desplazamiento.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AutoScroll(object sender, ScrollEventArgs e)
-        {
-            listaDeclarados[e.Position - 1].BringIntoView();
         }
 
         //Handles PDF Export
@@ -735,7 +680,7 @@ namespace Lector_Excel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// See <see cref="PDFManager"/>
+        /// <seealso cref="PDFManager"/>
         private void Menu_ExportPDFDraft_Click(object sender, RoutedEventArgs e)
         {
             if(listaDeclarados.Count > 6)
