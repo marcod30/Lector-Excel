@@ -1,0 +1,16 @@
+﻿<Window x:Class="Lector_Excel.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lector_Excel"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Exportando..." Height="100" Width="300" ResizeMode="NoResize">
+    <Grid Margin="10">
+        <ProgressBar Name="Export_Progressbar" Minimum="0" Maximum="100" IsIndeterminate="False" Margin="2">
+            
+        </ProgressBar>
+        <TextBlock Name="txt_percentage" Text="{Binding ElementName=Export_Progressbar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Grid>
+</Window>

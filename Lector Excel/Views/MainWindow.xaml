@@ -1,0 +1,367 @@
+﻿<Window   x:Class="Lector_Excel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lector_Excel"
+        xmlns:Fluent="urn:fluent-ribbon"
+        mc:Ignorable="d"
+        Title="347 Reader" Height="480" Width="850" MinHeight="240" MinWidth="425" WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize" Loaded="Window_Loaded" Closing="Window_Closing">
+    <DockPanel>
+        <Fluent:Ribbon DockPanel.Dock="Top">
+            <Fluent:Ribbon.Menu>
+                <Fluent:Backstage>
+                    <Fluent:BackstageTabControl>
+                        <Fluent:Button Name="menu_Import" Header="Abrir archivo BOE" Click="Menu_Import_Click"/>
+                        <Fluent:Button Name="menu_Export" Header="Guardar como archivo BOE" Click="Menu_Export_Click" IsEnabled="False"/>
+                        <Fluent:Button Name="menu_OpenFile" Header="Importar desde Excel" Click="BtnOpenFile_Click"/>
+                        <Fluent:Button Name="menu_SaveExcel" Header="Exportar a Excel" Click="Menu_SaveExcel_Click" IsEnabled="False"/>
+                        <Fluent:Button Name="menu_ExportPDFDraft" Header="Exportar a imprimible" Click="Menu_ExportPDFDraft_Click"/>
+                    </Fluent:BackstageTabControl>
+                </Fluent:Backstage>
+            </Fluent:Ribbon.Menu>
+            <Fluent:RibbonTabItem Header="Modelo 347">
+                <Fluent:RibbonGroupBox Header="Registros">
+                    <Fluent:Button Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click" ToolTip="Añade un nuevo registro al final de la lista.">
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.77,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                        <Fluent:Button.LargeIcon>
+                            media\addDeclared_icon.png
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Name="menu_deleteAllDeclared" Header="Eliminar todos" Click="Menu_deleteAllDeclared_Click" ToolTip="Elimina todos los registros.">
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.203,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                        <Fluent:Button.LargeIcon>
+                            media\deleteAll_icon.png
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Name="menu_FillType1" Header="Registro de tipo 1" Click="Menu_FillType1_Click" ToolTip="Abre el formulario del registro de tipo 1.">
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.351,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                        <Fluent:Button.LargeIcon>
+                            media\fillForm_icon.png
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>               
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Desplazamiento">
+                    <Fluent:Spinner Name="menu_ScrollSpinner" Header="Ir a registro" ToolTip="Desplaza la vista al registro seleccionado." Minimum="0"
+                                    ValueChanged="menu_ScrollSpinner_ValueChanged" Format="0" Delay="500">
+                    </Fluent:Spinner>
+                    <Fluent:Button Name="menu_ScrollToTop" Header="Desplazarse arriba" Click="Menu_ScrollToTop_Click" ToolTip="Pone la vista en el primer registro.">
+                        <Fluent:Button.SizeDefinition>
+                            Middle
+                        </Fluent:Button.SizeDefinition>
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.749,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                    <Fluent:Button Name="menu_ScrollToBottom" Header="Desplazarse abajo" Click="Menu_ScrollToBottom_Click" ToolTip="Pone la vista en último registro.">
+                        <Fluent:Button.SizeDefinition>
+                            Middle
+                        </Fluent:Button.SizeDefinition>
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,0.41,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Excel">
+                    <Fluent:Button Name="menu_ImportSettings" Header="Configurar encolumnado" Click="Menu_ImportSettings_Click" ToolTip="Modifica cómo el programa exporta/importa archivos Excel.">
+                        <Fluent:Button.LargeIcon>
+                            media\excelConfig_icon.png
+                        </Fluent:Button.LargeIcon>
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.277,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox Header="Gráficos">
+                    <Fluent:Button Name="menu_ChartVisor"  Header="Abrir visor de gráficos" Click="Menu_ChartVisor_Click" ToolTip="Permite visualizar los datos introducidos en distintos gráficos.">
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.27,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                        <Fluent:Button.LargeIcon>
+                            media\graph_icon.png
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="Acceso web">
+                    <Fluent:Button Name="menu_GoToAEAT"
+                                   Header="Presentación del modelo"
+                                   Icon="media\AEAT_logo_48x48.png"
+                                   LargeIcon="media\AEAT_logo_48x48.png" 
+                                   Click="Menu_GoToAEAT_Click"
+                                   ToolTip="Abre la web de presentación del modelo 347."
+                           />
+                    <Fluent:Button Name="menu_About" Header="Ayuda de 347Reader" Click="Menu_About_Click" ToolTip="Abre la web de 347Reader">
+                        <Fluent:Button.LargeIcon>
+                            media\info_logo.png
+                        </Fluent:Button.LargeIcon>
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.870,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                
+                <Fluent:RibbonGroupBox Header="Otros">
+                    <Fluent:Button Name="menu_Updates" Header="Buscar actualizaciones" Click="Menu_Updates_Click" ToolTip="Comprueba si hay actualizaciones disponibles.">
+                        <Fluent:Button.LargeIcon>
+                            media\updateCheck_icon.png
+                        </Fluent:Button.LargeIcon>
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.23,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+        </Fluent:Ribbon>
+        <!-- FIN DE RIBBON-->
+        <!--
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Archivo">
+                <MenuItem Name="menu_Import" Header="Abrir archivo BOE" Click="Menu_Import_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.722,0.93" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menu_Export" Header="Exportar a formato BOE" IsEnabled="False" Click="Menu_Export_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.796,0.93" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_OpenFile" Header="Importar datos desde Excel" Click="BtnOpenFile_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.759,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_SaveExcel" Header="Exportar datos a Excel" Click="Menu_SaveExcel_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.796,0.93" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_ImportSettings" Header="Opciones de Excel..." Click="Menu_ImportSettings_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.277,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_ExportPDFDraft" Header="Exportar a PDF imprimible" IsEnabled="False" Click="Menu_ExportPDFDraft_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.13,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_Exit" Header="Salir" Click="Menu_Exit_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Modelo 347">
+                <MenuItem Name="menu_addNewDeclared" Header="Añadir registro de declarado" Click="Menu_addNewDeclared_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.77,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="menu_deleteAllDeclared" Header="Eliminar todos los registros" IsEnabled="False" Click="Menu_deleteAllDeclared_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.203,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_FillType1" Header="Rellenar datos de tipo de registro 1..." Click="Menu_FillType1_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.351,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_GoToAEAT" Header="Ir a formulario de la AEAT" Click="Menu_GoToAEAT_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\AEAT_logo_48x48.png" Viewbox="0,0,1,1" Stretch="Fill"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Herramientas">
+                <MenuItem Name="menu_ScrollToControl" Header="Desplazarse a declarado..." Click="Menu_ScrollToControl_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.39,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_ScrollToTop" Header="Desplazarse al primer registro" Click="Menu_ScrollToTop_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.749,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_ScrollToBottom" Header="Desplazarse al último registro" Click="Menu_ScrollToBottom_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,0.41,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_ChartVisor" Header="Abrir visor de gráficas...." Click="Menu_ChartVisor_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.27,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Acerca de">
+
+                <MenuItem Name="menu_Updates" Header="Buscar actualizaciones" Click="Menu_Updates_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\misc_icons.png" Viewbox="0,0,1.23,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Name="menu_About" Header="Acerca de 347 Reader" Click="Menu_About_Click">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.870,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        -->
+        <ScrollViewer Name="scrl_MainScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" DockPanel.Dock="Right">
+            <DockPanel Name="dock_DeclaredContainer">
+                
+            </DockPanel>
+        </ScrollViewer>
+        
+
+    </DockPanel>
+</Window>
