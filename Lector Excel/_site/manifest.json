@@ -63,7 +63,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.AboutWindow.html",
-          "hash": "3CqUbp7DLY6XR6Ie5ajg+wMv82EJZdPBWK6WHlmEiR4="
+          "hash": "qjpYFYb+NEdHKMB2HdeRyhEzyi0jbrRPbOZfGEeOsSw="
         }
       },
       "is_incremental": true,
@@ -123,7 +123,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ExportManager.html",
-          "hash": "14t4/I82+cTHJtcdbgZBiRVJErBlFppLLWWrCyWOag4="
+          "hash": "1OZLABzxFO9JIVpEHbt9EuZJSWTIov9D0Ho2ui1ZIjA="
         }
       },
       "is_incremental": true,
@@ -135,7 +135,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ImportManager.html",
-          "hash": "PU9iKX130M926HK/h6lnP5rK6ShSa8gsda0qqB55ll4="
+          "hash": "nYCQeWsSfsICZ5EzVJ6pbF/aOrCUBI5dvdQ+1YBr7e8="
         }
       },
       "is_incremental": true,
@@ -150,7 +150,7 @@
           "hash": "OF5ZzqXKHjyFoW7g8DOY0g2/XnU4MA6ZRHxlNSHliSE="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -186,7 +186,7 @@
           "hash": "Ao8vsllL0DHC//BqFa0x/ZwvTydgbYG1nMDZHs4JwAE="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -195,7 +195,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.Type1Window.html",
-          "hash": "P2FLmDoCmVpVAAAARExZa7g0m8Z34dcHXzqE9DZUwsM="
+          "hash": "Mm2pCQDRkli0rYne7pg4HL5sEoZVu6LI9rfSCY5+PSE="
         }
       },
       "is_incremental": true,
@@ -263,14 +263,50 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Model347.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Model347.html",
+          "hash": "8XTJLN2VIW+ME6FRLxQcLWwReZpS/X03fIwfK1jA5qE="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Models.ExcelSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Models.ExcelSettings.html",
+          "hash": "T5Kp8ABck4UGYx42xTijQukTmYABGJS8S8ybogxj1uA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Models.html",
+          "hash": "nEWEkAzWIkzB3cY7GecGEmXu8WvDwW2zI2WXTL1Xf50="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Reader_347.PDFManager.yml",
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.PDFManager.html",
-          "hash": "enjqsGcUGvwj5REPtdLOC6kLjbxos5vh15DrKIQe1/U="
+          "hash": "uA6owndEQ+nmzKoXHekcwEVUyPUPx01CeAr5h4KGnDg="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -311,6 +347,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/Reader_347.Type1Registry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Reader_347.Type1Registry.html",
+          "hash": "rRZfox31OZr+lebXOvHlql5dF9eRfspPcp4V5CNrqPc="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/Reader_347.UpdateChecker.yml",
       "output": {
         ".html": {
@@ -327,10 +375,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.html",
-          "hash": "CsYqpROSfcPSO0/OK5Q638bmrGWLb8kEDUq1s0aUtaA="
+          "hash": "3WkBKJvu8vICJOHpgo2t+HYVj8rSznXm1JJOdYeD39I="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -339,7 +387,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "m2QmXgpqiP7/pu93eNWP8ugDNuq3GMSsSVf4japO+WI="
+          "hash": "MZsbNmnhcblm7G8NvZezPMemo6DRluY8LDZWwc0k5XM="
         }
       },
       "is_incremental": false,
@@ -376,8 +424,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 23,
-          "skipped_file_count": 22
+          "total_file_count": 27,
+          "skipped_file_count": 24
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

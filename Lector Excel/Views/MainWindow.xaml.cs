@@ -29,14 +29,14 @@ namespace Lector_Excel
         ///<value> La referencia a la ventana de progreso.</value>
         ProgressWindow exportProgressBar;
 
-        ///<value> Contiene los valores del registro de tipo 1.</value>
-        List<string> Type1Fields = new List<string>();
         ///<value> Contiene los valores de la configuración de Excel.</value>
         private List<string> posiciones = new List<string>();
         ///<value> Contiene los registros de declarados.</value>
-        ObservableCollection<DeclaredFormControl> listaDeclarados = new ObservableCollection<DeclaredFormControl>();
+        //ObservableCollection<DeclaredFormControl> model.ListaDeclarados = new ObservableCollection<DeclaredFormControl>();
         ///<value> Límite de declarados.</value>
         readonly int DECLARED_AMOUNT_LIMIT = 1000;
+
+        Model347 model = Model347.Model;
 
         ///<value> La referencia al BackgroundWorker.</value>
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -52,7 +52,9 @@ namespace Lector_Excel
             backgroundWorker.DoWork += Worker_DoWork;
             backgroundWorker.ProgressChanged += Worker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += Worker_Completed;
-            listaDeclarados.CollectionChanged += DeclaredListChanged;
+            //model.ListaDeclarados.CollectionChanged += DeclaredListChanged;
+            model.ListaDeclarados = new ObservableCollection<DeclaredFormControl>();
+            model.ListaDeclarados.CollectionChanged += DeclaredListChanged;
         }
 
         //Handles file opening button
@@ -134,14 +136,7 @@ namespace Lector_Excel
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
 
-            if (Type1Fields != null && Type1Fields.Count > 0)
-                type1Window.Lista = Type1Fields;
             type1Window.ShowDialog();
-            if(type1Window.DialogResult == true)
-            {
-                //MessageBox.Show("Cambios confirmados","cambios",MessageBoxButton.OK,MessageBoxImage.Information);
-                Type1Fields = type1Window.Lista;
-            }
         }
 
         //Handles text file exporting
@@ -152,13 +147,8 @@ namespace Lector_Excel
         /// <param name="e"></param>
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
-            if (Type1Fields.Count < 5)
-            {
-                MessageBox.Show("Rellene la información esencial del registro de tipo 1","Error",MessageBoxButton.OK,MessageBoxImage.Error);
-                return;
-            }
             bool containsErrors = false;
-            foreach(DeclaredFormControl dfc in listaDeclarados)
+            foreach(DeclaredFormControl dfc in model.ListaDeclarados)
             {
                 
                 if (!dfc.IsAllDataValid())
@@ -205,7 +195,7 @@ namespace Lector_Excel
             if (openFileDialog.ShowDialog() == true)
             {
                 ImportManager importManager = new ImportManager(openFileDialog.FileName);
-                List<string> _type1 = new List<string>();
+                Type1Registry _type1 = new Type1Registry();
                 List<Declared> _declareds = new List<Declared>();
 
                 //FIXME: We need to show a progressbar!
@@ -214,8 +204,9 @@ namespace Lector_Excel
                 {
                     if (_type1 != null && _declareds != null)
                     {
-                        this.Type1Fields = _type1;
+                        model.Type1Fields = _type1;
                         ImportedFileToForm(_declareds);
+                        MessageBox.Show("Se importaron " + _declareds.Count + " declarados.", "Importación exitosa", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
@@ -268,8 +259,8 @@ namespace Lector_Excel
 
             if((e.Argument as string).Equals("exportAll")){
                 List<Declared> temp = new List<Declared>();
-                ExportManager = new ExportManager(saveLocation, Type1Fields);
-                foreach (DeclaredFormControl dfc in listaDeclarados)
+                ExportManager = new ExportManager(saveLocation, model.Type1Fields);
+                foreach (DeclaredFormControl dfc in model.ListaDeclarados)
                 {
                     temp.Add(dfc.declared);
                 }
@@ -286,7 +277,7 @@ namespace Lector_Excel
             if ((e.Argument as string).Equals("excelExport"))
             {
                 List<Declared> temp = new List<Declared>();
-                foreach (DeclaredFormControl dfc in listaDeclarados)
+                foreach (DeclaredFormControl dfc in model.ListaDeclarados)
                 {
                     temp.Add(dfc.declared);
                 }
@@ -327,7 +318,7 @@ namespace Lector_Excel
                 {
                     DeclaredFormControl dfc = new DeclaredFormControl();
 
-                    dfc.mainGroupBox.Header = "Declarado " + (listaDeclarados.Count + 1);
+                    dfc.mainGroupBox.Header = "Declarado " + (model.ListaDeclarados.Count + 1);
                     dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
                     dfc.PropertyChanged += DeclaredChanged;
 
@@ -385,7 +376,7 @@ namespace Lector_Excel
                         dfc.declared.declaredData["OpCustoms"] = " ";
                     DockPanel.SetDock(dfc, Dock.Top);
                     dock_DeclaredContainer.Children.Add(dfc);
-                    listaDeclarados.Add(dfc);
+                    model.ListaDeclarados.Add(dfc);
                 }
                 else
                     break;
@@ -449,12 +440,12 @@ namespace Lector_Excel
             {
                 DeclaredFormControl d = new DeclaredFormControl();
 
-                d.mainGroupBox.Header = "Declarado "+(listaDeclarados.Count+1);
+                d.mainGroupBox.Header = "Declarado "+(model.ListaDeclarados.Count+1);
                 d.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
 
                 DockPanel.SetDock(d, Dock.Top);
                 dock_DeclaredContainer.Children.Add(d);
-                listaDeclarados.Add(d);
+                model.ListaDeclarados.Add(d);
                 scrl_MainScrollViewer.ScrollToBottom(); //Scroll to bottom, where new declared was added
             }
             else
@@ -475,19 +466,19 @@ namespace Lector_Excel
             if (msg == MessageBoxResult.No)
                 return;
 
-            if (listaDeclarados.Contains(sender as DeclaredFormControl))
+            if (model.ListaDeclarados.Contains(sender as DeclaredFormControl))
             {
-                listaDeclarados.Remove(sender as DeclaredFormControl);
+                model.ListaDeclarados.Remove(sender as DeclaredFormControl);
                 dock_DeclaredContainer.Children.Remove(sender as DeclaredFormControl);
 
                 //Reorganize items
-                foreach(DeclaredFormControl dfc in listaDeclarados)
+                foreach(DeclaredFormControl dfc in model.ListaDeclarados)
                 {
-                    var pos = listaDeclarados.IndexOf(dfc);
+                    var pos = model.ListaDeclarados.IndexOf(dfc);
                     dfc.mainGroupBox.Header = "Declarado " + (pos+1);
                 }
 
-                if (listaDeclarados.Count == 0)
+                if (model.ListaDeclarados.Count == 0)
                     menu_deleteAllDeclared.IsEnabled = false;
             }
         }
@@ -509,13 +500,13 @@ namespace Lector_Excel
             if (msg == MessageBoxResult.No)
                 return;
 
-            if(listaDeclarados.Count > 0)
+            if(model.ListaDeclarados.Count > 0)
             {
-                foreach(DeclaredFormControl dfc in listaDeclarados)
+                foreach(DeclaredFormControl dfc in model.ListaDeclarados)
                 {
                     dock_DeclaredContainer.Children.Remove(dfc);
                 }
-                listaDeclarados.Clear();
+                model.ListaDeclarados.Clear();
             }
         }
 
@@ -530,7 +521,7 @@ namespace Lector_Excel
         /// <param name="e"></param>
         public void DeclaredListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (listaDeclarados.Count > 0)
+            if (model.ListaDeclarados.Count > 0)
             {
                 menu_deleteAllDeclared.IsEnabled = true;
 
@@ -538,9 +529,9 @@ namespace Lector_Excel
                 menu_SaveExcel.IsEnabled = true;
 
                 menu_ScrollSpinner.IsEnabled = true;
-                menu_ScrollSpinner.Maximum = listaDeclarados.Count;
+                menu_ScrollSpinner.Maximum = model.ListaDeclarados.Count;
                 menu_ScrollSpinner.Minimum = 1;
-                menu_ScrollSpinner.Value = listaDeclarados.Count;
+                menu_ScrollSpinner.Value = model.ListaDeclarados.Count;
                 menu_ScrollToTop.IsEnabled = true;
                 menu_ScrollToBottom.IsEnabled = true;
             }
@@ -560,7 +551,7 @@ namespace Lector_Excel
             }
             
             //Set PropertyChanged method for every item
-            foreach(DeclaredFormControl dfc in listaDeclarados)
+            foreach(DeclaredFormControl dfc in model.ListaDeclarados)
             {
                 dfc.PropertyChanged -= DeclaredChanged;
                 dfc.PropertyChanged += DeclaredChanged;
@@ -675,9 +666,9 @@ namespace Lector_Excel
         private void menu_ScrollSpinner_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             int value = (int)e.NewValue;
-            if(value > 0 && listaDeclarados.Count > 0)
+            if(value > 0 && model.ListaDeclarados.Count > 0)
             {
-                listaDeclarados[value - 1].BringIntoView();
+                model.ListaDeclarados[value - 1].BringIntoView();
             }
         }
 
@@ -690,9 +681,9 @@ namespace Lector_Excel
         /// <seealso cref="PDFManager"/>
         private void Menu_ExportPDFDraft_Click(object sender, RoutedEventArgs e)
         {
-            if(listaDeclarados.Count > 6)
+            if(model.ListaDeclarados.Count > 6)
             {
-                MessageBoxResult msg = MessageBox.Show(string.Format("La exportación a PDF solo está disponible para 6 o menos registros de declarados. Actualmente hay {0}. ¿Desea continuar y exportar solo los 6 primeros?", listaDeclarados.Count), "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                MessageBoxResult msg = MessageBox.Show(string.Format("La exportación a PDF solo está disponible para 6 o menos registros de declarados. Actualmente hay {0}. ¿Desea continuar y exportar solo los 6 primeros?", model.ListaDeclarados.Count), "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if(msg != MessageBoxResult.Yes)
                 {
                     return;
@@ -707,12 +698,12 @@ namespace Lector_Excel
             {
                 PDFManager pdfManager = new PDFManager(sfd.FileName);
                 List<Declared> temp = new List<Declared>();
-                foreach (DeclaredFormControl dfc in listaDeclarados)
+                foreach (DeclaredFormControl dfc in model.ListaDeclarados)
                 {
                     temp.Add(dfc.declared);
                 }
 
-                pdfManager.ExportToPDFDraft(this.Type1Fields, temp);
+                pdfManager.ExportToPDFDraft(model.Type1Fields, temp);
             }
         }
 
@@ -872,7 +863,7 @@ namespace Lector_Excel
         private ChartValues<int> GetRegistriesPerOpKey()
         {
             ChartValues<int> values = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0 };
-            foreach (DeclaredFormControl dfc in listaDeclarados)
+            foreach (DeclaredFormControl dfc in model.ListaDeclarados)
             {
                 switch (dfc.declared.declaredData["OpKey"])
                 {
@@ -918,7 +909,7 @@ namespace Lector_Excel
         {
             ChartValues<float> values = new ChartValues<float> {0,0,0,0};
             Dictionary<string, string> tempDeclaredData;
-            foreach(DeclaredFormControl dfc in listaDeclarados)
+            foreach(DeclaredFormControl dfc in model.ListaDeclarados)
             {
                 tempDeclaredData = dfc.declared.declaredData;
                 if (getSells)
@@ -988,7 +979,7 @@ namespace Lector_Excel
             Dictionary<string, double> data = new Dictionary<string, double>();
             Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
 
-            foreach (DeclaredFormControl declaredFormControl in listaDeclarados)
+            foreach (DeclaredFormControl declaredFormControl in model.ListaDeclarados)
             {
                 tempDeclaredData = declaredFormControl.declared.declaredData;
 
@@ -1058,7 +1049,7 @@ namespace Lector_Excel
             SeriesCollection series = new SeriesCollection();
             Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
             Func<ChartPoint, string> PieFormatter;
-            foreach (DeclaredFormControl declaredFormControl in listaDeclarados)
+            foreach (DeclaredFormControl declaredFormControl in model.ListaDeclarados)
             {
                 tempDeclaredData = declaredFormControl.declared.declaredData;
 

@@ -14,7 +14,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.722,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,0.722,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
@@ -24,7 +24,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.426,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,1.426,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
@@ -37,7 +37,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.722,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,1.722,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
@@ -47,7 +47,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.537,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,0.537,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
 
@@ -59,7 +59,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,1.314,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,1.314,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>
@@ -71,7 +71,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.13,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,0.13,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>
@@ -80,7 +80,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.166,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,0.166,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>
@@ -89,7 +89,7 @@
                     <MenuItem.Icon>
                         <Rectangle>
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="media\common_icons.png" Viewbox="0,0,0.907,1" Stretch="None"/>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,0.907,1" Stretch="None"/>
                             </Rectangle.Fill>
                         </Rectangle>
                     </MenuItem.Icon>

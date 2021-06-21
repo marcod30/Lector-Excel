@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System;
 using System.IO;
+using Reader_347.Models;
 
 namespace Lector_Excel
 {
@@ -17,6 +18,8 @@ namespace Lector_Excel
         /// <value> Contiene las posiciones de cada campo en el Excel.</value>
         public List<string> positions { get; set; }
 
+        ExcelSettings Settings = ExcelSettings.Settings;
+
         /// <summary>
         /// Inicializa una nueva instancia de <c>ImportSettings</c>.
         /// </summary>
@@ -24,6 +27,7 @@ namespace Lector_Excel
         {
             InitializeComponent();
             positions = new List<string>();
+            DataContext = this;
         }
 
         // Handles manual window closing, without saving changes

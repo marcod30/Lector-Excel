@@ -147,12 +147,12 @@
     <Compile Include="Views\DeclaredFormControl.xaml.cs">
       <DependentUpon>DeclaredFormControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ExportManager.cs" />
-    <Compile Include="ViewModels\ImportManager.cs" />
+    <Compile Include="Util\ExportManager.cs" />
+    <Compile Include="Util\ImportManager.cs" />
     <Compile Include="Views\ImportSettings.xaml.cs">
       <DependentUpon>ImportSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PDFManager.cs" />
+    <Compile Include="Util\PDFManager.cs" />
     <Compile Include="Views\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
     </Compile>
@@ -162,7 +162,7 @@
     <Compile Include="Views\Type1Window.xaml.cs">
       <DependentUpon>Type1Window.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\UpdateChecker.cs" />
+    <Compile Include="Util\UpdateChecker.cs" />
     <Page Include="Views\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,7 +187,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\ExcelManager.cs" />
+    <Compile Include="Util\ExcelManager.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
