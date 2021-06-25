@@ -36,37 +36,63 @@ namespace Reader_347.Models
             }
         }
 
+        /// <summary> El NIF del declarado.</summary>
         public string DeclaredNIF { get => declaredNIF; set => declaredNIF = value; }
+        /// <summary> El NIF del representante legal.</summary>
         public string LegalRepNIF { get => legalRepNIF; set => legalRepNIF = value; }
+        /// <summary> Nombre y apellidos, razón social o denominación del declarado.</summary>
         public string DeclaredName { get => declaredName; set => declaredName = value; }
+        /// <summary> Código de provincia.</summary>
         public string ProvinceCode { get => provinceCode; set => provinceCode = value; }
+        /// <summary> Código de país.</summary>
         public string StateCode { get => stateCode; set => stateCode = value; }
+        /// <summary> Clave de operación.</summary>
         public string OpKey { get => opKey; set => opKey = value; }
+        /// <summary> Importe anual de las operaciones.</summary>
         public string AnualOpMoney { get => anualOpMoney; set => anualOpMoney = value; }
+        /// <summary> Operación seguro.</summary>
         public string OpInsurance { get => opInsurance; set => opInsurance = value; }
+        /// <summary> Arrendamiento local de negocio.</summary>
         public string LocalBusinessRental { get => localBusinessRental; set => localBusinessRental = value; }
+        /// <summary> Importe percibido en metálico.</summary>
         public string MetalMoney { get => metalMoney; set => metalMoney = value; }
+        /// <summary> Importe anual percibido por transmisiones de inmuebles sujetas a IVA.</summary>
         public string AnualPropertyTransmissionIVA { get => anualPropertyTransmissionIVA; set => anualPropertyTransmissionIVA = value; }
+        /// <summary> Ejercicio.</summary>
         public string Exercise { get => exercise; set => exercise = value; }
+        /// <summary> Importe de las operaciones (1er trimestre).</summary>
         public string OpMoney1T { get => opMoney1T; set => opMoney1T = value; }
+        /// <summary> Importe percibido por transmisiones de inmuebles sujetas a IVA (1T).</summary>
         public string PropertyTransmissionIVA1T { get => propertyTransmissionIVA1T; set => propertyTransmissionIVA1T = value; }
+        /// <summary> Importe de las operaciones (2o trimestre).</summary>
         public string OpMoney2T { get => opMoney2T; set => opMoney2T = value; }
+        /// <summary> Importe percibido por transmisiones de inmuebles sujetas a IVA (2T).</summary>
         public string PropertyTransmissionIVA2T { get => propertyTransmissionIVA2T; set => propertyTransmissionIVA2T = value; }
+        /// <summary> Importe de las operaciones (3er trimestre).</summary>
         public string OpMoney3T { get => opMoney3T; set => opMoney3T = value; }
+        /// <summary> Importe percibido por transmisiones de inmuebles sujetas a IVA (3T).</summary>
         public string PropertyTransmissionIVA3T { get => propertyTransmissionIVA3T; set => propertyTransmissionIVA3T = value; }
+        /// <summary> Importe de las operaciones (4o trimestre).</summary>
         public string OpMoney4T { get => opMoney4T; set => opMoney4T = value; }
+        /// <summary> Importe percibido por transmisiones de inmuebles sujetas a IVA (4T).</summary>
         public string PropertyTransmissionIVA4T { get => propertyTransmissionIVA4T; set => propertyTransmissionIVA4T = value; }
+        /// <summary> NIF del operador comunitario.</summary>
         public string CommunityOpNIF { get => communityOpNIF; set => communityOpNIF = value; }
+        /// <summary> Operaciones régimen especial con criterio de caja IVA.</summary>
         public string OpSpecialRegIVA { get => opSpecialRegIVA; set => opSpecialRegIVA = value; }
+        /// <summary> Operación con inversión del sujeto pasivo.</summary>
         public string OpPassive { get => opPassive; set => opPassive = value; }
+        /// <summary> Operación con bienes vinculados o destinados a vincularse al régimen de depósito distinto del aduanero.</summary>
         public string OpRegNotCustoms { get => opRegNotCustoms; set => opRegNotCustoms = value; }
+        /// <summary> Importe anual de las operaciones devengadas conforme al criterio de caja del IVA.</summary>
         public string AnualMoneyDevengedIVA { get => anualMoneyDevengedIVA; set => anualMoneyDevengedIVA = value; }
+        /// <summary> Indica si la primera fila del Excel contiene los títulos de los campos.</summary>
         public bool FirstRowIsTitle { get => firstRowIsTitle; set => firstRowIsTitle = value; }
 
-        private string declaredNIF, legalRepNIF, declaredName, provinceCode, stateCode, opKey, anualOpMoney, opInsurance,
-                       localBusinessRental, metalMoney, anualPropertyTransmissionIVA, exercise, opMoney1T, propertyTransmissionIVA1T,
-                       opMoney2T, propertyTransmissionIVA2T, opMoney3T, propertyTransmissionIVA3T, opMoney4T, propertyTransmissionIVA4T,
-                       communityOpNIF, opSpecialRegIVA, opPassive, opRegNotCustoms, anualMoneyDevengedIVA;
+        private string declaredNIF = "A", legalRepNIF = "B", declaredName = "C", provinceCode = "D", stateCode = "E", opKey = "F", anualOpMoney = "G", opInsurance = "H",
+                       localBusinessRental = "I", metalMoney ="J", anualPropertyTransmissionIVA = "K", exercise ="L", opMoney1T ="M", propertyTransmissionIVA1T ="N",
+                       opMoney2T ="O", propertyTransmissionIVA2T = "P", opMoney3T = "Q", propertyTransmissionIVA3T = "R", opMoney4T ="S", propertyTransmissionIVA4T = "T",
+                       communityOpNIF = "U", opSpecialRegIVA = "V", opPassive = "W", opRegNotCustoms = "X", anualMoneyDevengedIVA ="Y";
         private bool firstRowIsTitle = true;
     }
 }

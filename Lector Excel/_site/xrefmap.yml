@@ -154,15 +154,15 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExcelManager.ExcelManager
   nameWithType: ExcelManager.ExcelManager
-- uid: Lector_Excel.ExcelManager.ExportToExcel(System.Collections.Generic.List{System.String},System.Collections.Generic.List{Lector_Excel.Declared},System.ComponentModel.BackgroundWorker)
-  name: ExportToExcel(List<String>, List<Declared>, BackgroundWorker)
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ExportToExcel_System_Collections_Generic_List_System_String__System_Collections_Generic_List_Lector_Excel_Declared__System_ComponentModel_BackgroundWorker_
-  commentId: M:Lector_Excel.ExcelManager.ExportToExcel(System.Collections.Generic.List{System.String},System.Collections.Generic.List{Lector_Excel.Declared},System.ComponentModel.BackgroundWorker)
-  name.vb: ExportToExcel(List(Of String), List(Of Declared), BackgroundWorker)
-  fullName: Lector_Excel.ExcelManager.ExportToExcel(System.Collections.Generic.List<System.String>, System.Collections.Generic.List<Lector_Excel.Declared>, System.ComponentModel.BackgroundWorker)
-  fullName.vb: Lector_Excel.ExcelManager.ExportToExcel(System.Collections.Generic.List(Of System.String), System.Collections.Generic.List(Of Lector_Excel.Declared), System.ComponentModel.BackgroundWorker)
-  nameWithType: ExcelManager.ExportToExcel(List<String>, List<Declared>, BackgroundWorker)
-  nameWithType.vb: ExcelManager.ExportToExcel(List(Of String), List(Of Declared), BackgroundWorker)
+- uid: Lector_Excel.ExcelManager.ExportToExcel(Reader_347.Models.ExcelSettings,System.Collections.Generic.List{Lector_Excel.Declared},System.ComponentModel.BackgroundWorker)
+  name: ExportToExcel(ExcelSettings, List<Declared>, BackgroundWorker)
+  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ExportToExcel_Reader_347_Models_ExcelSettings_System_Collections_Generic_List_Lector_Excel_Declared__System_ComponentModel_BackgroundWorker_
+  commentId: M:Lector_Excel.ExcelManager.ExportToExcel(Reader_347.Models.ExcelSettings,System.Collections.Generic.List{Lector_Excel.Declared},System.ComponentModel.BackgroundWorker)
+  name.vb: ExportToExcel(ExcelSettings, List(Of Declared), BackgroundWorker)
+  fullName: Lector_Excel.ExcelManager.ExportToExcel(Reader_347.Models.ExcelSettings, System.Collections.Generic.List<Lector_Excel.Declared>, System.ComponentModel.BackgroundWorker)
+  fullName.vb: Lector_Excel.ExcelManager.ExportToExcel(Reader_347.Models.ExcelSettings, System.Collections.Generic.List(Of Lector_Excel.Declared), System.ComponentModel.BackgroundWorker)
+  nameWithType: ExcelManager.ExportToExcel(ExcelSettings, List<Declared>, BackgroundWorker)
+  nameWithType.vb: ExcelManager.ExportToExcel(ExcelSettings, List(Of Declared), BackgroundWorker)
 - uid: Lector_Excel.ExcelManager.ExportToExcel*
   name: ExportToExcel
   href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ExportToExcel_
@@ -170,15 +170,12 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ExcelManager.ExportToExcel
   nameWithType: ExcelManager.ExportToExcel
-- uid: Lector_Excel.ExcelManager.ImportExcelData(System.Collections.Generic.List{System.String},System.ComponentModel.BackgroundWorker)
-  name: ImportExcelData(List<String>, BackgroundWorker)
-  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ImportExcelData_System_Collections_Generic_List_System_String__System_ComponentModel_BackgroundWorker_
-  commentId: M:Lector_Excel.ExcelManager.ImportExcelData(System.Collections.Generic.List{System.String},System.ComponentModel.BackgroundWorker)
-  name.vb: ImportExcelData(List(Of String), BackgroundWorker)
-  fullName: Lector_Excel.ExcelManager.ImportExcelData(System.Collections.Generic.List<System.String>, System.ComponentModel.BackgroundWorker)
-  fullName.vb: Lector_Excel.ExcelManager.ImportExcelData(System.Collections.Generic.List(Of System.String), System.ComponentModel.BackgroundWorker)
-  nameWithType: ExcelManager.ImportExcelData(List<String>, BackgroundWorker)
-  nameWithType.vb: ExcelManager.ImportExcelData(List(Of String), BackgroundWorker)
+- uid: Lector_Excel.ExcelManager.ImportExcelData(Reader_347.Models.ExcelSettings,System.ComponentModel.BackgroundWorker)
+  name: ImportExcelData(ExcelSettings, BackgroundWorker)
+  href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ImportExcelData_Reader_347_Models_ExcelSettings_System_ComponentModel_BackgroundWorker_
+  commentId: M:Lector_Excel.ExcelManager.ImportExcelData(Reader_347.Models.ExcelSettings,System.ComponentModel.BackgroundWorker)
+  fullName: Lector_Excel.ExcelManager.ImportExcelData(Reader_347.Models.ExcelSettings, System.ComponentModel.BackgroundWorker)
+  nameWithType: ExcelManager.ImportExcelData(ExcelSettings, BackgroundWorker)
 - uid: Lector_Excel.ExcelManager.ImportExcelData*
   name: ImportExcelData
   href: api/Lector_Excel.ExcelManager.html#Lector_Excel_ExcelManager_ImportExcelData_
@@ -288,19 +285,6 @@ references:
   isSpec: "True"
   fullName: Lector_Excel.ImportSettings.ImportSettings
   nameWithType: ImportSettings.ImportSettings
-- uid: Lector_Excel.ImportSettings.positions
-  name: positions
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_positions
-  commentId: P:Lector_Excel.ImportSettings.positions
-  fullName: Lector_Excel.ImportSettings.positions
-  nameWithType: ImportSettings.positions
-- uid: Lector_Excel.ImportSettings.positions*
-  name: positions
-  href: api/Lector_Excel.ImportSettings.html#Lector_Excel_ImportSettings_positions_
-  commentId: Overload:Lector_Excel.ImportSettings.positions
-  isSpec: "True"
-  fullName: Lector_Excel.ImportSettings.positions
-  nameWithType: ImportSettings.positions
 - uid: Lector_Excel.MainWindow
   name: MainWindow
   href: api/Lector_Excel.MainWindow.html

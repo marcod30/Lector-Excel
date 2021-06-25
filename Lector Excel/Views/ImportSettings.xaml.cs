@@ -16,9 +16,10 @@ namespace Lector_Excel
     public partial class ImportSettings : Window
     {
         /// <value> Contiene las posiciones de cada campo en el Excel.</value>
-        public List<string> positions { get; set; }
+        private List<string> positions { get; set; }
 
-        ExcelSettings Settings = ExcelSettings.Settings;
+        /// <value> Almacena la configuración de Excel.</value>
+        private ExcelSettings Settings = ExcelSettings.Settings;
 
         /// <summary>
         /// Inicializa una nueva instancia de <c>ImportSettings</c>.
@@ -63,6 +64,35 @@ namespace Lector_Excel
             if (CheckForEmptyAndDuplicates())
                 return;
 
+            //Set settings fields
+            Settings.DeclaredNIF = txt_declaredNIF.Text;
+            Settings.DeclaredName = txt_declaredName.Text;
+            Settings.LegalRepNIF = txt_legalRepNIF.Text;
+            Settings.ProvinceCode = txt_provinceCode.Text;
+            Settings.StateCode = txt_stateCode.Text;
+            Settings.OpKey = txt_opKey.Text;
+            Settings.AnualOpMoney = txt_anualMoney.Text;
+            Settings.OpInsurance = txt_opInsurance.Text;
+            Settings.LocalBusinessRental = txt_localBusinessRental.Text;
+            Settings.MetalMoney = txt_metalMoney.Text;
+            Settings.AnualPropertyTransmissionIVA = txt_anualMoneyPropIVA.Text;
+            Settings.Exercise = txt_exercise.Text;
+            Settings.OpMoney1T = txt_opMoney1.Text;
+            Settings.OpMoney2T = txt_opMoney2.Text;
+            Settings.OpMoney3T = txt_opMoney3.Text;
+            Settings.OpMoney4T = txt_opMoney4.Text;
+            Settings.PropertyTransmissionIVA1T = txt_moneyPropIVA1.Text;
+            Settings.PropertyTransmissionIVA2T = txt_moneyPropIVA2.Text;
+            Settings.PropertyTransmissionIVA3T = txt_moneyPropIVA3.Text;
+            Settings.PropertyTransmissionIVA4T = txt_moneyPropIVA4.Text;
+            Settings.CommunityOpNIF = txt_commOpNIF.Text;
+            Settings.OpSpecialRegIVA = txt_opSpecialIVA.Text;
+            Settings.OpPassive = txt_opPassive.Text;
+            Settings.OpRegNotCustoms = txt_opAduanero.Text;
+            Settings.AnualMoneyDevengedIVA = txt_anualMoneyBoxIVA.Text;
+
+            Settings.FirstRowIsTitle = (bool) chk_TitleRow.IsChecked;
+
             this.DialogResult = true;
             this.Close();
         }
@@ -97,15 +127,40 @@ namespace Lector_Excel
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if(positions != null && positions.Count > 0)
+            txt_declaredNIF.Text = Settings.DeclaredNIF;
+            txt_declaredName.Text = Settings.DeclaredName;
+            txt_legalRepNIF.Text = Settings.LegalRepNIF;
+            txt_provinceCode.Text = Settings.ProvinceCode;
+            txt_stateCode.Text = Settings.StateCode;
+            txt_opKey.Text = Settings.OpKey;
+            txt_anualMoney.Text = Settings.AnualOpMoney;
+            txt_opInsurance.Text = Settings.OpInsurance;
+            txt_localBusinessRental.Text = Settings.LocalBusinessRental;
+            txt_metalMoney.Text = Settings.MetalMoney;
+            txt_anualMoneyPropIVA.Text = Settings.AnualPropertyTransmissionIVA;
+            txt_exercise.Text = Settings.Exercise;
+            txt_opMoney1.Text = Settings.OpMoney1T;
+            txt_opMoney2.Text = Settings.OpMoney2T;
+            txt_opMoney3.Text = Settings.OpMoney3T;
+            txt_opMoney4.Text = Settings.OpMoney4T;
+            txt_moneyPropIVA1.Text = Settings.PropertyTransmissionIVA1T;
+            txt_moneyPropIVA2.Text = Settings.PropertyTransmissionIVA2T;
+            txt_moneyPropIVA3.Text = Settings.PropertyTransmissionIVA3T;
+            txt_moneyPropIVA4.Text = Settings.PropertyTransmissionIVA4T;
+            txt_commOpNIF.Text = Settings.CommunityOpNIF;
+            txt_opSpecialIVA.Text = Settings.OpSpecialRegIVA;
+            txt_opPassive.Text = Settings.OpPassive;
+            txt_opAduanero.Text = Settings.OpRegNotCustoms;
+            txt_anualMoneyBoxIVA.Text = Settings.AnualMoneyDevengedIVA;
+
+            chk_TitleRow.IsChecked = Settings.FirstRowIsTitle;
+
+            positions.Clear();
+            foreach (TextBox t in stack_text.Children.OfType<TextBox>())
             {
-                int i = 0;
-                foreach (TextBox t in stack_text.Children.OfType<TextBox>())
+                if (t.IsEnabled)
                 {
-                    if (t.IsEnabled)
-                    {
-                        t.Text = positions.ElementAt(i++);
-                    }
+                    positions.Add(t.Text.ToUpper());
                 }
             }
         }

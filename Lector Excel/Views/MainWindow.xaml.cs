@@ -2,6 +2,7 @@
 using LiveCharts.Wpf;
 using Microsoft.Win32;
 using Reader_347;
+using Reader_347.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,14 +30,13 @@ namespace Lector_Excel
         ///<value> La referencia a la ventana de progreso.</value>
         ProgressWindow exportProgressBar;
 
-        ///<value> Contiene los valores de la configuración de Excel.</value>
-        private List<string> posiciones = new List<string>();
-        ///<value> Contiene los registros de declarados.</value>
-        //ObservableCollection<DeclaredFormControl> model.ListaDeclarados = new ObservableCollection<DeclaredFormControl>();
         ///<value> Límite de declarados.</value>
         readonly int DECLARED_AMOUNT_LIMIT = 1000;
 
+        /// <value> La referencia a la única instancia del Modelo 347.</value>
         Model347 model = Model347.Model;
+        /// <value> La referencia a la única instancia de la configuración Excel.</value>
+        ExcelSettings excelSettings = ExcelSettings.Settings;
 
         ///<value> La referencia al BackgroundWorker.</value>
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -70,9 +70,9 @@ namespace Lector_Excel
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (openFileDialog.ShowDialog() == true)
             {
-                if (posiciones.Count == 0)
+                if (excelSettings == null)
                 {
-                    MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al leer la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -106,9 +106,9 @@ namespace Lector_Excel
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             if (saveFileDialog.ShowDialog() == true)
             {
-                if (posiciones.Count == 0)
+                if (excelSettings == null)
                 {
-                    MessageBox.Show("No se ha establecido la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al leer la configuración de encolumnado de Excel.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -236,14 +236,8 @@ namespace Lector_Excel
                 Owner = this,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen
             };
-            if (this.posiciones != null && this.posiciones.Count > 0)
-                importSettings.positions = this.posiciones;
 
             importSettings.ShowDialog();
-            if (importSettings.DialogResult == true)
-            {
-                posiciones = importSettings.positions;
-            }
         }
 
         //Handles background worker execution
@@ -269,8 +263,7 @@ namespace Lector_Excel
             
             if((e.Argument as string).Equals("excelImport"))
             {
-                List<Declared> temp = new List<Declared>();
-                temp = ExcelManager.ImportExcelData(posiciones, sender as BackgroundWorker);
+                List<Declared> temp = ExcelManager.ImportExcelData(excelSettings, sender as BackgroundWorker);
                 e.Result = temp;
             }
 
@@ -282,7 +275,7 @@ namespace Lector_Excel
                     temp.Add(dfc.declared);
                 }
 
-                ExcelManager.ExportToExcel(posiciones, temp, sender as BackgroundWorker);
+                ExcelManager.ExportToExcel(excelSettings, temp, sender as BackgroundWorker);
             }
         }
 

@@ -111,7 +111,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ExcelManager.html",
-          "hash": "3ze1KkYlD9wR+nDbJ4bu4UXeKq63QriPIRMhRjnkYQM="
+          "hash": "nCK/mhDWdvOqVlTzofmIXL/6CypUJZOgRyzG+aK1GXI="
         }
       },
       "is_incremental": true,
@@ -147,10 +147,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.ImportSettings.html",
-          "hash": "OF5ZzqXKHjyFoW7g8DOY0g2/XnU4MA6ZRHxlNSHliSE="
+          "hash": "IsMLeTv/hfN8QADjHhHMdUZI908idUKrSKPZNOsYPtM="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -210,7 +210,7 @@
           "hash": "isS8PMtJ7omyej865vvDirwL/iemd5EV3Ot+wLNIYSQ="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -279,10 +279,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.Models.ExcelSettings.html",
-          "hash": "T5Kp8ABck4UGYx42xTijQukTmYABGJS8S8ybogxj1uA="
+          "hash": "sgQSKiKagrTUp8IdFKTCuniaAKbd4vrzveQja7qpUfY="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -294,7 +294,7 @@
           "hash": "nEWEkAzWIkzB3cY7GecGEmXu8WvDwW2zI2WXTL1Xf50="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -306,7 +306,7 @@
           "hash": "uA6owndEQ+nmzKoXHekcwEVUyPUPx01CeAr5h4KGnDg="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -378,7 +378,7 @@
           "hash": "3WkBKJvu8vICJOHpgo2t+HYVj8rSznXm1JJOdYeD39I="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -425,7 +425,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 27,
-          "skipped_file_count": 24
+          "skipped_file_count": 27
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
