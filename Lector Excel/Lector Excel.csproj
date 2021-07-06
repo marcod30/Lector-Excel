@@ -133,9 +133,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\ExcelSettings.cs" />
-    <Compile Include="Views\AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ChartWindow.xaml.cs">
       <DependentUpon>ChartWindow.xaml</DependentUpon>
     </Compile>
@@ -156,17 +153,10 @@
     <Compile Include="Views\PropertyFormControl.xaml.cs">
       <DependentUpon>PropertyFormControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScrollToDialog.xaml.cs">
-      <DependentUpon>ScrollToDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Type1Window.xaml.cs">
       <DependentUpon>Type1Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\UpdateChecker.cs" />
-    <Page Include="Views\AboutWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ChartWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,10 +189,6 @@
     <Page Include="Views\PropertyFormControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ScrollToDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Type1Window.xaml">
       <SubType>Designer</SubType>
