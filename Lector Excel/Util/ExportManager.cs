@@ -110,56 +110,96 @@ namespace Lector_Excel
                 foreach (Declared dec in declareds)
                 {
                     Debug.WriteLine("Appending declared " + i);
-                    stringBuilder.Append(EncodeToLatin("2347")).Append(EncodeToLatin(Type1Data.Ejercicio)).Append(EncodeToLatin(Type1Data.DeclarantName)); // We append Type1Data Exercise and Declarant Name, as they are the same fields for Type 2
+                    stringBuilder.Append(EncodeToLatin("2347")).Append(EncodeToLatin(Type1Data.Ejercicio)).Append(EncodeToLatin(Type1Data.DeclarantNIF)); // We append Type1Data Exercise and Declarant NIF, as they are the same fields for Type 2
 
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["DeclaredNIF"].ToUpper().PadRight(9)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["LegalRepNIF"].ToUpper().PadRight(9)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["DeclaredName"].ToUpper().PadRight(40)));
-
-                    stringBuilder.Append(EncodeToLatin("D"));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"].ToUpper().PadRight(2)));
-
-                    stringBuilder.Append(" ");
-
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpKey"]));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualMoney"], 16, true, false)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpInsurance"].PadLeft(1)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["LocalBusinessLease"].PadLeft(1)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TotalMoney"], 15, true, true)));
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyMoney"], 16, true, false)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["Exercise"], 4, false, true)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp1"], 16, true, false)));
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp1"], 16, true, false)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp2"], 16, true, false)));
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp2"], 16, true, false)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp3"], 16, true, false)));
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp3"], 16, true, false)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp4"], 16, true, false)));
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp4"], 16, true, false)));
-
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["CommunityOpNIF"].ToUpper().PadRight(17)));
-
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpIVA"].PadLeft(1)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpPassive"].PadLeft(1)));
-                    stringBuilder.Append(EncodeToLatin(dec.declaredData["OpCustoms"].PadLeft(1)));
-
-                    stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualOpIVA"], 16, true, false)));
-
-                    //Append 201 blank characters
-                    for (int k = 0; k < 201; k++)
+                    if (!dec.isPropertyDeclared)
                     {
+
+
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["DeclaredNIF"].ToUpper().PadRight(9)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["LegalRepNIF"].ToUpper().PadRight(9)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["DeclaredName"].ToUpper().PadRight(40)));
+
+                        stringBuilder.Append(EncodeToLatin("D"));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["CountryCode"].ToUpper().PadRight(2)));
+
+                        //Append 1 blank character
                         stringBuilder.Append(" ");
+
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["OpKey"]));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualMoney"], 16, true, false)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["OpInsurance"].PadLeft(1)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["LocalBusinessLease"].PadLeft(1)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TotalMoney"], 15, true, true)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyMoney"], 16, true, false)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["Exercise"], 4, false, true)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp1"], 16, true, false)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp1"], 16, true, false)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp2"], 16, true, false)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp2"], 16, true, false)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp3"], 16, true, false)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp3"], 16, true, false)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TrimestralOp4"], 16, true, false)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualPropertyIVAOp4"], 16, true, false)));
+
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["CommunityOpNIF"].ToUpper().PadRight(17)));
+
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["OpIVA"].PadLeft(1)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["OpPassive"].PadLeft(1)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["OpCustoms"].PadLeft(1)));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["AnualOpIVA"], 16, true, false)));
+
+                        //Append 201 blank characters
+                        for (int k = 0; k < 201; k++)
+                        {
+                            stringBuilder.Append(" ");
+                        }
+                        stringBuilder.Append(Environment.NewLine); // Append a new line
                     }
-                    stringBuilder.Append(Environment.NewLine); // Append a new line
+                    else
+                    {
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["RenterNIF"].ToUpper().PadLeft(9,'0')));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["LegalRepNIF"].ToUpper().PadLeft(9)));
+                        stringBuilder.Append(EncodeToLatin(deAccent(dec.declaredData["RenterName"].ToUpper().PadRight(40))));
+
+                        stringBuilder.Append(EncodeToLatin("I"));
+
+                        //Append 22 blank characters
+                        stringBuilder.Append("".PadLeft(22));
+
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["TotalMoney"], 16, true, false)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["Situation"], 1, false, true)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["CatRef"].ToUpper().PadRight(25)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["StreetType"].ToUpper().PadRight(5)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["StreetName"].ToUpper().PadRight(50)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["TypeNum"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["HouseNum"].ToUpper().PadRight(5)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["QualNum"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Block"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Port"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Stair"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Floor"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Door"].ToUpper().PadRight(3)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Complement"].ToUpper().PadRight(40)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Location"].ToUpper().PadRight(30)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["Town"].ToUpper().PadRight(30)));
+                        stringBuilder.Append(EncodeToLatin(dec.declaredData["TownCode"].ToUpper().PadRight(5)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["ProvinceCode"], 2, false, true)));
+                        stringBuilder.Append(EncodeToLatin(FormatNumber(dec.declaredData["PostalCode"], 5, false, true)));
+
+                        //Append 167 blank characters
+                        stringBuilder.Append("".PadLeft(167));
+                    }
 
                     //Report progress to Background Worker
                     i++;

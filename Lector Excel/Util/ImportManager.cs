@@ -87,35 +87,73 @@ namespace Lector_Excel
                         {
                             throw new BadFileFormattingException(counter);
                         }
-                        Declared d = new Declared();
 
-                        d.declaredData["DeclaredNIF"] = FormatString(line.Substring(17, 9));
-                        d.declaredData["LegalRepNIF"] = FormatString(line.Substring(26, 9));
-                        d.declaredData["CommunityOpNIF"] = FormatString(line.Substring(263, 17));
-                        d.declaredData["DeclaredName"] = EncodeToUTF8(FormatString(line.Substring(35, 40)));
-                        d.declaredData["ProvinceCode"] = line.Substring(76, 2);
-                        d.declaredData["CountryCode"] = line.Substring(78, 2);
-                        d.declaredData["OpKey"] = FormatString(line.Substring(81, 1));
-                        d.declaredData["OpInsurance"] = line.Substring(98, 1);
-                        d.declaredData["LocalBusinessLease"] = line.Substring(99, 1);
-                        d.declaredData["OpIVA"] = line.Substring(280, 1);
-                        d.declaredData["OpPassive"] = line.Substring(281, 1);
-                        d.declaredData["OpCustoms"] = line.Substring(282, 1);
-                        d.declaredData["TotalMoney"] = FormatNumber(line.Substring(100, 15), true);
-                        d.declaredData["AnualMoney"] = FormatNumber(line.Substring(82, 16), false);
-                        d.declaredData["AnualPropertyMoney"] = FormatNumber(line.Substring(115, 16), false);
-                        d.declaredData["AnualOpIVA"] = FormatNumber(line.Substring(283, 16), false);
-                        d.declaredData["Exercise"] = FormatString(line.Substring(131, 4));
-                        d.declaredData["TrimestralOp1"] = FormatNumber(line.Substring(135, 16), false);
-                        d.declaredData["TrimestralOp2"] = FormatNumber(line.Substring(167, 16), false);
-                        d.declaredData["TrimestralOp3"] = FormatNumber(line.Substring(199, 16), false);
-                        d.declaredData["TrimestralOp4"] = FormatNumber(line.Substring(231, 16), false);
-                        d.declaredData["AnualPropertyIVAOp1"] = FormatNumber(line.Substring(151, 16), false);
-                        d.declaredData["AnualPropertyIVAOp2"] = FormatNumber(line.Substring(183, 16), false);
-                        d.declaredData["AnualPropertyIVAOp3"] = FormatNumber(line.Substring(215, 16), false);
-                        d.declaredData["AnualPropertyIVAOp4"] = FormatNumber(line.Substring(247, 16), false);
+                        if (!line.Substring(75, 1).ToUpper().Equals("I"))
+                        {
+                            Declared d = new Declared(false);
 
-                        returnList.Add(d);
+                            d.declaredData["DeclaredNIF"] = FormatString(line.Substring(17, 9));
+                            d.declaredData["LegalRepNIF"] = FormatString(line.Substring(26, 9));
+                            d.declaredData["CommunityOpNIF"] = FormatString(line.Substring(263, 17));
+                            d.declaredData["DeclaredName"] = EncodeToUTF8(FormatString(line.Substring(35, 40)));
+                            d.declaredData["ProvinceCode"] = line.Substring(76, 2);
+                            d.declaredData["CountryCode"] = line.Substring(78, 2);
+                            d.declaredData["OpKey"] = FormatString(line.Substring(81, 1));
+                            d.declaredData["OpInsurance"] = line.Substring(98, 1);
+                            d.declaredData["LocalBusinessLease"] = line.Substring(99, 1);
+                            d.declaredData["OpIVA"] = line.Substring(280, 1);
+                            d.declaredData["OpPassive"] = line.Substring(281, 1);
+                            d.declaredData["OpCustoms"] = line.Substring(282, 1);
+                            d.declaredData["TotalMoney"] = FormatNumber(line.Substring(100, 15), true);
+                            d.declaredData["AnualMoney"] = FormatNumber(line.Substring(82, 16), false);
+                            d.declaredData["AnualPropertyMoney"] = FormatNumber(line.Substring(115, 16), false);
+                            d.declaredData["AnualOpIVA"] = FormatNumber(line.Substring(283, 16), false);
+                            d.declaredData["Exercise"] = FormatString(line.Substring(131, 4));
+                            d.declaredData["TrimestralOp1"] = FormatNumber(line.Substring(135, 16), false);
+                            d.declaredData["TrimestralOp2"] = FormatNumber(line.Substring(167, 16), false);
+                            d.declaredData["TrimestralOp3"] = FormatNumber(line.Substring(199, 16), false);
+                            d.declaredData["TrimestralOp4"] = FormatNumber(line.Substring(231, 16), false);
+                            d.declaredData["AnualPropertyIVAOp1"] = FormatNumber(line.Substring(151, 16), false);
+                            d.declaredData["AnualPropertyIVAOp2"] = FormatNumber(line.Substring(183, 16), false);
+                            d.declaredData["AnualPropertyIVAOp3"] = FormatNumber(line.Substring(215, 16), false);
+                            d.declaredData["AnualPropertyIVAOp4"] = FormatNumber(line.Substring(247, 16), false);
+
+                            returnList.Add(d);
+                        }
+                        else
+                        {
+                            Declared d = new Declared(true);
+
+                            d.declaredData["RenterNIF"] = FormatString(line.Substring(17, 9));
+                            d.declaredData["LegalRepNIF"] = FormatString(line.Substring(26, 9));
+                            d.declaredData["RenterName"] = EncodeToUTF8(FormatString(line.Substring(35, 40)));
+
+                            d.declaredData["TotalMoney"] = FormatNumber(line.Substring(98, 16), false);
+
+                            d.declaredData["Situation"] = line.Substring(114, 1);
+                            d.declaredData["CatRef"] = FormatString(line.Substring(115, 25));
+                            
+                            d.declaredData["StreetType"] = EncodeToUTF8(FormatString(line.Substring(140, 5)));
+                            d.declaredData["StreetName"] = EncodeToUTF8(FormatString(line.Substring(145, 50)));
+                            d.declaredData["TypeNum"] = FormatString(line.Substring(195, 3));
+                            d.declaredData["HouseNum"] = FormatString(line.Substring(198, 5));
+                            d.declaredData["QualNum"] = FormatString(line.Substring(203, 3));
+                            d.declaredData["Block"] = FormatString(line.Substring(206, 3));
+                            d.declaredData["Port"] = FormatString(line.Substring(209, 3));
+                            d.declaredData["Stair"] = FormatString(line.Substring(212, 3));
+                            d.declaredData["Floor"] = FormatString(line.Substring(215, 3));
+                            d.declaredData["Door"] = FormatString(line.Substring(218, 3));
+
+                            d.declaredData["Complement"] = EncodeToUTF8(FormatString(line.Substring(221, 40)));
+                            d.declaredData["Location"] = EncodeToUTF8(FormatString(line.Substring(261, 30)));
+                            d.declaredData["Town"] = EncodeToUTF8(FormatString(line.Substring(291, 30)));
+                            d.declaredData["TownCode"] = FormatString(line.Substring(321, 5));
+                            d.declaredData["ProvinceCode"] = line.Substring(326, 2);
+                            d.declaredData["PostalCode"] = line.Substring(328, 5);
+                            
+
+                            returnList.Add(d);
+                        }
                     }
 
                     counter++;
@@ -187,6 +225,7 @@ namespace Lector_Excel
                 return "";
             }
 
+            s.TrimEnd(' ');
             return s;
         }
 
