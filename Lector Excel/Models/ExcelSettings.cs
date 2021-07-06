@@ -88,11 +88,13 @@ namespace Reader_347.Models
         public string AnualMoneyDevengedIVA { get => anualMoneyDevengedIVA; set => anualMoneyDevengedIVA = value; }
         /// <summary> Indica si la primera fila del Excel contiene los títulos de los campos.</summary>
         public bool FirstRowIsTitle { get => firstRowIsTitle; set => firstRowIsTitle = value; }
+        /// <summary> Tipo de hoja</summary>
+        public string SheetType { get => sheetType; set => sheetType = value; }
 
-        private string declaredNIF = "A", legalRepNIF = "B", declaredName = "C", provinceCode = "D", stateCode = "E", opKey = "F", anualOpMoney = "G", opInsurance = "H",
-                       localBusinessRental = "I", metalMoney ="J", anualPropertyTransmissionIVA = "K", exercise ="L", opMoney1T ="M", propertyTransmissionIVA1T ="N",
-                       opMoney2T ="O", propertyTransmissionIVA2T = "P", opMoney3T = "Q", propertyTransmissionIVA3T = "R", opMoney4T ="S", propertyTransmissionIVA4T = "T",
-                       communityOpNIF = "U", opSpecialRegIVA = "V", opPassive = "W", opRegNotCustoms = "X", anualMoneyDevengedIVA ="Y";
+        private string declaredNIF = "A", legalRepNIF = "B", declaredName = "C", sheetType = "D", provinceCode = "E", stateCode = "F", opKey = "G", anualOpMoney = "H", opInsurance = "I",
+                       localBusinessRental = "J", metalMoney ="K", anualPropertyTransmissionIVA = "L", exercise ="M", opMoney1T ="N", propertyTransmissionIVA1T ="O",
+                       opMoney2T ="P", propertyTransmissionIVA2T = "Q", opMoney3T = "R", propertyTransmissionIVA3T = "S", opMoney4T ="T", propertyTransmissionIVA4T = "U",
+                       communityOpNIF = "V", opSpecialRegIVA = "W", opPassive = "X", opRegNotCustoms = "Y", anualMoneyDevengedIVA ="Z";
         private bool firstRowIsTitle = true;
     }
 }
