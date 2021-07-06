@@ -3,6 +3,7 @@ using LiveCharts.Wpf;
 using Microsoft.Win32;
 using Reader_347;
 using Reader_347.Models;
+using Reader_347.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -31,7 +33,7 @@ namespace Lector_Excel
         ProgressWindow exportProgressBar;
 
         ///<value> Límite de declarados.</value>
-        readonly int DECLARED_AMOUNT_LIMIT = 1000;
+        readonly int DECLARED_AMOUNT_LIMIT = 40000;
 
         /// <value> La referencia a la única instancia del Modelo 347.</value>
         Model347 model = Model347.Model;
@@ -52,8 +54,7 @@ namespace Lector_Excel
             backgroundWorker.DoWork += Worker_DoWork;
             backgroundWorker.ProgressChanged += Worker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += Worker_Completed;
-            //model.ListaDeclarados.CollectionChanged += DeclaredListChanged;
-            model.ListaDeclarados = new ObservableCollection<DeclaredFormControl>();
+            model.ListaDeclarados = new ObservableCollection<UserControl>();
             model.ListaDeclarados.CollectionChanged += DeclaredListChanged;
         }
 
@@ -148,10 +149,10 @@ namespace Lector_Excel
         private void Menu_Export_Click(object sender, RoutedEventArgs e)
         {
             bool containsErrors = false;
-            foreach(DeclaredFormControl dfc in model.ListaDeclarados)
+            foreach(UserControl dfc in model.ListaDeclarados)
             {
                 
-                if (!dfc.IsAllDataValid())
+                if ((dfc is DeclaredFormControl && !(dfc as DeclaredFormControl).IsAllDataValid()) || ((dfc is PropertyFormControl) && !(dfc as PropertyFormControl).IsAllDataValid()))
                 {
                     containsErrors = true;
                     break;
@@ -159,7 +160,7 @@ namespace Lector_Excel
             }
             if (containsErrors)
             {
-                MessageBoxResult msg = MessageBox.Show("Hay errores en los campos de los declarados. Los campos con errores se exportarán como campos en blanco. ¿Continuar?", "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult msg = MessageBox.Show("Hay errores en los campos de los registros. Los campos con errores se exportarán como campos en blanco. ¿Continuar?", "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (msg != MessageBoxResult.Yes)
                 {
                     return;
@@ -254,9 +255,12 @@ namespace Lector_Excel
             if((e.Argument as string).Equals("exportAll")){
                 List<Declared> temp = new List<Declared>();
                 ExportManager = new ExportManager(saveLocation, model.Type1Fields);
-                foreach (DeclaredFormControl dfc in model.ListaDeclarados)
+                foreach (UserControl dfc in model.ListaDeclarados)
                 {
-                    temp.Add(dfc.declared);
+                    if (dfc is DeclaredFormControl)
+                        temp.Add((dfc as DeclaredFormControl).declared);
+                    else if (dfc is PropertyFormControl)
+                        temp.Add((dfc as PropertyFormControl).property);
                 }
                 ExportManager.ExportFromMain(temp, sender as BackgroundWorker);
             }
@@ -270,9 +274,12 @@ namespace Lector_Excel
             if ((e.Argument as string).Equals("excelExport"))
             {
                 List<Declared> temp = new List<Declared>();
-                foreach (DeclaredFormControl dfc in model.ListaDeclarados)
+                foreach (UserControl dfc in model.ListaDeclarados)
                 {
-                    temp.Add(dfc.declared);
+                    if (dfc is DeclaredFormControl)
+                        temp.Add((dfc as DeclaredFormControl).declared);
+                    else if (dfc is PropertyFormControl)
+                        temp.Add((dfc as PropertyFormControl).property);
                 }
 
                 ExcelManager.ExportToExcel(excelSettings, temp, sender as BackgroundWorker);
@@ -309,67 +316,111 @@ namespace Lector_Excel
             {
                 if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
                 {
-                    DeclaredFormControl dfc = new DeclaredFormControl();
+                    if (!d.isPropertyDeclared)
+                    {
+                        DeclaredFormControl dfc = new DeclaredFormControl();
 
-                    dfc.mainGroupBox.Header = "Declarado " + (model.ListaDeclarados.Count + 1);
-                    dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
-                    dfc.PropertyChanged += DeclaredChanged;
+                        dfc.mainGroupBox.Header = "Registro " + (model.ListaDeclarados.Count + 1);
+                        dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+                        dfc.PropertyChanged += DeclaredChanged;
 
-                    dfc.declared = d;
-                    dfc.txt_DeclaredNIF.Text = (dfc.declared.declaredData["DeclaredNIF"].Length >= 9) ? dfc.declared.declaredData["DeclaredNIF"].Substring(0, 9) : dfc.declared.declaredData["DeclaredNIF"];
-                    dfc.txt_LegalRepNIF.Text = (dfc.declared.declaredData["LegalRepNIF"].Length >= 9) ? dfc.declared.declaredData["LegalRepNIF"].Substring(0, 9) : dfc.declared.declaredData["LegalRepNIF"];
-                    dfc.txt_CommunityOpNIF.Text = (dfc.declared.declaredData["CommunityOpNIF"].Length >= 17) ? dfc.declared.declaredData["CommunityOpNIF"].Substring(0, 17) : dfc.declared.declaredData["CommunityOpNIF"];
-                    dfc.txt_DeclaredName.Text = (dfc.declared.declaredData["DeclaredName"].Length >= 40) ? dfc.declared.declaredData["DeclaredName"].Substring(0, 40) : dfc.declared.declaredData["DeclaredName"];
-                    dfc.txt_ProvinceCode.Text = (dfc.declared.declaredData["ProvinceCode"].Length >= 2) ? dfc.declared.declaredData["ProvinceCode"].Substring(0, 2) : dfc.declared.declaredData["ProvinceCode"];
-                    dfc.txt_CountryCode.Text = (dfc.declared.declaredData["CountryCode"].Length >= 2) ? dfc.declared.declaredData["CountryCode"].Substring(0, 2) : dfc.declared.declaredData["CountryCode"];
-                    dfc.txt_OpKey.Text = (dfc.declared.declaredData["OpKey"].Length >= 1) ? dfc.declared.declaredData["OpKey"].Substring(0, 1) : dfc.declared.declaredData["OpKey"];
-                    dfc.txt_TotalMoney.Text = (dfc.declared.declaredData["TotalMoney"].Length >= 15) ? dfc.declared.declaredData["TotalMoney"].Substring(0, 15) : dfc.declared.declaredData["TotalMoney"];
-                    dfc.txt_AnualMoney.Text = (dfc.declared.declaredData["AnualMoney"].Length >= 16) ? dfc.declared.declaredData["AnualMoney"].Substring(0, 16) : dfc.declared.declaredData["AnualMoney"];
-                    dfc.txt_AnualPropertyMoney.Text = (dfc.declared.declaredData["AnualPropertyMoney"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyMoney"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyMoney"];
-                    dfc.txt_AnualOpIVA.Text = (dfc.declared.declaredData["AnualOpIVA"].Length >= 16) ? dfc.declared.declaredData["AnualOpIVA"].Substring(0, 16) : dfc.declared.declaredData["AnualOpIVA"];
-                    dfc.txt_Exercise.Text = (dfc.declared.declaredData["Exercise"].Length >= 4) ? dfc.declared.declaredData["Exercise"].Substring(0, 4) : dfc.declared.declaredData["Exercise"];
-                    dfc.txt_TrimestralOp1.Text = (dfc.declared.declaredData["TrimestralOp1"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp1"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp1"];
-                    dfc.txt_TrimestralOp2.Text = (dfc.declared.declaredData["TrimestralOp2"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp2"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp2"]; ;
-                    dfc.txt_TrimestralOp3.Text = (dfc.declared.declaredData["TrimestralOp3"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp3"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp3"]; ;
-                    dfc.txt_TrimestralOp4.Text = (dfc.declared.declaredData["TrimestralOp4"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp4"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp4"]; ;
-                    dfc.txt_AnualPropertyIVAOp1.Text = (dfc.declared.declaredData["AnualPropertyIVAOp1"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp1"].Substring(0,16) : dfc.declared.declaredData["AnualPropertyIVAOp1"];
-                    dfc.txt_AnualPropertyIVAOp2.Text = (dfc.declared.declaredData["AnualPropertyIVAOp2"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp2"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp2"];
-                    dfc.txt_AnualPropertyIVAOp3.Text = (dfc.declared.declaredData["AnualPropertyIVAOp3"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp3"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp3"];
-                    dfc.txt_AnualPropertyIVAOp4.Text = (dfc.declared.declaredData["AnualPropertyIVAOp4"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp4"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp4"];
+                        dfc.declared = d;
+                        dfc.txt_DeclaredNIF.Text = (dfc.declared.declaredData["DeclaredNIF"].Length >= 9) ? dfc.declared.declaredData["DeclaredNIF"].Substring(0, 9) : dfc.declared.declaredData["DeclaredNIF"];
+                        dfc.txt_LegalRepNIF.Text = (dfc.declared.declaredData["LegalRepNIF"].Length >= 9) ? dfc.declared.declaredData["LegalRepNIF"].Substring(0, 9) : dfc.declared.declaredData["LegalRepNIF"];
+                        dfc.txt_CommunityOpNIF.Text = (dfc.declared.declaredData["CommunityOpNIF"].Length >= 17) ? dfc.declared.declaredData["CommunityOpNIF"].Substring(0, 17) : dfc.declared.declaredData["CommunityOpNIF"];
+                        dfc.txt_DeclaredName.Text = (dfc.declared.declaredData["DeclaredName"].Length >= 40) ? dfc.declared.declaredData["DeclaredName"].Substring(0, 40) : dfc.declared.declaredData["DeclaredName"];
+                        dfc.txt_ProvinceCode.Text = (dfc.declared.declaredData["ProvinceCode"].Length >= 2) ? dfc.declared.declaredData["ProvinceCode"].Substring(0, 2) : dfc.declared.declaredData["ProvinceCode"];
+                        dfc.txt_CountryCode.Text = (dfc.declared.declaredData["CountryCode"].Length >= 2) ? dfc.declared.declaredData["CountryCode"].Substring(0, 2) : dfc.declared.declaredData["CountryCode"];
+                        dfc.txt_OpKey.Text = (dfc.declared.declaredData["OpKey"].Length >= 1) ? dfc.declared.declaredData["OpKey"].Substring(0, 1) : dfc.declared.declaredData["OpKey"];
+                        dfc.txt_TotalMoney.Text = (dfc.declared.declaredData["TotalMoney"].Length >= 15) ? dfc.declared.declaredData["TotalMoney"].Substring(0, 15) : dfc.declared.declaredData["TotalMoney"];
+                        dfc.txt_AnualMoney.Text = (dfc.declared.declaredData["AnualMoney"].Length >= 16) ? dfc.declared.declaredData["AnualMoney"].Substring(0, 16) : dfc.declared.declaredData["AnualMoney"];
+                        dfc.txt_AnualPropertyMoney.Text = (dfc.declared.declaredData["AnualPropertyMoney"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyMoney"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyMoney"];
+                        dfc.txt_AnualOpIVA.Text = (dfc.declared.declaredData["AnualOpIVA"].Length >= 16) ? dfc.declared.declaredData["AnualOpIVA"].Substring(0, 16) : dfc.declared.declaredData["AnualOpIVA"];
+                        dfc.txt_Exercise.Text = (dfc.declared.declaredData["Exercise"].Length >= 4) ? dfc.declared.declaredData["Exercise"].Substring(0, 4) : dfc.declared.declaredData["Exercise"];
+                        dfc.txt_TrimestralOp1.Text = (dfc.declared.declaredData["TrimestralOp1"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp1"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp1"];
+                        dfc.txt_TrimestralOp2.Text = (dfc.declared.declaredData["TrimestralOp2"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp2"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp2"]; ;
+                        dfc.txt_TrimestralOp3.Text = (dfc.declared.declaredData["TrimestralOp3"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp3"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp3"]; ;
+                        dfc.txt_TrimestralOp4.Text = (dfc.declared.declaredData["TrimestralOp4"].Length >= 16) ? dfc.declared.declaredData["TrimestralOp4"].Substring(0, 16) : dfc.declared.declaredData["TrimestralOp4"]; ;
+                        dfc.txt_AnualPropertyIVAOp1.Text = (dfc.declared.declaredData["AnualPropertyIVAOp1"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp1"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp1"];
+                        dfc.txt_AnualPropertyIVAOp2.Text = (dfc.declared.declaredData["AnualPropertyIVAOp2"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp2"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp2"];
+                        dfc.txt_AnualPropertyIVAOp3.Text = (dfc.declared.declaredData["AnualPropertyIVAOp3"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp3"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp3"];
+                        dfc.txt_AnualPropertyIVAOp4.Text = (dfc.declared.declaredData["AnualPropertyIVAOp4"].Length >= 16) ? dfc.declared.declaredData["AnualPropertyIVAOp4"].Substring(0, 16) : dfc.declared.declaredData["AnualPropertyIVAOp4"];
 
-                    if (dfc.declared.declaredData["OpInsurance"].Equals("X"))
-                    {
-                        dfc.chk_OpInsurance.IsChecked = true;
+                        if (dfc.declared.declaredData["OpInsurance"].Equals("X"))
+                        {
+                            dfc.chk_OpInsurance.IsChecked = true;
+                        }
+                        else
+                            dfc.declared.declaredData["OpInsurance"] = " ";
+                        if (dfc.declared.declaredData["LocalBusinessLease"].Equals("X"))
+                        {
+                            dfc.chk_LocalBusinessLease.IsChecked = true;
+                        }
+                        else
+                            dfc.declared.declaredData["LocalBusinessLease"] = " ";
+                        if (dfc.declared.declaredData["OpIVA"].Equals("X"))
+                        {
+                            dfc.chk_OpIVA.IsChecked = true;
+                        }
+                        else
+                            dfc.declared.declaredData["OpInsurance"] = " ";
+                        if (dfc.declared.declaredData["OpPassive"].Equals("X"))
+                        {
+                            dfc.chk_OpPassive.IsChecked = true;
+                        }
+                        else
+                            dfc.declared.declaredData["OpPassive"] = " ";
+                        if (dfc.declared.declaredData["OpCustoms"].Equals("X"))
+                        {
+                            dfc.chk_OpCustoms.IsChecked = true;
+                        }
+                        else
+                            dfc.declared.declaredData["OpCustoms"] = " ";
+                        DockPanel.SetDock(dfc, Dock.Top);
+                        dock_DeclaredContainer.Children.Add(dfc);
+                        model.ListaDeclarados.Add(dfc);
                     }
                     else
-                        dfc.declared.declaredData["OpInsurance"] = " ";
-                    if (dfc.declared.declaredData["LocalBusinessLease"].Equals("X"))
                     {
-                        dfc.chk_LocalBusinessLease.IsChecked = true;
+                        PropertyFormControl dfc = new PropertyFormControl();
+
+                        dfc.mainGroupBox.Header = "Registro " + (model.ListaDeclarados.Count + 1);
+                        dfc.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+                        dfc.PropertyChanged += DeclaredChanged;
+
+                        dfc.property = d;
+                        dfc.txt_RenterNIF.Text = (dfc.property.declaredData["RenterNIF"].Length >= 9) ? dfc.property.declaredData["RenterNIF"].Substring(0, 9) : dfc.property.declaredData["DeclaredNIF"];
+                        dfc.txt_LegalRepNIF.Text = (dfc.property.declaredData["LegalRepNIF"].Length >= 9) ? dfc.property.declaredData["LegalRepNIF"].Substring(0, 9) : dfc.property.declaredData["LegalRepNIF"];
+                        dfc.txt_RenterName.Text = (dfc.property.declaredData["RenterName"].Length >= 40) ? dfc.property.declaredData["RenterName"].Substring(0, 40) : dfc.property.declaredData["RenterName"];
+                        
+                        dfc.txt_TotalMoney.Text = (dfc.property.declaredData["TotalMoney"].Length >= 16) ? dfc.property.declaredData["TotalMoney"].Substring(0, 16) : dfc.property.declaredData["TotalMoney"];
+
+                        dfc.txt_CatRef.Text = (dfc.property.declaredData["CatRef"].Length >= 35) ? dfc.property.declaredData["CatRef"].Substring(0, 35) : dfc.property.declaredData["CatRef"];
+                        dfc.txt_Situation.Text = (dfc.property.declaredData["Situation"].Length >= 1) ? dfc.property.declaredData["Situation"].Substring(0, 1) : dfc.property.declaredData["Situation"];
+                        dfc.txt_StreetType.Text = (dfc.property.declaredData["StreetType"].Length >= 5) ? dfc.property.declaredData["StreetType"].Substring(0, 5) : dfc.property.declaredData["StreetType"];
+                        dfc.txt_StreetName.Text = (dfc.property.declaredData["StreetName"].Length >= 50) ? dfc.property.declaredData["StreetName"].Substring(0, 50) : dfc.property.declaredData["StreetName"];
+                        dfc.txt_TypeNum.Text = (dfc.property.declaredData["TypeNum"].Length >= 3) ? dfc.property.declaredData["TypeNum"].Substring(0, 3) : dfc.property.declaredData["TypeNum"];
+                        dfc.txt_HouseNum.Text = (dfc.property.declaredData["HouseNum"].Length >= 5) ? dfc.property.declaredData["HouseNum"].Substring(0, 5) : dfc.property.declaredData["HouseNum"];
+                        dfc.txt_QualNum.Text = (dfc.property.declaredData["QualNum"].Length >= 3) ? dfc.property.declaredData["QualNum"].Substring(0, 3) : dfc.property.declaredData["QualNum"];
+                        dfc.txt_Block.Text = (dfc.property.declaredData["Block"].Length >= 3) ? dfc.property.declaredData["Block"].Substring(0, 3) : dfc.property.declaredData["Block"];
+                        dfc.txt_Port.Text = (dfc.property.declaredData["Port"].Length >= 3) ? dfc.property.declaredData["Port"].Substring(0, 3) : dfc.property.declaredData["Port"];
+                        dfc.txt_Stair.Text = (dfc.property.declaredData["Stair"].Length >= 3) ? dfc.property.declaredData["Stair"].Substring(0, 3) : dfc.property.declaredData["Stair"];
+                        dfc.txt_Floor.Text = (dfc.property.declaredData["Floor"].Length >= 3) ? dfc.property.declaredData["Floor"].Substring(0, 3) : dfc.property.declaredData["Floor"];
+                        dfc.txt_Door.Text = (dfc.property.declaredData["Door"].Length >= 3) ? dfc.property.declaredData["Door"].Substring(0, 3) : dfc.property.declaredData["Door"];
+
+                        dfc.txt_Complement.Text = (dfc.property.declaredData["Complement"].Length >= 40) ? dfc.property.declaredData["Complement"].Substring(0, 40) : dfc.property.declaredData["Complement"];
+                        dfc.txt_Location.Text = (dfc.property.declaredData["Location"].Length >= 30) ? dfc.property.declaredData["Location"].Substring(0, 30) : dfc.property.declaredData["Location"];
+                        dfc.txt_Town.Text = (dfc.property.declaredData["Town"].Length >= 30) ? dfc.property.declaredData["Town"].Substring(0, 30) : dfc.property.declaredData["Town"];
+
+                        dfc.txt_TownCode.Text = (dfc.property.declaredData["TownCode"].Length >= 5) ? dfc.property.declaredData["TownCode"].Substring(0, 5) : dfc.property.declaredData["TownCode"];
+                        dfc.txt_ProvinceCode.Text = (dfc.property.declaredData["ProvinceCode"].Length >= 2) ? dfc.property.declaredData["ProvinceCode"].Substring(0, 2) : dfc.property.declaredData["ProvinceCode"];
+                        dfc.txt_PostalCode.Text = (dfc.property.declaredData["PostalCode"].Length >= 5) ? dfc.property.declaredData["PostalCode"].Substring(0, 5) : dfc.property.declaredData["PostalCode"];
+
+
+                        DockPanel.SetDock(dfc, Dock.Top);
+                        dock_DeclaredContainer.Children.Add(dfc);
+                        model.ListaDeclarados.Add(dfc);
                     }
-                    else
-                        dfc.declared.declaredData["LocalBusinessLease"] = " ";
-                    if (dfc.declared.declaredData["OpIVA"].Equals("X"))
-                    {
-                        dfc.chk_OpIVA.IsChecked = true;
-                    }
-                    else
-                        dfc.declared.declaredData["OpInsurance"] = " ";
-                    if (dfc.declared.declaredData["OpPassive"].Equals("X"))
-                    {
-                        dfc.chk_OpPassive.IsChecked = true;
-                    }
-                    else
-                        dfc.declared.declaredData["OpPassive"] = " ";
-                    if (dfc.declared.declaredData["OpCustoms"].Equals("X"))
-                    {
-                        dfc.chk_OpCustoms.IsChecked = true;
-                    }
-                    else
-                        dfc.declared.declaredData["OpCustoms"] = " ";
-                    DockPanel.SetDock(dfc, Dock.Top);
-                    dock_DeclaredContainer.Children.Add(dfc);
-                    model.ListaDeclarados.Add(dfc);
                 }
                 else
                     break;
@@ -433,7 +484,7 @@ namespace Lector_Excel
             {
                 DeclaredFormControl d = new DeclaredFormControl();
 
-                d.mainGroupBox.Header = "Declarado "+(model.ListaDeclarados.Count+1);
+                d.mainGroupBox.Header = "Registro "+(model.ListaDeclarados.Count+1);
                 d.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
 
                 DockPanel.SetDock(d, Dock.Top);
@@ -443,7 +494,27 @@ namespace Lector_Excel
             }
             else
             {
-                MessageBoxResult msg = MessageBox.Show("No se pueden añadir más de "+DECLARED_AMOUNT_LIMIT+" declarados.", "ATENCIÓN", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                MessageBoxResult msg = MessageBox.Show("No se pueden añadir más de "+DECLARED_AMOUNT_LIMIT+" registros.", "ATENCIÓN", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+        }
+
+        private void Menu_addNewProperty_Click(object sender, RoutedEventArgs e)
+        {
+            if (dock_DeclaredContainer.Children.Count < DECLARED_AMOUNT_LIMIT)
+            {
+                PropertyFormControl d = new PropertyFormControl();
+
+                d.mainGroupBox.Header = "Registro " + (model.ListaDeclarados.Count + 1);
+                d.DeleteButtonClick += DeclaredContainer_OnDeleteButtonClick;   //Subscribe delegate for deleting
+
+                DockPanel.SetDock(d, Dock.Top);
+                dock_DeclaredContainer.Children.Add(d);
+                model.ListaDeclarados.Add(d);
+                scrl_MainScrollViewer.ScrollToBottom(); //Scroll to bottom, where new declared was added
+            }
+            else
+            {
+                MessageBoxResult msg = MessageBox.Show("No se pueden añadir más de " + DECLARED_AMOUNT_LIMIT + " registros.", "ATENCIÓN", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
         }
 
@@ -465,10 +536,31 @@ namespace Lector_Excel
                 dock_DeclaredContainer.Children.Remove(sender as DeclaredFormControl);
 
                 //Reorganize items
-                foreach(DeclaredFormControl dfc in model.ListaDeclarados)
+                foreach(UserControl dfc in model.ListaDeclarados)
                 {
                     var pos = model.ListaDeclarados.IndexOf(dfc);
-                    dfc.mainGroupBox.Header = "Declarado " + (pos+1);
+                    if(dfc is DeclaredFormControl)
+                        (dfc as DeclaredFormControl).mainGroupBox.Header = "Registro " + (pos + 1);
+                    else if(dfc is PropertyFormControl)
+                        (dfc as PropertyFormControl).mainGroupBox.Header = "Registro " + (pos + 1);
+                }
+
+                if (model.ListaDeclarados.Count == 0)
+                    menu_deleteAllDeclared.IsEnabled = false;
+            }
+            else if (model.ListaDeclarados.Contains(sender as PropertyFormControl))
+            {
+                model.ListaDeclarados.Remove(sender as PropertyFormControl);
+                dock_DeclaredContainer.Children.Remove(sender as PropertyFormControl);
+
+                //Reorganize items
+                foreach (UserControl dfc in model.ListaDeclarados)
+                {
+                    var pos = model.ListaDeclarados.IndexOf(dfc);
+                    if (dfc is DeclaredFormControl)
+                        (dfc as DeclaredFormControl).mainGroupBox.Header = "Registro " + (pos + 1);
+                    else if (dfc is PropertyFormControl)
+                        (dfc as PropertyFormControl).mainGroupBox.Header = "Registro " + (pos + 1);
                 }
 
                 if (model.ListaDeclarados.Count == 0)
@@ -495,7 +587,7 @@ namespace Lector_Excel
 
             if(model.ListaDeclarados.Count > 0)
             {
-                foreach(DeclaredFormControl dfc in model.ListaDeclarados)
+                foreach(UserControl dfc in model.ListaDeclarados)
                 {
                     dock_DeclaredContainer.Children.Remove(dfc);
                 }
@@ -542,14 +634,46 @@ namespace Lector_Excel
                 menu_ScrollToTop.IsEnabled = false;
                 menu_ScrollToBottom.IsEnabled = false;
             }
-            
-            //Set PropertyChanged method for every item
-            foreach(DeclaredFormControl dfc in model.ListaDeclarados)
-            {
-                dfc.PropertyChanged -= DeclaredChanged;
-                dfc.PropertyChanged += DeclaredChanged;
-            }
+
+            UpdateDeclareds();
         }
+
+        private void UpdateDeclareds()
+        {
+            //Set PropertyChanged method for every item and update Type 1
+            int totalDeclareds = 0, totalProperties = 0;
+            double totalAnualMoney = 0, totalAnualMoneyRental = 0;
+            foreach (UserControl dfc in model.ListaDeclarados)
+            {
+                if(dfc is DeclaredFormControl)
+                {
+                    (dfc as DeclaredFormControl).PropertyChanged -= DeclaredChanged;
+                    (dfc as DeclaredFormControl).PropertyChanged += DeclaredChanged;
+                    totalDeclareds++;
+                    if (double.TryParse((dfc as DeclaredFormControl).txt_AnualMoney.Text, out double tempAnual))
+                    {
+                        totalAnualMoney += tempAnual;
+                    }
+                }
+                else if(dfc is PropertyFormControl)
+                {
+                    (dfc as PropertyFormControl).PropertyChanged -= DeclaredChanged;
+                    (dfc as PropertyFormControl).PropertyChanged += DeclaredChanged;
+                    totalProperties++;
+                    if (double.TryParse((dfc as PropertyFormControl).txt_TotalMoney.Text, out double tempAnual))
+                    {
+                        totalAnualMoneyRental += tempAnual;
+                    }
+                }
+                
+            }
+
+            model.Type1Fields.TotalEntities = totalDeclareds.ToString();
+            model.Type1Fields.TotalAnualMoney = Math.Round(totalAnualMoney, 2).ToString();
+            model.Type1Fields.TotalProperties = totalProperties.ToString();
+            model.Type1Fields.TotalMoneyRental = Math.Round(totalAnualMoneyRental, 2).ToString();
+        }
+        
 
         //When a Declared property changes, trigger this
         /// <summary>
@@ -560,46 +684,51 @@ namespace Lector_Excel
         /// <seealso cref="Reader_347.ChartWindow"/>
         public void DeclaredChanged(object sender, PropertyChangedEventArgs e)
         {
-            //FIXME - Remove this condition so deleting a declared also updates chart
-            if (e.PropertyName.Split('_')[0].Equals("txt"))
+            
+            if (sender is DeclaredFormControl)
             {
-                //A textbox changed
-                Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
-                if(ChartWindow != null && ChartWindow.IsVisible)
+                //FIXME - Remove this condition so deleting a declared also updates chart
+                if (e.PropertyName.Split('_')[0].Equals("txt"))
                 {
-                    switch (ChartWindow.ChartType)
+                    //A textbox changed
+                    Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
+                    if (ChartWindow != null && ChartWindow.IsVisible)
                     {
-                        case "VerticalBar_RegistryPerOpKey":
-                        case "HorizontalBar_RegistryPerOpKey":
-                            ChartWindow.SeriesCollection[0].Values = GetRegistriesPerOpKey();
-                            break;
-                        case "VerticalBar_BuySellPerTrimester":
-                        case "HorizontalBar_BuySellPerTrimester":
-                        case "Line_BuySellPerTrimester":
-                            ChartWindow.SeriesCollection[0].Values = GetBuySellsPerTrimester(false);
-                            ChartWindow.SeriesCollection[1].Values = GetBuySellsPerTrimester(true);
-                            break;
+                        switch (ChartWindow.ChartType)
+                        {
+                            case "VerticalBar_RegistryPerOpKey":
+                            case "HorizontalBar_RegistryPerOpKey":
+                                ChartWindow.SeriesCollection[0].Values = GetRegistriesPerOpKey();
+                                break;
+                            case "VerticalBar_BuySellPerTrimester":
+                            case "HorizontalBar_BuySellPerTrimester":
+                            case "Line_BuySellPerTrimester":
+                                ChartWindow.SeriesCollection[0].Values = GetBuySellsPerTrimester(false);
+                                ChartWindow.SeriesCollection[1].Values = GetBuySellsPerTrimester(true);
+                                break;
                             //FIXME Pie charts are not updating correctly!
-                        case "Pie_BuyTotal":
-                            ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(false);
-                            break;
-                        case "Pie_SellTotal":
-                            ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(true);
-                            break;
-                        case "Map_BuyTotal":
-                            ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(false);
-                            break;
-                        case "Map_SellTotal":
-                            ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(true);
-                            break;
+                            case "Pie_BuyTotal":
+                                ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(false);
+                                break;
+                            case "Pie_SellTotal":
+                                ChartWindow.SeriesCollection = GetBuySellsPerRegionAsPie(true);
+                                break;
+                            case "Map_BuyTotal":
+                                ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(false);
+                                break;
+                            case "Map_SellTotal":
+                                ChartWindow.GeoMap.HeatMap = GetBuySellsPerRegion(true);
+                                break;
+                        }
                     }
                 }
-            }
 
-            if (e.PropertyName.Split('_')[0].Equals("chk"))
-            {
-                //A checkbox changed
-                Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
+                if (e.PropertyName.Split('_')[0].Equals("chk"))
+                {
+                    //A checkbox changed
+                    Debug.WriteLine(e.PropertyName + " : " + (sender as DeclaredFormControl).declared.declaredData[e.PropertyName.Substring(4)]);
+
+                }
             }
         }
 
@@ -674,15 +803,25 @@ namespace Lector_Excel
         /// <seealso cref="PDFManager"/>
         private void Menu_ExportPDFDraft_Click(object sender, RoutedEventArgs e)
         {
-            if(model.ListaDeclarados.Count > 6)
+            int declaredAmount = model.ListaDeclarados.Count(d => d is DeclaredFormControl);
+            int propertyAmount = model.ListaDeclarados.Count(d => d is PropertyFormControl);
+            if (declaredAmount > 6)
             {
-                MessageBoxResult msg = MessageBox.Show(string.Format("La exportación a PDF solo está disponible para 6 o menos registros de declarados. Actualmente hay {0}. ¿Desea continuar y exportar solo los 6 primeros?", model.ListaDeclarados.Count), "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                MessageBoxResult msg = MessageBox.Show(string.Format("La exportación a PDF solo está disponible para 6 o menos registros de declarados. Actualmente hay {0}. ¿Desea continuar y exportar solo los 6 primeros?", declaredAmount), "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if(msg != MessageBoxResult.Yes)
                 {
                     return;
                 }
             }
-            
+
+            if (propertyAmount > 6)
+            {
+                MessageBoxResult msg = MessageBox.Show(string.Format("La exportación a PDF solo está disponible para 6 o menos registros de inmueble. Actualmente hay {0}. ¿Desea continuar y exportar solo los 6 primeros?", propertyAmount), "ATENCIÓN", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if (msg != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+            }
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Documentos PDF (*.pdf)|*.pdf";
@@ -691,9 +830,12 @@ namespace Lector_Excel
             {
                 PDFManager pdfManager = new PDFManager(sfd.FileName);
                 List<Declared> temp = new List<Declared>();
-                foreach (DeclaredFormControl dfc in model.ListaDeclarados)
+                foreach (UserControl dfc in model.ListaDeclarados)
                 {
-                    temp.Add(dfc.declared);
+                    if (dfc is DeclaredFormControl && temp.Count(d => !d.isPropertyDeclared) < 6)
+                        temp.Add((dfc as DeclaredFormControl).declared);
+                    /*else if (dfc is PropertyFormControl && temp.Count(d => d.isPropertyDeclared) < 6)
+                        temp.Add((dfc as PropertyFormControl).property);*/
                 }
 
                 pdfManager.ExportToPDFDraft(model.Type1Fields, temp);
@@ -856,31 +998,34 @@ namespace Lector_Excel
         private ChartValues<int> GetRegistriesPerOpKey()
         {
             ChartValues<int> values = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0 };
-            foreach (DeclaredFormControl dfc in model.ListaDeclarados)
+            foreach (UserControl dfc in model.ListaDeclarados)
             {
-                switch (dfc.declared.declaredData["OpKey"])
+                if(dfc is DeclaredFormControl)
                 {
-                    case "A":
-                        values[0] += 1;
-                        break;
-                    case "B":
-                        values[1] += 1;
-                        break;
-                    case "C":
-                        values[2] += 1;
-                        break;
-                    case "D":
-                        values[3] += 1;
-                        break;
-                    case "E":
-                        values[4] += 1;
-                        break;
-                    case "F":
-                        values[5] += 1;
-                        break;
-                    case "G":
-                        values[6] += 1;
-                        break;
+                    switch ((dfc as DeclaredFormControl).declared.declaredData["OpKey"])
+                    {
+                        case "A":
+                            values[0] += 1;
+                            break;
+                        case "B":
+                            values[1] += 1;
+                            break;
+                        case "C":
+                            values[2] += 1;
+                            break;
+                        case "D":
+                            values[3] += 1;
+                            break;
+                        case "E":
+                            values[4] += 1;
+                            break;
+                        case "F":
+                            values[5] += 1;
+                            break;
+                        case "G":
+                            values[6] += 1;
+                            break;
+                    }
                 }
                 
             }
@@ -902,57 +1047,62 @@ namespace Lector_Excel
         {
             ChartValues<float> values = new ChartValues<float> {0,0,0,0};
             Dictionary<string, string> tempDeclaredData;
-            foreach(DeclaredFormControl dfc in model.ListaDeclarados)
+            foreach(UserControl dfc in model.ListaDeclarados)
             {
-                tempDeclaredData = dfc.declared.declaredData;
-                if (getSells)
+                if (dfc is DeclaredFormControl)
                 {
-                    if (tempDeclaredData["OpKey"].Equals("B"))
+                    tempDeclaredData = (dfc as DeclaredFormControl).declared.declaredData;
+
+                    if (getSells)
                     {
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"])){
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',','.'),NumberStyles.Float,CultureInfo.InvariantCulture);
-                            values[0] += temp;
-                        }
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                        if (tempDeclaredData["OpKey"].Equals("B"))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[1] += temp;
-                        }
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
-                        {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[2] += temp;
-                        }
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
-                        {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[3] += temp;
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[0] += temp;
+                            }
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[1] += temp;
+                            }
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[2] += temp;
+                            }
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[3] += temp;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    else
                     {
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"]))
+                        if (tempDeclaredData["OpKey"].Equals("A"))
                         {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[0] += temp;
-                        }
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
-                        {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[1] += temp;
-                        }
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
-                        {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[2] += temp;
-                        }
-                        if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
-                        {
-                            float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                            values[3] += temp;
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp1"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp1"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[0] += temp;
+                            }
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp2"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp2"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[1] += temp;
+                            }
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp3"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp3"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[2] += temp;
+                            }
+                            if (!string.IsNullOrEmpty(tempDeclaredData["TrimestralOp4"]))
+                            {
+                                float temp = float.Parse(tempDeclaredData["TrimestralOp4"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                                values[3] += temp;
+                            }
                         }
                     }
                 }
@@ -972,56 +1122,61 @@ namespace Lector_Excel
             Dictionary<string, double> data = new Dictionary<string, double>();
             Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
 
-            foreach (DeclaredFormControl declaredFormControl in model.ListaDeclarados)
+            foreach (UserControl declaredFormControl in model.ListaDeclarados)
             {
-                tempDeclaredData = declaredFormControl.declared.declaredData;
-
-                if (getSells)
+                if (declaredFormControl is DeclaredFormControl)
                 {
-                    if (tempDeclaredData["OpKey"].Equals("B"))
-                    {
-                        double amount;
-                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
-                        {
-                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            amount = 0;
-                        }
 
-                        if(amount != 0)
+
+                    tempDeclaredData = (declaredFormControl as DeclaredFormControl).declared.declaredData;
+
+                    if (getSells)
+                    {
+                        if (tempDeclaredData["OpKey"].Equals("B"))
                         {
-                            if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
-                                data[tempDeclaredData["ProvinceCode"]] += amount;
+                            double amount;
+                            if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                            {
+                                amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            }
                             else
                             {
-                                data.Add(tempDeclaredData["ProvinceCode"], amount);
+                                amount = 0;
+                            }
+
+                            if (amount != 0)
+                            {
+                                if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                    data[tempDeclaredData["ProvinceCode"]] += amount;
+                                else
+                                {
+                                    data.Add(tempDeclaredData["ProvinceCode"], amount);
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    else
                     {
-                        double amount;
-                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        if (tempDeclaredData["OpKey"].Equals("A"))
                         {
-                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            amount = 0;
-                        }
-
-                        if (amount != 0)
-                        {
-                            if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
-                                data[tempDeclaredData["ProvinceCode"]] += amount;
+                            double amount;
+                            if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                            {
+                                amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
+                            }
                             else
                             {
-                                data.Add(tempDeclaredData["ProvinceCode"], amount);
+                                amount = 0;
+                            }
+
+                            if (amount != 0)
+                            {
+                                if (data.ContainsKey(tempDeclaredData["ProvinceCode"]))
+                                    data[tempDeclaredData["ProvinceCode"]] += amount;
+                                else
+                                {
+                                    data.Add(tempDeclaredData["ProvinceCode"], amount);
+                                }
                             }
                         }
                     }
@@ -1042,52 +1197,31 @@ namespace Lector_Excel
             SeriesCollection series = new SeriesCollection();
             Dictionary<string, string> tempDeclaredData = new Dictionary<string, string>();
             Func<ChartPoint, string> PieFormatter;
-            foreach (DeclaredFormControl declaredFormControl in model.ListaDeclarados)
+            foreach (UserControl declaredFormControl in model.ListaDeclarados)
             {
-                tempDeclaredData = declaredFormControl.declared.declaredData;
-
-                if (getSells)
+                if (declaredFormControl is DeclaredFormControl)
                 {
-                    if (tempDeclaredData["OpKey"].Equals("B"))
-                    {
-                        double amount;
-                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !string.IsNullOrWhiteSpace(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
-                        {
-                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            amount = 0;
-                        }
 
-                        if (amount != 0 && Province.CodeToName(tempDeclaredData["ProvinceCode"]) != null)
+
+                    tempDeclaredData = (declaredFormControl as DeclaredFormControl).declared.declaredData;
+
+                    if (getSells)
+                    {
+                        if (tempDeclaredData["OpKey"].Equals("B"))
                         {
-                            if(series.Count == 0)
+                            double amount;
+                            if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !string.IsNullOrWhiteSpace(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
                             {
-                                series.Add(new PieSeries
-                                {
-                                    Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
-                                    Values = new ChartValues<double> { amount },
-                                    DataLabels = true,
-                                    LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})",chartPoint.Y,chartPoint.Participation))
-                                });
+                                amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             }
                             else
                             {
-                                bool foundEqual = false;
-                                foreach (PieSeries ps in series)
-                                {
-                                    if (ps.Title.Equals(Province.CodeToName(tempDeclaredData["ProvinceCode"])))
-                                    {
-                                        (ps.Values as ChartValues<double>)[0] += amount;
-                                        foundEqual = true;
-                                        break;
-                                    }
+                                amount = 0;
+                            }
 
-                                    
-                                }
-
-                                if (!foundEqual)
+                            if (amount != 0 && Province.CodeToName(tempDeclaredData["ProvinceCode"]) != null)
+                            {
+                                if (series.Count == 0)
                                 {
                                     series.Add(new PieSeries
                                     {
@@ -1096,53 +1230,53 @@ namespace Lector_Excel
                                         DataLabels = true,
                                         LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
                                     });
+                                }
+                                else
+                                {
+                                    bool foundEqual = false;
+                                    foreach (PieSeries ps in series)
+                                    {
+                                        if (ps.Title.Equals(Province.CodeToName(tempDeclaredData["ProvinceCode"])))
+                                        {
+                                            (ps.Values as ChartValues<double>)[0] += amount;
+                                            foundEqual = true;
+                                            break;
+                                        }
+
+
+                                    }
+
+                                    if (!foundEqual)
+                                    {
+                                        series.Add(new PieSeries
+                                        {
+                                            Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
+                                            Values = new ChartValues<double> { amount },
+                                            DataLabels = true,
+                                            LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
+                                        });
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                else
-                {
-                    if (tempDeclaredData["OpKey"].Equals("A"))
+                    else
                     {
-                        double amount;
-                        if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !string.IsNullOrWhiteSpace(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
+                        if (tempDeclaredData["OpKey"].Equals("A"))
                         {
-                            amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
-                        }
-                        else
-                        {
-                            amount = 0;
-                        }
-
-                        if (amount != 0 && Province.CodeToName(tempDeclaredData["ProvinceCode"]) != null)
-                        {
-                            if (series.Count == 0)
+                            double amount;
+                            if (!string.IsNullOrEmpty(tempDeclaredData["ProvinceCode"]) && !string.IsNullOrWhiteSpace(tempDeclaredData["ProvinceCode"]) && !tempDeclaredData["ProvinceCode"].Equals("99"))
                             {
-                                series.Add(new PieSeries
-                                {
-                                    Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
-                                    Values = new ChartValues<double> { amount },
-                                    DataLabels = true,
-                                    LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
-                                });
+                                amount = double.Parse(tempDeclaredData["AnualMoney"].Replace(',', '.'), NumberStyles.Float, CultureInfo.InvariantCulture);
                             }
                             else
                             {
-                                bool foundEqual = false;
-                                foreach (PieSeries ps in series)
-                                {
-                                    if (ps.Title.Equals(Province.CodeToName(tempDeclaredData["ProvinceCode"])))
-                                    {
-                                        (ps.Values as ChartValues<double>)[0] += amount;
-                                        foundEqual = true;
-                                        break;
-                                    }
+                                amount = 0;
+                            }
 
-
-                                }
-
-                                if (!foundEqual)
+                            if (amount != 0 && Province.CodeToName(tempDeclaredData["ProvinceCode"]) != null)
+                            {
+                                if (series.Count == 0)
                                 {
                                     series.Add(new PieSeries
                                     {
@@ -1151,6 +1285,32 @@ namespace Lector_Excel
                                         DataLabels = true,
                                         LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
                                     });
+                                }
+                                else
+                                {
+                                    bool foundEqual = false;
+                                    foreach (PieSeries ps in series)
+                                    {
+                                        if (ps.Title.Equals(Province.CodeToName(tempDeclaredData["ProvinceCode"])))
+                                        {
+                                            (ps.Values as ChartValues<double>)[0] += amount;
+                                            foundEqual = true;
+                                            break;
+                                        }
+
+
+                                    }
+
+                                    if (!foundEqual)
+                                    {
+                                        series.Add(new PieSeries
+                                        {
+                                            Title = Province.CodeToName(tempDeclaredData["ProvinceCode"]),
+                                            Values = new ChartValues<double> { amount },
+                                            DataLabels = true,
+                                            LabelPoint = (PieFormatter = chartPoint => string.Format("{0}€ ({1:P})", chartPoint.Y, chartPoint.Participation))
+                                        });
+                                    }
                                 }
                             }
                         }

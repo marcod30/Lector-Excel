@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Lector_Excel"
         xmlns:Fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
-        Title="347 Reader" Height="480" Width="850" MinHeight="240" MinWidth="425" WindowStartupLocation="CenterScreen"
+        Title="347 Reader" Height="550" Width="850" MinHeight="250" MinWidth="425" WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize" Loaded="Window_Loaded" Closing="Window_Closing">
     <DockPanel>
         <Fluent:Ribbon DockPanel.Dock="Top">
@@ -23,7 +23,7 @@
             </Fluent:Ribbon.Menu>
             <Fluent:RibbonTabItem Header="Modelo 347">
                 <Fluent:RibbonGroupBox Header="Registros">
-                    <Fluent:Button Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click" ToolTip="Añade un nuevo registro al final de la lista.">
+                    <Fluent:Button Name="menu_addNewDeclared" Header="Añadir declarado" Click="Menu_addNewDeclared_Click" ToolTip="Añade un nuevo registro de declarado al final de la lista.">
                         <Fluent:Button.Icon>
                             <Rectangle>
                                 <Rectangle.Fill>
@@ -33,6 +33,18 @@
                         </Fluent:Button.Icon>
                         <Fluent:Button.LargeIcon>
                             ..\media\addDeclared_icon.png
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button Name="menu_addNewProperty" Header="Añadir inmueble" Click="Menu_addNewProperty_Click" ToolTip="Añade un nuevo registro de inmueble al final de la lista.">
+                        <Fluent:Button.Icon>
+                            <Rectangle>
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="..\media\misc_icons.png" Viewbox="0,0,1.77,1" Stretch="None"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Fluent:Button.Icon>
+                        <Fluent:Button.LargeIcon>
+                            ..\media\addPropery_icon.png
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
                     <Fluent:Button Name="menu_deleteAllDeclared" Header="Eliminar todos" Click="Menu_deleteAllDeclared_Click" ToolTip="Elimina todos los registros.">
