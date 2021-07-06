@@ -38,12 +38,12 @@ references:
   commentId: T:Lector_Excel.Declared
   fullName: Lector_Excel.Declared
   nameWithType: Declared
-- uid: Lector_Excel.Declared.#ctor
-  name: Declared()
-  href: api/Lector_Excel.Declared.html#Lector_Excel_Declared__ctor
-  commentId: M:Lector_Excel.Declared.#ctor
-  fullName: Lector_Excel.Declared.Declared()
-  nameWithType: Declared.Declared()
+- uid: Lector_Excel.Declared.#ctor(System.Boolean)
+  name: Declared(Boolean)
+  href: api/Lector_Excel.Declared.html#Lector_Excel_Declared__ctor_System_Boolean_
+  commentId: M:Lector_Excel.Declared.#ctor(System.Boolean)
+  fullName: Lector_Excel.Declared.Declared(System.Boolean)
+  nameWithType: Declared.Declared(Boolean)
 - uid: Lector_Excel.Declared.#ctor(System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)
   name: Declared(Dictionary<String, String>, Boolean)
   href: api/Lector_Excel.Declared.html#Lector_Excel_Declared__ctor_System_Collections_Generic_Dictionary_System_String_System_String__System_Boolean_
@@ -66,6 +66,12 @@ references:
   commentId: F:Lector_Excel.Declared.declaredData
   fullName: Lector_Excel.Declared.declaredData
   nameWithType: Declared.declaredData
+- uid: Lector_Excel.Declared.isPropertyDeclared
+  name: isPropertyDeclared
+  href: api/Lector_Excel.Declared.html#Lector_Excel_Declared_isPropertyDeclared
+  commentId: F:Lector_Excel.Declared.isPropertyDeclared
+  fullName: Lector_Excel.Declared.isPropertyDeclared
+  nameWithType: Declared.isPropertyDeclared
 - uid: Lector_Excel.Declared.mayContainErrors
   name: mayContainErrors
   href: api/Lector_Excel.Declared.html#Lector_Excel_Declared_mayContainErrors
@@ -973,6 +979,19 @@ references:
   isSpec: "True"
   fullName: Reader_347.Models.ExcelSettings.Settings
   nameWithType: ExcelSettings.Settings
+- uid: Reader_347.Models.ExcelSettings.SheetType
+  name: SheetType
+  href: api/Reader_347.Models.ExcelSettings.html#Reader_347_Models_ExcelSettings_SheetType
+  commentId: P:Reader_347.Models.ExcelSettings.SheetType
+  fullName: Reader_347.Models.ExcelSettings.SheetType
+  nameWithType: ExcelSettings.SheetType
+- uid: Reader_347.Models.ExcelSettings.SheetType*
+  name: SheetType
+  href: api/Reader_347.Models.ExcelSettings.html#Reader_347_Models_ExcelSettings_SheetType_
+  commentId: Overload:Reader_347.Models.ExcelSettings.SheetType
+  isSpec: "True"
+  fullName: Reader_347.Models.ExcelSettings.SheetType
+  nameWithType: ExcelSettings.SheetType
 - uid: Reader_347.Models.ExcelSettings.StateCode
   name: StateCode
   href: api/Reader_347.Models.ExcelSettings.html#Reader_347_Models_ExcelSettings_StateCode
@@ -1375,3 +1394,72 @@ references:
   isSpec: "True"
   fullName: Reader_347.UpdateChecker.GetReleases
   nameWithType: UpdateChecker.GetReleases
+- uid: Reader_347.Views
+  name: Reader_347.Views
+  href: api/Reader_347.Views.html
+  commentId: N:Reader_347.Views
+  fullName: Reader_347.Views
+  nameWithType: Reader_347.Views
+- uid: Reader_347.Views.PropertyFormControl
+  name: PropertyFormControl
+  href: api/Reader_347.Views.PropertyFormControl.html
+  commentId: T:Reader_347.Views.PropertyFormControl
+  fullName: Reader_347.Views.PropertyFormControl
+  nameWithType: PropertyFormControl
+- uid: Reader_347.Views.PropertyFormControl.#ctor
+  name: PropertyFormControl()
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl__ctor
+  commentId: M:Reader_347.Views.PropertyFormControl.#ctor
+  fullName: Reader_347.Views.PropertyFormControl.PropertyFormControl()
+  nameWithType: PropertyFormControl.PropertyFormControl()
+- uid: Reader_347.Views.PropertyFormControl.#ctor*
+  name: PropertyFormControl
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl__ctor_
+  commentId: Overload:Reader_347.Views.PropertyFormControl.#ctor
+  isSpec: "True"
+  fullName: Reader_347.Views.PropertyFormControl.PropertyFormControl
+  nameWithType: PropertyFormControl.PropertyFormControl
+- uid: Reader_347.Views.PropertyFormControl.DeleteButtonClick
+  name: DeleteButtonClick
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_DeleteButtonClick
+  commentId: E:Reader_347.Views.PropertyFormControl.DeleteButtonClick
+  fullName: Reader_347.Views.PropertyFormControl.DeleteButtonClick
+  nameWithType: PropertyFormControl.DeleteButtonClick
+- uid: Reader_347.Views.PropertyFormControl.IsAllDataValid
+  name: IsAllDataValid()
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_IsAllDataValid
+  commentId: M:Reader_347.Views.PropertyFormControl.IsAllDataValid
+  fullName: Reader_347.Views.PropertyFormControl.IsAllDataValid()
+  nameWithType: PropertyFormControl.IsAllDataValid()
+- uid: Reader_347.Views.PropertyFormControl.IsAllDataValid*
+  name: IsAllDataValid
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_IsAllDataValid_
+  commentId: Overload:Reader_347.Views.PropertyFormControl.IsAllDataValid
+  isSpec: "True"
+  fullName: Reader_347.Views.PropertyFormControl.IsAllDataValid
+  nameWithType: PropertyFormControl.IsAllDataValid
+- uid: Reader_347.Views.PropertyFormControl.OnDeleteButtonClick(System.EventArgs)
+  name: OnDeleteButtonClick(EventArgs)
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_OnDeleteButtonClick_System_EventArgs_
+  commentId: M:Reader_347.Views.PropertyFormControl.OnDeleteButtonClick(System.EventArgs)
+  fullName: Reader_347.Views.PropertyFormControl.OnDeleteButtonClick(System.EventArgs)
+  nameWithType: PropertyFormControl.OnDeleteButtonClick(EventArgs)
+- uid: Reader_347.Views.PropertyFormControl.OnDeleteButtonClick*
+  name: OnDeleteButtonClick
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_OnDeleteButtonClick_
+  commentId: Overload:Reader_347.Views.PropertyFormControl.OnDeleteButtonClick
+  isSpec: "True"
+  fullName: Reader_347.Views.PropertyFormControl.OnDeleteButtonClick
+  nameWithType: PropertyFormControl.OnDeleteButtonClick
+- uid: Reader_347.Views.PropertyFormControl.property
+  name: property
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_property
+  commentId: F:Reader_347.Views.PropertyFormControl.property
+  fullName: Reader_347.Views.PropertyFormControl.property
+  nameWithType: PropertyFormControl.property
+- uid: Reader_347.Views.PropertyFormControl.PropertyChanged
+  name: PropertyChanged
+  href: api/Reader_347.Views.PropertyFormControl.html#Reader_347_Views_PropertyFormControl_PropertyChanged
+  commentId: E:Reader_347.Views.PropertyFormControl.PropertyChanged
+  fullName: Reader_347.Views.PropertyFormControl.PropertyChanged
+  nameWithType: PropertyFormControl.PropertyChanged

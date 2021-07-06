@@ -99,6 +99,7 @@ namespace Reader_347
                 int count = 0;
                 foreach (Declared declared in declareds)
                 {
+
                     switch (declareds.IndexOf(declared))
                     {
                         case 0:
