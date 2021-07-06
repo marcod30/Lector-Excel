@@ -9,7 +9,7 @@
     <StackPanel Name="mainStack">
         <GroupBox Name="mainGroupBox" Header="Declarado ???" Margin="10,0,10,10">
             <StackPanel Name="groupStack">
-                <Button Name="btn_DeleteDeclared" Content="Eliminar declarado" Margin="15,10,0,0" MaxWidth="200" HorizontalAlignment="Left" Click="Btn_DeleteDeclared_Click"/>
+                <Button Name="btn_DeleteDeclared" Content="Eliminar declarado" Margin="15,10,0,0" MaxWidth="200" HorizontalAlignment="Left" ToolTip="Quitar este declarado del modelo." Click="Btn_DeleteDeclared_Click"/>
                 <Grid Name="grid1" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

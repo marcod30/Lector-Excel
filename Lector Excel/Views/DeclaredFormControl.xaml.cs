@@ -48,7 +48,7 @@ namespace Lector_Excel
         public DeclaredFormControl()
         {
             InitializeComponent();
-            declared = new Declared();
+            declared = new Declared(false);
         }
 
         //Send delegate handler
@@ -84,7 +84,7 @@ namespace Lector_Excel
         /// <remarks>Activa o desactiva otro campo por incompatibilidad en el modelo 347.</remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Txt_DeclaredNIF_TextChanged(object sender, RoutedEventArgs e)
+        private void Txt_DeclaredNIF_TextChanged(object sender, TextChangedEventArgs e)
         {
             var thisTextBox = sender as TextBox;
             //Disable Community NIF textbox as they are incompatible
