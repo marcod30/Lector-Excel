@@ -1,6 +1,7 @@
 ﻿using Lector_Excel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace Reader_347
 {
@@ -35,7 +36,7 @@ namespace Reader_347
         }
 
         private Type1Registry type1Fields = new Type1Registry();
-        private ObservableCollection<DeclaredFormControl> listaDeclarados;
+        private ObservableCollection<UserControl> listaDeclarados;
 
         /// <summary>
         /// Obtiene o modifica el registro de tipo 1.
@@ -44,7 +45,7 @@ namespace Reader_347
         /// <summary>
         /// Obtiene o modifica la lista de declarados (registros de tipo 2).
         /// </summary>
-        public ObservableCollection<DeclaredFormControl> ListaDeclarados { get => listaDeclarados; set => listaDeclarados = value; }
+        public ObservableCollection<UserControl> ListaDeclarados { get => listaDeclarados; set => listaDeclarados = value; }
     }
 
     /// <summary>
@@ -52,9 +53,9 @@ namespace Reader_347
     /// </summary>
     public sealed class Type1Registry
     {
-        private string ejercicio, declarantNIF, supportType, declarantName, relationsName, relationsPhone,
-                       declarationID, prevDeclarationID, totalEntities, totalAnualMoney, totalProperties,
-                       totalMoneyRental, legalRepNIF;
+        private string ejercicio, declarantNIF, supportType = "T", declarantName, relationsName, relationsPhone,
+                       declarationID, prevDeclarationID, totalEntities = "0", totalAnualMoney = "0", totalProperties = "0",
+                       totalMoneyRental = "0", legalRepNIF;
         private bool isComplementaryDec = false, isSustitutiveDec = false, isNonSpecialDec = true;
         /// <summary>
         /// Inicializa una nueva instancia de <c>Type1Registry</c>.
