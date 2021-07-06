@@ -1,0 +1,106 @@
+﻿<Window x:Class="Reader_347.ChartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:Reader_347"
+        mc:Ignorable="d"
+        Title="Visor de gráficas" Height="480" Width="720" ResizeMode="CanResize">
+    <DockPanel Name="dock_Main">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Gráfico">
+                <MenuItem Header="Barras">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="..\media\misc_icons.png" Viewbox="0,0,0.19,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                    <MenuItem Name="menu_VertBar_RegPerOpKey" Header="Registros por clave de operación" Click="Menu_VertBar_RegPerOpKey_Click">
+
+                    </MenuItem>
+                    <MenuItem Name="menu_VertBar_BuySellPerTrimester" Header="Compras/Ventas por trimestre" Click="Menu_VertBar_BuySellPerTrimester_Click">
+
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Barras laterales">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="..\media\misc_icons.png" Viewbox="0,0,0.17,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+
+                    <MenuItem Name="HorizBar_RegPerOpKey" Header="Registros por clave de operación" Click="HorizBar_RegPerOpKey_Click">
+
+                    </MenuItem>
+                    <MenuItem Name="HorizBar_BuySellPerTrimester" Header="Compras/Ventas por trimestre" Click="HorizBar_BuySellPerTrimester_Click">
+
+                    </MenuItem>
+
+                </MenuItem>
+                <MenuItem Header="Líneas">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="..\media\misc_icons.png" Viewbox="0,0,0.23,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+
+                    <MenuItem Name="menu_Line_BuySellPerTrimester" Header="Compras/Ventas por trimestre" Click="Menu_Line_BuySellPerTrimester_Click">
+
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Circular">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="..\media\misc_icons.png" Viewbox="0,0,0.21,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                    <MenuItem Name="menu_Pie_BuyPerRegion" Header="Compras por región" Click="Menu_Pie_BuyPerRegion_Click">
+
+                    </MenuItem>
+                    <MenuItem Name="menu_Pie_SellPerRegion" Header="Ventas por región" Click="Menu_Pie_SellPerRegion_Click">
+
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Mapa regional">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="..\media\misc_icons.png" Viewbox="0,0,1.17,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                    <MenuItem Name="menu_Map_BuyTotal" Header="Compras por región" Click="Menu_Map_BuyTotal_Click">
+
+                    </MenuItem>
+                    <MenuItem Name="menu_Map_SellTotal" Header="Ventas por región" Click="Menu_Map_SellTotal_Click">
+
+                    </MenuItem>
+                </MenuItem>
+
+                <Separator/>
+
+                <MenuItem Name="menu_SaveGraphAs" Header="Guardar como..." Click="Menu_SaveGraphAs_Click" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="..\media\common_icons.png" Viewbox="0,0,1.426,1" Stretch="None"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <Label Name="lbl_ChartNotSelected" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False">
+            Seleccione una gráfica del menú superior
+        </Label>
+    </DockPanel>
+</Window>
