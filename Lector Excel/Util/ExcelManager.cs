@@ -66,37 +66,52 @@ namespace Lector_Excel
                 Debug.WriteLine("El excel tiene " + rows + " filas y " + columns + " columnas");
 
                 List<Declared> returnList = new List<Declared>();
-                for (int i = 2; i <= rows; i++) // We skip the row that contains the header?
+                for (int i = 1; i <= rows; i++) 
                 {
-                    Declared declared = new Declared();
+                    if (Positions.FirstRowIsTitle && i == 1) // We skip the row that contains the header if specified
+                        continue;
 
-                    declared.declaredData["DeclaredNIF"] = (range.Cells[i, Positions.DeclaredNIF].Value2 != null) ? range.Cells[i, Positions.DeclaredNIF].Value2.ToString() : "";
-                    declared.declaredData["LegalRepNIF"] = (range.Cells[i, Positions.LegalRepNIF].Value2 != null) ? range.Cells[i, Positions.LegalRepNIF].Value2.ToString() : "";
-                    declared.declaredData["CommunityOpNIF"] = (range.Cells[i, Positions.CommunityOpNIF].Value2 != null) ? range.Cells[i, Positions.CommunityOpNIF].Value2.ToString() : "";
-                    declared.declaredData["DeclaredName"] = (range.Cells[i, Positions.DeclaredName].Value2 != null) ? range.Cells[i, Positions.DeclaredName].Value2.ToString() : "";
-                    declared.declaredData["ProvinceCode"] = (range.Cells[i, Positions.ProvinceCode].Value2 != null) ? range.Cells[i, Positions.ProvinceCode].Value2.ToString() : "";
-                    declared.declaredData["CountryCode"] = (range.Cells[i, Positions.StateCode].Value2 != null) ? range.Cells[i, Positions.StateCode].Value2.ToString() : "";
-                    declared.declaredData["OpKey"] = (range.Cells[i, Positions.OpKey].Value2 != null) ? range.Cells[i, Positions.OpKey].Value2.ToString() : "";
-                    declared.declaredData["OpInsurance"] = (range.Cells[i, Positions.OpInsurance].Value2 != null) ? range.Cells[i, Positions.OpInsurance].Value2.ToString() : "";
-                    declared.declaredData["LocalBusinessLease"] = (range.Cells[i, Positions.LocalBusinessRental].Value2 != null) ? range.Cells[i, Positions.LocalBusinessRental].Value2.ToString() : "";
-                    declared.declaredData["OpIVA"] = (range.Cells[i, Positions.OpSpecialRegIVA].Value2 != null) ? range.Cells[i, Positions.OpSpecialRegIVA].Value2.ToString() : "";
-                    declared.declaredData["OpPassive"] = (range.Cells[i, Positions.OpPassive].Value2 != null) ? range.Cells[i, Positions.OpPassive].Value2.ToString() : "";
-                    declared.declaredData["OpCustoms"] = (range.Cells[i, Positions.OpRegNotCustoms].Value2 != null) ? range.Cells[i, Positions.OpRegNotCustoms].Value2.ToString() : "";
-                    declared.declaredData["TotalMoney"] = (range.Cells[i, Positions.MetalMoney].Value2 != null) ? range.Cells[i, Positions.MetalMoney].Value2.ToString() : "";
-                    declared.declaredData["AnualMoney"] = (range.Cells[i, Positions.AnualOpMoney].Value2 != null) ? range.Cells[i, Positions.AnualOpMoney].Value2.ToString() : "";
-                    declared.declaredData["AnualPropertyMoney"] = (range.Cells[i, Positions.AnualPropertyTransmissionIVA].Value2 != null) ? range.Cells[i, Positions.AnualPropertyTransmissionIVA].Value2.ToString() : "";
-                    declared.declaredData["AnualOpIVA"] = (range.Cells[i, Positions.AnualMoneyDevengedIVA].Value2 != null) ? range.Cells[i, Positions.AnualMoneyDevengedIVA].Value2.ToString() : "";
-                    declared.declaredData["Exercise"] = (range.Cells[i, Positions.Exercise].Value2 != null) ? range.Cells[i, Positions.Exercise].Value2.ToString() : "" ;
-                    declared.declaredData["TrimestralOp1"] = (range.Cells[i, Positions.OpMoney1T].Value2 != null) ? range.Cells[i, Positions.OpMoney1T].Value2.ToString() : "";
-                    declared.declaredData["TrimestralOp2"] = (range.Cells[i, Positions.OpMoney2T].Value2 != null) ? range.Cells[i, Positions.OpMoney2T].Value2.ToString() : "";
-                    declared.declaredData["TrimestralOp3"] = (range.Cells[i, Positions.OpMoney3T].Value2 != null) ? range.Cells[i, Positions.OpMoney3T].Value2.ToString() : "";
-                    declared.declaredData["TrimestralOp4"] = (range.Cells[i, Positions.OpMoney4T].Value2 != null) ? range.Cells[i, Positions.OpMoney4T].Value2.ToString() : "";
-                    declared.declaredData["AnualPropertyIVAOp1"] = (range.Cells[i, Positions.PropertyTransmissionIVA1T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA1T].Value2.ToString() : "";
-                    declared.declaredData["AnualPropertyIVAOp2"] = (range.Cells[i, Positions.PropertyTransmissionIVA2T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA2T].Value2.ToString() : "";
-                    declared.declaredData["AnualPropertyIVAOp3"] = (range.Cells[i, Positions.PropertyTransmissionIVA3T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA3T].Value2.ToString() : "";
-                    declared.declaredData["AnualPropertyIVAOp4"] = (range.Cells[i, Positions.PropertyTransmissionIVA4T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA4T].Value2.ToString() : "";
+                    //Get declared type (person or property)
+                    string declaredType = (range.Cells[i, Positions.SheetType].Value2 != null) ? range.Cells[i, Positions.SheetType].Value2.ToString() : "";
+                    if (declaredType.Equals("") || declaredType.Equals("I")) 
+                    {
+                        continue;
+                    }
+                    else if (declaredType.Equals("D")) //Import person
+                    {
+                        Declared declared = new Declared(false);
 
-                    returnList.Add(declared);
+                        declared.declaredData["DeclaredNIF"] = (range.Cells[i, Positions.DeclaredNIF].Value2 != null) ? range.Cells[i, Positions.DeclaredNIF].Value2.ToString() : "";
+                        declared.declaredData["LegalRepNIF"] = (range.Cells[i, Positions.LegalRepNIF].Value2 != null) ? range.Cells[i, Positions.LegalRepNIF].Value2.ToString() : "";
+                        declared.declaredData["CommunityOpNIF"] = (range.Cells[i, Positions.CommunityOpNIF].Value2 != null) ? range.Cells[i, Positions.CommunityOpNIF].Value2.ToString() : "";
+                        declared.declaredData["DeclaredName"] = (range.Cells[i, Positions.DeclaredName].Value2 != null) ? range.Cells[i, Positions.DeclaredName].Value2.ToString() : "";
+                        declared.declaredData["ProvinceCode"] = (range.Cells[i, Positions.ProvinceCode].Value2 != null) ? range.Cells[i, Positions.ProvinceCode].Value2.ToString() : "";
+                        declared.declaredData["CountryCode"] = (range.Cells[i, Positions.StateCode].Value2 != null) ? range.Cells[i, Positions.StateCode].Value2.ToString() : "";
+                        declared.declaredData["OpKey"] = (range.Cells[i, Positions.OpKey].Value2 != null) ? range.Cells[i, Positions.OpKey].Value2.ToString() : "";
+                        declared.declaredData["OpInsurance"] = (range.Cells[i, Positions.OpInsurance].Value2 != null) ? range.Cells[i, Positions.OpInsurance].Value2.ToString() : "";
+                        declared.declaredData["LocalBusinessLease"] = (range.Cells[i, Positions.LocalBusinessRental].Value2 != null) ? range.Cells[i, Positions.LocalBusinessRental].Value2.ToString() : "";
+                        declared.declaredData["OpIVA"] = (range.Cells[i, Positions.OpSpecialRegIVA].Value2 != null) ? range.Cells[i, Positions.OpSpecialRegIVA].Value2.ToString() : "";
+                        declared.declaredData["OpPassive"] = (range.Cells[i, Positions.OpPassive].Value2 != null) ? range.Cells[i, Positions.OpPassive].Value2.ToString() : "";
+                        declared.declaredData["OpCustoms"] = (range.Cells[i, Positions.OpRegNotCustoms].Value2 != null) ? range.Cells[i, Positions.OpRegNotCustoms].Value2.ToString() : "";
+                        declared.declaredData["TotalMoney"] = (range.Cells[i, Positions.MetalMoney].Value2 != null) ? range.Cells[i, Positions.MetalMoney].Value2.ToString() : "";
+                        declared.declaredData["AnualMoney"] = (range.Cells[i, Positions.AnualOpMoney].Value2 != null) ? range.Cells[i, Positions.AnualOpMoney].Value2.ToString() : "";
+                        declared.declaredData["AnualPropertyMoney"] = (range.Cells[i, Positions.AnualPropertyTransmissionIVA].Value2 != null) ? range.Cells[i, Positions.AnualPropertyTransmissionIVA].Value2.ToString() : "";
+                        declared.declaredData["AnualOpIVA"] = (range.Cells[i, Positions.AnualMoneyDevengedIVA].Value2 != null) ? range.Cells[i, Positions.AnualMoneyDevengedIVA].Value2.ToString() : "";
+                        declared.declaredData["Exercise"] = (range.Cells[i, Positions.Exercise].Value2 != null) ? range.Cells[i, Positions.Exercise].Value2.ToString() : "";
+                        declared.declaredData["TrimestralOp1"] = (range.Cells[i, Positions.OpMoney1T].Value2 != null) ? range.Cells[i, Positions.OpMoney1T].Value2.ToString() : "";
+                        declared.declaredData["TrimestralOp2"] = (range.Cells[i, Positions.OpMoney2T].Value2 != null) ? range.Cells[i, Positions.OpMoney2T].Value2.ToString() : "";
+                        declared.declaredData["TrimestralOp3"] = (range.Cells[i, Positions.OpMoney3T].Value2 != null) ? range.Cells[i, Positions.OpMoney3T].Value2.ToString() : "";
+                        declared.declaredData["TrimestralOp4"] = (range.Cells[i, Positions.OpMoney4T].Value2 != null) ? range.Cells[i, Positions.OpMoney4T].Value2.ToString() : "";
+                        declared.declaredData["AnualPropertyIVAOp1"] = (range.Cells[i, Positions.PropertyTransmissionIVA1T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA1T].Value2.ToString() : "";
+                        declared.declaredData["AnualPropertyIVAOp2"] = (range.Cells[i, Positions.PropertyTransmissionIVA2T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA2T].Value2.ToString() : "";
+                        declared.declaredData["AnualPropertyIVAOp3"] = (range.Cells[i, Positions.PropertyTransmissionIVA3T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA3T].Value2.ToString() : "";
+                        declared.declaredData["AnualPropertyIVAOp4"] = (range.Cells[i, Positions.PropertyTransmissionIVA4T].Value2 != null) ? range.Cells[i, Positions.PropertyTransmissionIVA4T].Value2.ToString() : "";
+
+                        returnList.Add(declared);
+                    }
+                    
+
+                    
 
                     float progress = (float)i / rows * 100;
                     Debug.WriteLine(progress + "%");
@@ -159,10 +174,10 @@ namespace Lector_Excel
 
                 range = worksheet.UsedRange;
 
-                int titleRow = 2;
-                if (!Positions.FirstRowIsTitle)
+                int titleRow = 1;
+                if (Positions.FirstRowIsTitle)
                 {
-                    titleRow = 0;
+                    titleRow = 2;
 
                     //Set title row
                     worksheet.Rows[1].Font.Bold = true;
@@ -170,6 +185,7 @@ namespace Lector_Excel
                     worksheet.Cells[1, Positions.DeclaredNIF] = "NIF Declarado";
                     worksheet.Cells[1, Positions.LegalRepNIF] = "NIF Rep. Legal";
                     worksheet.Cells[1, Positions.CommunityOpNIF] = "NIF Op. Comunitario";
+                    worksheet.Cells[1, Positions.SheetType] = "Tipo hoja";
                     worksheet.Cells[1, Positions.DeclaredName] = "Nombre Declarado";
                     worksheet.Cells[1, Positions.ProvinceCode] = "Cod. Provincia";
                     worksheet.Cells[1, Positions.StateCode] = "Cod. Pais";
@@ -196,33 +212,36 @@ namespace Lector_Excel
 
                 for (int i = 0; i < declareds.Count; i++)
                 {
-                    worksheet.Cells[i + titleRow, Positions.DeclaredNIF] = declareds[i].declaredData["DeclaredNIF"];
-                    worksheet.Cells[i + titleRow, Positions.LegalRepNIF] = declareds[i].declaredData["LegalRepNIF"];
-                    worksheet.Cells[i + titleRow, Positions.CommunityOpNIF] = declareds[i].declaredData["CommunityOpNIF"];
-                    worksheet.Cells[i + titleRow, Positions.DeclaredName] = declareds[i].declaredData["DeclaredName"];
-                    worksheet.Cells[i + titleRow, Positions.ProvinceCode] = declareds[i].declaredData["ProvinceCode"];
-                    worksheet.Cells[i + titleRow, Positions.StateCode] = declareds[i].declaredData["CountryCode"];
-                    worksheet.Cells[i + titleRow, Positions.OpKey] = declareds[i].declaredData["OpKey"];
-                    worksheet.Cells[i + titleRow, Positions.OpInsurance] = declareds[i].declaredData["OpInsurance"];
-                    worksheet.Cells[i + titleRow, Positions.LocalBusinessRental] = declareds[i].declaredData["LocalBusinessLease"];
-                    worksheet.Cells[i + titleRow, Positions.OpSpecialRegIVA] = declareds[i].declaredData["OpIVA"];
-                    worksheet.Cells[i + titleRow, Positions.OpPassive] = declareds[i].declaredData["OpPassive"];
-                    worksheet.Cells[i + titleRow, Positions.OpRegNotCustoms] = declareds[i].declaredData["OpCustoms"];
-                    worksheet.Cells[i + titleRow, Positions.MetalMoney] = declareds[i].declaredData["TotalMoney"];
-                    worksheet.Cells[i + titleRow, Positions.AnualOpMoney] = declareds[i].declaredData["AnualMoney"];
-                    worksheet.Cells[i + titleRow, Positions.AnualPropertyTransmissionIVA] = declareds[i].declaredData["AnualPropertyMoney"];
-                    worksheet.Cells[i + titleRow, Positions.AnualMoneyDevengedIVA] = declareds[i].declaredData["AnualOpIVA"];
-                    worksheet.Cells[i + titleRow, Positions.Exercise] = declareds[i].declaredData["Exercise"];
-                    worksheet.Cells[i + titleRow, Positions.OpMoney1T] = declareds[i].declaredData["TrimestralOp1"];
-                    worksheet.Cells[i + titleRow, Positions.OpMoney2T] = declareds[i].declaredData["TrimestralOp2"];
-                    worksheet.Cells[i + titleRow, Positions.OpMoney3T] = declareds[i].declaredData["TrimestralOp3"];
-                    worksheet.Cells[i + titleRow, Positions.OpMoney4T] = declareds[i].declaredData["TrimestralOp4"];
-                    worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA1T] = declareds[i].declaredData["AnualPropertyIVAOp1"];
-                    worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA2T] = declareds[i].declaredData["AnualPropertyIVAOp2"];
-                    worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA3T] = declareds[i].declaredData["AnualPropertyIVAOp3"];
-                    worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA4T] = declareds[i].declaredData["AnualPropertyIVAOp4"];
+                    if (!declareds[i].isPropertyDeclared)
+                    {
+                        worksheet.Cells[i + titleRow, Positions.DeclaredNIF] = declareds[i].declaredData["DeclaredNIF"];
+                        worksheet.Cells[i + titleRow, Positions.LegalRepNIF] = declareds[i].declaredData["LegalRepNIF"];
+                        worksheet.Cells[i + titleRow, Positions.CommunityOpNIF] = declareds[i].declaredData["CommunityOpNIF"];
+                        worksheet.Cells[i + titleRow, Positions.SheetType] = "D";
+                        worksheet.Cells[i + titleRow, Positions.DeclaredName] = declareds[i].declaredData["DeclaredName"];
+                        worksheet.Cells[i + titleRow, Positions.ProvinceCode] = declareds[i].declaredData["ProvinceCode"];
+                        worksheet.Cells[i + titleRow, Positions.StateCode] = declareds[i].declaredData["CountryCode"];
+                        worksheet.Cells[i + titleRow, Positions.OpKey] = declareds[i].declaredData["OpKey"];
+                        worksheet.Cells[i + titleRow, Positions.OpInsurance] = declareds[i].declaredData["OpInsurance"];
+                        worksheet.Cells[i + titleRow, Positions.LocalBusinessRental] = declareds[i].declaredData["LocalBusinessLease"];
+                        worksheet.Cells[i + titleRow, Positions.OpSpecialRegIVA] = declareds[i].declaredData["OpIVA"];
+                        worksheet.Cells[i + titleRow, Positions.OpPassive] = declareds[i].declaredData["OpPassive"];
+                        worksheet.Cells[i + titleRow, Positions.OpRegNotCustoms] = declareds[i].declaredData["OpCustoms"];
+                        worksheet.Cells[i + titleRow, Positions.MetalMoney] = declareds[i].declaredData["TotalMoney"];
+                        worksheet.Cells[i + titleRow, Positions.AnualOpMoney] = declareds[i].declaredData["AnualMoney"];
+                        worksheet.Cells[i + titleRow, Positions.AnualPropertyTransmissionIVA] = declareds[i].declaredData["AnualPropertyMoney"];
+                        worksheet.Cells[i + titleRow, Positions.AnualMoneyDevengedIVA] = declareds[i].declaredData["AnualOpIVA"];
+                        worksheet.Cells[i + titleRow, Positions.Exercise] = declareds[i].declaredData["Exercise"];
+                        worksheet.Cells[i + titleRow, Positions.OpMoney1T] = declareds[i].declaredData["TrimestralOp1"];
+                        worksheet.Cells[i + titleRow, Positions.OpMoney2T] = declareds[i].declaredData["TrimestralOp2"];
+                        worksheet.Cells[i + titleRow, Positions.OpMoney3T] = declareds[i].declaredData["TrimestralOp3"];
+                        worksheet.Cells[i + titleRow, Positions.OpMoney4T] = declareds[i].declaredData["TrimestralOp4"];
+                        worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA1T] = declareds[i].declaredData["AnualPropertyIVAOp1"];
+                        worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA2T] = declareds[i].declaredData["AnualPropertyIVAOp2"];
+                        worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA3T] = declareds[i].declaredData["AnualPropertyIVAOp3"];
+                        worksheet.Cells[i + titleRow, Positions.PropertyTransmissionIVA4T] = declareds[i].declaredData["AnualPropertyIVAOp4"];
 
-
+                    }
                     //Report progress through BackgroundWorker
                     float progress = (float)i / declareds.Count * 100;
                     Debug.WriteLine(progress + "%");
