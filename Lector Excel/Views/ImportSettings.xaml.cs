@@ -68,6 +68,7 @@ namespace Lector_Excel
             Settings.DeclaredNIF = txt_declaredNIF.Text;
             Settings.DeclaredName = txt_declaredName.Text;
             Settings.LegalRepNIF = txt_legalRepNIF.Text;
+            Settings.SheetType = txt_sheetType.Text;
             Settings.ProvinceCode = txt_provinceCode.Text;
             Settings.StateCode = txt_stateCode.Text;
             Settings.OpKey = txt_opKey.Text;
@@ -130,6 +131,7 @@ namespace Lector_Excel
             txt_declaredNIF.Text = Settings.DeclaredNIF;
             txt_declaredName.Text = Settings.DeclaredName;
             txt_legalRepNIF.Text = Settings.LegalRepNIF;
+            txt_sheetType.Text = Settings.SheetType;
             txt_provinceCode.Text = Settings.ProvinceCode;
             txt_stateCode.Text = Settings.StateCode;
             txt_opKey.Text = Settings.OpKey;

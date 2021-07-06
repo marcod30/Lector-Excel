@@ -109,7 +109,7 @@
             <Label HorizontalAlignment="Right">
                 Apellidos y nombre, razón social o denominación del declarado
             </Label>
-            <Label HorizontalAlignment="Right" Cursor="Help" ToolTip="Este campo es una constante, el programa se encargará de rellenarlo por usted.">
+            <Label HorizontalAlignment="Right" Cursor="Help" ToolTip="Este campo es importante, ya que determina la naturaleza del registro.">
                 Tipo de hoja (?)
             </Label>
             <Label HorizontalAlignment="Right">
@@ -186,29 +186,29 @@
             <TextBox Name="txt_declaredNIF" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="A"/>
             <TextBox Name="txt_legalRepNIF" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="B"/>
             <TextBox Name="txt_declaredName" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="C"/>
-            <TextBox Name="txt_sheetType" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" IsEnabled="False" Text=""/>
-            <TextBox Name="txt_provinceCode" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="D"/>
-            <TextBox Name="txt_stateCode" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="E"/>
-            <TextBox Name="txt_opKey" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="F"/>
-            <TextBox Name="txt_anualMoney" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="G"/>
-            <TextBox Name="txt_opInsurance" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="H"/>
-            <TextBox Name="txt_localBusinessRental" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="I"/>
-            <TextBox Name="txt_metalMoney" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="J"/>
-            <TextBox Name="txt_anualMoneyPropIVA" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="K"/>
-            <TextBox Name="txt_exercise" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="L"/>
-            <TextBox Name="txt_opMoney1" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="M"/>
-            <TextBox Name="txt_moneyPropIVA1" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="N"/>
-            <TextBox Name="txt_opMoney2" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="O"/>
-            <TextBox Name="txt_moneyPropIVA2" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="P"/>
-            <TextBox Name="txt_opMoney3" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Q"/>
-            <TextBox Name="txt_moneyPropIVA3" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="R"/>
-            <TextBox Name="txt_opMoney4" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="S"/>
-            <TextBox Name="txt_moneyPropIVA4" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="T"/>
-            <TextBox Name="txt_commOpNIF" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="U"/>
-            <TextBox Name="txt_opSpecialIVA" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="V"/>
-            <TextBox Name="txt_opPassive" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="W"/>
-            <TextBox Name="txt_opAduanero" Margin="5,10" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="X"/>
-            <TextBox Name="txt_anualMoneyBoxIVA" Margin="5,10" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Y"/>
+            <TextBox Name="txt_sheetType" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="D"/>
+            <TextBox Name="txt_provinceCode" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="E"/>
+            <TextBox Name="txt_stateCode" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="F"/>
+            <TextBox Name="txt_opKey" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="G"/>
+            <TextBox Name="txt_anualMoney" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="H"/>
+            <TextBox Name="txt_opInsurance" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="I"/>
+            <TextBox Name="txt_localBusinessRental" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="J"/>
+            <TextBox Name="txt_metalMoney" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="K"/>
+            <TextBox Name="txt_anualMoneyPropIVA" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="L"/>
+            <TextBox Name="txt_exercise" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="M"/>
+            <TextBox Name="txt_opMoney1" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="N"/>
+            <TextBox Name="txt_moneyPropIVA1" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="O"/>
+            <TextBox Name="txt_opMoney2" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="P"/>
+            <TextBox Name="txt_moneyPropIVA2" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Q"/>
+            <TextBox Name="txt_opMoney3" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="R"/>
+            <TextBox Name="txt_moneyPropIVA3" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="S"/>
+            <TextBox Name="txt_opMoney4" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="T"/>
+            <TextBox Name="txt_moneyPropIVA4" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="U"/>
+            <TextBox Name="txt_commOpNIF" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="V"/>
+            <TextBox Name="txt_opSpecialIVA" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="W"/>
+            <TextBox Name="txt_opPassive" Margin="5,4" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="X"/>
+            <TextBox Name="txt_opAduanero" Margin="5,10" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Y"/>
+            <TextBox Name="txt_anualMoneyBoxIVA" Margin="5,10" HorizontalAlignment="Left" MinWidth="40" MaxLength="2" Text="Z"/>
         </StackPanel>
     </DockPanel>
 </Window>
