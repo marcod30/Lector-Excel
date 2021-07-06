@@ -1,0 +1,154 @@
+﻿<UserControl x:Class="Reader_347.Views.PropertyFormControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Reader_347.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Name="mainStack">
+        <GroupBox Name="mainGroupBox" Header="Inmueble ???" Margin="10,0,10,10">
+            <StackPanel Name="groupStack">
+                <Button Name="btn_DeleteProperty" Content="Eliminar inmueble" Margin="15,10,0,0" MaxWidth="200" HorizontalAlignment="Left" ToolTip="Quitar este inmueble del modelo." Click="Btn_DeleteProperty_Click"/>
+                <Grid Name="grid1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" MinWidth="300" MaxWidth="500"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Name="lbl_RenterNIF" Grid.Row="0" Grid.Column="0" FontSize="10">NIF del arrendatario</Label>
+                    <TextBox Name="txt_RenterNIF" Grid.Row="1" Grid.Column="0" Margin="5,0" MinWidth="100" MaxLength="9" TextChanged="Txt_RenterNIF_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox>
+
+                    <Label Name="lbl_LegalRepNIF" Grid.Row="0" Grid.Column="1" FontSize="10">NIF repr. Legal</Label>
+                    <TextBox Name="txt_LegalRepNIF" Grid.Row="1" Grid.Column="1" Margin="5,0" MinWidth="100" MaxLength="9" TextChanged="Txt_LegalRepNIF_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox>
+
+                    <Label Name="lbl_RenterName" Grid.Row="0" Grid.Column="3" FontSize="10">Apellidos y nombre, razón social o denominación del arrendatario</Label>
+                    <TextBox Name="txt_RenterName" Grid.Row="1" Grid.Column="3" Margin="5,0" MaxLength="40" LostFocus="Txt_Any_LostFocus"></TextBox>
+                </Grid>
+                
+                <Grid Name="grid2" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" MinWidth="200" MaxWidth="300"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Name="lbl_TotalMoney" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Importe de la operación"></Label>
+                    <TextBox Name="txt_TotalMoney" Grid.Row="1" Grid.Column="0" Margin="5,0" MaxLength="16" TextChanged="Txt_SignedFloat_TextChanged" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: signo (1) + numero float(15)-->
+
+                    <Label Name="lbl_catRef" Grid.Row="0" Grid.Column="2" FontSize="10" Content="Referencia catastral"></Label>
+                    <TextBox Name="txt_CatRef" Grid.Row="1" Grid.Column="2" Margin="5,0" MaxLength="25" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 25 -->
+
+                    <Label Name="lbl_situation" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Situación del inmueble"></Label>
+                    <TextBox Name="txt_Situation" Grid.Row="1" Grid.Column="1" Margin="5,0" MaxLength="1" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 1-->
+
+                </Grid>
+                <Grid Name="grid3" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MaxWidth="300"/>
+                        <ColumnDefinition Width="Auto" MinWidth="300" MaxWidth="500"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                        <ColumnDefinition Width="Auto" MaxWidth="100"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Name="lbl_streetType" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Tipo de vía"></Label>
+                    <TextBox Name="txt_StreetType" Grid.Row="1" Grid.Column="0" Margin="5,1" MaxWidth="150" MaxLength="4" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 4-->
+                    <Label Name="lbl_streetName" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Nombre de la vía pública"></Label>
+                    <TextBox Name="txt_StreetName" Grid.Row="1" Grid.Column="1" Margin="5,1" MaxLength="40" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 40-->
+                    <Label Name="lbl_typeNum" Grid.Row="0" Grid.Column="2" FontSize="10" Content="Tipo Núm."></Label>
+                    <TextBox Name="txt_TypeNum" Grid.Row="1" Grid.Column="2" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                    <Label Name="lbl_houseNum" Grid.Row="0" Grid.Column="3" FontSize="10" Content="Núm. casa"></Label>
+                    <TextBox Name="txt_HouseNum" Grid.Row="1" Grid.Column="3" Margin="5,1" MaxLength="5" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 5-->
+                    <Label Name="lbl_qualNum" Grid.Row="0" Grid.Column="4" FontSize="10" Content="Calif. Núm."></Label>
+                    <TextBox Name="txt_QualNum" Grid.Row="1" Grid.Column="4" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                    <Label Name="lbl_block" Grid.Row="0" Grid.Column="5" FontSize="10" Content="Bloque"></Label>
+                    <TextBox Name="txt_Block" Grid.Row="1" Grid.Column="5" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                    <Label Name="lbl_port" Grid.Row="0" Grid.Column="6" FontSize="10" Content="Portal"></Label>
+                    <TextBox Name="txt_Port" Grid.Row="1" Grid.Column="6" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                    <Label Name="lbl_stair" Grid.Row="0" Grid.Column="7" FontSize="10" Content="Escalera"></Label>
+                    <TextBox Name="txt_Stair" Grid.Row="1" Grid.Column="7" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                    <Label Name="lbl_floor" Grid.Row="0" Grid.Column="8" FontSize="10" Content="Planta"></Label>
+                    <TextBox Name="txt_Floor" Grid.Row="1" Grid.Column="8" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                    <Label Name="lbl_door" Grid.Row="0" Grid.Column="9" FontSize="10" Content="Puerta"></Label>
+                    <TextBox Name="txt_Door" Grid.Row="1" Grid.Column="9" Margin="5,1" MaxLength="3" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 3-->
+                </Grid>
+                <Grid Name="grid4" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="450"/>
+                        <ColumnDefinition Width="Auto" MinWidth="300"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Name="lbl_complement" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Complemento"></Label>
+                    <TextBox Name="txt_Complement" Grid.Row="1" Grid.Column="0" Margin="5,1" MaxLength="40" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 40-->
+                    <Label Name="lbl_location" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Localidad o población"></Label>
+                    <TextBox Name="txt_Location" Grid.Row="1" Grid.Column="1" Margin="5,1" MaxLength="30" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 30-->
+                </Grid>
+                <Grid Name="grid5" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="300"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Name="lbl_town" Grid.Row="0" Grid.Column="0" FontSize="10" Content="Municipio"></Label>
+                    <TextBox Name="txt_Town" Grid.Row="1" Grid.Column="0" Margin="5,1" MaxLength="30" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 30-->
+                    <Label Name="lbl_townCode" Grid.Row="0" Grid.Column="1" FontSize="10" Content="Código municipio"></Label>
+                    <TextBox Name="txt_TownCode" Grid.Row="1" Grid.Column="1" Margin="5,1" MaxLength="5" LostFocus="Txt_Any_LostFocus"></TextBox>
+                    <!-- MaxLenght: 5-->
+                    <Label Name="lbl_provCode" Grid.Row="0" Grid.Column="2" FontSize="10" Content="Código provincia"></Label>
+                    <TextBox Name="txt_ProvinceCode" Grid.Row="1" Grid.Column="2" Margin="5,1" MaxLength="2" LostFocus="Txt_Any_LostFocus" TextChanged="Txt_ProvinceCode_TextChanged"></TextBox>
+                    <!-- MaxLenght: 2-->
+                    <Label Name="lbl_postalCode" Grid.Row="0" Grid.Column="3" FontSize="10" Content="Código postal"></Label>
+                    <TextBox Name="txt_PostalCode" Grid.Row="1" Grid.Column="3" Margin="5,1" MaxLength="5" LostFocus="Txt_Any_LostFocus" TextChanged="Txt_PostalCode_TextChanged"></TextBox>
+                    <!-- MaxLenght: 5-->
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</UserControl>
