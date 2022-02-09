@@ -1,2 +1,2 @@
-# Lector-Excel
-Aplicación Windows para exportar el Modelo 347 de Excel a formato BOE. Si tiene un archivo Excel con los datos del Modelo 347 Tipo 2 y quiere pasarlos todos a formato BOE, puede emplear esta aplicación.
+# 347Reader
+Gestione el modelo 347 de manera sencilla con 347Reader. Esta aplicación le permite editar el modelo, exportar e importar datos de distintas fuentes como Excel y visualizar en gráficas algunos de los datos más significativos que haya introducido.
