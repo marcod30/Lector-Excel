@@ -59,18 +59,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/Lector_Excel.AboutWindow.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Lector_Excel.AboutWindow.html",
-          "hash": "SNelxj/IBXvljBHXeWQA5HqkGJyxTxnqzwVbDODFoHg="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "obj/api/Lector_Excel.App.yml",
       "output": {
         ".html": {
@@ -207,7 +195,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Lector_Excel.html",
-          "hash": "LdDQ/bNVCHcnBV1U5QXHUqBy+fNsucwUmTfO7i8kVio="
+          "hash": "/aOBWWtPRhe9KsT2MqAjH+GQXcoX1JhrbxdIV2DRIxc="
         }
       },
       "is_incremental": true,
@@ -311,42 +299,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.ScrollDialogDelegate.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.ScrollDialogDelegate.html",
-          "hash": "NwreQuYWWr+VExnvRZ3NQIhCH6WI3p8b64xgzvhB4Ew="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.ScrollEventArgs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.ScrollEventArgs.html",
-          "hash": "lzNbT36z1CBsnoYvB6tNVQVUcyPLDya/3NhfGaZyfz0="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/Reader_347.ScrollToDialog.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Reader_347.ScrollToDialog.html",
-          "hash": "UIRUZscttS3BwPNjkiWQ3Sh6EhDvtwLE7rppzSjT6vI="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "obj/api/Reader_347.Type1Registry.yml",
       "output": {
         ".html": {
@@ -399,7 +351,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Reader_347.html",
-          "hash": "Lkem8md2Z9ylRCSLOGojAkVgLZB4cWCngfrttWuoxtU="
+          "hash": "lfeCnSS0gOIo7MuLfcOyoetpvt3zXez9Edw2g1v4B+M="
         }
       },
       "is_incremental": true,
@@ -411,7 +363,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "0xgXDG+B8Ynv+medCEVwK4qTnEaL9dZ2jCztxymIJK4="
+          "hash": "/Pb8WbhaheD4/24cH5APOZ59a/FSEgXQWtyTrzbSK9I="
         }
       },
       "is_incremental": false,
@@ -448,8 +400,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 29,
-          "skipped_file_count": 29
+          "total_file_count": 25,
+          "skipped_file_count": 25
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

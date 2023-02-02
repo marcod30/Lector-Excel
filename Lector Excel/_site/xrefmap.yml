@@ -7,25 +7,6 @@ references:
   commentId: N:Lector_Excel
   fullName: Lector_Excel
   nameWithType: Lector_Excel
-- uid: Lector_Excel.AboutWindow
-  name: AboutWindow
-  href: api/Lector_Excel.AboutWindow.html
-  commentId: T:Lector_Excel.AboutWindow
-  fullName: Lector_Excel.AboutWindow
-  nameWithType: AboutWindow
-- uid: Lector_Excel.AboutWindow.#ctor
-  name: AboutWindow()
-  href: api/Lector_Excel.AboutWindow.html#Lector_Excel_AboutWindow__ctor
-  commentId: M:Lector_Excel.AboutWindow.#ctor
-  fullName: Lector_Excel.AboutWindow.AboutWindow()
-  nameWithType: AboutWindow.AboutWindow()
-- uid: Lector_Excel.AboutWindow.#ctor*
-  name: AboutWindow
-  href: api/Lector_Excel.AboutWindow.html#Lector_Excel_AboutWindow__ctor_
-  commentId: Overload:Lector_Excel.AboutWindow.#ctor
-  isSpec: "True"
-  fullName: Lector_Excel.AboutWindow.AboutWindow
-  nameWithType: AboutWindow.AboutWindow
 - uid: Lector_Excel.App
   name: App
   href: api/Lector_Excel.App.html
@@ -1066,75 +1047,6 @@ references:
   isSpec: "True"
   fullName: Reader_347.PDFManager.ExportToPDFDraft
   nameWithType: PDFManager.ExportToPDFDraft
-- uid: Reader_347.ScrollDialogDelegate
-  name: ScrollDialogDelegate
-  href: api/Reader_347.ScrollDialogDelegate.html
-  commentId: T:Reader_347.ScrollDialogDelegate
-  fullName: Reader_347.ScrollDialogDelegate
-  nameWithType: ScrollDialogDelegate
-- uid: Reader_347.ScrollEventArgs
-  name: ScrollEventArgs
-  href: api/Reader_347.ScrollEventArgs.html
-  commentId: T:Reader_347.ScrollEventArgs
-  fullName: Reader_347.ScrollEventArgs
-  nameWithType: ScrollEventArgs
-- uid: Reader_347.ScrollEventArgs.Position
-  name: Position
-  href: api/Reader_347.ScrollEventArgs.html#Reader_347_ScrollEventArgs_Position
-  commentId: F:Reader_347.ScrollEventArgs.Position
-  fullName: Reader_347.ScrollEventArgs.Position
-  nameWithType: ScrollEventArgs.Position
-- uid: Reader_347.ScrollToDialog
-  name: ScrollToDialog
-  href: api/Reader_347.ScrollToDialog.html
-  commentId: T:Reader_347.ScrollToDialog
-  fullName: Reader_347.ScrollToDialog
-  nameWithType: ScrollToDialog
-- uid: Reader_347.ScrollToDialog.#ctor
-  name: ScrollToDialog()
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog__ctor
-  commentId: M:Reader_347.ScrollToDialog.#ctor
-  fullName: Reader_347.ScrollToDialog.ScrollToDialog()
-  nameWithType: ScrollToDialog.ScrollToDialog()
-- uid: Reader_347.ScrollToDialog.#ctor*
-  name: ScrollToDialog
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog__ctor_
-  commentId: Overload:Reader_347.ScrollToDialog.#ctor
-  isSpec: "True"
-  fullName: Reader_347.ScrollToDialog.ScrollToDialog
-  nameWithType: ScrollToDialog.ScrollToDialog
-- uid: Reader_347.ScrollToDialog.maxValue
-  name: maxValue
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_maxValue
-  commentId: P:Reader_347.ScrollToDialog.maxValue
-  fullName: Reader_347.ScrollToDialog.maxValue
-  nameWithType: ScrollToDialog.maxValue
-- uid: Reader_347.ScrollToDialog.maxValue*
-  name: maxValue
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_maxValue_
-  commentId: Overload:Reader_347.ScrollToDialog.maxValue
-  isSpec: "True"
-  fullName: Reader_347.ScrollToDialog.maxValue
-  nameWithType: ScrollToDialog.maxValue
-- uid: Reader_347.ScrollToDialog.returnValue
-  name: returnValue
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_returnValue
-  commentId: P:Reader_347.ScrollToDialog.returnValue
-  fullName: Reader_347.ScrollToDialog.returnValue
-  nameWithType: ScrollToDialog.returnValue
-- uid: Reader_347.ScrollToDialog.returnValue*
-  name: returnValue
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_returnValue_
-  commentId: Overload:Reader_347.ScrollToDialog.returnValue
-  isSpec: "True"
-  fullName: Reader_347.ScrollToDialog.returnValue
-  nameWithType: ScrollToDialog.returnValue
-- uid: Reader_347.ScrollToDialog.ScrollDelegate
-  name: ScrollDelegate
-  href: api/Reader_347.ScrollToDialog.html#Reader_347_ScrollToDialog_ScrollDelegate
-  commentId: E:Reader_347.ScrollToDialog.ScrollDelegate
-  fullName: Reader_347.ScrollToDialog.ScrollDelegate
-  nameWithType: ScrollToDialog.ScrollDelegate
 - uid: Reader_347.Type1Registry
   name: Type1Registry
   href: api/Reader_347.Type1Registry.html
